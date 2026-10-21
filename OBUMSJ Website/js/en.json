@@ -1,4 +1,4 @@
-﻿{
+{
     "page_title": "OBUMSJ - Oda Bultum University Muslim Students' JAMA'A",
     "logo": "OBUMSJ",
     "lang.english": "English",
@@ -167,7 +167,42 @@
         "ruqiya.verse3_trans": "Say, 'I seek refuge in the Lord of daybreak. From the evil of that which He created. And from the evil of darkness when it settles. And from the evil of the blowers in knots. And from the evil of an envier when he envies.'",
         "ruqiya.verse4_title": "An-Nas (Mankind)",
         "ruqiya.verse4_trans": "Say, 'I seek refuge in the Lord of mankind. The Sovereign of mankind. The God of mankind. From the evil of the retreating whisperer. Who whispers [evil] into the breasts of mankind. From among the jinn and mankind.'",
-        "ruqiya.download_all_btn": "Download All Audio Files"
+        "ruqiya.download_all_btn": "Download All Audio Files",
+
+        "login.page_title": "Login & Membership | OBUMSJ - Oda Bultum University Muslim Students' JAMA'A",
+        "login.title": "OBUMSJ Membership Portal",
+        "login.subtitle": "Sign in to your member account or apply for new Jama'a membership",
+        "login.form_title": "Login to Your Account",
+        "login.form_subtitle": "Choose your preferred sign-in method",
+        "login.google_btn": "Continue with Google",
+        "login.or_divider": "or sign in with email / username",
+        "login.username": "Email or Username",
+        "login.password": "Password",
+        "login.remember_me": "Remember session",
+        "login.forgot_link": "Forgot Password?",
+        "login.submit": "Login to Dashboard",
+        "login.no_account": "Don't have an account?",
+        "login.register_link": "Register Here",
+
+        "register.register_form": "Apply for Membership",
+        "register.subtitle": "Join the Oda Bultum University Muslim Students' Jama'a",
+        "register.back_login": "Back to Login",
+        "register.google_btn": "Quick Register with Google",
+        "register.or_divider": "or fill registration details",
+        "register.full_name": "Full Name",
+        "register.username": "Username",
+        "register.email": "Email Address",
+        "register.phone": "Phone Number",
+        "register.gender": "Gender",
+        "register.select_gender": "-- Select Gender --",
+        "register.male": "Male",
+        "register.female": "Female",
+        "register.sector": "Primary Sector of Interest",
+        "register.password": "Password",
+        "register.confirm_password": "Confirm Password",
+        "register.submit": "Complete Registration",
+        "register.have_account": "Already have an account?",
+        "register.login_link": "Login Here"
        
     
 }

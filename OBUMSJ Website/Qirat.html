@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -650,6 +650,25 @@ body {
 </div>
 
 <!-- ================= WEEKLY SCHEDULE ================= -->
+<!-- ================= UPCOMING LIVE QIRAT PROGRAMS (FIRESTORE DYNAMIC) ================= -->
+<section class="upcoming-qirat-section" style="padding: 60px 0; background: #fff; border-bottom: 1px solid #e2e8f0;">
+    <div class="container">
+        <h2 class="section-title" style="text-align: center; margin-bottom: 10px;">
+            <i class="fas fa-calendar-alt" style="color: var(--primary);"></i> Upcoming Qirat Sessions & Special Programs
+        </h2>
+        <p style="text-align: center; color: #64748b; max-width: 720px; margin: 0 auto 35px auto; font-size: 0.95rem;">
+            Live Quran recitation circles, guest lectures, Tajweed intensives, and competitions published dynamically by OBUMSJ Leadership.
+        </p>
+        
+        <div id="dynamicQiratGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px;">
+            <div style="grid-column: 1/-1; text-align: center; color: #888; padding: 25px;">
+                <i class="fas fa-spinner fa-spin" style="font-size: 1.5rem; color: var(--primary); margin-bottom: 10px;"></i>
+                <p>Checking live Qirat programs from Firestore...</p>
+            </div>
+        </div>
+    </div>
+</section>
+
 <section class="schedule-section">
     <div class="container">
         <h2 class="section-title" data-i18n="qirat.schedule_title">Weekly Qirat Program Schedule</h2>
@@ -2192,6 +2211,73 @@ body {
         // Here you would load the appropriate page of audio items
         // For now, we'll just show an alert
         alert(`Loading page ${pageNumber} of ${bookId} audio files...`);
+    }
+</script>
+
+<!-- Real-time Firestore Qirat Programs -->
+<script type="module">
+    import { db, collection, onSnapshot } from "./js/firebase.js";
+
+    const container = document.getElementById('dynamicQiratGrid');
+    if (container) {
+        try {
+            onSnapshot(collection(db, "qirat_programs"), (snapshot) => {
+                const programs = [];
+                snapshot.forEach(docSnap => {
+                    const data = docSnap.data();
+                    if (data.status === 'upcoming' || data.status === 'ongoing') {
+                        programs.push({ id: docSnap.id, ...data });
+                    }
+                });
+
+                programs.sort((a,b) => new Date(a.dateTime || 0) - new Date(b.dateTime || 0));
+
+                if (programs.length === 0) {
+                    container.innerHTML = `
+                        <div style="grid-column: 1/-1; text-align: center; background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 12px; padding: 35px 20px;">
+                            <i class="fas fa-quran" style="font-size: 2.5rem; color: #94a3b8; margin-bottom: 12px;"></i>
+                            <h4 style="color: #334155; margin-bottom: 6px;">No Special Programs Currently Scheduled</h4>
+                            <p style="color: #64748b; font-size: 0.9rem;">Please refer to the regular weekly class timetable below or check back soon.</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                container.innerHTML = programs.map(p => {
+                    const dt = p.dateTime ? new Date(p.dateTime).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' }) : 'TBD';
+                    const target = p.target || 'All Students';
+                    const regBtn = p.registrationUrl 
+                        ? `<a href="${p.registrationUrl}" target="_blank" class="action-btn" style="display: inline-block; padding: 8px 16px; font-size: 0.85rem; margin-top: 10px; text-decoration: none; border-radius: 6px; background: var(--primary); color: #fff; font-weight: 600;"><i class="fas fa-user-plus"></i> Register Now</a>` 
+                        : '';
+
+                    return `
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-top: 4px solid var(--primary); border-radius: 10px; padding: 22px; box-shadow: 0 3px 12px rgba(0,0,0,0.04); display: flex; flex-direction: column; justify-content: space-between;">
+                            <div>
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                    <span style="background: #dcfce7; color: #15803d; font-size: 0.75rem; font-weight: 700; padding: 2px 8px; border-radius: 10px; text-transform: uppercase;">${p.status || 'UPCOMING'}</span>
+                                    <span style="font-size: 0.8rem; color: #64748b;"><i class="fas fa-users"></i> ${target}</span>
+                                </div>
+                                <h3 style="color: var(--secondary); font-size: 1.15rem; margin-bottom: 8px;">${p.title}</h3>
+                                <p style="color: #475569; font-size: 0.88rem; line-height: 1.5; margin-bottom: 14px;">${p.description || ''}</p>
+                                <div style="font-size: 0.82rem; color: #64748b; display: flex; flex-direction: column; gap: 4px;">
+                                    <div><i class="far fa-calendar-alt" style="color: var(--primary); width: 18px;"></i> <strong>When:</strong> ${dt}</div>
+                                    <div><i class="fas fa-map-marker-alt" style="color: var(--primary); width: 18px;"></i> <strong>Venue:</strong> ${p.location || 'Campus Masjid'}</div>
+                                    ${p.instructor ? `<div><i class="fas fa-user-tie" style="color: var(--primary); width: 18px;"></i> <strong>Instructor:</strong> ${p.instructor}</div>` : ''}
+                                </div>
+                            </div>
+                            <div style="margin-top: 15px; padding-top: 12px; border-top: 1px solid #e2e8f0;">
+                                ${regBtn}
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }, (err) => {
+                console.warn("Qirat live programs listener:", err);
+            });
+        } catch (e) {
+            console.error("Firestore Qirat error:", e);
+        }
+
     }
 </script>
 </body>

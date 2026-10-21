@@ -12,13 +12,21 @@ import {
   signOut, 
   onAuthStateChanged,
   sendPasswordResetEmail,
-  updateProfile
+  updateProfile,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signInWithRedirect,
+  getRedirectResult,
+  setPersistence,
+  browserLocalPersistence,
+  browserSessionPersistence
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 import { 
   getFirestore, 
   collection, 
   doc, 
   getDoc, 
+  getDocs,
   setDoc, 
   addDoc, 
   updateDoc, 
@@ -52,11 +60,16 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 const storage = getStorage(app);
 
+// Pre-configured Google Auth Provider
+const googleProvider = new GoogleAuthProvider();
+googleProvider.setCustomParameters({ prompt: 'select_account' });
+
 export {
   app,
   auth,
   db,
   storage,
+  googleProvider,
   // Auth methods
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
@@ -64,10 +77,18 @@ export {
   onAuthStateChanged,
   sendPasswordResetEmail,
   updateProfile,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signInWithRedirect,
+  getRedirectResult,
+  setPersistence,
+  browserLocalPersistence,
+  browserSessionPersistence,
   // Firestore methods
   collection,
   doc,
   getDoc,
+  getDocs,
   setDoc,
   addDoc,
   updateDoc,

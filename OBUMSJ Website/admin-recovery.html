@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Recovery & Bootstrap | OBUMSJ</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+<style>
+:root {
+  --primary:#2f8f3d;
+  --secondary:#0f3d2e;
+  --dark:#1e293b;
+}
+body {
+  background: #f1f5f9;
+  font-family: Poppins, Arial, sans-serif;
+  color: #334155;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+}
+.recovery-header {
+  background: linear-gradient(135deg, #0f3d2e, #1e3a8a);
+  color: #fff;
+  padding: 60px 20px;
+  text-align: center;
+}
+.recovery-card {
+  max-width: 600px;
+  margin: -30px auto 60px;
+  background: #fff;
+  border-radius: 14px;
+  padding: 35px 30px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  border-top: 5px solid #2f8f3d;
+}
+.badge-locked {
+  display: inline-block;
+  background: #fee2e2;
+  color: #b91c1c;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+.badge-ready {
+  display: inline-block;
+  background: #dcfce7;
+  color: #15803d;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+.step-box {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+.step-title {
+  font-weight: 700;
+  color: #0f3d2e;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.btn-google {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 12px;
+  background: #fff;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 15px;
+}
+.btn-google:hover { background: #f8fafc; }
+.btn-google svg { width: 18px; height: 18px; }
+.form-input {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  margin-bottom: 14px;
+  box-sizing: border-box;
+  font-size: 0.95rem;
+}
+.btn-action {
+  width: 100%;
+  padding: 13px;
+  background: #2f8f3d;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.btn-action:hover { background: #0f3d2e; }
+.alert-box {
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  font-size: 0.92rem;
+  display: none;
+}
+.alert-error { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
+.alert-success { background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; }
+</style>
+</head>
+<body>
+
+<div class="recovery-header">
+  <h2><i class="fas fa-shield-alt"></i> OBUMSJ Administrator Setup & Recovery</h2>
+  <p>Authorized channel for bootstrapping the initial Chief Administrator account</p>
+</div>
+
+<div class="recovery-card">
+  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+    <h3 style="margin:0; color:#0f3d2e;">Bootstrap Governance</h3>
+    <span id="bootstrapStatusBadge" class="badge-ready"><i class="fas fa-spinner fa-spin"></i> Checking status...</span>
+  </div>
+
+  <div id="alertBox" class="alert-box"></div>
+
+  <!-- Locked Notice (Shown if bootstrap is already locked) -->
+  <div id="lockedPanel" style="display:none; text-align:center; padding:20px 0;">
+    <i class="fas fa-lock" style="font-size:3rem; color:#94a3b8; margin-bottom:15px;"></i>
+    <h4 style="color:#1e293b; margin-bottom:10px;">Bootstrap Channel is Permanently Locked</h4>
+    <p style="color:#64748b; font-size:0.95rem; margin-bottom:20px;">
+      An initial administrator has already been established and verified on this platform. For security reasons, the bootstrap recovery channel is sealed against public use.
+    </p>
+    <div style="background:#f8fafc; border:1px dashed #cbd5e1; border-radius:8px; padding:16px; font-size:0.9rem; text-align:left; margin-bottom:20px;">
+      <strong>How to access your Admin account:</strong><br>
+      1. If you remember your email, go to the <a href="member.html" style="color:#2f8f3d; font-weight:600;">Membership Login</a> and click "Forgot Password".<br>
+      2. If you are signed in with an authorized account, open the <a href="Dashboard.html" style="color:#2f8f3d; font-weight:600;">Admin Dashboard</a> directly.
+    </div>
+    <a href="member.html" class="btn-action" style="display:inline-block; text-decoration:none; text-align:center;">Back to Login</a>
+  </div>
+
+  <!-- Active Bootstrap Form -->
+  <div id="bootstrapPanel" style="display:none;">
+    <p style="font-size:0.92rem; color:#475569; margin-bottom:20px;">
+      Follow these two verification steps to promote your account to Chief Administrator. This operation will be permanently recorded in the immutable audit log and the bootstrap key will lock immediately.
+    </p>
+
+    <!-- Step 1: Authentication -->
+    <div class="step-box">
+      <div class="step-title"><i class="fas fa-user-check"></i> Step 1: Sign in with your Account</div>
+      <div id="authStatusText" style="font-size:0.9rem; margin-bottom:12px; color:#475569;">
+        Please sign in with the email address or Google account you wish to establish as Administrator.
+      </div>
+
+      <button type="button" class="btn-google" id="btnGoogleAuth">
+        <svg viewBox="0 0 18 18">
+          <path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.616z"/>
+          <path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.258c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332C2.438 15.983 5.482 18 9 18z"/>
+          <path fill="#FBBC05" d="M3.964 10.707c-.18-.54-.282-1.117-.282-1.707s.102-1.167.282-1.707V4.961H.957C.347 6.175 0 7.55 0 9s.347 2.825.957 4.039l3.007-2.332z"/>
+          <path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0 5.482 0 2.438 2.017.957 4.961L3.964 7.293C4.672 5.166 6.656 3.58 9 3.58z"/>
+        </svg>
+        <span>Sign in with Google</span>
+      </button>
+
+      <div style="text-align:center; margin:10px 0; font-size:12px; color:#94a3b8; font-weight:600;">— OR SIGN IN WITH EMAIL —</div>
+
+      <input type="email" id="authEmail" class="form-input" placeholder="Administrator Email Address">
+      <input type="password" id="authPassword" class="form-input" placeholder="Password (existing or new)">
+      <div style="display:flex; gap:10px;">
+        <button type="button" class="btn-action" id="btnEmailLogin" style="background:#0288d1; font-size:0.9rem; padding:10px;">Sign In</button>
+        <button type="button" class="btn-action" id="btnEmailRegister" style="background:#475569; font-size:0.9rem; padding:10px;">Register Account</button>
+      </div>
+    </div>
+
+    <!-- Step 2: Verification Secret -->
+    <div class="step-box">
+      <div class="step-title"><i class="fas fa-key"></i> Step 2: Enter Verification Setup Secret</div>
+      <p style="font-size:0.85rem; color:#64748b; margin-bottom:10px;">
+        Enter the system bootstrap secret configured in the environment:
+      </p>
+      <input type="password" id="setupSecretInput" class="form-input" placeholder="Enter setup secret">
+      <button type="button" class="btn-action" id="btnPromoteAdmin">
+        <i class="fas fa-check-shield"></i> Establish & Verify Administrator
+      </button>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+  import {
+    auth,
+    db,
+    googleProvider,
+    signInWithEmailAndPassword,
+    createUserWithEmailAndPassword,
+    signInWithPopup,
+    onAuthStateChanged,
+    doc,
+    getDoc,
+    setDoc,
+    addDoc,
+    collection,
+    serverTimestamp
+  } from "./js/firebase.js";
+
+  const setupSecretExpected = "OBUMSJ-SECURE-BOOTSTRAP-2026";
+  let activeUser = null;
+
+  const statusBadge = document.getElementById("bootstrapStatusBadge");
+  const alertBox = document.getElementById("alertBox");
+  const lockedPanel = document.getElementById("lockedPanel");
+  const bootstrapPanel = document.getElementById("bootstrapPanel");
+  const authStatusText = document.getElementById("authStatusText");
+
+  function showAlert(msg, isError = true) {
+    alertBox.style.display = "block";
+    alertBox.className = "alert-box " + (isError ? "alert-error" : "alert-success");
+    alertBox.innerHTML = msg;
+  }
+
+  // Check Firestore bootstrap lock state
+  async function checkBootstrapLockState() {
+    try {
+      const snap = await getDoc(doc(db, "settings", "bootstrap"));
+      if (snap.exists() && snap.data().locked === true) {
+        statusBadge.className = "badge-locked";
+        statusBadge.innerHTML = '<i class="fas fa-lock"></i> LOCKED';
+        lockedPanel.style.display = "block";
+        bootstrapPanel.style.display = "none";
+      } else {
+        statusBadge.className = "badge-ready";
+        statusBadge.innerHTML = '<i class="fas fa-unlock"></i> READY FOR SETUP';
+        lockedPanel.style.display = "none";
+        bootstrapPanel.style.display = "block";
+      }
+    } catch (e) {
+      console.warn("Bootstrap check:", e);
+      statusBadge.className = "badge-ready";
+      statusBadge.innerHTML = '<i class="fas fa-unlock"></i> READY';
+      lockedPanel.style.display = "none";
+      bootstrapPanel.style.display = "block";
+    }
+  }
+
+  // Update Auth State Display
+  onAuthStateChanged(auth, async (user) => {
+    activeUser = user;
+    if (user) {
+      authStatusText.innerHTML = `
+        <div style="background:#e0f2fe; border:1px solid #bae6fd; color:#0369a1; padding:10px; border-radius:6px;">
+          <i class="fas fa-check-circle"></i> Authenticated as: <strong>${user.email}</strong> (UID: <code style="font-size:0.8rem;">${user.uid.substring(0,8)}...</code>)
+        </div>
+      `;
+    } else {
+      authStatusText.innerHTML = "Not authenticated. Please sign in or register above.";
+    }
+  });
+
+  // Google Sign In
+  document.getElementById("btnGoogleAuth").addEventListener("click", async () => {
+    try {
+      const cred = await signInWithPopup(auth, googleProvider);
+      showAlert(`Signed in as ${cred.user.email}. Now proceed to Step 2.`, false);
+    } catch (e) {
+      showAlert("Google Sign In failed: " + e.message);
+    }
+  });
+
+  // Email Sign In
+  document.getElementById("btnEmailLogin").addEventListener("click", async () => {
+    const email = document.getElementById("authEmail").value.trim();
+    const pass = document.getElementById("authPassword").value;
+    if (!email || !pass) return showAlert("Please enter both email and password.");
+    try {
+      await signInWithEmailAndPassword(auth, email, pass);
+      showAlert(`Authenticated successfully as ${email}.`, false);
+    } catch (e) {
+      showAlert("Login error: " + e.message);
+    }
+  });
+
+  // Email Register
+  document.getElementById("btnEmailRegister").addEventListener("click", async () => {
+    const email = document.getElementById("authEmail").value.trim();
+    const pass = document.getElementById("authPassword").value;
+    if (!email || !pass) return showAlert("Please enter both email and password.");
+    try {
+      await createUserWithEmailAndPassword(auth, email, pass);
+      showAlert(`Account created and signed in as ${email}.`, false);
+    } catch (e) {
+      showAlert("Registration error: " + e.message);
+    }
+  });
+
+  // Promote to Admin
+  document.getElementById("btnPromoteAdmin").addEventListener("click", async () => {
+    if (!activeUser) {
+      showAlert("Please complete Step 1: Sign in with your intended administrator account first.");
+      return;
+    }
+
+    const secret = document.getElementById("setupSecretInput").value.trim();
+    if (secret !== setupSecretExpected) {
+      showAlert("Invalid setup secret. Verification rejected.");
+      return;
+    }
+
+    const btn = document.getElementById("btnPromoteAdmin");
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Initializing Administrator...';
+
+    try {
+      // 1. Promote or establish user record with role: 'admin'
+      await setDoc(doc(db, "users", activeUser.uid), {
+        fullName: activeUser.displayName || activeUser.email.split('@')[0],
+        email: activeUser.email,
+        username: (activeUser.email.split('@')[0] || "admin").toLowerCase().replace(/[^a-z0-9_]/g, ''),
+        role: "admin",
+        status: "active",
+        sector: "Executive Board",
+        setupKey: setupSecretExpected,
+        approvedAt: serverTimestamp(),
+        approvedBy: "SYSTEM_BOOTSTRAP",
+        updatedAt: serverTimestamp()
+      }, { merge: true });
+
+      // 2. Map username in usernames collection
+      const cleanUser = (activeUser.email.split('@')[0] || "admin").toLowerCase().replace(/[^a-z0-9_]/g, '');
+      try {
+        await setDoc(doc(db, "usernames", cleanUser), {
+          uid: activeUser.uid,
+          email: activeUser.email
+        });
+      } catch (e) {}
+
+      // 3. Log to audit trail
+      try {
+        await addDoc(collection(db, "audit_logs"), {
+          category: "SYSTEM",
+          actionType: "ADMIN_BOOTSTRAP",
+          actingUid: activeUser.uid,
+          actingName: activeUser.displayName || activeUser.email,
+          actingRole: "admin",
+          targetId: activeUser.uid,
+          details: { summary: `Chief Administrator bootstrapped via authorized recovery tool for ${activeUser.email}` },
+          timestamp: serverTimestamp()
+        });
+      } catch (e) {}
+
+      // 4. Seal bootstrap lock
+      await setDoc(doc(db, "settings", "bootstrap"), {
+        locked: true,
+        lockedAt: serverTimestamp(),
+        initializedByUid: activeUser.uid,
+        initializedByEmail: activeUser.email,
+        setupKey: setupSecretExpected
+      }, { merge: true });
+
+      // 5. Cache session
+      localStorage.setItem("currentUser", JSON.stringify({
+        uid: activeUser.uid,
+        fullName: activeUser.displayName || activeUser.email.split('@')[0],
+        email: activeUser.email,
+        username: cleanUser,
+        role: "admin",
+        status: "active"
+      }));
+
+      showAlert("SUCCESS! Account elevated to Chief Administrator and bootstrap channel locked permanently. Redirecting to Dashboard...", false);
+      setTimeout(() => {
+        window.location.href = "Dashboard.html";
+      }, 1500);
+
+    } catch (err) {
+      console.error("Bootstrap error:", err);
+      showAlert("Error elevating administrator: " + err.message);
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fas fa-check-shield"></i> Establish & Verify Administrator';
+    }
+  });
+
+  // Run initial lock check
+  checkBootstrapLockState();
+</script>
+</body>
+</html>

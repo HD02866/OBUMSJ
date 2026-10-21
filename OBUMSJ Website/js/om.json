@@ -1,4 +1,4 @@
-﻿{
+{
     "nav_home": "Mana",
     "nav_about": "Biroo",
     "nav_sectors": "Sectors",
@@ -179,6 +179,41 @@
         "ruqiya.verse3_trans": "Jedhi: 'Gooftaa Bari'aa irratti maganfadha. Hamtuu waan Inni uume irraa. Hamtuu dukkana yeroo inni raawwatu irraa. Hamtuu harkiftoota tuqaa keessatti irraa. Hamtuu hawwataa yeroo inni hawwatu irraa.'",
         "ruqiya.verse4_title": "An-Nas (Namoota)",
         "ruqiya.verse4_trans": "Jedhi: 'Gooftaa namootaa irratti maganfadha. Mootii namootaa. Rabbiin namootaa. Hamtuu jalliftoota gadi deebi'aa irraa. Inni onneewwan namootaa keessatti jallisu. Jinnii fi namoota irraa.'",
-        "ruqiya.download_all_btn": "Sagalee Fayla Hunda Maxxansi"
+        "ruqiya.download_all_btn": "Sagalee Fayla Hunda Maxxansi",
+
+        "login.page_title": "Seensaa fi Miseensummaa | OBUMSJ",
+        "login.title": "Seensa Miseensummaa OBUMSJ",
+        "login.subtitle": "Akkaawuntii keessanitti seenaa yookiin miseensummaa haaraaf galmaa'aa",
+        "login.form_title": "Akkaawuntii Keessanitti Seenaa",
+        "login.form_subtitle": "Karaa itti seentan filadhaa",
+        "login.google_btn": "Google waliin Itti fufaa",
+        "login.or_divider": "yookiin Imeelii / Maqaa Fayyadamaan seenaa",
+        "login.username": "Imeelii yookiin Maqaa Fayyadamaa",
+        "login.password": "Jecha Darbii",
+        "login.remember_me": "Na yaadadhu",
+        "login.forgot_link": "Jecha darbii irraanfattee?",
+        "login.submit": "Daashboordiitti Seeni",
+        "login.no_account": "Akkaawuntii hin qabduu?",
+        "login.register_link": "Asitti Galmaa'aa",
+
+        "register.register_form": "Miseensummaaf Galmaa'aa",
+        "register.subtitle": "Jamaa Barattoota Muslimaa Yuunivarsiitii Odaa Bultumitti makamaa",
+        "register.back_login": "Gara Seensaatti Deebi'i",
+        "register.google_btn": "Google waliin Saffisaan Galmaa'aa",
+        "register.or_divider": "yookiin unka galmee guutaa",
+        "register.full_name": "Maqaa Guutuu",
+        "register.username": "Maqaa Fayyadamaa",
+        "register.email": "Teessoo Imeelii",
+        "register.phone": "Lakkoofsa Bilbilaa",
+        "register.gender": "Saala",
+        "register.select_gender": "-- Saala Filadhaa --",
+        "register.male": "Dhiira",
+        "register.female": "Dhalaa",
+        "register.sector": "Kutaa Fedhii",
+        "register.password": "Jecha Darbii",
+        "register.confirm_password": "Jecha Darbii Mirkaneessaa",
+        "register.submit": "Galmee Xumuraa",
+        "register.have_account": "Duraan akkaawuntii qabduu?",
+        "register.login_link": "Asitti Seenaa"
 
 }

@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title data-i18n="login.page_title">Login | OBUMSJ - Oda Bultum University Muslim Students' JAMA'A</title>
+<title data-i18n="login.page_title">Login & Membership | OBUMSJ - Oda Bultum University Muslim Students' JAMA'A</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <link rel="stylesheet" href="style.css">
 <style>
@@ -24,38 +24,102 @@ body{background:var(--bg);color:var(--text);line-height:1.6;}
 header{
   background:linear-gradient(135deg,var(--secondary),var(--primary));
   color:#fff;
-  padding:90px 20px;
+  padding:80px 20px;
   text-align:center;
   margin-top: 80px;
 }
-header h1{font-size:40px;font-weight:700;}
-header p{max-width:900px;margin:15px auto;font-size:18px;}
+header h1{font-size:38px;font-weight:700;margin-bottom:8px;}
+header p{max-width:760px;margin:0 auto;font-size:17px;opacity:0.95;}
 
 /* CONTAINER */
 .container{
   width:90%;
-  max-width:900px;
-  margin:50px auto;
+  max-width:850px;
+  margin:40px auto 60px;
 }
 
 /* FORM CARD */
 .form-card{
-  background:rgba(255,255,255,0.85);
+  background:rgba(255,255,255,0.95);
   backdrop-filter:blur(10px);
   -webkit-backdrop-filter:blur(10px);
   border-radius:16px;
-  padding:35px;
-  box-shadow:0 8px 25px rgba(0,0,0,0.1);
-  border-left:6px solid var(--primary);
+  padding:36px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.08);
+  border-top:5px solid var(--primary);
   margin-bottom: 30px;
+  transition: all 0.3s ease;
+}
+
+.form-card h2{
+  color:var(--secondary);
+  margin-bottom:8px;
+  font-size:1.6rem;
+}
+.form-card-subtitle{
+  color:#6b7280;
+  font-size:0.92rem;
+  margin-bottom:24px;
+}
+
+/* GOOGLE AUTH BUTTON */
+.btn-google {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  padding: 13px 18px;
+  background: #ffffff;
+  color: #1f2937;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 9px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+.btn-google:hover {
+  background: #f9fafb;
+  border-color: #cbd5e1;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+  transform: translateY(-1px);
+}
+.btn-google:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+}
+.btn-google svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+/* AUTH DIVIDER */
+.auth-divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 22px 0;
+  color: #9ca3af;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+.auth-divider::before,
+.auth-divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid #e5e7eb;
+}
+.auth-divider span {
+  padding: 0 14px;
 }
 
 /* FORM ELEMENTS */
-.form-card h2{
-  color:var(--secondary);
-  margin-bottom:20px;
-}
-
 .form-group{
   margin-bottom:18px;
 }
@@ -64,25 +128,88 @@ header p{max-width:900px;margin:15px auto;font-size:18px;}
   font-weight:600;
   display:block;
   margin-bottom:6px;
-  color: var(--dark);
+  color: #374151;
+  font-size: 0.92rem;
 }
 
 .form-group input,
 .form-group select{
   width:100%;
-  padding:12px;
+  padding:12px 14px;
   border-radius:8px;
-  border:1px solid #ddd;
+  border:1px solid #d1d5db;
   outline:none;
-  font-size:15px;
-  transition:0.3s;
-  background: var(--light);
+  font-size:14.5px;
+  transition:all 0.25s ease;
+  background: #ffffff;
   color: var(--text);
 }
 
 .form-group input:focus,
 .form-group select:focus{
   border-color:var(--primary);
+  box-shadow:0 0 0 3px rgba(47,143,61,0.15);
+}
+
+/* PASSWORD WRAPPER & TOGGLE */
+.password-field-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.password-field-wrapper input {
+  padding-right: 42px;
+}
+.password-toggle-btn {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #9ca3af;
+  cursor: pointer;
+  padding: 6px 8px;
+  font-size: 15px;
+  transition: color 0.2s;
+}
+.password-toggle-btn:hover {
+  color: var(--primary);
+}
+
+/* REMEMBER ME & FORGOT ROW */
+.remember-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 12px 0 20px;
+  font-size: 13.5px;
+}
+.remember-row label {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  cursor: pointer;
+  color: #4b5563;
+  font-weight: 500;
+  margin-bottom: 0;
+  user-select: none;
+}
+.remember-row input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--primary);
+  cursor: pointer;
+}
+.forgot-password-link {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+.forgot-password-link:hover {
+  text-decoration: underline;
+  color: var(--secondary);
 }
 
 /* SUBMIT BUTTON */
@@ -91,134 +218,127 @@ header p{max-width:900px;margin:15px auto;font-size:18px;}
   background:var(--primary);
   color:#fff;
   padding:14px;
-  font-size:16px;
-  font-weight:bold;
+  font-size:15.5px;
+  font-weight:700;
   border:none;
   border-radius:8px;
   cursor:pointer;
-  transition:0.3s;
+  transition:all 0.3s;
+  box-shadow: 0 4px 12px rgba(47,143,61,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 .submit-btn:hover{
   background:var(--secondary);
+  box-shadow: 0 6px 16px rgba(15,61,46,0.3);
+  transform: translateY(-1px);
+}
+.submit-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
 }
 
-/* LINK TO REGISTER */
+/* SWITCH LINKS */
 .register-link{
   text-align:center;
-  margin-top:20px;
+  margin-top:22px;
   font-size:14px;
+  color: #4b5563;
 }
 .register-link a{
   color:var(--primary);
   text-decoration:none;
-  font-weight:600;
+  font-weight:700;
+  margin-left: 4px;
 }
 .register-link a:hover{
   text-decoration:underline;
 }
 
-/* RESPONSIVE */
-@media(max-width:600px){
-  header h1{font-size:32px;}
-  .form-card{padding:25px;}
-}
-
-/* ERROR MESSAGE */
+/* ERROR & SUCCESS MESSAGES */
 .error-message{
-  background:#ffebee;
-  color:#c62828;
-  padding:10px;
+  background:#fef2f2;
+  color:#991b1b;
+  border:1px solid #fecaca;
+  padding:12px 16px;
   border-radius:8px;
   margin-bottom:20px;
-  text-align:center;
+  font-size:0.92rem;
   display:none;
+  line-height: 1.5;
 }
-
-/* SUCCESS MESSAGE */
 .success-message{
-  background:#e8f5e9;
-  color:#2e7d32;
-  padding:10px;
+  background:#f0fdf4;
+  color:#166534;
+  border:1px solid #bbf7d0;
+  padding:12px 16px;
   border-radius:8px;
   margin-bottom:20px;
-  text-align:center;
+  font-size:0.92rem;
   display:none;
-}
-
-/* REGISTRATION FORM STYLES */
-#registrationForm {
-  display: none;
-}
-
-.registration-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.registration-header h2 {
-  margin: 0;
-}
-
-.back-to-login {
-  background: #f0f0f0;
-  color: var(--text);
-  border: none;
-  padding: 8px 15px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 14px;
-  transition: 0.3s;
-}
-
-.back-to-login:hover {
-  background: #e0e0e0;
-}
-
-/* FORM TOGGLE MESSAGE */
-.form-toggle-message {
-  text-align: center;
-  padding: 15px;
-  margin: 20px 0;
-  background: #fff3cd;
-  border: 1px solid #ffeaa7;
-  border-radius: 8px;
-  color: #856404;
-}
-
-.form-toggle-message a {
-  color: var(--primary);
-  font-weight: 600;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.form-toggle-message a:hover {
-  text-decoration: underline;
+  line-height: 1.5;
 }
 
 /* TWO COLUMN FORM FOR REGISTRATION */
 .two-column-form {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 20px;
+  gap: 18px;
 }
 
-@media(max-width: 768px) {
-  .two-column-form {
-    grid-template-columns: 1fr;
-  }
+.registration-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.back-to-login {
+  background: #f3f4f6;
+  color: #4b5563;
+  border: 1px solid #e5e7eb;
+  padding: 7px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13.5px;
+  font-weight: 500;
+  transition: 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.back-to-login:hover {
+  background: #e5e7eb;
+  color: #111827;
 }
 
+/* INFO NOTICE BOX */
+.notice-box {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  color: #1e40af;
+  padding: 12px 14px;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  header h1{font-size:30px;}
+  .two-column-form { grid-template-columns: 1fr; }
+  .form-card{padding:24px 20px;}
+}
 </style>
 </head>
 
-
 <body>
-    <!-- =========================================
-        FLOATING SOCIAL MEDIA SIDEBAR (NEW FEATURE)
-    ========================================= -->
+    <!-- Floating Social Media Sidebar -->
     <div class="social-sidebar" id="socialSidebar">
         <div class="social-toggle" id="socialToggle">
             <i class="fas fa-share-alt"></i>
@@ -237,7 +357,7 @@ header p{max-width:900px;margin:15px auto;font-size:18px;}
                 <span class="social-tooltip">WhatsApp</span>
             </a>
             <a href="https://youtube.com/obumsj" target="_blank" title="YouTube" class="social-icon">
-                <i class="fas fa-youtube"></i>
+                <i class="fab fa-youtube"></i>
                 <span class="social-tooltip">YouTube</span>
             </a>
             <a href="https://tiktok.com/@obumsj" target="_blank" title="TikTok" class="social-icon">
@@ -252,20 +372,18 @@ header p{max-width:900px;margin:15px auto;font-size:18px;}
         <div class="logo-container">
             <img src="./IMAGE/OBUMSJ Logo.jpg" alt="OBUMSJ Logo" class="logo">
             <span class="logo-text" data-i18n="logo">OBUMSJ</span>
-             <button id="darkModeToggle" class="dark-btn">🌙</button>
+            <button id="darkModeToggle" class="dark-btn">🌙</button>
         </div>
 
-       <div class="lang-dropdown">
-  <button class="lang-btn">🌐 <span class="lang-code">EN</span></button>
-  <div class="lang-menu">
-    <a href="#" onclick="setLang('en'); return false;" data-i18n="lang.english">English</a>
-    <a href="#" onclick="setLang('am'); return false;" data-i18n="lang.amharic">Amharic</a>
-    <a href="#" onclick="setLang('om'); return false;" data-i18n="lang.oromo">Oromo</a>
-    <a href="#" onclick="setLang('ar'); return false;" data-i18n="lang.arabic">Arabic</a>
-  </div>
-</div>
-
-
+        <div class="lang-dropdown">
+            <button class="lang-btn">🌐 <span class="lang-code">EN</span></button>
+            <div class="lang-menu">
+                <a href="#" onclick="setLang('en'); return false;" data-i18n="lang.english">English</a>
+                <a href="#" onclick="setLang('am'); return false;" data-i18n="lang.amharic">Amharic</a>
+                <a href="#" onclick="setLang('om'); return false;" data-i18n="lang.oromo">Oromo</a>
+                <a href="#" onclick="setLang('ar'); return false;" data-i18n="lang.arabic">Arabic</a>
+            </div>
+        </div>
         
         <ul class="nav-links">
             <li><a href="./index.html" data-i18n="nav.home">HOME</a></li>
@@ -276,7 +394,6 @@ header p{max-width:900px;margin:15px auto;font-size:18px;}
                     <a href="./Qirat.html" data-i18n="sector.qirat"><i class="fas fa-quran"></i> Qirat</a>
                     <a href="./Dawah.html" data-i18n="sector.dawah"><i class="fas fa-megaphone"></i> Dawah</a>
                     <a href="./Social Affairs.html" data-i18n="sector.social"><i class="fas fa-hands-helping"></i> Social Affairs</a>
-                   
                     <a href="./Academy.html" data-i18n="sector.academy"><i class="fas fa-graduation-cap"></i> Academy</a>
                     <a href="./Finance.html" data-i18n="sector.finance"><i class="fas fa-coins"></i> Finance</a>
                     <a href="./Ziyara.html" data-i18n="sector.ziyara"><i class="fas fa-kaaba"></i> Ziyara</a>
@@ -288,7 +405,7 @@ header p{max-width:900px;margin:15px auto;font-size:18px;}
             </li>
             <li><a href="Blog.html" data-i18n="nav.blog">BLOG</a></li>
             <li><a href="contact.html" data-i18n="nav.contact">CONTACT US</a></li>
-            <li><a href="./member.html" data-i18n="nav.membership">REGISTER</a></li>
+            <li><a href="./member.html" data-i18n="nav.membership" style="color:var(--primary); font-weight:700;">MEMBERSHIP</a></li>
             <li><a href="donate.html" class="btn nav-donate" data-i18n="nav.donate">DONATE HERE</a></li>
         </ul>
         
@@ -299,513 +416,849 @@ header p{max-width:900px;margin:15px auto;font-size:18px;}
         </div>
     </nav>
 
-<header>
-  <h1 data-i18n="login.title">Login to OBUMSJ</h1>
-  <p data-i18n="login.subtitle">Access your dashboard based on your role</p>
-</header>
+    <header>
+        <h1 data-i18n="login.title">OBUMSJ Membership Portal</h1>
+        <p data-i18n="login.subtitle">Sign in to your member account or apply for new Jama'a membership</p>
+    </header>
 
-<div class="container">
-  <!-- Login Form -->
-  <div class="form-card" id="loginFormContainer">
-    <h2 data-i18n="login.form_title">Login to Your Account</h2>
-    
-    <!-- Error Message -->
-    <div id="errorMessage" class="error-message"></div>
-    
-    <!-- Success Message -->
-    <div id="successMessage" class="success-message"></div>
-    
-    <form id="loginForm">
-      
-      <div class="form-group">
-        <label for="username" data-i18n="login.username">Username or Email</label>
-        <input type="text" id="username" name="username" placeholder="Enter your username or email" required>
-      </div>
-
-      <div class="form-group">
-        <label for="password" data-i18n="login.password">Password</label>
-        <input type="password" id="password" name="password" placeholder="Enter your password" required>
-      
-      <div style="text-align: right; margin-top: -8px; margin-bottom: 16px;">
-        <a href="#" id="forgotPasswordBtn" style="color: var(--primary); font-size: 0.85rem; text-decoration: none; font-weight: 500;">
-          <i class="fas fa-key"></i> Forgot Password?
-        </a>
-      </div>
-      </div>
-
-      <button type="submit" class="submit-btn" data-i18n="login.submit">Login to Dashboard</button>
-      
-      <div class="register-link">
-        <span data-i18n="login.no_account">Don't have an account?</span>
-        <a href="#" id="showRegistration" data-i18n="login.register_link">Register Here</a>
-      </div>
-    </form>
-  </div>
-
-  <!-- Registration Form (Initially Hidden) -->
-  <div class="form-card" id="registrationForm">
-    <div class="registration-header">
-      <h2 data-i18n="register.register_form">Register as a Member</h2>
-      <button type="button" class="back-to-login" id="backToLogin">
-        <i class="fas fa-arrow-left"></i> Back to Login
-      </button>
-    </div>
-    
-    <!-- Registration Messages -->
-    <div id="registrationSuccess" class="success-message" style="display:none;"></div>
-    <div id="registrationError" class="error-message" style="display:none;"></div>
-    
-    <form id="registerForm">
-      <div class="two-column-form">
-        <div>
-          <div class="form-group">
-            <label for="regFullName" data-i18n="register.full_name">Full Name</label>
-            <input type="text" id="regFullName" name="fullName" placeholder="Enter your full name" required>
-          </div>
-
-          <div class="form-group">
-            <label for="regUsername" data-i18n="register.username">Username</label>
-            <input type="text" id="regUsername" name="username" placeholder="Choose a username" required>
-          </div>
-
-          <div class="form-group">
-            <label for="regEmail" data-i18n="register.email">Email Address</label>
-            <input type="email" id="regEmail" name="email" placeholder="Enter your email" required>
-          </div>
-
-          <div class="form-group">
-            <label for="regPassword" data-i18n="register.password">Password</label>
-            <input type="password" id="regPassword" name="password" placeholder="Choose a password" required>
-          </div>
-        </div>
-        
-        <div>
-          <div class="form-group">
-            <label for="regPhone" data-i18n="register.phone">Phone Number</label>
-            <input type="tel" id="regPhone" name="phone" placeholder="Enter your phone number" required>
-          </div>
-
-          <div class="form-group">
-            <label for="regGender" data-i18n="register.gender">Gender</label>
-            <select id="regGender" name="gender" required>
-              <option value="" data-i18n="register.select_gender">-- Select Gender --</option>
-              <option value="Male" data-i18n="register.male">Male</option>
-              <option value="Female" data-i18n="register.female">Female</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="regRole">Requested Sector / Role</label>
-            <select id="regRole" name="role" required>
-              <option value="sector_member">Sector Member</option>
-              <option value="female_member">Female Member</option>
-              <option value="blog_manager">Blog Manager</option>
-              <option value="amir">Amir</option>
-              <option value="main_amir">Main Amir</option>
-              <option value="admin">Admin</option>
-            </select>
-          </div>
-        </div>
-      </div>
-
-      <button type="submit" class="submit-btn" data-i18n="register.submit">Complete Registration</button>
-      
-      <div class="register-link">
-        <span data-i18n="register.have_account">Already have an account?</span>
-        <a href="#" id="showLoginFromReg" data-i18n="register.login_link">Login Here</a>
-      </div>
-    </form>
-  </div>
-
-  <!-- Toggle Message -->
-  <div id="toggleMessage" class="form-toggle-message" style="display: none;">
-    <p id="toggleMessageText"></p>
-    <p>If you are not registered, please <a href="#" id="toggleRegistrationLink">register first</a>. 
-    If you entered wrong username or password, <a href="#" id="toggleLoginLink">try again</a>.</p>
-  </div>
-</div>
-
-<!-- Footer -->
-
-  <!-- Forgot Password Modal -->
-  <div id="forgotPasswordModal" style="display:none; position:fixed; z-index:99999; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.6); align-items:center; justify-content:center;">
-    <div style="background:#fff; border-radius:14px; padding:32px; max-width:440px; width:90%; position:relative; box-shadow:0 12px 35px rgba(0,0,0,0.25);">
-      <button type="button" id="closeResetModalBtn" style="position:absolute; right:15px; top:15px; background:none; border:none; font-size:1.4rem; cursor:pointer; color:#666;" aria-label="Close">&times;</button>
-      <h3 style="color:#0f3d2e; margin-bottom:10px;"><i class="fas fa-key" style="color:#2f8f3d;"></i> Reset Password</h3>
-      <p style="font-size:0.9rem; color:#666; margin-bottom:18px;">Enter your registered email address and we will send you a password reset link.</p>
-      <div id="resetMessage" style="display:none; padding:10px; border-radius:6px; margin-bottom:15px; font-size:0.9rem;"></div>
-      <form id="resetPasswordForm">
-        <div class="form-group" style="margin-bottom:15px;">
-          <label for="resetEmail" style="font-weight:600; font-size:0.9rem; display:block; margin-bottom:6px;">Registered Email</label>
-          <input type="email" id="resetEmail" required placeholder="name@example.com" style="width:100%; padding:10px; border-radius:6px; border:1px solid #ccc; font-size:0.95rem;">
-        </div>
-        <button type="submit" id="resetSubmitBtn" class="submit-btn" style="padding:12px; font-size:1rem;">Send Reset Link</button>
-      </form>
-    </div>
-  </div>
-
-<footer class="footer">
     <div class="container">
-        <div class="footer-content">
-            <div class="footer-column">
-                <h3 data-i18n="footer.about">About OBUMSJ</h3>
-                <p data-i18n="footer.about_text">ODA BULTUM UNIVERSITY MUSLIM STUDENTS' JAMA'A is dedicated to supporting Muslim students in their academic and spiritual journey.</p>
-                <div class="footer-social">
-                    <a href="https://t.me/obumsj" target="_blank" title="Telegram"><i class="fab fa-telegram"></i></a>
-                    <a href="https://facebook.com/obumsj" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
-                    <a href="https://wa.me/251912345678" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-                    <a href="https://youtube.com/obumsj" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
-                    <a href="https://tiktok.com/@obumsj" target="_blank" title="TikTok"><i class="fab fa-tiktok"></i></a>
+        <!-- ============================================
+             1. LOGIN FORM CONTAINER
+        ============================================ -->
+        <div class="form-card" id="loginFormContainer">
+            <h2 data-i18n="login.form_title">Login to Your Account</h2>
+            <p class="form-card-subtitle" data-i18n="login.form_subtitle">Choose your preferred sign-in method</p>
+            
+            <!-- Global Feedback Messages -->
+            <div id="loginErrorMessage" class="error-message"></div>
+            <div id="loginSuccessMessage" class="success-message"></div>
+            
+            <!-- Option B: Continue with Google -->
+            <button type="button" class="btn-google" id="googleLoginBtn">
+                <svg viewBox="0 0 18 18">
+                    <path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.616z"/>
+                    <path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.258c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332C2.438 15.983 5.482 18 9 18z"/>
+                    <path fill="#FBBC05" d="M3.964 10.707c-.18-.54-.282-1.117-.282-1.707s.102-1.167.282-1.707V4.961H.957C.347 6.175 0 7.55 0 9s.347 2.825.957 4.039l3.007-2.332z"/>
+                    <path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0 5.482 0 2.438 2.017.957 4.961L3.964 7.293C4.672 5.166 6.656 3.58 9 3.58z"/>
+                </svg>
+                <span data-i18n="login.google_btn">Continue with Google</span>
+            </button>
+
+            <div class="auth-divider">
+                <span data-i18n="login.or_divider">or sign in with email / username</span>
+            </div>
+
+            <!-- Option A: Email or Username + Password -->
+            <form id="loginForm" autocomplete="on">
+                <div class="form-group">
+                    <label for="loginIdentifier" data-i18n="login.username">Email or Username</label>
+                    <input type="text" id="loginIdentifier" name="loginIdentifier" placeholder="Enter your email or username" required autocomplete="username">
+                </div>
+
+                <div class="form-group">
+                    <label for="loginPassword" data-i18n="login.password">Password</label>
+                    <div class="password-field-wrapper">
+                        <input type="password" id="loginPassword" name="password" placeholder="Enter your password" required autocomplete="current-password">
+                        <button type="button" class="password-toggle-btn" data-target="loginPassword" aria-label="Toggle password visibility">
+                            <i class="far fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="remember-row">
+                    <label>
+                        <input type="checkbox" id="rememberSession" checked>
+                        <span data-i18n="login.remember_me">Remember session</span>
+                    </label>
+                    <a href="#" id="forgotPasswordBtn" class="forgot-password-link" data-i18n="login.forgot_link">
+                        <i class="fas fa-key"></i> Forgot Password?
+                    </a>
+                </div>
+
+                <button type="submit" class="submit-btn" id="loginSubmitBtn">
+                    <i class="fas fa-sign-in-alt"></i> <span data-i18n="login.submit">Login to Dashboard</span>
+                </button>
+                
+                <div class="register-link">
+                    <span data-i18n="login.no_account">Don't have an account?</span>
+                    <a href="#register" id="showRegistrationLink" data-i18n="login.register_link">Register Here</a>
+                </div>
+            </form>
+        </div>
+
+        <!-- ============================================
+             2. REGISTRATION FORM (INITIALLY HIDDEN)
+        ============================================ -->
+        <div class="form-card" id="registrationFormContainer" style="display:none;">
+            <div class="registration-header">
+                <h2 data-i18n="register.register_form">Apply for Membership</h2>
+                <button type="button" class="back-to-login" id="backToLoginBtn">
+                    <i class="fas fa-arrow-left"></i> <span data-i18n="register.back_login">Back to Login</span>
+                </button>
+            </div>
+            <p class="form-card-subtitle" data-i18n="register.subtitle">Join the Oda Bultum University Muslim Students' Jama'a</p>
+
+            <!-- Registration Feedback Messages -->
+            <div id="regErrorMessage" class="error-message"></div>
+            <div id="regSuccessMessage" class="success-message"></div>
+
+            <!-- Option B: Sign up with Google -->
+            <button type="button" class="btn-google" id="googleRegBtn">
+                <svg viewBox="0 0 18 18">
+                    <path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.616z"/>
+                    <path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.258c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332C2.438 15.983 5.482 18 9 18z"/>
+                    <path fill="#FBBC05" d="M3.964 10.707c-.18-.54-.282-1.117-.282-1.707s.102-1.167.282-1.707V4.961H.957C.347 6.175 0 7.55 0 9s.347 2.825.957 4.039l3.007-2.332z"/>
+                    <path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0 5.482 0 2.438 2.017.957 4.961L3.964 7.293C4.672 5.166 6.656 3.58 9 3.58z"/>
+                </svg>
+                <span data-i18n="register.google_btn">Quick Register with Google</span>
+            </button>
+
+            <div class="auth-divider">
+                <span data-i18n="register.or_divider">or fill registration details</span>
+            </div>
+
+            <div class="notice-box">
+                <i class="fas fa-info-circle" style="font-size:1.1rem; margin-top:2px;"></i>
+                <div>
+                    <strong>Membership Policy:</strong> All new member registrations are reviewed by the Jama'a leadership to ensure community safety. You will receive access upon approval.
                 </div>
             </div>
-            <div class="footer-column">
-                <h3 data-i18n="footer.quick">Quick Links</h3>
-                <ul class="footer-links">
-                    <li><a href="./index.html" data-i18n="nav.home">Home</a></li>
-                    <li><a href="./About-Us.html" data-i18n="nav.about">About Us</a></li>
-                    <li><a href="./index.html#sectors" data-i18n="nav.sectors">Sectors</a></li>
-                    <li><a href="./Blog.html" data-i18n="nav.blog">Blog</a></li>
-                    <li><a href="./contact.html" data-i18n="nav.contact">Contact Us</a></li>
-                </ul>
-            </div>
-            <div class="footer-column">
-                <h3 data-i18n="footer.sectors">Our Sectors</h3>
-                <ul class="footer-links">
-                    <li><a href="./Qirat.html" data-i18n="sector.qirat">Qirat</a></li>
-                    <li><a href="./Dawah.html" data-i18n="sector.dawah">Dawah</a></li>
-                    <li><a href="./Social Affairs.html" data-i18n="sector.social">Social Affairs</a></li>
-                    <li><a href="./Academy.html" data-i18n="sector.academy">Academy</a></li>
-                    <li><a href="./Finance.html" data-i18n="sector.finance">Finance</a></li>
-                </ul>
-            </div>
-            <div class="footer-column">
-                <h3 data-i18n="footer.contact">Contact Info</h3>
-                <ul class="footer-links">
-                    <li><i class="fas fa-map-marker-alt"></i> <span data-i18n="footer.address">Oda Bultum University, Chiro, Ethiopia</span></li>
-                    <li><i class="fas fa-phone"></i> <span data-i18n="footer.phone">+251 912 345 678</span></li>
-                    <li><i class="fas fa-envelope"></i> <span data-i18n="footer.email">info@obumsj.org</span></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p data-i18n="footer.copyright">&copy; 2023 OBUMSJ - Oda Bultum University Muslim Students' JAMA'A. All Rights Reserved.</p>
+
+            <!-- Registration Form (ROLE SELECTION REMOVED - SECURED ON BACKEND) -->
+            <form id="registerForm" autocomplete="on">
+                <div class="two-column-form">
+                    <div>
+                        <div class="form-group">
+                            <label for="regFullName" data-i18n="register.full_name">Full Name *</label>
+                            <input type="text" id="regFullName" name="fullName" placeholder="e.g. Ahmed Mohammed" required autocomplete="name">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="regUsername" data-i18n="register.username">Username *</label>
+                            <input type="text" id="regUsername" name="username" placeholder="Choose a unique username" required autocomplete="username" pattern="[a-zA-Z0-9._-]{3,25}" title="3-25 alphanumeric characters">
+                            <small style="color:#6b7280; font-size:0.75rem;">Allowed: letters, numbers, dot, underscore (3-25 chars)</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="regEmail" data-i18n="register.email">Email Address *</label>
+                            <input type="email" id="regEmail" name="email" placeholder="name@example.com" required autocomplete="email">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="regPhone" data-i18n="register.phone">Phone Number *</label>
+                            <input type="tel" id="regPhone" name="phone" placeholder="+251 9..." required autocomplete="tel">
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="form-group">
+                            <label for="regGender" data-i18n="register.gender">Gender *</label>
+                            <select id="regGender" name="gender" required>
+                                <option value="" data-i18n="register.select_gender">-- Select Gender --</option>
+                                <option value="Male" data-i18n="register.male">Male</option>
+                                <option value="Female" data-i18n="register.female">Female</option>
+                            </select>
+                        </div>
+
+                        <!-- Jama'a Sector Interest (Replaces administrative role selection) -->
+                        <div class="form-group">
+                            <label for="regSector" data-i18n="register.sector">Primary Sector of Interest</label>
+                            <select id="regSector" name="sector">
+                                <option value="General">General Jama'a Member</option>
+                                <option value="Qirat">Qirat (Quranic Recitation & Tajweed)</option>
+                                <option value="Dawah">Dawah & Outreach</option>
+                                <option value="Social Affairs">Social Affairs & Welfare</option>
+                                <option value="Academy">Academic Support & Tutoring</option>
+                                <option value="Finance">Finance & Sponsorship</option>
+                                <option value="Ziyara">Ziyara & Educational Visits</option>
+                                <option value="Ruqiya">Rukiya & Spiritual Support</option>
+                                <option value="Charity">Charity & Zakat</option>
+                                <option value="Dawrul Hasen">Dawrul Hasen Project</option>
+                                <option value="Information">Information & Media</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="regPassword" data-i18n="register.password">Password *</label>
+                            <div class="password-field-wrapper">
+                                <input type="password" id="regPassword" name="password" placeholder="At least 6 characters" required autocomplete="new-password" minlength="6">
+                                <button type="button" class="password-toggle-btn" data-target="regPassword" aria-label="Toggle password visibility">
+                                    <i class="far fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="regConfirmPassword" data-i18n="register.confirm_password">Confirm Password *</label>
+                            <div class="password-field-wrapper">
+                                <input type="password" id="regConfirmPassword" name="confirmPassword" placeholder="Re-enter your password" required autocomplete="new-password" minlength="6">
+                                <button type="button" class="password-toggle-btn" data-target="regConfirmPassword" aria-label="Toggle password visibility">
+                                    <i class="far fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn" id="regSubmitBtn" style="margin-top: 10px;">
+                    <i class="fas fa-user-plus"></i> <span data-i18n="register.submit">Complete Registration</span>
+                </button>
+                
+                <div class="register-link">
+                    <span data-i18n="register.have_account">Already have an account?</span>
+                    <a href="#login" id="showLoginLink" data-i18n="register.login_link">Login Here</a>
+                </div>
+            </form>
         </div>
     </div>
-</footer>
 
-<script src="./js/language-system.js"></script>
-<script src="./Script.js"></script>
+    <!-- ============================================
+         3. FORGOT PASSWORD MODAL DIALOG
+    ============================================ -->
+    <div id="forgotPasswordModal" style="display:none; position:fixed; z-index:99999; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.65); align-items:center; justify-content:center; backdrop-filter:blur(4px);">
+        <div style="background:#fff; border-radius:14px; padding:32px; max-width:440px; width:90%; position:relative; box-shadow:0 12px 35px rgba(0,0,0,0.25);">
+            <button type="button" id="closeResetModalBtn" style="position:absolute; right:15px; top:15px; background:none; border:none; font-size:1.5rem; cursor:pointer; color:#6b7280; padding:4px;" aria-label="Close">&times;</button>
+            <h3 style="color:#0f3d2e; margin-bottom:10px; font-size:1.3rem;"><i class="fas fa-key" style="color:#2f8f3d; margin-right:6px;"></i> Reset Password</h3>
+            <p style="font-size:0.9rem; color:#64748b; margin-bottom:18px;">Enter your registered account email and we will send you a secure password reset link.</p>
+            
+            <div id="resetMessage" style="display:none; padding:12px; border-radius:8px; margin-bottom:16px; font-size:0.9rem;"></div>
+            
+            <form id="resetPasswordForm">
+                <div class="form-group" style="margin-bottom:18px;">
+                    <label for="resetEmail" style="font-weight:600; font-size:0.9rem; display:block; margin-bottom:6px;">Registered Email Address</label>
+                    <input type="email" id="resetEmail" required placeholder="name@example.com" style="width:100%; padding:11px 14px; border-radius:8px; border:1px solid #cbd5e1; font-size:0.95rem;">
+                </div>
+                <button type="submit" id="resetSubmitBtn" class="submit-btn" style="padding:12px; font-size:1rem;">
+                    <i class="fas fa-paper-plane"></i> Send Password Reset Link
+                </button>
+            </form>
+        </div>
+    </div>
 
-<script type="module">
-/* =========================
-   FIREBASE INTEGRATION
-========================= */
-import {
-  auth,
-  db,
-  signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
-  onAuthStateChanged,
-  sendPasswordResetEmail,
-  doc,
-  setDoc,
-  getDoc,
-  serverTimestamp
-} from "./js/firebase.js";
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3 data-i18n="footer.about">About OBUMSJ</h3>
+                    <p data-i18n="footer.about_text">ODA BULTUM UNIVERSITY MUSLIM STUDENTS' JAMA'A is dedicated to supporting Muslim students in their academic and spiritual journey.</p>
+                    <div class="footer-social">
+                        <a href="https://t.me/obumsj" target="_blank" title="Telegram"><i class="fab fa-telegram"></i></a>
+                        <a href="https://facebook.com/obumsj" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="https://wa.me/251912345678" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://youtube.com/obumsj" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="https://tiktok.com/@obumsj" target="_blank" title="TikTok"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3 data-i18n="footer.quick">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="./index.html" data-i18n="nav.home">Home</a></li>
+                        <li><a href="./About-Us.html" data-i18n="nav.about">About Us</a></li>
+                        <li><a href="./sector.html" data-i18n="nav.sectors">Sectors</a></li>
+                        <li><a href="./Blog.html" data-i18n="nav.blog">Blog</a></li>
+                        <li><a href="./contact.html" data-i18n="nav.contact">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3 data-i18n="footer.sectors">Our Sectors</h3>
+                    <ul class="footer-links">
+                        <li><a href="./Qirat.html" data-i18n="sector.qirat">Qirat</a></li>
+                        <li><a href="./Dawah.html" data-i18n="sector.dawah">Dawah</a></li>
+                        <li><a href="./Social Affairs.html" data-i18n="sector.social">Social Affairs</a></li>
+                        <li><a href="./Academy.html" data-i18n="sector.academy">Academy</a></li>
+                        <li><a href="./Finance.html" data-i18n="sector.finance">Finance</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3 data-i18n="footer.contact">Contact Info</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> <span data-i18n="footer.address">Oda Bultum University, Chiro, Ethiopia</span></li>
+                        <li><i class="fas fa-phone"></i> <span data-i18n="footer.phone">+251 912 345 678</span></li>
+                        <li><i class="fas fa-envelope"></i> <span data-i18n="footer.email">info@obumsj.org</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p data-i18n="footer.copyright">&copy; 2026 OBUMSJ - Oda Bultum University Muslim Students' Jama'a. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
 
-/* =========================
-   PAGE LOAD
-========================= */
-document.addEventListener("DOMContentLoaded", () => {
-  setupEventListeners();
+    <!-- Universal Scripts -->
+    <script src="./js/language-system.js"></script>
+    <script src="./Script.js"></script>
 
-  // If already logged in and account is active, direct to Dashboard
-  onAuthStateChanged(auth, async (user) => {
-    if (user) {
-      try {
-        const snap = await getDoc(doc(db, "users", user.uid));
-        if (snap.exists()) {
-          const userData = snap.data();
-          if (userData.role !== "pending") {
-            window.location.href = "Dashboard.html";
-          }
+    <!-- ============================================
+         FIREBASE AUTHENTICATION & MEMBERSHIP LOGIC
+    ============================================ -->
+    <script type="module">
+        import {
+            auth,
+            db,
+            googleProvider,
+            signInWithEmailAndPassword,
+            createUserWithEmailAndPassword,
+            signInWithPopup,
+            signInWithRedirect,
+            getRedirectResult,
+            setPersistence,
+            browserLocalPersistence,
+            browserSessionPersistence,
+            signOut,
+            onAuthStateChanged,
+            sendPasswordResetEmail,
+            doc,
+            setDoc,
+            getDoc,
+            getDocs,
+            collection,
+            query,
+            where,
+            serverTimestamp
+        } from "./js/firebase.js";
+
+        // DOM elements
+        const loginContainer = document.getElementById("loginFormContainer");
+        const regContainer = document.getElementById("registrationFormContainer");
+        const loginErr = document.getElementById("loginErrorMessage");
+        const loginSucc = document.getElementById("loginSuccessMessage");
+        const regErr = document.getElementById("regErrorMessage");
+        const regSucc = document.getElementById("regSuccessMessage");
+        const loginForm = document.getElementById("loginForm");
+        const registerForm = document.getElementById("registerForm");
+        const loginSubmitBtn = document.getElementById("loginSubmitBtn");
+        const regSubmitBtn = document.getElementById("regSubmitBtn");
+        const googleLoginBtn = document.getElementById("googleLoginBtn");
+        const googleRegBtn = document.getElementById("googleRegBtn");
+
+        // Helper: Clear messages
+        function clearMessages() {
+            [loginErr, loginSucc, regErr, regSucc].forEach(el => {
+                if (el) {
+                    el.style.display = "none";
+                    el.innerHTML = "";
+                }
+            });
         }
-      } catch (e) {
-        console.warn("Auth state check:", e);
-      }
-    }
-  });
-});
 
-/* =========================
-   EVENT LISTENERS
-========================= */
-function setupEventListeners() {
-  document.getElementById("showRegistration").onclick = e => {
-    e.preventDefault();
-    showRegistrationForm();
-  };
+        // View Toggling
+        window.showLoginForm = function() {
+            clearMessages();
+            loginContainer.style.display = "block";
+            regContainer.style.display = "none";
+            history.replaceState(null, null, "#login");
+        };
 
-  document.getElementById("showLoginFromReg").onclick = e => {
-    e.preventDefault();
-    showLoginForm();
-  };
+        window.showRegistrationForm = function() {
+            clearMessages();
+            loginContainer.style.display = "none";
+            regContainer.style.display = "block";
+            history.replaceState(null, null, "#register");
+        };
 
-  document.getElementById("backToLogin").onclick = e => {
-    e.preventDefault();
-    showLoginForm();
-  };
+        // Initialize Router based on URL hash or query params
+        function initViewRouting() {
+            const hash = window.location.hash.toLowerCase();
+            const search = new URLSearchParams(window.location.search);
+            const mode = search.get("mode") || search.get("action");
 
-  document.getElementById("toggleRegistrationLink").onclick = e => {
-    e.preventDefault();
-    showRegistrationForm();
-  };
+            if (hash === "#register" || mode === "register" || mode === "signup") {
+                window.showRegistrationForm();
+            } else {
+                window.showLoginForm();
+            }
+        }
 
-  document.getElementById("toggleLoginLink").onclick = e => {
-    e.preventDefault();
-    showLoginForm();
-  };
+        // ============================================
+        // PASSWORD VISIBILITY TOGGLE HANDLER
+        // ============================================
+        document.querySelectorAll(".password-toggle-btn").forEach(btn => {
+            btn.addEventListener("click", function() {
+                const targetId = this.getAttribute("data-target");
+                const input = document.getElementById(targetId);
+                const icon = this.querySelector("i");
+                if (!input) return;
 
-  // Forgot Password modal controls
-  const forgotBtn = document.getElementById("forgotPasswordBtn");
-  const forgotModal = document.getElementById("forgotPasswordModal");
-  const closeResetModal = document.getElementById("closeResetModalBtn");
+                if (input.type === "password") {
+                    input.type = "text";
+                    icon.classList.remove("fa-eye");
+                    icon.classList.add("fa-eye-slash");
+                } else {
+                    input.type = "password";
+                    icon.classList.remove("fa-eye-slash");
+                    icon.classList.add("fa-eye");
+                }
+            });
+        });
 
-  if (forgotBtn && forgotModal) {
-    forgotBtn.onclick = (e) => {
-      e.preventDefault();
-      forgotModal.style.display = "flex";
-      const resetMsg = document.getElementById("resetMessage");
-      if (resetMsg) resetMsg.style.display = "none";
-      const userField = document.getElementById("username");
-      if (userField && userField.value.includes("@")) {
-        document.getElementById("resetEmail").value = userField.value;
-      }
-    };
-  }
+        // ============================================
+        // FORGOT PASSWORD MODAL HANDLER
+        // ============================================
+        const forgotBtn = document.getElementById("forgotPasswordBtn");
+        const forgotModal = document.getElementById("forgotPasswordModal");
+        const closeResetModal = document.getElementById("closeResetModalBtn");
+        const resetForm = document.getElementById("resetPasswordForm");
 
-  if (closeResetModal && forgotModal) {
-    closeResetModal.onclick = () => {
-      forgotModal.style.display = "none";
-    };
-  }
+        if (forgotBtn && forgotModal) {
+            forgotBtn.addEventListener("click", (e) => {
+                e.preventDefault();
+                forgotModal.style.display = "flex";
+                const resetMsg = document.getElementById("resetMessage");
+                if (resetMsg) resetMsg.style.display = "none";
+                const loginId = document.getElementById("loginIdentifier").value.trim();
+                if (loginId.includes("@")) {
+                    document.getElementById("resetEmail").value = loginId;
+                }
+            });
+        }
 
-  window.addEventListener("click", (e) => {
-    if (forgotModal && e.target === forgotModal) {
-      forgotModal.style.display = "none";
-    }
-  });
+        if (closeResetModal && forgotModal) {
+            closeResetModal.addEventListener("click", () => {
+                forgotModal.style.display = "none";
+            });
+        }
 
-  const resetForm = document.getElementById("resetPasswordForm");
-  if (resetForm) {
-    resetForm.onsubmit = async (e) => {
-      e.preventDefault();
-      const email = document.getElementById("resetEmail").value.trim();
-      const msgBox = document.getElementById("resetMessage");
-      const submitBtn = document.getElementById("resetSubmitBtn");
+        window.addEventListener("click", (e) => {
+            if (forgotModal && e.target === forgotModal) {
+                forgotModal.style.display = "none";
+            }
+        });
 
-      if (!email) return;
+        if (resetForm) {
+            resetForm.addEventListener("submit", async (e) => {
+                e.preventDefault();
+                const email = document.getElementById("resetEmail").value.trim();
+                const resetMsg = document.getElementById("resetMessage");
+                const submitBtn = document.getElementById("resetSubmitBtn");
 
-      submitBtn.disabled = true;
-      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending Link...';
+                if (!email) return;
 
-      try {
-        await sendPasswordResetEmail(auth, email);
-        msgBox.style.display = "block";
-        msgBox.style.background = "#e8f5e9";
-        msgBox.style.color = "#2e7d32";
-        msgBox.style.border = "1px solid #c8e6c9";
-        msgBox.innerHTML = '<i class="fas fa-check-circle"></i> Password reset email sent! Please check your inbox or spam folder.';
-      } catch (err) {
-        msgBox.style.display = "block";
-        msgBox.style.background = "#ffebee";
-        msgBox.style.color = "#c62828";
-        msgBox.style.border = "1px solid #ffcdd2";
-        msgBox.innerHTML = '<i class="fas fa-exclamation-circle"></i> ' + (err.message || 'Error sending password reset email.');
-      } finally {
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = 'Send Reset Link';
-      }
-    };
-  }
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending Link...';
 
-  document.getElementById("loginForm").onsubmit = e => {
-    e.preventDefault();
-    handleLogin();
-  };
+                try {
+                    await sendPasswordResetEmail(auth, email);
+                    resetMsg.style.display = "block";
+                    resetMsg.style.background = "#f0fdf4";
+                    resetMsg.style.color = "#166534";
+                    resetMsg.style.border = "1px solid #bbf7d0";
+                    resetMsg.innerHTML = '<i class="fas fa-check-circle"></i> Password reset email sent! Please check your inbox or spam folder.';
+                } catch (err) {
+                    resetMsg.style.display = "block";
+                    resetMsg.style.background = "#fef2f2";
+                    resetMsg.style.color = "#991b1b";
+                    resetMsg.style.border = "1px solid #fecaca";
+                    let msg = err.message;
+                    if (err.code === "auth/user-not-found") msg = "No account found matching this email address.";
+                    else if (err.code === "auth/invalid-email") msg = "Please enter a valid email address.";
+                    resetMsg.innerHTML = '<i class="fas fa-exclamation-circle"></i> ' + msg;
+                } finally {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Password Reset Link';
+                }
+            });
+        }
 
-  document.getElementById("registerForm").onsubmit = e => {
-    e.preventDefault();
-    handleRegistration();
-  };
-}
+        // ============================================
+        // RESOLVE USERNAME TO EMAIL
+        // ============================================
+        async function resolveEmailFromIdentifier(identifier) {
+            const raw = identifier.trim();
+            // If already an email, return directly
+            if (raw.includes("@")) {
+                return raw.toLowerCase();
+            }
 
-/* =========================
-   UI FUNCTIONS
-========================= */
-function showLoginForm() {
-  document.getElementById("loginFormContainer").style.display = "block";
-  document.getElementById("registrationForm").style.display = "none";
-  document.getElementById("toggleMessage").style.display = "none";
-  clearMessages();
-}
+            const cleanUsername = raw.toLowerCase().replace(/[^a-z0-9_.-]/g, '');
 
-function showRegistrationForm() {
-  document.getElementById("loginFormContainer").style.display = "none";
-  document.getElementById("registrationForm").style.display = "block";
-  document.getElementById("toggleMessage").style.display = "none";
-  clearMessages();
-}
+            // 1. Try exact match in the usernames index collection
+            try {
+                const userDocSnap = await getDoc(doc(db, "usernames", cleanUsername));
+                if (userDocSnap.exists() && userDocSnap.data().email) {
+                    return userDocSnap.data().email;
+                }
+            } catch (e) {
+                console.warn("Usernames lookup:", e);
+            }
 
-function showToggleMessage(msg) {
-  document.getElementById("toggleMessage").style.display = "block";
-  document.getElementById("toggleMessageText").textContent = msg;
-}
+            // 2. Fallback query on users collection (for legacy users)
+            try {
+                const q = query(collection(db, "users"), where("username", "==", cleanUsername));
+                const snap = await getDocs(q);
+                if (!snap.empty) {
+                    const firstMatch = snap.docs[0].data();
+                    if (firstMatch.email) return firstMatch.email;
+                }
+            } catch (e) {
+                console.warn("Users fallback query:", e);
+            }
 
-function clearMessages() {
-  const err = document.getElementById("errorMessage");
-  const succ = document.getElementById("successMessage");
-  const regErr = document.getElementById("registrationError");
-  const regSucc = document.getElementById("registrationSuccess");
-  if (err) { err.style.display = "none"; err.textContent = ""; }
-  if (succ) { succ.style.display = "none"; succ.textContent = ""; }
-  if (regErr) { regErr.style.display = "none"; regErr.textContent = ""; }
-  if (regSucc) { regSucc.style.display = "none"; regSucc.textContent = ""; }
-}
+            // Not found
+            return null;
+        }
 
-/* =========================
-   LOGIN (FIREBASE AUTH & FIRESTORE)
-========================= */
-async function handleLogin() {
-  clearMessages();
-  const email = document.getElementById("username").value.trim();
-  const password = document.getElementById("password").value;
-  const loginBtn = document.querySelector("#loginForm button[type='submit']");
-  const errBox = document.getElementById("errorMessage");
+        // ============================================
+        // OPTION A: EMAIL OR USERNAME + PASSWORD LOGIN
+        // ============================================
+        async function handleLoginSubmit(e) {
+            e.preventDefault();
+            clearMessages();
 
-  loginBtn.disabled = true;
-  loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging in...';
+            const identifier = document.getElementById("loginIdentifier").value.trim();
+            const password = document.getElementById("loginPassword").value;
+            const rememberMe = document.getElementById("rememberSession").checked;
 
-  try {
-    const cred = await signInWithEmailAndPassword(auth, email, password);
-    const snap = await getDoc(doc(db, "users", cred.user.uid));
+            if (!identifier || !password) {
+                showLoginError("Please enter both your email/username and password.");
+                return;
+            }
 
-    if (!snap.exists()) {
-      showToggleMessage("No member profile found for this account. Please register first.");
-      loginBtn.disabled = false;
-      loginBtn.innerHTML = 'Login to Dashboard';
-      return;
-    }
+            loginSubmitBtn.disabled = true;
+            loginSubmitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Authenticating...';
 
-    const userData = snap.data();
+            try {
+                // 1. Apply Session Persistence
+                await setPersistence(auth, rememberMe ? browserLocalPersistence : browserSessionPersistence);
 
-    if (userData.role === "pending") {
-      if (errBox) {
-        errBox.style.display = "block";
-        errBox.innerHTML = '<i class="fas fa-clock"></i> Your registration request is pending administrator review. Please wait for an administrator to approve your account.';
-      } else {
-        alert("Your account is pending administrator approval. Please wait for review.");
-      }
-      loginBtn.disabled = false;
-      loginBtn.innerHTML = 'Login to Dashboard';
-      return;
-    }
+                // 2. Resolve target email
+                let targetEmail = identifier;
+                if (!identifier.includes("@")) {
+                    targetEmail = await resolveEmailFromIdentifier(identifier);
+                    if (!targetEmail) {
+                        showLoginError(`No account registered with username "@${identifier}". Please sign in with your email address or check spelling.`);
+                        loginSubmitBtn.disabled = false;
+                        loginSubmitBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login to Dashboard';
+                        return;
+                    }
+                }
 
-    localStorage.setItem("currentUser", JSON.stringify({
-      uid: cred.user.uid,
-      fullName: userData.fullName || "User",
-      email: userData.email || cred.user.email,
-      username: userData.username || userData.email?.split('@')[0],
-      phone: userData.phone || "",
-      gender: userData.gender || "Male",
-      role: userData.role
-    }));
+                // 3. Authenticate with Firebase Auth
+                const cred = await signInWithEmailAndPassword(auth, targetEmail, password);
+                await postAuthVerification(cred.user);
 
-    window.location.href = "Dashboard.html";
-  } catch (err) {
-    console.error("Login error:", err);
-    let msg = "Invalid login details. Please verify your email and password.";
-    if (err.code === "auth/invalid-credential" || err.code === "auth/user-not-found" || err.code === "auth/wrong-password") {
-      msg = "Invalid email or password. Please try again or use Forgot Password.";
-    } else if (err.code === "auth/too-many-requests") {
-      msg = "Too many failed attempts. Please reset your password or try again later.";
-    }
-    showToggleMessage(msg);
-  } finally {
-    loginBtn.disabled = false;
-    loginBtn.innerHTML = 'Login to Dashboard';
-  }
-}
+            } catch (err) {
+                console.error("Login authentication error:", err);
+                let message = "Invalid email or password. Please verify your credentials.";
+                if (err.code === "auth/invalid-credential" || err.code === "auth/user-not-found" || err.code === "auth/wrong-password") {
+                    message = "Invalid email/username or password. Please try again or use Forgot Password.";
+                } else if (err.code === "auth/too-many-requests") {
+                    message = "Account temporarily locked due to multiple failed login attempts. Please reset your password or wait a few minutes.";
+                } else if (err.code === "auth/user-disabled") {
+                    message = "This member account has been disabled. Please contact the administrator.";
+                } else if (err.code === "auth/network-request-failed") {
+                    message = "Network connection failed. Please check your internet connection.";
+                }
+                showLoginError(message);
+                loginSubmitBtn.disabled = false;
+                loginSubmitBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login to Dashboard';
+            }
+        }
 
-/* =========================
-   REGISTRATION (FIREBASE AUTH & FIRESTORE)
-========================= */
-async function handleRegistration() {
-  clearMessages();
-  const fullName = document.getElementById("regFullName").value.trim();
-  const username = (document.getElementById("regUsername") ? document.getElementById("regUsername").value : "").trim();
-  const email = document.getElementById("regEmail").value.trim();
-  const password = document.getElementById("regPassword").value;
-  const phone = document.getElementById("regPhone").value.trim();
-  const gender = document.getElementById("regGender").value;
-  const role = document.getElementById("regRole").value;
+        // ============================================
+        // OPTION B: CONTINUE / SIGN UP WITH GOOGLE
+        // ============================================
+        async function handleGoogleSignIn(sourceBtn) {
+            clearMessages();
+            sourceBtn.disabled = true;
+            const originalContent = sourceBtn.innerHTML;
+            sourceBtn.innerHTML = '<i class="fas fa-spinner fa-spin" style="margin-right:8px;"></i> Connecting to Google...';
 
-  const regBtn = document.querySelector("#registerForm button[type='submit']");
-  const regErr = document.getElementById("registrationError");
-  const regSucc = document.getElementById("registrationSuccess");
+            try {
+                // 1. Ensure local persistence
+                await setPersistence(auth, browserLocalPersistence);
 
-  regBtn.disabled = true;
-  regBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting Registration...';
+                // 2. Perform Google Sign-in popup
+                const cred = await signInWithPopup(auth, googleProvider);
+                const user = cred.user;
 
-  try {
-    const cred = await createUserWithEmailAndPassword(auth, email, password);
+                // 3. Inspect if profile exists in Firestore
+                const userDocRef = doc(db, "users", user.uid);
+                const snap = await getDoc(userDocRef);
 
-    await setDoc(doc(db, "users", cred.user.uid), {
-      fullName,
-      username: username || email.split('@')[0],
-      email,
-      phone,
-      gender,
-      role: "pending",
-      requestedRole: role,
-      createdAt: serverTimestamp()
-    });
+                if (!snap.exists()) {
+                    // Brand new user from Google: create default pending profile
+                    const derivedUsername = (user.email.split('@')[0] || "member").toLowerCase().replace(/[^a-z0-9_]/g, '');
 
-    document.getElementById("registerForm").reset();
+                    await setDoc(userDocRef, {
+                        fullName: user.displayName || "Google Member",
+                        username: derivedUsername,
+                        email: user.email,
+                        phone: user.phoneNumber || "",
+                        gender: "Not specified",
+                        sector: "General",
+                        role: "pending",
+                        status: "pending",
+                        authProvider: "google",
+                        createdAt: serverTimestamp()
+                    });
 
-    if (regSucc) {
-      regSucc.style.display = "block";
-      regSucc.innerHTML = '<i class="fas fa-check-circle"></i> Registration submitted successfully! Your account is pending administrator approval. Please wait for an administrator to review and activate your account.';
-    } else {
-      alert("Registration submitted successfully! Your account is pending administrator approval.");
-    }
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  } catch (err) {
-    console.error("Registration error:", err);
-    let msg = err.message;
-    if (err.code === "auth/email-already-in-use") {
-      msg = "This email is already registered. Please login or reset your password.";
-    } else if (err.code === "auth/weak-password") {
-      msg = "Password must be at least 6 characters long.";
-    }
+                    // Claim username mapping
+                    try {
+                        await setDoc(doc(db, "usernames", derivedUsername), {
+                            uid: user.uid,
+                            email: user.email
+                        });
+                    } catch (e) {}
 
-    if (regErr) {
-      regErr.style.display = "block";
-      regErr.innerHTML = '<i class="fas fa-exclamation-triangle"></i> ' + msg;
-    } else {
-      alert(msg);
-    }
-  } finally {
-    regBtn.disabled = false;
-    regBtn.innerHTML = 'Complete Registration';
-  }
-}
-</script>
+                    // Inform user their application is under review
+                    showLoginSuccess(`<i class="fas fa-clock"></i> Welcome, ${user.displayName || 'Member'}! Your Google account has been registered with OBUMSJ. Your membership application is now pending administrator review.`);
+                    sourceBtn.disabled = false;
+                    sourceBtn.innerHTML = originalContent;
+                    return;
+                }
 
+                // Existing user: proceed with standard status check
+                await postAuthVerification(user);
 
+            } catch (err) {
+                console.error("Google authentication error:", err);
+                let message = "Google Sign-In was cancelled or failed.";
+                if (err.code === "auth/popup-blocked") {
+                    message = "Google Sign-in popup was blocked by your browser. Please allow popups for this site and try again.";
+                } else if (err.code === "auth/popup-closed-by-user") {
+                    message = "Google Sign-in window was closed before completion.";
+                } else if (err.code === "auth/account-exists-with-different-credential") {
+                    message = "An account already exists with this email address using a different login method. Please sign in with your email and password.";
+                } else if (err.message) {
+                    message = err.message;
+                }
+                showLoginError(message);
+            } finally {
+                sourceBtn.disabled = false;
+                sourceBtn.innerHTML = originalContent;
+            }
+        }
 
+        // ============================================
+        // POST-AUTH VERIFICATION & ROLE ROUTING
+        // ============================================
+        async function postAuthVerification(user) {
+            const snap = await getDoc(doc(db, "users", user.uid));
+
+            if (!snap.exists()) {
+                showLoginError("No member profile record found for this account. Please submit a new registration application.");
+                loginSubmitBtn.disabled = false;
+                loginSubmitBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login to Dashboard';
+                return;
+            }
+
+            const userData = snap.data();
+
+            // Status 1: Pending membership review
+            if (userData.role === "pending" || userData.status === "pending") {
+                showLoginError('<i class="fas fa-clock" style="margin-right:6px;"></i> Your registration application is currently pending administrator review. Please wait for an administrator to review and activate your account.');
+                loginSubmitBtn.disabled = false;
+                loginSubmitBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login to Dashboard';
+                return;
+            }
+
+            // Status 2: Suspended account
+            if (userData.status === "suspended") {
+                showLoginError('<i class="fas fa-ban" style="margin-right:6px;"></i> This account has been suspended by the Jama\'a leadership. Please contact an administrator for assistance.');
+                loginSubmitBtn.disabled = false;
+                loginSubmitBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login to Dashboard';
+                return;
+            }
+
+            // Status 3: Rejected application
+            if (userData.role === "rejected" || userData.status === "rejected") {
+                const reasonNotice = userData.rejectionReason 
+                    ? `<br><small style="display:block;margin-top:6px;font-weight:600;">Reason: ${userData.rejectionReason}</small>` 
+                    : '';
+                showLoginError(`<i class="fas fa-times-circle" style="margin-right:6px;"></i> Your membership application was not approved.${reasonNotice}`);
+                loginSubmitBtn.disabled = false;
+                loginSubmitBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login to Dashboard';
+                return;
+            }
+
+            // Status 4: Active Approved Member / Leadership / Administrator
+            localStorage.setItem("currentUser", JSON.stringify({
+                uid: user.uid,
+                fullName: userData.fullName || user.displayName || "Member",
+                email: userData.email || user.email,
+                username: userData.username || user.email?.split('@')[0],
+                phone: userData.phone || "",
+                gender: userData.gender || "Not specified",
+                role: userData.role || "sector_member",
+                sector: userData.sector || "General",
+                status: userData.status || "active"
+            }));
+
+            showLoginSuccess('<i class="fas fa-check-circle"></i> Login successful! Redirecting to dashboard...');
+            setTimeout(() => {
+                window.location.href = "Dashboard.html";
+            }, 500);
+        }
+
+        // ============================================
+        // REGISTRATION FORM SUBMISSION (SECURE DEFAULTS)
+        // ============================================
+        async function handleRegistrationSubmit(e) {
+            e.preventDefault();
+            clearMessages();
+
+            const fullName = document.getElementById("regFullName").value.trim();
+            const rawUsername = document.getElementById("regUsername").value.trim();
+            const email = document.getElementById("regEmail").value.trim().toLowerCase();
+            const phone = document.getElementById("regPhone").value.trim();
+            const gender = document.getElementById("regGender").value;
+            const sector = document.getElementById("regSector").value;
+            const password = document.getElementById("regPassword").value;
+            const confirmPassword = document.getElementById("regConfirmPassword").value;
+
+            // Password confirmation check
+            if (password !== confirmPassword) {
+                showRegError("Passwords do not match. Please re-enter identical passwords.");
+                return;
+            }
+
+            if (password.length < 6) {
+                showRegError("Password must be at least 6 characters in length.");
+                return;
+            }
+
+            const cleanUsername = rawUsername.toLowerCase().replace(/[^a-z0-9_.-]/g, '');
+            if (cleanUsername.length < 3) {
+                showRegError("Username must contain at least 3 alphanumeric characters.");
+                return;
+            }
+
+            regSubmitBtn.disabled = true;
+            regSubmitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting Application...';
+
+            try {
+                // 1. Check if username is already claimed in usernames index
+                const existingUserDoc = await getDoc(doc(db, "usernames", cleanUsername));
+                if (existingUserDoc.exists()) {
+                    showRegError(`The username "@${cleanUsername}" is already taken. Please choose another username.`);
+                    regSubmitBtn.disabled = false;
+                    regSubmitBtn.innerHTML = '<i class="fas fa-user-plus"></i> Complete Registration';
+                    return;
+                }
+
+                // 2. Create Firebase Auth user
+                const cred = await createUserWithEmailAndPassword(auth, email, password);
+
+                // 3. Store user profile in Firestore (ROLE IS ALWAYS "pending" - SECURED AGAINST CLIENT OVERRIDE)
+                await setDoc(doc(db, "users", cred.user.uid), {
+                    fullName,
+                    username: cleanUsername,
+                    email,
+                    phone,
+                    gender,
+                    sector: sector || "General",
+                    role: "pending",
+                    status: "pending",
+                    createdAt: serverTimestamp()
+                });
+
+                // 4. Map username in usernames collection
+                try {
+                    await setDoc(doc(db, "usernames", cleanUsername), {
+                        uid: cred.user.uid,
+                        email: email
+                    });
+                } catch (e) {
+                    console.warn("Username map error:", e);
+                }
+
+                // 5. Notify success and reset form
+                registerForm.reset();
+                showRegSuccess('<i class="fas fa-check-circle" style="font-size:1.1rem; margin-right:6px;"></i> Registration submitted successfully! Your account is pending administrator review. Once an administrator approves your application, you will be able to log in to the Dashboard.');
+                
+                // Pre-fill email in login form
+                document.getElementById("loginIdentifier").value = cleanUsername;
+
+                window.scrollTo({ top: 120, behavior: 'smooth' });
+
+            } catch (err) {
+                console.error("Registration error:", err);
+                let message = err.message;
+                if (err.code === "auth/email-already-in-use") {
+                    message = "This email address is already registered. Please login or use the Forgot Password option.";
+                } else if (err.code === "auth/weak-password") {
+                    message = "Password is too weak. Please use at least 6 characters with mixed letters and numbers.";
+                } else if (err.code === "auth/invalid-email") {
+                    message = "Please enter a valid email address.";
+                }
+                showRegError(message);
+            } finally {
+                regSubmitBtn.disabled = false;
+                regSubmitBtn.innerHTML = '<i class="fas fa-user-plus"></i> Complete Registration';
+            }
+        }
+
+        // ============================================
+        // FEEDBACK HELPERS
+        // ============================================
+        function showLoginError(msg) {
+            loginErr.style.display = "block";
+            loginErr.innerHTML = msg;
+            loginSucc.style.display = "none";
+        }
+
+        function showLoginSuccess(msg) {
+            loginSucc.style.display = "block";
+            loginSucc.innerHTML = msg;
+            loginErr.style.display = "none";
+        }
+
+        function showRegError(msg) {
+            regErr.style.display = "block";
+            regErr.innerHTML = msg;
+            regSucc.style.display = "none";
+        }
+
+        function showRegSuccess(msg) {
+            regSucc.style.display = "block";
+            regSucc.innerHTML = msg;
+            regErr.style.display = "none";
+        }
+
+        // ============================================
+        // EVENT ATTACHMENTS
+        // ============================================
+        document.addEventListener("DOMContentLoaded", () => {
+            initViewRouting();
+
+            // Link listeners
+            const showRegBtn = document.getElementById("showRegistrationLink");
+            if (showRegBtn) showRegBtn.addEventListener("click", (e) => { e.preventDefault(); window.showRegistrationForm(); });
+
+            const showLoginBtn = document.getElementById("showLoginLink");
+            if (showLoginBtn) showLoginBtn.addEventListener("click", (e) => { e.preventDefault(); window.showLoginForm(); });
+
+            const backBtn = document.getElementById("backToLoginBtn");
+            if (backBtn) backBtn.addEventListener("click", (e) => { e.preventDefault(); window.showLoginForm(); });
+
+            // Form listeners
+            if (loginForm) loginForm.addEventListener("submit", handleLoginSubmit);
+            if (registerForm) registerForm.addEventListener("submit", handleRegistrationSubmit);
+
+            // Google button listeners
+            if (googleLoginBtn) googleLoginBtn.addEventListener("click", () => handleGoogleSignIn(googleLoginBtn));
+            if (googleRegBtn) googleRegBtn.addEventListener("click", () => handleGoogleSignIn(googleRegBtn));
+
+            // Check if already authenticated and active
+            onAuthStateChanged(auth, async (user) => {
+                if (user) {
+                    try {
+                        const snap = await getDoc(doc(db, "users", user.uid));
+                        if (snap.exists()) {
+                            const data = snap.data();
+                            if (data.role !== "pending" && data.status === "active") {
+                                // User already authenticated & active
+                                // Only auto-redirect if not specifically viewing register
+                                if (!window.location.hash.includes("register")) {
+                                    window.location.href = "Dashboard.html";
+                                }
+                            }
+                        }
+                    } catch (e) {}
+                }
+            });
+        });
+    </script>
 </body>
 </html>
-
-
-

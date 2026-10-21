@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -57,8 +57,6 @@
     <a href="#" onclick="setLang('ar'); return false;" data-i18n="lang.arabic">Arabic</a>
   </div>
 </div>
-
-
         
         <ul class="nav-links">
             <li><a href="#home" data-i18n="nav.home">HOME</a></li>
@@ -69,7 +67,6 @@
                     <a href="./Qirat.html" data-i18n="sector.qirat"><i class="fas fa-quran"></i> Qirat</a>
                     <a href="./Dawah.html" data-i18n="sector.dawah"><i class="fas fa-megaphone"></i> Dawah</a>
                     <a href="./Social Affairs.html" data-i18n="sector.social"><i class="fas fa-hands-helping"></i> Social Affairs</a>
-                    
                     <a href="./Academy.html" data-i18n="sector.academy"><i class="fas fa-graduation-cap"></i> Academy</a>
                     <a href="./Finance.html" data-i18n="sector.finance"><i class="fas fa-coins"></i> Finance</a>
                     <a href="./Ziyara.html" data-i18n="sector.ziyara"><i class="fas fa-kaaba"></i> Ziyara</a>
@@ -81,22 +78,15 @@
             </li>
             <li><a href="Blog.html" data-i18n="nav.blog">BLOG</a></li>
             <li><a href="contact.html" data-i18n="nav.contact">CONTACT US</a></li>
-            <li><a href="./member.html" data-i18n="nav.membership">MEMBERSHIP</a></li>
+            <li id="loginNavItem"><a href="./member.html" id="loginBtn" data-i18n="nav.membership">MEMBERSHIP</a></li>
+            <li id="userMenuNavItem" style="display:none;">
+                <div id="userMenu" style="display:none; gap:8px; align-items:center;">
+                    <a href="Dashboard.html" id="dashboardLink" class="btn" style="padding:6px 12px; font-size:0.85rem;"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                    <a href="#" class="btn logout-btn" style="padding:6px 10px; font-size:0.85rem; background:#fee2e2; color:#b91c1c;"><i class="fas fa-sign-out-alt"></i></a>
+                </div>
+            </li>
             <li><a href="donate.html" class="btn nav-donate" data-i18n="nav.donate">DONATE HERE</a></li>
         </ul>
-
-        <!-- Add this to your nav-links -->
-<li>
-    
-    <div id="userMenu" style="display: none;">
-        <a href="#" id="dashboardLink" class="btn">
-            <i class="fas fa-tachometer-alt"></i> Dashboard
-        </a>
-        <a href="#" class="btn logout-btn">
-            <i class="fas fa-sign-out-alt"></i> Logout
-        </a>
-    </div>
-</li>
         
         <div class="menu-toggle" id="mobile-menu">
             <span></span>
@@ -481,7 +471,7 @@
                 <div class="donate-form">
                     <form id="donationForm">
                         <div class="form-group">
-                            <label for="amount" data-i18n="donate.amount">Donation Amount (₦)</label>
+                            <label for="amount" data-i18n="donate.amount">Donation Amount (Birr)</label>
                             <input type="number" id="amount" class="form-control" placeholder="Enter amount" min="100" required>
                         </div>
                         <div class="form-group">
@@ -577,7 +567,7 @@
             <div class="footer-content">
                 <div class="footer-column">
                     <h3 data-i18n="footer.about">About OBUMSJ</h3>
-                    <p data-i18n="footer.about_text">ODA BULTUM UNIVERSITY MUSLIM STUDENTS' Jama'a is dedicated to supporting Muslim students in their academic and spiritual journey.</p>
+                    <p data-i18n="footer.about_text">ODA BULTUM UNIVERSITY MUSLIM STUDENTS' JAMA'A is dedicated to supporting Muslim students in their academic and spiritual journey.</p>
                     <div class="footer-social">
                         <a href="https://t.me/obumsj" target="_blank" title="Telegram"><i class="fab fa-telegram"></i></a>
                         <a href="https://facebook.com/obumsj" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
@@ -616,30 +606,12 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p data-i18n="footer.copyright">&copy; 2023 OBUMSJ - Oda Bultum University Muslim Students' Jama'a. All Rights Reserved.</p>
+                <p data-i18n="footer.copyright">&copy; 2026 OBUMSJ - Oda Bultum University Muslim Students' Jama'a. All Rights Reserved.</p>
             </div>
         </div>
     </footer>
 
-    <!-- =========================================
-     GOOGLE AUTOMATIC TRANSLATION WIDGET
-     ========================================= -->
-    <div id="google_translate_element"></div>
-    <script type="text/javascript">
-        function googleTranslateElementInit() {
-          new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
-        }
-    </script>
-        <!-- Remove Google Translate Widget (optional) -->
-    <!-- <div id="google_translate_element"></div>
-    <script type="text/javascript">
-        function googleTranslateElementInit() {
-          new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
-        }
-    </script>
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script> -->
-
-    <!-- Include the universal language system -->
+    <!-- Universal Scripts -->
     <script src="./js/language-system.js"></script>
     <script src="./Script.js"></script>
 </body>

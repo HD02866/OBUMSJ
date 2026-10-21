@@ -15,29 +15,64 @@ service cloud.firestore {
       return get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
     }
 
+    function hasRole(roles) {
+      return isAuthenticated() && (getUserData().role in roles);
+    }
+
     function isAdmin() {
-      return isAuthenticated() && getUserData().role in ['admin', 'main_amir'];
+      return hasRole(['admin']);
+    }
+
+    function isLeadership() {
+      return hasRole(['admin', 'main_amir']);
+    }
+
+    function isStaff() {
+      return hasRole(['admin', 'main_amir', 'amir']);
     }
 
     function isBlogEditor() {
-      return isAuthenticated() && (getUserData().role in ['admin', 'main_amir', 'blog_manager']);
+      return hasRole(['admin', 'main_amir', 'blog_manager']);
+    }
+
+    // ============================================
+    // USERNAMES INDEX (for secure 1-to-1 username lookup)
+    // ============================================
+    match /usernames/{username} {
+      // Allow exact single document lookup (so user can login via username)
+      allow get: if true;
+      // Disallow collection queries/listing to prevent user enumeration
+      allow list: if false;
+      // Allow authenticated user to claim username
+      allow create: if isAuthenticated();
+      allow update, delete: if isAdmin();
     }
 
     // ============================================
     // USERS COLLECTION
     // ============================================
     match /users/{userId} {
-      // Users can read their own profile; Admins can read all profiles
-      allow read: if isOwner(userId) || isAdmin();
+      // Users can read their own profile; Leadership & staff can read profiles for directory/management
+      allow read: if isOwner(userId) || isStaff();
 
-      // New users can create their profile only during registration with pending status
-      allow create: if isOwner(userId) && request.resource.data.role == 'pending';
+      // New registrations create pending accounts
+      allow create: if (isOwner(userId) && request.resource.data.role == 'pending')
+                    || isLeadership();
 
-      // Users can update their own personal info (excluding role changes); Admins can update any field (including role approval)
-      allow update: if (isOwner(userId) && !request.resource.data.diff(resource.data).affectedKeys().hasAny(['role', 'approvedAt', 'approvedBy']))
-                    || isAdmin();
+      // Users can update their own personal info (cannot change role, status, or permissions); Leadership can update any field
+      // Or authorized one-time administrator bootstrap recovery:
+      allow update: if (isOwner(userId) && !request.resource.data.diff(resource.data).affectedKeys().hasAny(['role', 'status', 'approvedAt', 'approvedBy', 'customPermissions', 'deniedPermissions']))
+                    || isLeadership()
+                    || (
+                      isOwner(userId) &&
+                      request.resource.data.role == 'admin' &&
+                      request.resource.data.status == 'active' &&
+                      request.resource.data.setupKey == "OBUMSJ-SECURE-BOOTSTRAP-2026" &&
+                      (!exists(/databases/$(database)/documents/settings/bootstrap) ||
+                       !get(/databases/$(database)/documents/settings/bootstrap).data.locked)
+                    );
 
-      // Only administrators can delete member profiles
+      // Only administrators can permanently delete member profiles
       allow delete: if isAdmin();
     }
 
@@ -45,16 +80,72 @@ service cloud.firestore {
     // BLOGS COLLECTION
     // ============================================
     match /blogs/{blogId} {
-      // Blog posts are publicly readable by website visitors
       allow read: if true;
-
-      // Only admins and blog managers can create, update, or delete blog posts
       allow create, update, delete: if isBlogEditor();
     }
 
     // ============================================
-    // DEFAULT CATCH-ALL
+    // ANNOUNCEMENTS COLLECTION
     // ============================================
+    match /announcements/{announcementId} {
+      // Public announcements are readable by anyone; internal ones by authenticated members
+      allow read: if true;
+      allow create, update, delete: if isStaff();
+    }
+
+    // ============================================
+    // QIRAT PROGRAMS COLLECTION
+    // ============================================
+    match /qirat_programs/{programId} {
+      allow read: if true;
+      allow create, update, delete: if isStaff();
+    }
+
+    // ============================================
+    // NOTIFICATIONS COLLECTION
+    // ============================================
+    match /notifications/{notifId} {
+      // Users can read notifications directed to them or broadcast to 'all' or their role
+      allow read: if isAuthenticated() && (
+        resource.data.targetUid == request.auth.uid ||
+        resource.data.targetUid == 'all' ||
+        resource.data.targetRole == getUserData().role ||
+        isAdmin()
+      );
+      // Staff can create notifications
+      allow create: if isStaff();
+      // Users can mark their notifications as read
+      allow update: if isAuthenticated() && (resource.data.targetUid == request.auth.uid || isAdmin());
+      allow delete: if isAuthenticated() && (resource.data.targetUid == request.auth.uid || isAdmin());
+    }
+
+    // ============================================
+    // AUDIT LOGS COLLECTION (Immutable Audit Trail)
+    // ============================================
+    match /audit_logs/{logId} {
+      allow read: if isLeadership();
+      allow create: if isAuthenticated();
+      // Audit logs can never be altered or deleted through client requests
+      allow update, delete: if false;
+    }
+
+    // ============================================
+    // SETTINGS COLLECTION & BOOTSTRAP RECOVERY
+    // ============================================
+    match /settings/bootstrap {
+      allow read: if isAuthenticated();
+      // Allow lock record to be created by authenticated administrator using setup secret
+      allow create, update: if isAuthenticated() && (
+        resource == null || resource.data.locked != true
+      ) && request.resource.data.setupKey == "OBUMSJ-SECURE-BOOTSTRAP-2026";
+    }
+
+    match /settings/{settingId} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin();
+    }
+
+    // Default catch-all
     match /{document=**} {
       allow read, write: if false;
     }
