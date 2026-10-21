@@ -1312,10 +1312,11 @@ textarea.form-control{
         <script src="./js/language-system.js"></script>
     <script src="./Script.js"></script>
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
         import { 
-            getFirestore, 
+            auth, 
+            db, 
+            signOut, 
+            onAuthStateChanged,
             collection, 
             doc, 
             getDoc, 
@@ -1325,20 +1326,7 @@ textarea.form-control{
             deleteDoc, 
             onSnapshot, 
             serverTimestamp 
-        } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyBKscUp7O2Trqczz05JX2_4QxvURsd-GmA",
-            authDomain: "obumsj-ed1f2.firebaseapp.com",
-            projectId: "obumsj-ed1f2",
-            storageBucket: "obumsj-ed1f2.firebasestorage.app",
-            messagingSenderId: "571597576656",
-            appId: "1:571597576656:web:1a0a1d0d1fd5af397b01d5"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
+        } from "./js/firebase.js";
 
         let currentUser = null;
         let allFirestoreUsers = [];
@@ -1352,33 +1340,76 @@ textarea.form-control{
             return div.innerHTML;
         }
 
-        // ================= DOCUMENT READY =================
+        // ================= DOCUMENT READY & AUTH VERIFICATION =================
         document.addEventListener('DOMContentLoaded', function() {
-            currentUser = JSON.parse(localStorage.getItem('currentUser'));
-            
-            if (!currentUser) {
-                window.location.href = 'member.html';
-                return;
+            // Optimistic pre-render from local storage to avoid layout flash
+            const cachedUser = localStorage.getItem('currentUser');
+            if (cachedUser) {
+                try {
+                    currentUser = JSON.parse(cachedUser);
+                    updateUserInfo(currentUser);
+                    loadDashboardData(currentUser);
+                    loadRoleSpecificContent(currentUser.role);
+                } catch (e) {
+                    console.warn("Cached user parse error", e);
+                }
             }
 
-            // Update user info
-            updateUserInfo(currentUser);
-            
-            // Load local dashboard data (hadiths, announcements, zakir)
-            loadDashboardData(currentUser);
-            
-            // Setup event listeners
             setupEventListeners();
-            
-            // Update navigation
-            updateNavigation(currentUser);
-            
-            // Load role-specific content
-            loadRoleSpecificContent(currentUser.role);
 
-            // Connect real-time Firestore listeners
-            setupUsersFirestoreListener();
-            setupBlogsFirestoreListener();
+            // Authoritative Firebase Authentication & Role Verification
+            onAuthStateChanged(auth, async (firebaseUser) => {
+                if (!firebaseUser) {
+                    localStorage.removeItem('currentUser');
+                    window.location.href = 'member.html';
+                    return;
+                }
+
+                try {
+                    const snap = await getDoc(doc(db, "users", firebaseUser.uid));
+                    if (!snap.exists()) {
+                        alert("No member profile found for this account. Please register first.");
+                        await signOut(auth);
+                        localStorage.removeItem('currentUser');
+                        window.location.href = 'member.html';
+                        return;
+                    }
+
+                    const userData = snap.data();
+                    if (userData.role === 'pending') {
+                        alert("Your registration is pending administrator approval. Please wait for an administrator to activate your account.");
+                        await signOut(auth);
+                        localStorage.removeItem('currentUser');
+                        window.location.href = 'member.html';
+                        return;
+                    }
+
+                    // Authoritative user object verified by Firestore
+                    currentUser = {
+                        uid: firebaseUser.uid,
+                        email: firebaseUser.email,
+                        fullName: userData.fullName || firebaseUser.displayName || 'Member',
+                        username: userData.username || firebaseUser.email?.split('@')[0] || 'member',
+                        phone: userData.phone || '',
+                        gender: userData.gender || 'Not specified',
+                        role: userData.role || 'sector_member'
+                    };
+
+                    localStorage.setItem('currentUser', JSON.stringify(currentUser));
+
+                    updateUserInfo(currentUser);
+                    loadDashboardData(currentUser);
+                    updateNavigation(currentUser);
+                    loadRoleSpecificContent(currentUser.role);
+
+                    // Setup real-time listeners
+                    setupUsersFirestoreListener();
+                    setupBlogsFirestoreListener();
+
+                } catch (err) {
+                    console.error("Firestore auth sync error:", err);
+                }
+            });
         });
 
         // ================= USER INFO & ROLE =================
@@ -1478,6 +1509,9 @@ textarea.form-control{
 
         // ================= REAL-TIME FIRESTORE: USERS & APPROVALS =================
         function setupUsersFirestoreListener() {
+            if (!currentUser || (currentUser.role !== 'admin' && currentUser.role !== 'main_amir')) {
+                return;
+            }
             try {
                 const usersRef = collection(db, "users");
                 onSnapshot(usersRef, (snapshot) => {

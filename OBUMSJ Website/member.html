@@ -213,28 +213,7 @@ header p{max-width:900px;margin:15px auto;font-size:18px;}
 
 </style>
 </head>
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } 
-    from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-  import { getFirestore, doc, setDoc, getDoc } 
-    from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyBKscUp7O2Trqczz05JX2_4QxvURsd-GmA",
-    authDomain: "obumsj-ed1f2.firebaseapp.com",
-    projectId: "obumsj-ed1f2",
-    storageBucket: "obumsj-ed1f2.firebasestorage.app",
-    messagingSenderId: "571597576656",
-    appId: "1:571597576656:web:1a0a1d0d1fd5af397b01d5"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const db = getFirestore(app);
-
-  // We will add logic here next
-</script>
 
 <body>
     <!-- =========================================
@@ -309,7 +288,7 @@ header p{max-width:900px;margin:15px auto;font-size:18px;}
             </li>
             <li><a href="Blog.html" data-i18n="nav.blog">BLOG</a></li>
             <li><a href="contact.html" data-i18n="nav.contact">CONTACT US</a></li>
-            <li><a href="./register.html" data-i18n="nav.membership">REGISTER</a></li>
+            <li><a href="./member.html" data-i18n="nav.membership">REGISTER</a></li>
             <li><a href="donate.html" class="btn nav-donate" data-i18n="nav.donate">DONATE HERE</a></li>
         </ul>
         
@@ -346,6 +325,12 @@ header p{max-width:900px;margin:15px auto;font-size:18px;}
       <div class="form-group">
         <label for="password" data-i18n="login.password">Password</label>
         <input type="password" id="password" name="password" placeholder="Enter your password" required>
+      
+      <div style="text-align: right; margin-top: -8px; margin-bottom: 16px;">
+        <a href="#" id="forgotPasswordBtn" style="color: var(--primary); font-size: 0.85rem; text-decoration: none; font-weight: 500;">
+          <i class="fas fa-key"></i> Forgot Password?
+        </a>
+      </div>
       </div>
 
       <button type="submit" class="submit-btn" data-i18n="login.submit">Login to Dashboard</button>
@@ -355,11 +340,6 @@ header p{max-width:900px;margin:15px auto;font-size:18px;}
         <a href="#" id="showRegistration" data-i18n="login.register_link">Register Here</a>
       </div>
     </form>
-      <div style="margin-top: 18px; text-align: center; border-top: 1px dashed #ddd; padding-top: 14px;">
-        <button type="button" id="quickAdminLoginBtn" style="background: #e8f5e9; border: 1px dashed #2f8f3d; color: #1b5e20; padding: 7px 16px; border-radius: 6px; font-size: 0.85rem; cursor: pointer; font-weight: 500;">
-          <i class="fas fa-user-shield"></i> Quick Admin Access (Testing Mode)
-        </button>
-      </div>
   </div>
 
   <!-- Registration Form (Initially Hidden) -->
@@ -435,11 +415,6 @@ header p{max-width:900px;margin:15px auto;font-size:18px;}
         <a href="#" id="showLoginFromReg" data-i18n="register.login_link">Login Here</a>
       </div>
     </form>
-      <div style="margin-top: 18px; text-align: center; border-top: 1px dashed #ddd; padding-top: 14px;">
-        <button type="button" id="quickAdminLoginBtn" style="background: #e8f5e9; border: 1px dashed #2f8f3d; color: #1b5e20; padding: 7px 16px; border-radius: 6px; font-size: 0.85rem; cursor: pointer; font-weight: 500;">
-          <i class="fas fa-user-shield"></i> Quick Admin Access (Testing Mode)
-        </button>
-      </div>
   </div>
 
   <!-- Toggle Message -->
@@ -451,6 +426,24 @@ header p{max-width:900px;margin:15px auto;font-size:18px;}
 </div>
 
 <!-- Footer -->
+
+  <!-- Forgot Password Modal -->
+  <div id="forgotPasswordModal" style="display:none; position:fixed; z-index:99999; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.6); align-items:center; justify-content:center;">
+    <div style="background:#fff; border-radius:14px; padding:32px; max-width:440px; width:90%; position:relative; box-shadow:0 12px 35px rgba(0,0,0,0.25);">
+      <button type="button" id="closeResetModalBtn" style="position:absolute; right:15px; top:15px; background:none; border:none; font-size:1.4rem; cursor:pointer; color:#666;" aria-label="Close">&times;</button>
+      <h3 style="color:#0f3d2e; margin-bottom:10px;"><i class="fas fa-key" style="color:#2f8f3d;"></i> Reset Password</h3>
+      <p style="font-size:0.9rem; color:#666; margin-bottom:18px;">Enter your registered email address and we will send you a password reset link.</p>
+      <div id="resetMessage" style="display:none; padding:10px; border-radius:6px; margin-bottom:15px; font-size:0.9rem;"></div>
+      <form id="resetPasswordForm">
+        <div class="form-group" style="margin-bottom:15px;">
+          <label for="resetEmail" style="font-weight:600; font-size:0.9rem; display:block; margin-bottom:6px;">Registered Email</label>
+          <input type="email" id="resetEmail" required placeholder="name@example.com" style="width:100%; padding:10px; border-radius:6px; border:1px solid #ccc; font-size:0.95rem;">
+        </div>
+        <button type="submit" id="resetSubmitBtn" class="submit-btn" style="padding:12px; font-size:1rem;">Send Reset Link</button>
+      </form>
+    </div>
+  </div>
+
 <footer class="footer">
     <div class="container">
         <div class="footer-content">
@@ -505,35 +498,20 @@ header p{max-width:900px;margin:15px auto;font-size:18px;}
 
 <script type="module">
 /* =========================
-   FIREBASE SETUP
+   FIREBASE INTEGRATION
 ========================= */
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import {
-  getAuth,
-  createUserWithEmailAndPassword,
+  auth,
+  db,
   signInWithEmailAndPassword,
-  onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import {
-  getFirestore,
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+  sendPasswordResetEmail,
   doc,
   setDoc,
   getDoc,
   serverTimestamp
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyBKscUp7O2Trqczz05JX2_4QxvURsd-GmA",
-  authDomain: "obumsj-ed1f2.firebaseapp.com",
-  projectId: "obumsj-ed1f2",
-  storageBucket: "obumsj-ed1f2.firebasestorage.app",
-  messagingSenderId: "571597576656",
-  appId: "1:571597576656:web:1a0a1d0d1fd5af397b01d5"
-};
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
+} from "./js/firebase.js";
 
 /* =========================
    PAGE LOAD
@@ -541,9 +519,20 @@ const db = getFirestore(app);
 document.addEventListener("DOMContentLoaded", () => {
   setupEventListeners();
 
-  onAuthStateChanged(auth, user => {
+  // If already logged in and account is active, direct to Dashboard
+  onAuthStateChanged(auth, async (user) => {
     if (user) {
-      window.location.href = "dashboard.html";
+      try {
+        const snap = await getDoc(doc(db, "users", user.uid));
+        if (snap.exists()) {
+          const userData = snap.data();
+          if (userData.role !== "pending") {
+            window.location.href = "Dashboard.html";
+          }
+        }
+      } catch (e) {
+        console.warn("Auth state check:", e);
+      }
     }
   });
 });
@@ -577,19 +566,66 @@ function setupEventListeners() {
     showLoginForm();
   };
 
-  const quickBtn = document.getElementById("quickAdminLoginBtn");
-  if (quickBtn) {
-    quickBtn.onclick = () => {
-      localStorage.setItem("currentUser", JSON.stringify({
-        uid: "admin_master",
-        fullName: "Chief Administrator",
-        email: "admin@obumsj.org",
-        username: "admin",
-        phone: "0912345678",
-        gender: "Male",
-        role: "admin"
-      }));
-      window.location.href = "Dashboard.html";
+  // Forgot Password modal controls
+  const forgotBtn = document.getElementById("forgotPasswordBtn");
+  const forgotModal = document.getElementById("forgotPasswordModal");
+  const closeResetModal = document.getElementById("closeResetModalBtn");
+
+  if (forgotBtn && forgotModal) {
+    forgotBtn.onclick = (e) => {
+      e.preventDefault();
+      forgotModal.style.display = "flex";
+      const resetMsg = document.getElementById("resetMessage");
+      if (resetMsg) resetMsg.style.display = "none";
+      const userField = document.getElementById("username");
+      if (userField && userField.value.includes("@")) {
+        document.getElementById("resetEmail").value = userField.value;
+      }
+    };
+  }
+
+  if (closeResetModal && forgotModal) {
+    closeResetModal.onclick = () => {
+      forgotModal.style.display = "none";
+    };
+  }
+
+  window.addEventListener("click", (e) => {
+    if (forgotModal && e.target === forgotModal) {
+      forgotModal.style.display = "none";
+    }
+  });
+
+  const resetForm = document.getElementById("resetPasswordForm");
+  if (resetForm) {
+    resetForm.onsubmit = async (e) => {
+      e.preventDefault();
+      const email = document.getElementById("resetEmail").value.trim();
+      const msgBox = document.getElementById("resetMessage");
+      const submitBtn = document.getElementById("resetSubmitBtn");
+
+      if (!email) return;
+
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending Link...';
+
+      try {
+        await sendPasswordResetEmail(auth, email);
+        msgBox.style.display = "block";
+        msgBox.style.background = "#e8f5e9";
+        msgBox.style.color = "#2e7d32";
+        msgBox.style.border = "1px solid #c8e6c9";
+        msgBox.innerHTML = '<i class="fas fa-check-circle"></i> Password reset email sent! Please check your inbox or spam folder.';
+      } catch (err) {
+        msgBox.style.display = "block";
+        msgBox.style.background = "#ffebee";
+        msgBox.style.color = "#c62828";
+        msgBox.style.border = "1px solid #ffcdd2";
+        msgBox.innerHTML = '<i class="fas fa-exclamation-circle"></i> ' + (err.message || 'Error sending password reset email.');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = 'Send Reset Link';
+      }
     };
   }
 
@@ -605,18 +641,20 @@ function setupEventListeners() {
 }
 
 /* =========================
-   UI FUNCTIONS (UNCHANGED)
+   UI FUNCTIONS
 ========================= */
 function showLoginForm() {
   document.getElementById("loginFormContainer").style.display = "block";
   document.getElementById("registrationForm").style.display = "none";
   document.getElementById("toggleMessage").style.display = "none";
+  clearMessages();
 }
 
 function showRegistrationForm() {
   document.getElementById("loginFormContainer").style.display = "none";
   document.getElementById("registrationForm").style.display = "block";
   document.getElementById("toggleMessage").style.display = "none";
+  clearMessages();
 }
 
 function showToggleMessage(msg) {
@@ -624,63 +662,107 @@ function showToggleMessage(msg) {
   document.getElementById("toggleMessageText").textContent = msg;
 }
 
+function clearMessages() {
+  const err = document.getElementById("errorMessage");
+  const succ = document.getElementById("successMessage");
+  const regErr = document.getElementById("registrationError");
+  const regSucc = document.getElementById("registrationSuccess");
+  if (err) { err.style.display = "none"; err.textContent = ""; }
+  if (succ) { succ.style.display = "none"; succ.textContent = ""; }
+  if (regErr) { regErr.style.display = "none"; regErr.textContent = ""; }
+  if (regSucc) { regSucc.style.display = "none"; regSucc.textContent = ""; }
+}
+
 /* =========================
-   LOGIN (FIREBASE)
+   LOGIN (FIREBASE AUTH & FIRESTORE)
 ========================= */
 async function handleLogin() {
-  const email = document.getElementById("username").value;
+  clearMessages();
+  const email = document.getElementById("username").value.trim();
   const password = document.getElementById("password").value;
+  const loginBtn = document.querySelector("#loginForm button[type='submit']");
+  const errBox = document.getElementById("errorMessage");
+
+  loginBtn.disabled = true;
+  loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging in...';
 
   try {
     const cred = await signInWithEmailAndPassword(auth, email, password);
     const snap = await getDoc(doc(db, "users", cred.user.uid));
 
     if (!snap.exists()) {
-      alert("User data not found.");
+      showToggleMessage("No member profile found for this account. Please register first.");
+      loginBtn.disabled = false;
+      loginBtn.innerHTML = 'Login to Dashboard';
       return;
     }
 
     const userData = snap.data();
 
     if (userData.role === "pending") {
-      alert("Waiting for admin approval.");
+      if (errBox) {
+        errBox.style.display = "block";
+        errBox.innerHTML = '<i class="fas fa-clock"></i> Your registration request is pending administrator review. Please wait for an administrator to approve your account.';
+      } else {
+        alert("Your account is pending administrator approval. Please wait for review.");
+      }
+      loginBtn.disabled = false;
+      loginBtn.innerHTML = 'Login to Dashboard';
       return;
     }
 
     localStorage.setItem("currentUser", JSON.stringify({
       uid: cred.user.uid,
       fullName: userData.fullName || "User",
-      email: userData.email,
-      username: userData.username || userData.email.split('@')[0],
+      email: userData.email || cred.user.email,
+      username: userData.username || userData.email?.split('@')[0],
       phone: userData.phone || "",
       gender: userData.gender || "Male",
       role: userData.role
     }));
 
-    window.location.href = "dashboard.html";
+    window.location.href = "Dashboard.html";
   } catch (err) {
-    showToggleMessage("Invalid login details.");
+    console.error("Login error:", err);
+    let msg = "Invalid login details. Please verify your email and password.";
+    if (err.code === "auth/invalid-credential" || err.code === "auth/user-not-found" || err.code === "auth/wrong-password") {
+      msg = "Invalid email or password. Please try again or use Forgot Password.";
+    } else if (err.code === "auth/too-many-requests") {
+      msg = "Too many failed attempts. Please reset your password or try again later.";
+    }
+    showToggleMessage(msg);
+  } finally {
+    loginBtn.disabled = false;
+    loginBtn.innerHTML = 'Login to Dashboard';
   }
 }
 
 /* =========================
-   REGISTRATION (FIREBASE)
+   REGISTRATION (FIREBASE AUTH & FIRESTORE)
 ========================= */
 async function handleRegistration() {
-  const fullName = document.getElementById("regFullName").value;
-  const email = document.getElementById("regEmail").value;
+  clearMessages();
+  const fullName = document.getElementById("regFullName").value.trim();
+  const username = (document.getElementById("regUsername") ? document.getElementById("regUsername").value : "").trim();
+  const email = document.getElementById("regEmail").value.trim();
   const password = document.getElementById("regPassword").value;
-  const phone = document.getElementById("regPhone").value;
+  const phone = document.getElementById("regPhone").value.trim();
   const gender = document.getElementById("regGender").value;
   const role = document.getElementById("regRole").value;
+
+  const regBtn = document.querySelector("#registerForm button[type='submit']");
+  const regErr = document.getElementById("registrationError");
+  const regSucc = document.getElementById("registrationSuccess");
+
+  regBtn.disabled = true;
+  regBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting Registration...';
 
   try {
     const cred = await createUserWithEmailAndPassword(auth, email, password);
 
-    const username = document.getElementById("regUsername") ? document.getElementById("regUsername").value : email.split('@')[0];
     await setDoc(doc(db, "users", cred.user.uid), {
       fullName,
-      username,
+      username: username || email.split('@')[0],
       email,
       phone,
       gender,
@@ -689,10 +771,33 @@ async function handleRegistration() {
       createdAt: serverTimestamp()
     });
 
-    alert("Registration successful. Wait for admin approval.");
-    showLoginForm();
+    document.getElementById("registerForm").reset();
+
+    if (regSucc) {
+      regSucc.style.display = "block";
+      regSucc.innerHTML = '<i class="fas fa-check-circle"></i> Registration submitted successfully! Your account is pending administrator approval. Please wait for an administrator to review and activate your account.';
+    } else {
+      alert("Registration submitted successfully! Your account is pending administrator approval.");
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   } catch (err) {
-    alert(err.message);
+    console.error("Registration error:", err);
+    let msg = err.message;
+    if (err.code === "auth/email-already-in-use") {
+      msg = "This email is already registered. Please login or reset your password.";
+    } else if (err.code === "auth/weak-password") {
+      msg = "Password must be at least 6 characters long.";
+    }
+
+    if (regErr) {
+      regErr.style.display = "block";
+      regErr.innerHTML = '<i class="fas fa-exclamation-triangle"></i> ' + msg;
+    } else {
+      alert(msg);
+    }
+  } finally {
+    regBtn.disabled = false;
+    regBtn.innerHTML = 'Complete Registration';
   }
 }
 </script>
@@ -701,5 +806,6 @@ async function handleRegistration() {
 
 </body>
 </html>
+
 
 

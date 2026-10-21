@@ -1,5 +1,8 @@
 param([int]$port = 8080)
-$root = "c:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website"
+$root = $PSScriptRoot
+if ([string]::IsNullOrWhiteSpace($root)) {
+    $root = "c:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website"
+}
 $listener = New-Object System.Net.HttpListener
 $prefix = "http://localhost:$port/"
 $listener.Prefixes.Add($prefix)
@@ -23,6 +26,8 @@ $mimeTypes = @{
     ".png"  = "image/png"
     ".ico"  = "image/x-icon"
     ".svg"  = "image/svg+xml"
+    ".pdf"  = "application/pdf"
+    ".mp3"  = "audio/mpeg"
     ".woff" = "font/woff"
     ".woff2"= "font/woff2"
     ".ttf"  = "font/ttf"

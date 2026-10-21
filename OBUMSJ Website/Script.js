@@ -1,4 +1,4 @@
-// Script.js - Clean and organized with NEW FEATURES
+﻿// Script.js - Clean and organized with NEW FEATURES
 
 // ================= FLOATING SOCIAL MEDIA SIDEBAR (NEW FEATURE) =================
 const socialSidebar = document.getElementById('socialSidebar');
@@ -67,7 +67,7 @@ function checkLoginStatus() {
         // Update dashboard link
         const dashboardLink = document.getElementById('dashboardLink');
         if (dashboardLink) {
-            dashboardLink.href = 'dashboard.html';
+            dashboardLink.href = 'Dashboard.html';
             dashboardLink.innerHTML = `<i class="fas fa-tachometer-alt"></i> ${formatRole(currentUser.role)} Dashboard`;
         }
         
@@ -269,16 +269,16 @@ if (darkToggle) {
     const currentTheme = localStorage.getItem('theme');
     if (currentTheme === 'dark') {
         document.body.classList.add('dark-mode');
-        darkToggle.textContent = "☀️";
+        darkToggle.textContent = "â˜€ï¸";
     }
 
     darkToggle.addEventListener('click', function() {
         document.body.classList.toggle('dark-mode');
         if (document.body.classList.contains('dark-mode')) {
-            darkToggle.textContent = "☀️";
+            darkToggle.textContent = "â˜€ï¸";
             localStorage.setItem('theme', 'dark');
         } else {
-            darkToggle.textContent = "🌙";
+            darkToggle.textContent = "ðŸŒ™";
             localStorage.setItem('theme', 'light');
         }
     });

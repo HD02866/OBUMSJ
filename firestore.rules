@@ -1,0 +1,62 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    function getUserData() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
+    }
+
+    function isAdmin() {
+      return isAuthenticated() && getUserData().role in ['admin', 'main_amir'];
+    }
+
+    function isBlogEditor() {
+      return isAuthenticated() && (getUserData().role in ['admin', 'main_amir', 'blog_manager']);
+    }
+
+    // ============================================
+    // USERS COLLECTION
+    // ============================================
+    match /users/{userId} {
+      // Users can read their own profile; Admins can read all profiles
+      allow read: if isOwner(userId) || isAdmin();
+
+      // New users can create their profile only during registration with pending status
+      allow create: if isOwner(userId) && request.resource.data.role == 'pending';
+
+      // Users can update their own personal info (excluding role changes); Admins can update any field (including role approval)
+      allow update: if (isOwner(userId) && !request.resource.data.diff(resource.data).affectedKeys().hasAny(['role', 'approvedAt', 'approvedBy']))
+                    || isAdmin();
+
+      // Only administrators can delete member profiles
+      allow delete: if isAdmin();
+    }
+
+    // ============================================
+    // BLOGS COLLECTION
+    // ============================================
+    match /blogs/{blogId} {
+      // Blog posts are publicly readable by website visitors
+      allow read: if true;
+
+      // Only admins and blog managers can create, update, or delete blog posts
+      allow create, update, delete: if isBlogEditor();
+    }
+
+    // ============================================
+    // DEFAULT CATCH-ALL
+    // ============================================
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

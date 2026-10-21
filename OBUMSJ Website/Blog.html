@@ -593,20 +593,7 @@
 
     <!-- Real-Time Firebase Integration for Blog CMS -->
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getFirestore, collection, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyBKscUp7O2Trqczz05JX2_4QxvURsd-GmA",
-            authDomain: "obumsj-ed1f2.firebaseapp.com",
-            projectId: "obumsj-ed1f2",
-            storageBucket: "obumsj-ed1f2.firebasestorage.app",
-            messagingSenderId: "571597576656",
-            appId: "1:571597576656:web:1a0a1d0d1fd5af397b01d5"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
+        import { db, collection, onSnapshot } from "./js/firebase.js";
 
         let allLoadedBlogs = [];
         let activeCategory = 'all';
