@@ -1,0 +1,623 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-i18n="dawah.page_title">Dawah Sector | OBUMSJ - Oda Bultum University Muslim Students' JAMA'A</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+<script src="js/theme-engine.js"></script>
+<style>
+
+/* ================= BRAND COLORS ================= */
+:root {
+    --primary: #2f8f3d;   /* Main Green */
+    --secondary: #0f3d2e; /* Dark Green */
+    --gold: #d4af37;      /* Luxury Gold */
+    --bg-light: #f5f7f6;
+    --text-dark: #222;
+}
+
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    background: var(--bg-light);
+    color: var(--text-dark);
+}
+
+/* ================= DEPARTMENT HEADER ================= */
+.dept-header {
+    background: linear-gradient(135deg, var(--secondary), var(--primary));
+    padding: 100px 20px 80px;
+    text-align: center;
+    color: white;
+    margin-top: 80px;
+}
+
+.dept-header h1 {
+    font-size: 42px;
+    font-weight: bold;
+}
+
+.dept-header p {
+    max-width: 800px;
+    margin: 15px auto 0;
+    font-size: 17px;
+    line-height: 1.6;
+}
+
+/* ================= CONTAINER ================= */
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 50px auto;
+}
+
+/* ================= FRAME CARD ================= */
+.frame-card {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    margin-bottom: 40px;
+    border-left: 6px solid var(--primary);
+}
+
+/* ================= MEMBER CARD ================= */
+.member-card {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    background: white;
+    padding: 20px;
+    border-radius: 14px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    margin-bottom: 25px;
+    transition: 0.3s;
+}
+
+.member-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+}
+
+/* IMAGE */
+.member-card img {
+    width: 120px;
+    height: 120px;
+    border-radius: 12px;
+    object-fit: cover;
+    border: 3px solid var(--primary);
+}
+
+/* TEXT */
+.member-info h3 {
+    font-size: 22px;
+    color: var(--secondary);
+}
+
+.member-info p {
+    font-size: 16px;
+    color: var(--primary);
+    font-weight: bold;
+}
+
+/* ================= DAWAH CARDS SECTION ================= */
+.dawah-section {
+    margin: 60px 0;
+}
+
+.section-title {
+    font-size: 32px;
+    color: var(--secondary);
+    margin-bottom: 30px;
+    text-align: center;
+    font-weight: 700;
+}
+
+.dawah-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+}
+
+.dawah-card {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.dawah-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+.dawah-video {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
+
+.dawah-video img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.dawah-card:hover .dawah-video img {
+    transform: scale(1.05);
+}
+
+.play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+    font-size: 24px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.play-button:hover {
+    background: var(--primary);
+    color: white;
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+.dawah-content {
+    padding: 25px;
+}
+
+.dawah-content h3 {
+    color: var(--secondary);
+    font-size: 20px;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.dawah-content p {
+    color: #555;
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.dawah-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+}
+
+.dawah-channel {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #666;
+    font-size: 14px;
+}
+
+.dawah-channel i {
+    color: #ff0000;
+}
+
+.dawah-duration {
+    background: var(--primary);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+/* ================= DAWAH MESSAGES SECTION ================= */
+.dawah-messages {
+    margin: 60px 0;
+}
+
+.messages-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+}
+
+.message-card {
+    background: white;
+    padding: 30px;
+    border-radius: 16px;
+    border-left: 5px solid var(--gold);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    transition: 0.3s;
+}
+
+.message-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+}
+
+.message-card h3 {
+    color: var(--secondary);
+    font-size: 20px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.message-card h3 i {
+    color: var(--gold);
+}
+
+.message-card p {
+    color: #444;
+    line-height: 1.8;
+    font-size: 16px;
+}
+
+.message-card .arabic {
+    direction: rtl;
+    text-align: right;
+    font-size: 18px;
+    font-family: "Traditional Arabic", Arial, sans-serif;
+    color: var(--secondary);
+    margin-top: 15px;
+    line-height: 1.8;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 700px) {
+    .member-card {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .dawah-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .messages-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+</style>
+</head>
+
+<body>
+    <!-- =========================================
+        FLOATING SOCIAL MEDIA SIDEBAR (NEW FEATURE)
+    ========================================= -->
+    <div class="social-sidebar" id="socialSidebar">
+        <div class="social-toggle" id="socialToggle">
+            <i class="fas fa-share-alt"></i>
+        </div>
+        <div class="social-icons">
+            <a href="https://t.me/obumsj" target="_blank" title="Telegram" class="social-icon">
+                <i class="fab fa-telegram"></i>
+                <span class="social-tooltip">Telegram</span>
+            </a>
+            <a href="https://facebook.com/obumsj" target="_blank" title="Facebook" class="social-icon">
+                <i class="fab fa-facebook"></i>
+                <span class="social-tooltip">Facebook</span>
+            </a>
+            <a href="https://wa.me/251912345678" target="_blank" title="WhatsApp" class="social-icon">
+                <i class="fab fa-whatsapp"></i>
+                <span class="social-tooltip">WhatsApp</span>
+            </a>
+            <a href="https://youtube.com/obumsj" target="_blank" title="YouTube" class="social-icon">
+                <i class="fab fa-youtube"></i>
+                <span class="social-tooltip">YouTube</span>
+            </a>
+            <a href="https://tiktok.com/@obumsj" target="_blank" title="TikTok" class="social-icon">
+                <i class="fab fa-tiktok"></i>
+                <span class="social-tooltip">TikTok</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo-container">
+            <img src="./IMAGE/OBUMSJ Logo.jpg" alt="OBUMSJ Logo" class="logo">
+            <span class="logo-text" data-i18n="logo">OBUMSJ</span>
+             <button id="darkModeToggle" class="dark-btn" aria-label="Toggle theme"><i class="fas fa-moon theme-icon" aria-hidden="true"></i></button>
+        </div>
+
+       <div class="lang-dropdown">
+  <button class="lang-btn" aria-label="Select Language"><i class="fas fa-globe" aria-hidden="true"></i> <span class="lang-code">EN</span> <i class="fas fa-chevron-down lang-chevron" aria-hidden="true"></i></button>
+  <div class="lang-menu">
+    <a href="#" onclick="setLang('en'); return false;" data-i18n="lang.english">English</a>
+    <a href="#" onclick="setLang('am'); return false;" data-i18n="lang.amharic">Amharic</a>
+    <a href="#" onclick="setLang('om'); return false;" data-i18n="lang.oromo">Oromo</a>
+    <a href="#" onclick="setLang('ar'); return false;" data-i18n="lang.arabic">Arabic</a>
+  </div>
+</div>
+
+
+        
+        <ul class="nav-links">
+            <li><a href="./index.html" data-i18n="nav.home">HOME</a></li>
+            <li><a href="./About-Us.html" data-i18n="nav.about">ABOUT US</a></li>
+            <li class="dropdown">
+                <a href="#sectors" data-i18n="nav.sectors">SECTORS <i class="fas fa-chevron-down"></i></a>
+                <div class="dropdown-content">
+                    <a href="./Qirat.html" data-i18n="sector.qirat"><i class="fas fa-quran"></i> Qirat</a>
+                    <a href="./Dawah.html" data-i18n="sector.dawah"><i class="fas fa-megaphone"></i> Dawah</a>
+                    <a href="./Social Affairs.html" data-i18n="sector.social"><i class="fas fa-hands-helping"></i> Social Affairs</a>
+                    
+                    <a href="./Academy.html" data-i18n="sector.academy"><i class="fas fa-graduation-cap"></i> Academy</a>
+                    <a href="./Finance.html" data-i18n="sector.finance"><i class="fas fa-coins"></i> Finance</a>
+                    <a href="./Ziyara.html" data-i18n="sector.ziyara"><i class="fas fa-kaaba"></i> Ziyara</a>
+                    <a href="./Ruqiya.html" data-i18n="sector.ruqiya"><i class="fas fa-hand-holding-heart"></i> Rukiya</a>
+                    <a href="./Charity.html" data-i18n="sector.charity"><i class="fas fa-donate"></i> Charity</a>
+                    <a href="./Dawrul-hasen.html" data-i18n="sector.dawrul"><i class="fas fa-book"></i> Dawrul Hasen</a>
+                    <a href="./Information.html" data-i18n="sector.information"><i class="fas fa-info-circle"></i> Information</a>
+                </div>
+            </li>
+            <li><a href="Blog.html" data-i18n="nav.blog">BLOG</a></li>
+            <li><a href="contact.html" data-i18n="nav.contact">CONTACT US</a></li>
+            <li><a href="./member.html" data-i18n="nav.membership">MEMBERSHIP</a></li>
+            <li><a href="donate.html" class="btn nav-donate" data-i18n="nav.donate">DONATE HERE</a></li>
+        </ul>
+        
+        <div class="menu-toggle" id="mobile-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+<!-- ================= HEADER ================= -->
+<section class="dept-header">
+    <h1 data-i18n="dawah.title">Dawah Sector</h1>
+    <p data-i18n="dawah.description">
+        The Dawah Sector focuses on Islamic propagation, education, and community outreach. 
+        We organize lectures, seminars, and programs to spread authentic Islamic knowledge.
+    </p>
+</section>
+
+<div class="container">
+
+    <!-- ================= ABOUT FRAME ================= -->
+    <div class="frame-card">
+        <h2 data-i18n="dawah.about_title">About Dawah Sector</h2>
+        <p data-i18n="dawah.about_text">
+            This department is dedicated to Islamic propagation and education. We conduct lectures, 
+            seminars, workshops, and outreach programs to spread authentic Islamic knowledge, 
+            clarify misconceptions, and invite people to the beautiful teachings of Islam.
+        </p>
+    </div>
+
+    <!-- ================= AMIR ================= -->
+    <div class="member-card">
+        <img src="./IMAGE/We are visted.jpg" alt="Amir">
+        <div class="member-info">
+            <h3>Sheikh Ahmed Ali</h3>
+            <p data-i18n="dawah.amir">Amir of Dawah Sector</p>
+        </div>
+    </div>
+
+    <!-- ================= VICE AMIR ================= -->
+    <div class="member-card">
+        <img src="./IMAGE/Best 4.jpg" alt="Vice Amir">
+        <div class="member-info">
+            <h3>Mohammed Yusuf</h3>
+            <p data-i18n="dawah.vice_amir">Vice Amir of Dawah Sector</p>
+        </div>
+    </div>
+
+    <!-- ================= WRITER ================= -->
+    <div class="member-card">
+        <img src="./IMAGE/Best 7.jpg" alt="Writer">
+        <div class="member-info">
+            <h3>Abdellah Hassan</h3>
+            <p data-i18n="dawah.writer">Writer of Dawah Sector</p>
+        </div>
+    </div>
+
+</div>
+
+<!-- ================= DAWAH VIDEO SECTION ================= -->
+<section class="dawah-section">
+    <div class="container">
+        <h2 class="section-title" data-i18n="dawah.videos_title">Dawah Video Lectures</h2>
+        
+        <div class="dawah-grid">
+            <!-- Video 1 -->
+            <a href="https://www.youtube.com/watch?v=pJpSiNIHmR0" target="_blank" class="dawah-card">
+                <div class="dawah-video">
+                    <img src="./IMAGE/Baba kenya 1.jpg" alt="Dawah Video 1">
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
+                </div>
+                <div class="dawah-content">
+                    <h3 data-i18n="dawah.video1_title">YouTube Channeli Sheik Amin Ibro </h3>
+                    <p data-i18n="dawah.video1_desc">Subscribe Gochuun fi Dawah Achirratti Gadhifamuu irraa fayyadama.</p>
+                    <div class="dawah-info">
+                        <div class="dawah-channel">
+                            <i class="fab fa-youtube"></i>
+                            <span data-i18n="dawah.channel_name">OBUMSJ Dawah</span>
+                        </div>
+                        <div class="dawah-duration">45:30</div>
+                    </div>
+                </div>
+            </a>
+            
+            <!-- Video 2 -->
+            <a href="https://www.youtube.com/watch?v=51NsHydNsT4" target="_blank" class="dawah-card">
+                <div class="dawah-video">
+                    <img src="./IMAGE/Hakim Hasen.jpg" alt="Dawah Video 2">
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
+                </div>
+                <div class="dawah-content">
+                    <h3 data-i18n="dawah.video2_title">YouTube Channeli Ustaz Hakim Hasen</h3>
+                    <p data-i18n="dawah.video2_desc">Subscribe Gochuun Gorsota babaredo irra Fayyadama.</p>
+                    <div class="dawah-info">
+                        <div class="dawah-channel">
+                            <i class="fab fa-youtube"></i>
+                            <span data-i18n="dawah.channel_name">OBUMSJ Dawah</span>
+                        </div>
+                        <div class="dawah-duration">38:15</div>
+                    </div>
+                </div>
+            </a>
+            
+            <!-- Video 3 -->
+            <a href="https://www.youtube.com/watch?v=HJT0HEhR2s0" target="_blank" class="dawah-card">
+                <div class="dawah-video">
+                    <img src="./IMAGE/We are visted.jpg" alt="Dawah Video 3">
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
+                </div>
+                <div class="dawah-content">
+                    <h3 data-i18n="dawah.video3_title">YouTube Channeli Suheyb Sheik Amin Ibro</h3>
+                    <p data-i18n="dawah.video3_desc">Clarifying the true status and rights given to women in Islam, addressing common misconceptions and stereotypes.</p>
+                    <div class="dawah-info">
+                        <div class="dawah-channel">
+                            <i class="fab fa-youtube"></i>
+                            <span data-i18n="dawah.channel_name">OBUMSJ Dawah</span>
+                        </div>
+                        <div class="dawah-duration">52:45</div>
+                    </div>
+                </div>
+            </a>
+            
+            <!-- Video 4 -->
+            <a href="https://www.youtube.com/watch?v=4bxNqTeCBqg" target="_blank" class="dawah-card">
+                <div class="dawah-video">
+                    <img src="./IMAGE/trial.jpg" alt="Dawah Video 4">
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
+                </div>
+                <div class="dawah-content">
+                    <h3 data-i18n="dawah.video4_title">Science in the Quran</h3>
+                    <p data-i18n="dawah.video4_desc">Examining scientific miracles mentioned in the Quran centuries before modern scientific discoveries.</p>
+                    <div class="dawah-info">
+                        <div class="dawah-channel">
+                            <i class="fab fa-youtube"></i>
+                            <span data-i18n="dawah.channel_name">OBUMSJ Dawah</span>
+                        </div>
+                        <div class="dawah-duration">41:20</div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ================= DAWAH MESSAGES SECTION ================= -->
+<section class="dawah-messages">
+    <div class="container">
+        <h2 class="section-title" data-i18n="dawah.messages_title">Key Dawah Messages</h2>
+        
+        <div class="messages-grid">
+            <!-- Message 1 -->
+            <div class="message-card">
+                <h3><i class="fas fa-hand-peace"></i> <span data-i18n="dawah.message1_title">Peace & Compassion</span></h3>
+                <p data-i18n="dawah.message1_text">Islam teaches peace, compassion, and mercy for all of creation. The very word "Islam" comes from the root word "Salaam" which means peace.</p>
+                <p class="arabic">وَإِن جَنَحُوا لِلسَّلْمِ فَاجْنَحْ لَهَا وَتَوَكَّلْ عَلَى اللَّهِ ۚ إِنَّهُ هُوَ السَّمِيعُ الْعَلِيمُ</p>
+            </div>
+            
+            <!-- Message 2 -->
+            <div class="message-card">
+                <h3><i class="fas fa-brain"></i> <span data-i18n="dawah.message2_title">Knowledge & Wisdom</span></h3>
+                <p data-i18n="dawah.message2_text">Islam encourages seeking knowledge and using wisdom in all matters. The first word revealed in the Quran was "Iqra" which means "Read".</p>
+                <p class="arabic">يَرْفَعِ اللَّهُ الَّذِينَ آمَنُوا مِنكُمْ وَالَّذِينَ أُوتُوا الْعِلْمَ دَرَجَاتٍ</p>
+            </div>
+            
+            <!-- Message 3 -->
+            <div class="message-card">
+                <h3><i class="fas fa-hands-helping"></i> <span data-i18n="dawah.message3_title">Justice & Equality</span></h3>
+                <p data-i18n="dawah.message3_text">Islam establishes justice and equality for all human beings regardless of race, ethnicity, or social status. All are equal before Allah.</p>
+                <p class="arabic">يَا أَيُّهَا النَّاسُ إِنَّا خَلَقْنَاكُم مِّن ذَكَرٍ وَأُنثَىٰ وَجَعَلْنَاكُمْ شُعُوبًا وَقَبَائِلَ لِتَعَارَفُوا</p>
+            </div>
+            
+            <!-- Message 4 -->
+            <div class="message-card">
+                <h3><i class="fas fa-heart"></i> <span data-i18n="dawah.message4_title">Love & Brotherhood</span></h3>
+                <p data-i18n="dawah.message4_text">Muslims are brothers and sisters to one another. The bond of faith is stronger than any other bond of kinship or nationality.</p>
+                <p class="arabic">إِنَّمَا الْمُؤْمِنُونَ إِخْوَةٌ فَأَصْلِحُوا بَيْنَ أَخَوَيْكُمْ</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3 data-i18n="footer.about">About OBUMSJ</h3>
+                <p data-i18n="footer.about_text">ODA BULTUM UNIVERSITY MUSLIM STUDENTS' JAMA'A is dedicated to supporting Muslim students in their academic and spiritual journey.</p>
+                <div class="footer-social">
+                    <a href="https://t.me/obumsj" target="_blank" title="Telegram"><i class="fab fa-telegram"></i></a>
+                    <a href="https://facebook.com/obumsj" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="https://wa.me/251912345678" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://youtube.com/obumsj" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="https://tiktok.com/@obumsj" target="_blank" title="TikTok"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3 data-i18n="footer.quick">Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="./index.html" data-i18n="nav.home">Home</a></li>
+                    <li><a href="./About-Us.html" data-i18n="nav.about">About Us</a></li>
+                    <li><a href="./index.html#sectors" data-i18n="nav.sectors">Sectors</a></li>
+                    <li><a href="./Blog.html" data-i18n="nav.blog">Blog</a></li>
+                    <li><a href="./contact.html" data-i18n="nav.contact">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3 data-i18n="footer.sectors">Our Sectors</h3>
+                <ul class="footer-links">
+                    <li><a href="./Qirat.html" data-i18n="sector.qirat">Qirat</a></li>
+                    <li><a href="./Dawah.html" data-i18n="sector.dawah">Dawah</a></li>
+                    <li><a href="./Social Affairs.html" data-i18n="sector.social">Social Affairs</a></li>
+                    <li><a href="./Academy.html" data-i18n="sector.academy">Academy</a></li>
+                    <li><a href="./Finance.html" data-i18n="sector.finance">Finance</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3 data-i18n="footer.contact">Contact Info</h3>
+                <ul class="footer-links">
+                    <li><i class="fas fa-map-marker-alt"></i> <span data-i18n="footer.address">Oda Bultum University, Chiro, Ethiopia</span></li>
+                    <li><i class="fas fa-phone"></i> <span data-i18n="footer.phone">+251 912 345 678</span></li>
+                    <li><i class="fas fa-envelope"></i> <span data-i18n="footer.email">info@obumsj.org</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p data-i18n="footer.copyright">&copy; 2023 OBUMSJ - Oda Bultum University Muslim Students' JAMA'A. All Rights Reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- Include the universal language system -->
+<script src="./js/language-system.js"></script>
+<script src="./Script.js"></script>
+</body>
+</html>

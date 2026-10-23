@@ -6,18 +6,35 @@
 <title data-i18n="dashboard.page_title">Dashboard | OBUMSJ</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <link rel="stylesheet" href="style.css">
+<script src="js/theme-engine.js"></script>
 <style>
 /* ================= DASHBOARD CORE STYLES ================= */
-:root{
-  --primary:#2f8f3d;
-  --secondary:#0f3d2e;
-  --gold:#d4af37;
-  --bg:#f4f9f5;
-  --text:#1f2937;
-  --sidebar-bg:#0f3d2e;
-  --sidebar-text:#fff;
-  --card-bg:#fff;
-  --border-color:#e5e7eb;
+:root,
+[data-theme="light"],
+[data-theme="day"] {
+  --primary: var(--primary, #1b5e20);
+  --secondary: var(--secondary, #2e7d32);
+  --gold: var(--gold, #c59a3f);
+  --bg: var(--bg-base, #fcfaf6);
+  --text: var(--text-body, #2b201a);
+  --sidebar-bg: var(--sidebar-bg, #0f3d2e);
+  --sidebar-text: #fff;
+  --card-bg: var(--bg-card, #ffffff);
+  --border-color: var(--border-light, #e5e7eb);
+}
+
+[data-theme="dark"],
+[data-theme="night"],
+body.dark-mode {
+  --primary: var(--primary, #d4af37);
+  --secondary: var(--secondary, #e5b85a);
+  --gold: var(--gold, #d4af37);
+  --bg: var(--bg-base, #140c07);
+  --text: var(--text-body, #ebd9c5);
+  --sidebar-bg: var(--sidebar-bg, #1a100a);
+  --sidebar-text: #ebd9c5;
+  --card-bg: var(--bg-card, #20140c);
+  --border-color: var(--border-light, rgba(212, 175, 55, 0.22));
 }
 
 /* RESET */
@@ -908,17 +925,62 @@ textarea.form-control{
   border-radius:0 0 14px 14px;
 }
 
-/* RESPONSIVE */
+/* RESPONSIVE & COLLAPSE */
+@media(min-width:993px){
+  .dashboard-sidebar {
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), margin-left 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .dashboard-main {
+    min-width: 0 !important;
+    transition: margin-left 0.3s cubic-bezier(0.16, 1, 0.3, 1), width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .dashboard-container.sidebar-collapsed .dashboard-sidebar {
+    transform: translateX(-100%) !important;
+  }
+  .dashboard-container.sidebar-collapsed .dashboard-main {
+    margin-left: 0 !important;
+    width: 100% !important;
+  }
+}
+
 @media(max-width:1200px){
   .dashboard-sidebar{width:250px;}
   .dashboard-main{margin-left:250px;}
+  .dashboard-container.sidebar-collapsed .dashboard-main{margin-left:0 !important;}
 }
 
 @media(max-width:992px){
-  .dashboard-container{flex-direction:column;}
-  .dashboard-sidebar{width:100%; position:relative; height:auto;}
-  .dashboard-main{margin-left:0; padding:20px;}
-  .form-grid{grid-template-columns:1fr;}
+  .dashboard-container {
+    flex-direction: row;
+  }
+  .dashboard-sidebar {
+    position: fixed !important;
+    top: 80px !important;
+    left: 0 !important;
+    width: 280px !important;
+    max-width: 85vw !important;
+    height: calc(100vh - 80px) !important;
+    transform: translateX(-100%);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    z-index: 1100 !important;
+    box-shadow: 4px 0 30px rgba(0, 0, 0, 0.45) !important;
+    overflow-y: auto !important;
+  }
+  .dashboard-container.sidebar-open .dashboard-sidebar {
+    transform: translateX(0) !important;
+  }
+  .dashboard-main {
+    margin-left: 0 !important;
+    width: 100% !important;
+    padding: 20px 15px !important;
+    min-width: 0 !important;
+  }
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+  .sidebar-close-btn {
+    display: flex !important;
+  }
 }
 
 @media(max-width:768px){
@@ -927,21 +989,586 @@ textarea.form-control{
   .posts-grid{grid-template-columns:1fr;}
   .tabs{flex-wrap:wrap;}
   .tab-btn{flex:1; min-width:120px; text-align:center;}
-  .notif-tray{width:300px; right:-50px;}
+  .notif-tray{width:300px; max-width:calc(100vw - 24px); right:0; left:auto;}
 }
+
+/* ================= DASHBOARD MODERNIZATION & NIGHT THEME ================= */
+[data-theme="dark"] .stat-card,
+[data-theme="night"] .stat-card,
+body.dark-mode .stat-card {
+  background: #20140c !important;
+  border: 1px solid rgba(212, 175, 55, 0.22) !important;
+  border-left: 5px solid var(--gold) !important;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.4) !important;
+}
+
+[data-theme="dark"] .stat-value,
+[data-theme="night"] .stat-value,
+body.dark-mode .stat-value {
+  color: #fae084 !important;
+}
+
+[data-theme="dark"] .stat-label,
+[data-theme="night"] .stat-label,
+body.dark-mode .stat-label {
+  color: #bda88e !important;
+}
+
+[data-theme="dark"] .stat-icon,
+[data-theme="night"] .stat-icon,
+body.dark-mode .stat-icon {
+  background: rgba(212, 175, 55, 0.15) !important;
+  color: #fae084 !important;
+}
+
+[data-theme="dark"] .dashboard-section,
+[data-theme="night"] .dashboard-section,
+body.dark-mode .dashboard-section {
+  background: #20140c !important;
+  border: 1px solid rgba(212, 175, 55, 0.22) !important;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.35) !important;
+}
+
+[data-theme="dark"] .dashboard-section h3,
+[data-theme="night"] .dashboard-section h3,
+body.dark-mode .dashboard-section h3 {
+  color: #fae084 !important;
+}
+
+[data-theme="dark"] .filter-toolbar,
+[data-theme="night"] .filter-toolbar,
+body.dark-mode .filter-toolbar {
+  background: #180e07 !important;
+  border-color: rgba(212, 175, 55, 0.22) !important;
+}
+
+[data-theme="dark"] .filter-select,
+[data-theme="dark"] .filter-search,
+[data-theme="night"] .filter-select,
+[data-theme="night"] .filter-search,
+body.dark-mode .filter-select,
+body.dark-mode .filter-search {
+  background: #140c07 !important;
+  color: #ebd9c5 !important;
+  border-color: rgba(212, 175, 55, 0.3) !important;
+}
+
+[data-theme="dark"] .user-table,
+[data-theme="night"] .user-table,
+body.dark-mode .user-table {
+  background: #20140c !important;
+  border: 1px solid rgba(212, 175, 55, 0.22) !important;
+}
+
+[data-theme="dark"] .user-table th,
+[data-theme="night"] .user-table th,
+body.dark-mode .user-table th {
+  background: #180e07 !important;
+  color: #fae084 !important;
+  border-bottom: 2px solid rgba(212, 175, 55, 0.28) !important;
+}
+
+[data-theme="dark"] .user-table td,
+[data-theme="night"] .user-table td,
+body.dark-mode .user-table td {
+  border-bottom: 1px solid rgba(212, 175, 55, 0.12) !important;
+  color: #ebd9c5 !important;
+}
+
+[data-theme="dark"] .user-table tr:hover td,
+[data-theme="night"] .user-table tr:hover td,
+body.dark-mode .user-table tr:hover td {
+  background: rgba(212, 175, 55, 0.08) !important;
+}
+
+[data-theme="dark"] .modal-dialog,
+[data-theme="night"] .modal-dialog,
+body.dark-mode .modal-dialog {
+  background: #20140c !important;
+  color: #ebd9c5 !important;
+  border: 1px solid rgba(212, 175, 55, 0.3) !important;
+  box-shadow: 0 15px 45px rgba(0,0,0,0.7) !important;
+}
+
+[data-theme="dark"] .modal-header,
+[data-theme="night"] .modal-header,
+body.dark-mode .modal-header {
+  background: #180e07 !important;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.2) !important;
+}
+
+[data-theme="dark"] .modal-header h3,
+[data-theme="night"] .modal-header h3,
+body.dark-mode .modal-header h3 {
+  color: #fae084 !important;
+}
+
+[data-theme="dark"] .modal-footer,
+[data-theme="night"] .modal-footer,
+body.dark-mode .modal-footer {
+  background: #180e07 !important;
+  border-top: 1px solid rgba(212, 175, 55, 0.2) !important;
+}
+
+[data-theme="dark"] .badge-status-active,
+[data-theme="night"] .badge-status-active,
+body.dark-mode .badge-status-active {
+  background: rgba(46, 125, 50, 0.25) !important;
+  color: #86efac !important;
+  border: 1px solid rgba(74, 222, 128, 0.4) !important;
+}
+
+[data-theme="dark"] .badge-status-pending,
+[data-theme="night"] .badge-status-pending,
+body.dark-mode .badge-status-pending {
+  background: rgba(212, 175, 55, 0.22) !important;
+  color: #fae084 !important;
+  border: 1px solid rgba(212, 175, 55, 0.5) !important;
+}
+
+[data-theme="dark"] .badge-status-suspended,
+[data-theme="dark"] .badge-status-rejected,
+[data-theme="night"] .badge-status-suspended,
+[data-theme="night"] .badge-status-rejected,
+body.dark-mode .badge-status-suspended,
+body.dark-mode .badge-status-rejected {
+  background: rgba(220, 38, 38, 0.22) !important;
+  color: #fca5a5 !important;
+  border: 1px solid rgba(220, 38, 38, 0.4) !important;
+}
+
+[data-theme="dark"] .menu-item,
+[data-theme="night"] .menu-item,
+body.dark-mode .menu-item {
+  color: #ebd9c5 !important;
+}
+
+[data-theme="dark"] .menu-item:hover,
+[data-theme="night"] .menu-item:hover,
+body.dark-mode .menu-item:hover {
+  background: rgba(212, 175, 55, 0.12) !important;
+  border-left-color: var(--gold) !important;
+}
+
+[data-theme="dark"] .menu-item.active,
+[data-theme="night"] .menu-item.active,
+body.dark-mode .menu-item.active {
+  background: rgba(212, 175, 55, 0.2) !important;
+  border-left-color: #fae084 !important;
+  color: #fae084 !important;
+}
+
+[data-theme="dark"] .menu-badge,
+[data-theme="night"] .menu-badge,
+body.dark-mode .menu-badge {
+  background: #d4af37 !important;
+  color: #140c07 !important;
+}
+
+/* Approve & Reject Button Enhancements */
+.btn-approve {
+  border-radius: var(--radius-sm, 6px) !important;
+  font-weight: 600 !important;
+  transition: all 0.25s ease !important;
+}
+.btn-approve:hover {
+  box-shadow: 0 4px 15px rgba(46, 125, 50, 0.4) !important;
+  transform: translateY(-1px) !important;
+}
+
+.btn-reject {
+  border-radius: var(--radius-sm, 6px) !important;
+  font-weight: 600 !important;
+  transition: all 0.25s ease !important;
+}
+.btn-reject:hover {
+  box-shadow: 0 4px 15px rgba(198, 40, 40, 0.4) !important;
+  transform: translateY(-1px) !important;
+}
+
+
+/* ================= PHASE 7: ADMIN & MEMBER COMPONENT POLISH ================= */
+
+/* 1. Dashboard Table Loading & Empty States */
+.table-state-cell {
+  padding: 35px 20px !important;
+  text-align: center !important;
+}
+
+.table-loading-state,
+.table-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 24px;
+  border-radius: var(--radius-md, 10px);
+  margin: 10px auto;
+  max-width: 480px;
+}
+
+.table-loading-state {
+  color: var(--primary, #2f8f3d);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.table-loading-state i {
+  font-size: 1.8rem;
+  color: var(--primary, #2f8f3d);
+  animation: spin 1s linear infinite;
+}
+
+.table-empty-state {
+  color: var(--text-secondary, #64748b);
+  font-size: 0.92rem;
+  background: rgba(0, 0, 0, 0.02);
+  border: 1px dashed var(--border-color, #e2e8f0);
+}
+
+.table-empty-state i {
+  font-size: 2rem;
+  color: var(--gold, #d4af37);
+  opacity: 0.85;
+}
+
+.table-empty-state.success-empty {
+  color: #2e7d32;
+  background: rgba(46, 125, 50, 0.05);
+  border-color: rgba(46, 125, 50, 0.2);
+}
+
+.table-empty-state.success-empty i {
+  color: #2e7d32;
+}
+
+[data-theme="dark"] .table-empty-state,
+[data-theme="night"] .table-empty-state,
+body.dark-mode .table-empty-state {
+  background: rgba(255, 255, 255, 0.03) !important;
+  border-color: rgba(212, 175, 55, 0.2) !important;
+  color: #cbd5e1 !important;
+}
+
+[data-theme="dark"] .table-empty-state.success-empty,
+[data-theme="night"] .table-empty-state.success-empty,
+body.dark-mode .table-empty-state.success-empty {
+  background: rgba(46, 125, 50, 0.15) !important;
+  border-color: rgba(74, 222, 128, 0.3) !important;
+  color: #86efac !important;
+}
+
+/* 2. Post Cards (Hadith, Zakir, Announcements, Female Section) */
+.post-card {
+  background: var(--bg-card, #ffffff);
+  border: 1px solid var(--border-color, #e2e8f0);
+  border-left: 4px solid var(--primary, #2f8f3d);
+  border-radius: var(--radius-md, 10px);
+  padding: 20px;
+  box-shadow: var(--shadow-sm, 0 2px 8px rgba(0,0,0,0.04));
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.post-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md, 0 6px 18px rgba(0,0,0,0.08));
+}
+
+.post-card.hadith {
+  border-left-color: #2f8f3d;
+  background: rgba(47, 143, 61, 0.04);
+}
+
+.post-card.announcement {
+  border-left-color: var(--gold, #d4af37);
+  background: rgba(212, 175, 55, 0.04);
+}
+
+.post-card.zakir {
+  border-left-color: #0f3d2e;
+  background: rgba(15, 61, 46, 0.04);
+}
+
+.post-title {
+  color: var(--text-primary, #1e293b);
+  font-weight: 700;
+  font-size: 1.05rem;
+  margin-bottom: 8px;
+}
+
+.post-content {
+  color: var(--text-secondary, #475569);
+  line-height: 1.6;
+  font-size: 0.9rem;
+}
+
+.post-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 14px;
+  font-size: 0.8rem;
+  color: var(--text-muted, #94a3b8);
+  border-top: 1px dashed var(--border-color, #e2e8f0);
+  padding-top: 10px;
+}
+
+.post-type {
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 0.72rem;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: rgba(0,0,0,0.04);
+}
+
+[data-theme="dark"] .post-card,
+[data-theme="night"] .post-card,
+body.dark-mode .post-card {
+  background: #20140c !important;
+  border-color: rgba(212, 175, 55, 0.25) !important;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.4) !important;
+}
+
+[data-theme="dark"] .post-card.hadith,
+[data-theme="night"] .post-card.hadith,
+body.dark-mode .post-card.hadith {
+  border-left-color: #4ade80 !important;
+  background: rgba(74, 222, 128, 0.06) !important;
+}
+
+[data-theme="dark"] .post-card.announcement,
+[data-theme="night"] .post-card.announcement,
+body.dark-mode .post-card.announcement {
+  border-left-color: #fae084 !important;
+  background: rgba(250, 224, 132, 0.06) !important;
+}
+
+[data-theme="dark"] .post-card.zakir,
+[data-theme="night"] .post-card.zakir,
+body.dark-mode .post-card.zakir {
+  border-left-color: #38bdf8 !important;
+  background: rgba(56, 189, 248, 0.06) !important;
+}
+
+[data-theme="dark"] .post-title,
+[data-theme="night"] .post-title,
+body.dark-mode .post-title {
+  color: #fae084 !important;
+}
+
+[data-theme="dark"] .post-content,
+[data-theme="night"] .post-content,
+body.dark-mode .post-content {
+  color: #ebd9c5 !important;
+}
+
+[data-theme="dark"] .post-meta,
+[data-theme="night"] .post-meta,
+body.dark-mode .post-meta {
+  color: #a89485 !important;
+  border-color: rgba(212, 175, 55, 0.15) !important;
+}
+
+[data-theme="dark"] .post-type,
+[data-theme="night"] .post-type,
+body.dark-mode .post-type {
+  background: rgba(212, 175, 55, 0.15) !important;
+  color: #fae084 !important;
+}
+
+/* 3. Permissions Matrix Dark Mode Polish */
+[data-theme="dark"] .perm-domain-card,
+[data-theme="night"] .perm-domain-card,
+body.dark-mode .perm-domain-card {
+  background: #20140c !important;
+  border: 1px solid rgba(212, 175, 55, 0.25) !important;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.4) !important;
+}
+
+[data-theme="dark"] .perm-domain-title,
+[data-theme="night"] .perm-domain-title,
+body.dark-mode .perm-domain-title {
+  color: #fae084 !important;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.2) !important;
+}
+
+[data-theme="dark"] .perm-item,
+[data-theme="night"] .perm-item,
+body.dark-mode .perm-item {
+  border-bottom: 1px dashed rgba(212, 175, 55, 0.12) !important;
+}
+
+[data-theme="dark"] .perm-item label,
+[data-theme="night"] .perm-item label,
+body.dark-mode .perm-item label {
+  color: #ebd9c5 !important;
+}
+
+[data-theme="dark"] .perm-desc,
+[data-theme="night"] .perm-desc,
+body.dark-mode .perm-desc {
+  color: #a89485 !important;
+}
+
+/* 4. Filter Audit Category Buttons */
+.filter-audit-btn {
+  background: var(--bg-surface, #e2e8f0);
+  color: var(--text-primary, #334155);
+  border: 1px solid var(--border-color, #cbd5e1);
+  padding: 6px 14px;
+  border-radius: var(--radius-sm, 6px);
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.82rem;
+  transition: all 0.2s ease;
+}
+
+.filter-audit-btn:hover {
+  background: var(--border-color, #cbd5e1);
+  color: var(--text-primary, #0f172a);
+}
+
+.filter-audit-btn.active {
+  background: var(--primary, #2f8f3d) !important;
+  color: #ffffff !important;
+  border-color: var(--primary, #2f8f3d) !important;
+  box-shadow: 0 2px 8px rgba(47, 143, 61, 0.3) !important;
+}
+
+[data-theme="dark"] .filter-audit-btn,
+[data-theme="night"] .filter-audit-btn,
+body.dark-mode .filter-audit-btn {
+  background: #20140c !important;
+  color: #ebd9c5 !important;
+  border-color: rgba(212, 175, 55, 0.3) !important;
+}
+
+[data-theme="dark"] .filter-audit-btn:hover,
+[data-theme="night"] .filter-audit-btn:hover,
+body.dark-mode .filter-audit-btn:hover {
+  background: rgba(212, 175, 55, 0.15) !important;
+  color: #fae084 !important;
+}
+
+[data-theme="dark"] .filter-audit-btn.active,
+[data-theme="night"] .filter-audit-btn.active,
+body.dark-mode .filter-audit-btn.active {
+  background: #d4af37 !important;
+  color: #140c07 !important;
+  border-color: #fae084 !important;
+  box-shadow: 0 2px 10px rgba(212, 175, 55, 0.3) !important;
+}
+
+/* 5. Highlight Banners & Cards */
+.roles-info-banner {
+  background: #fff8e1;
+  border: 1px solid #ffe082;
+  border-left: 6px solid #ffb300;
+  padding: 22px;
+  border-radius: 10px;
+  margin-bottom: 30px;
+}
+
+[data-theme="dark"] .roles-info-banner,
+[data-theme="night"] .roles-info-banner,
+body.dark-mode .roles-info-banner {
+  background: rgba(255, 179, 0, 0.08) !important;
+  border: 1px solid rgba(255, 179, 0, 0.3) !important;
+  border-left: 6px solid #ffb300 !important;
+  color: #ebd9c5 !important;
+}
+
+.inspect-role-box {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 8px;
+  padding: 14px;
+  margin-bottom: 12px;
+}
+
+[data-theme="dark"] .inspect-role-box,
+[data-theme="night"] .inspect-role-box,
+body.dark-mode .inspect-role-box {
+  background: rgba(59, 130, 246, 0.1) !important;
+  border: 1px solid rgba(59, 130, 246, 0.3) !important;
+  color: #bfdbfe !important;
+}
+
+.dashboard-card-panel {
+  background: var(--bg-card, #ffffff);
+  border: 1px solid var(--border-color, #e2e8f0);
+  border-radius: var(--radius-md, 12px);
+  box-shadow: var(--shadow-sm, 0 2px 8px rgba(0,0,0,0.03));
+}
+
+[data-theme="dark"] .dashboard-card-panel,
+[data-theme="night"] .dashboard-card-panel,
+body.dark-mode .dashboard-card-panel {
+  background: #20140c !important;
+  border-color: rgba(212, 175, 55, 0.25) !important;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.4) !important;
+}
+
+/* 6. Quick Action Buttons Polish */
+.quick-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 15px;
+}
+
+.quick-actions .action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: var(--radius-sm, 8px);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.quick-actions .action-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(47, 143, 61, 0.3);
+}
+
+.quick-actions .action-btn.secondary {
+  background: var(--secondary, #0f3d2e);
+}
+
+.quick-actions .action-btn.gold {
+  background: var(--gold, #d4af37);
+  color: #140c07;
+}
+
+[data-theme="dark"] .quick-actions .action-btn.gold,
+[data-theme="night"] .quick-actions .action-btn.gold,
+body.dark-mode .quick-actions .action-btn.gold {
+  background: #d4af37 !important;
+  color: #140c07 !important;
+}
+
 </style>
 </head>
 <body>
     <!-- Navigation -->
     <nav class="navbar">
         <div class="logo-container">
+            <button id="sidebarToggleBtn" class="sidebar-toggle-btn" aria-label="Toggle navigation sidebar" title="Toggle Sidebar">
+                <i class="fas fa-bars"></i>
+            </button>
             <img src="./IMAGE/OBUMSJ Logo.jpg" alt="OBUMSJ Logo" class="logo">
             <span class="logo-text">OBUMSJ</span>
-            <button id="darkModeToggle" class="dark-btn" aria-label="Toggle dark mode">🌙</button>
+            <button id="darkModeToggle" class="dark-btn" aria-label="Toggle dark mode" aria-label="Toggle theme"><i class="fas fa-moon theme-icon" aria-hidden="true"></i></button>
         </div>
 
         <div class="lang-dropdown">
-            <button class="lang-btn">🌐 <span class="lang-code">EN</span></button>
+            <button class="lang-btn" aria-label="Select Language"><i class="fas fa-globe" aria-hidden="true"></i> <span class="lang-code">EN</span> <i class="fas fa-chevron-down lang-chevron" aria-hidden="true"></i></button>
             <div class="lang-menu">
                 <a href="#" onclick="setLang('en'); return false;" data-i18n="lang.english">English</a>
                 <a href="#" onclick="setLang('am'); return false;" data-i18n="lang.amharic">Amharic</a>
@@ -976,10 +1603,12 @@ textarea.form-control{
     </nav>
 
     <!-- Dashboard Layout -->
-    <div class="dashboard-container">
+    <div class="dashboard-container" id="dashboardContainer">
+        <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
         <!-- Sidebar -->
-        <aside class="dashboard-sidebar">
-            <div class="sidebar-header">
+        <aside class="dashboard-sidebar" id="dashboardSidebar">
+            <div class="sidebar-header" style="position:relative;">
+                <button id="sidebarCloseBtn" class="sidebar-close-btn" aria-label="Close navigation sidebar" title="Close Sidebar"><i class="fas fa-times"></i></button>
                 <h2>OBUMSJ Management</h2>
                 <p>Oda Bultum University</p>
             </div>
@@ -995,11 +1624,16 @@ textarea.form-control{
                 <a href="#overview" class="menu-item active" data-tab="overview">
                     <i class="fas fa-tachometer-alt"></i> Overview
                 </a>
+
+                <!-- Dedicated Pending Applications Section (Admin & Staff) -->
+                <a href="#pending-applications" class="menu-item admin-only main-amir-only" data-tab="pending-applications" data-perm="applications.approve">
+                    <i class="fas fa-user-clock"></i> Pending Applications
+                    <span id="sidebarPendingBadge" class="menu-badge" style="background:#ff9800; color:#fff; display:none;">0</span>
+                </a>
                 
                 <!-- User Management (Admin & Leadership) -->
                 <a href="#users" class="menu-item admin-only main-amir-only" data-tab="users" data-perm="users.view">
                     <i class="fas fa-users-cog"></i> User Management
-                    <span id="sidebarPendingBadge" class="menu-badge" style="background:#ff9800; color:#fff; display:none;">0</span>
                 </a>
 
                 <!-- Roles & Permissions Matrix (Admin Only) -->
@@ -1118,6 +1752,26 @@ textarea.form-control{
 
             <!-- TAB 1: OVERVIEW -->
             <div class="tab-content active" id="overviewTab">
+                <!-- Pending Member Review Status Notice Banner -->
+                <div id="pendingMemberBanner" style="display:none; background:linear-gradient(135deg, #fffbeb, #fef3c7); border:1px solid #fde68a; border-left:6px solid #f59e0b; padding:20px; border-radius:12px; margin-bottom:25px; box-shadow:0 2px 8px rgba(245,158,11,0.08);">
+                    <div style="display:flex; align-items:flex-start; gap:16px;">
+                        <div style="background:#fef3c7; color:#d97706; width:44px; height:44px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.4rem; flex-shrink:0;">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div style="flex:1;">
+                            <h3 style="margin:0 0 6px 0; color:#92400e; font-size:1.15rem; font-weight:700;">
+                                <i class="fas fa-info-circle"></i> Welcome to OBUMSJ! Your Membership Review is in Progress
+                            </h3>
+                            <p style="margin:0 0 8px 0; color:#78350f; font-size:0.92rem; line-height:1.5;">
+                                Assalamualeykum! Your account has been registered successfully. You have immediate access to your profile, daily hadith, daily zakir, and community announcements while our administrators review your membership details.
+                            </p>
+                            <p style="margin:0; color:#b45309; font-size:0.85rem; font-weight:500;">
+                                <i class="fas fa-shield-alt"></i> Once an administrator verifies and activates your profile, your assigned sector role and committee tools will activate automatically.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Stats Overview -->
                 <div class="stats-grid">
                     <div class="stat-card">
@@ -1126,7 +1780,7 @@ textarea.form-control{
                         <div class="stat-label">Active Approved Members</div>
                     </div>
                     
-                    <div class="stat-card orange" id="statCardPending">
+                    <div class="stat-card orange" id="statCardPending" onclick="window.switchTabDirectly('pending-applications')" style="cursor:pointer;" title="Click to review pending applications">
                         <div class="stat-icon" style="background:rgba(255,152,0,0.1); color:#ff9800;"><i class="fas fa-user-clock"></i></div>
                         <div class="stat-value" id="totalPendingRegistrations" style="color:#ff9800;">0</div>
                         <div class="stat-label">Pending Review Applications</div>
@@ -1171,6 +1825,54 @@ textarea.form-control{
                 </div>
             </div>
 
+            <!-- TAB: DEDICATED PENDING MEMBERSHIP APPLICATIONS -->
+            <div class="tab-content admin-only main-amir-only" id="pendingApplicationsTab" data-perm="applications.approve">
+                <div class="dashboard-section">
+                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:15px; margin-bottom:20px;">
+                        <div>
+                            <h2 class="section-title" style="margin:0;"><i class="fas fa-user-clock"></i> Pending Membership Applications</h2>
+                            <p style="color:#64748b; font-size:0.9rem; margin-top:4px;">
+                                Dedicated queue for verifying, inspecting, and deciding on online registration applications.
+                            </p>
+                        </div>
+                        <div style="display:flex; gap:10px;">
+                            <button type="button" class="action-btn outline" onclick="window.refreshPendingApplications()"><i class="fas fa-sync-alt"></i> Refresh</button>
+                        </div>
+                    </div>
+
+                    <!-- Filter & Search Bar for Pending Applications -->
+                    <div class="dashboard-card-panel" style="padding:18px; margin-bottom:22px; display:flex; flex-wrap:wrap; gap:15px; align-items:center;">
+                        <div style="flex:1; min-width:240px; position:relative;">
+                            <input type="text" id="pendingSearchInput" class="form-control" placeholder="Search pending applicants by name, email, phone, sector..." style="padding-left:36px;" oninput="window.renderDedicatedPendingTable()">
+                            <i class="fas fa-search" style="position:absolute; left:12px; top:50%; transform:translateY(-50%); color:#94a3b8;"></i>
+                        </div>
+                        <div style="display:flex; align-items:center; gap:8px;">
+                            <span style="font-size:0.85rem; color:#64748b; font-weight:600;">Pending Applications:</span>
+                            <span id="dedicatedPendingCountBadge" class="badge-status badge-status-pending" style="font-size:0.9rem; padding:4px 10px;">0 Total</span>
+                        </div>
+                    </div>
+
+                    <!-- Dedicated Pending Applications Table -->
+                    <div class="dashboard-card-panel" style="overflow-x:auto;">
+                        <table class="user-table">
+                            <thead>
+                                <tr>
+                                    <th>Applicant Name</th>
+                                    <th>Contact Info</th>
+                                    <th>Gender</th>
+                                    <th>Sector Interest</th>
+                                    <th>Applied Date</th>
+                                    <th style="min-width:280px; text-align:right;">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="dedicatedPendingTableBody">
+                                <tr><td colspan="6" class="table-state-cell"><div class="table-loading-state"><i class="fas fa-spinner"></i><span>Loading pending applications from Firestore...</span></div></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
             <!-- TAB 2: ADVANCED USER MANAGEMENT & APPROVALS -->
             <div class="tab-content" id="usersTab">
                 <div class="dashboard-section">
@@ -1180,7 +1882,7 @@ textarea.form-control{
                     </div>
 
                     <!-- Create User Form (Modal / Drawer Toggle) -->
-                    <div id="createUserForm" style="display:none; background:#f8fafc; border:1px solid #e2e8f0; padding:25px; border-radius:12px; margin-bottom:25px;">
+                    <div id="createUserForm" class="dashboard-card-panel" style="display:none; padding:25px; margin-bottom:25px;">
                         <h3 style="color:var(--secondary); margin-bottom:15px; font-size:1.15rem;"><i class="fas fa-user-plus"></i> Add New Member Profile</h3>
                         <form id="newUserForm" class="form-grid">
                             <div class="form-group">
@@ -1237,7 +1939,7 @@ textarea.form-control{
                     </div>
                     
                     <!-- PENDING APPLICATIONS ACCORDION/SECTION -->
-                    <div style="background:#fff8e1; border:1px solid #ffe082; border-left:6px solid #ffb300; padding:22px; border-radius:10px; margin-bottom:30px;">
+                    <div class="roles-info-banner">
                         <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
                             <h3 style="color:#b78103; font-size:1.18rem; margin:0; display:flex; align-items:center; gap:8px;">
                                 <i class="fas fa-user-clock"></i> Pending Membership Applications (<span id="pendingApprovalCount">0</span>)
@@ -1262,7 +1964,7 @@ textarea.form-control{
                                     </tr>
                                 </thead>
                                 <tbody id="pendingUsersList">
-                                    <tr><td colspan="7" style="text-align:center; color:#888; padding:20px;">Checking pending registrations from Firestore...</td></tr>
+                                    <tr><td colspan="7" class="table-state-cell"><div class="table-loading-state"><i class="fas fa-spinner"></i><span>Checking pending registrations from Firestore...</span></div></td></tr>
                                 </tbody>
                             </table>
                         </div>
@@ -1313,7 +2015,7 @@ textarea.form-control{
                         </div>
 
                         <div class="filter-group">
-                            <button type="button" class="btn-sm" id="resetFiltersBtn" style="background:#e2e8f0; color:#334155; padding:8px 12px;">Reset</button>
+                            <button type="button" class="btn-sm" id="resetFiltersBtn" style="padding:8px 14px;">Reset</button>
                             <button type="button" class="btn-sm" id="exportUsersBtn" style="background:#2e7d32; color:#fff; padding:8px 12px;"><i class="fas fa-file-csv"></i> Export CSV</button>
                         </div>
                     </div>
@@ -1333,7 +2035,7 @@ textarea.form-control{
                                 </tr>
                             </thead>
                             <tbody id="usersList">
-                                <tr><td colspan="7" style="text-align:center; color:#888; padding:20px;">Loading users from Firestore...</td></tr>
+                                <tr><td colspan="7" class="table-state-cell"><div class="table-loading-state"><i class="fas fa-spinner"></i><span>Loading users from Firestore...</span></div></td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -1363,7 +2065,7 @@ textarea.form-control{
 
                     <!-- Subtab 1: Role Templates -->
                     <div class="subtab-content active" id="perm-role-templates-subtab">
-                        <div style="background:#f8fafc; padding:18px; border-radius:10px; border:1px solid #e2e8f0; margin-bottom:20px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:15px;">
+                        <div class="dashboard-card-panel" style="padding:18px; margin-bottom:20px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:15px;">
                             <div style="display:flex; align-items:center; gap:12px;">
                                 <label for="permTargetRoleSelect" style="font-weight:700; color:var(--secondary);">Select Role to Configure:</label>
                                 <select id="permTargetRoleSelect" class="form-control" style="width:220px; font-weight:600;">
@@ -1389,7 +2091,7 @@ textarea.form-control{
 
                     <!-- Subtab 2: User-Specific Overrides -->
                     <div class="subtab-content" id="perm-user-overrides-subtab">
-                        <div style="background:#fff; border:1px solid #e2e8f0; border-radius:10px; padding:22px; margin-bottom:20px;">
+                        <div class="dashboard-card-panel" style="padding:22px; margin-bottom:20px;">
                             <h3 style="color:var(--secondary); font-size:1.15rem; margin-bottom:10px;"><i class="fas fa-user-cog"></i> Grant or Revoke Custom Permissions for Specific Users</h3>
                             <p style="color:#64748b; font-size:0.88rem; margin-bottom:18px;">Example: You can authorize a specific Amir to manage Qirat programs and publish announcements without granting them user-management or blog-deletion privileges.</p>
 
@@ -1418,7 +2120,7 @@ textarea.form-control{
                     
                     <!-- Subtab 1: Create / Edit Blog Post -->
                     <div class="subtab-content active" id="create-blog-section">
-                        <div style="background:#fff; padding:25px; border-radius:12px; border:1px solid #e2e8f0;">
+                        <div class="dashboard-card-panel" style="padding:25px;">
                             <h3 id="blogFormHeading" style="color:var(--secondary); margin-bottom:20px; font-size:1.25rem;">
                                 <i class="fas fa-pen"></i> Create New Blog Post
                             </h3>
@@ -1441,17 +2143,24 @@ textarea.form-control{
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="blogImage">Featured Image URL or Preset</label>
-                                    <select id="blogImagePreset" class="form-control" style="margin-bottom:8px;">
-                                        <option value="">-- Choose Image Preset or paste URL below --</option>
-                                        <option value="./IMAGE/Best 7.jpg">Best 7 (Conference / Students)</option>
-                                        <option value="./IMAGE/Best 8.jpg">Best 8 (Community & Charity)</option>
-                                        <option value="./IMAGE/Best 9.jpg">Best 9 (Gathering & Study)</option>
-                                        <option value="./IMAGE/Best 1.jpg">Best 1 (Campus View)</option>
-                                        <option value="./IMAGE/Best 2.jpg">Best 2 (Youth Meeting)</option>
-                                        <option value="./IMAGE/OBUMSJ Logo.jpg">OBUMSJ Official Logo</option>
-                                    </select>
-                                    <input type="text" id="blogImage" class="form-control" placeholder="https://... or ./IMAGE/...">
+                                    <label for="blogImage">Featured Image (Upload File, Preset, or URL)</label>
+                                    <div style="display:flex; gap:8px; margin-bottom:8px;">
+                                        <select id="blogImagePreset" class="form-control" style="flex:1;">
+                                            <option value="">-- Choose Image Preset --</option>
+                                            <option value="./IMAGE/Best 7.jpg">Best 7 (Conference / Students)</option>
+                                            <option value="./IMAGE/Best 8.jpg">Best 8 (Community & Charity)</option>
+                                            <option value="./IMAGE/Best 9.jpg">Best 9 (Gathering & Study)</option>
+                                            <option value="./IMAGE/Best 1.jpg">Best 1 (Campus View)</option>
+                                            <option value="./IMAGE/Best 2.jpg">Best 2 (Youth Meeting)</option>
+                                            <option value="./IMAGE/OBUMSJ Logo.jpg">OBUMSJ Official Logo</option>
+                                        </select>
+                                        <label class="btn-sm" style="background:#1976d2; color:white; padding:8px 14px; cursor:pointer; display:inline-flex; align-items:center; gap:6px; border-radius:6px; white-space:nowrap; margin:0;" title="Upload custom image to Firebase Storage">
+                                            <i class="fas fa-cloud-upload-alt"></i> Upload Image
+                                            <input type="file" id="blogImageFileInput" accept="image/*" style="display:none;">
+                                        </label>
+                                    </div>
+                                    <input type="text" id="blogImage" class="form-control" placeholder="Image URL will appear here or paste https://... / ./IMAGE/...">
+                                    <div id="blogImageUploadStatus" style="font-size:0.78rem; color:#15803d; margin-top:4px; display:none;"></div>
                                 </div>
                                 <div class="form-group" style="grid-column: span 2;">
                                     <label for="blogContent">Full Article Content *</label>
@@ -1476,7 +2185,7 @@ textarea.form-control{
 
                     <!-- Subtab 2: Manage Existing Posts -->
                     <div class="subtab-content" id="manage-blogs-section">
-                        <div style="background:#fff; padding:20px; border-radius:12px; border:1px solid #e2e8f0; overflow-x:auto;">
+                        <div class="dashboard-card-panel" style="padding:20px; overflow-x:auto;">
                             <table class="user-table">
                                 <thead>
                                     <tr>
@@ -1489,7 +2198,7 @@ textarea.form-control{
                                     </tr>
                                 </thead>
                                 <tbody id="blogsListTable">
-                                    <tr><td colspan="6" style="text-align:center; color:#888; padding:20px;">Loading blogs from Firestore...</td></tr>
+                                    <tr><td colspan="6" class="table-state-cell"><div class="table-loading-state"><i class="fas fa-spinner"></i><span>Loading blogs from Firestore...</span></div></td></tr>
                                 </tbody>
                             </table>
                         </div>
@@ -1516,7 +2225,7 @@ textarea.form-control{
                     
                     <!-- Subtab 2: Post Announcement -->
                     <div class="subtab-content admin-only main-amir-only amir-only" id="post-announcement-subtab" data-perm="announcements.create">
-                        <div style="background:#fff; padding:25px; border-radius:12px; border:1px solid #e2e8f0;">
+                        <div class="dashboard-card-panel" style="padding:25px;">
                             <h3 style="color:var(--secondary); margin-bottom:18px; font-size:1.2rem;"><i class="fas fa-bullhorn"></i> Publish New Broadcast Announcement</h3>
                             <form id="firestoreAnnouncementForm" class="form-grid">
                                 <div class="form-group" style="grid-column: span 2;">
@@ -1580,7 +2289,7 @@ textarea.form-control{
 
                     <!-- Subtab 1: Programs Table -->
                     <div class="subtab-content active" id="qirat-programs-list-subtab">
-                        <div style="background:#fff; padding:20px; border-radius:12px; border:1px solid #e2e8f0; overflow-x:auto;">
+                        <div class="dashboard-card-panel" style="padding:20px; overflow-x:auto;">
                             <table class="user-table">
                                 <thead>
                                     <tr>
@@ -1594,7 +2303,7 @@ textarea.form-control{
                                     </tr>
                                 </thead>
                                 <tbody id="qiratProgramsTableBody">
-                                    <tr><td colspan="7" style="text-align:center; color:#888; padding:20px;">Loading Qirat programs from Firestore...</td></tr>
+                                    <tr><td colspan="7" class="table-state-cell"><div class="table-loading-state"><i class="fas fa-spinner"></i><span>Loading Qirat programs from Firestore...</span></div></td></tr>
                                 </tbody>
                             </table>
                         </div>
@@ -1602,7 +2311,7 @@ textarea.form-control{
 
                     <!-- Subtab 2: Schedule Form -->
                     <div class="subtab-content" id="qirat-create-program-subtab">
-                        <div style="background:#fff; padding:25px; border-radius:12px; border:1px solid #e2e8f0;">
+                        <div class="dashboard-card-panel" style="padding:25px;">
                             <h3 style="color:var(--secondary); margin-bottom:18px; font-size:1.2rem;"><i class="fas fa-calendar-plus"></i> Schedule Qirat Program</h3>
                             <form id="qiratProgramForm" class="form-grid">
                                 <div class="form-group" style="grid-column: span 2;">
@@ -1670,7 +2379,7 @@ textarea.form-control{
                     <div class="subtab-content active" id="my-notifs-subtab">
                         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
                             <span style="font-weight:600; color:#64748b;">Inbox</span>
-                            <button type="button" class="btn-sm" id="btnMarkAllReadCenter" style="background:#e2e8f0; color:#334155;">Mark All as Read</button>
+                            <button type="button" class="btn-sm" id="btnMarkAllReadCenter" style="padding:8px 14px;">Mark All as Read</button>
                         </div>
                         <div id="fullNotificationList" style="display:flex; flex-direction:column; gap:10px;">
                             <div style="padding:30px; text-align:center; color:#888;">Loading notifications...</div>
@@ -1679,7 +2388,7 @@ textarea.form-control{
 
                     <!-- Subtab 2: Dispatch Broadcast (Staff) -->
                     <div class="subtab-content admin-only main-amir-only amir-only" id="dispatch-notif-subtab" data-perm="notifications.send">
-                        <div style="background:#fff; padding:25px; border-radius:12px; border:1px solid #e2e8f0;">
+                        <div class="dashboard-card-panel" style="padding:25px;">
                             <h3 style="color:var(--secondary); margin-bottom:18px; font-size:1.2rem;"><i class="fas fa-broadcast-tower"></i> Send Instant In-App Alert</h3>
                             <form id="dispatchNotificationForm" class="form-grid">
                                 <div class="form-group" style="grid-column: span 2;">
@@ -1713,11 +2422,11 @@ textarea.form-control{
 
                     <!-- Subtab 3: Browser Push Notifications -->
                     <div class="subtab-content" id="browser-push-subtab">
-                        <div style="background:#fff; padding:25px; border-radius:12px; border:1px solid #e2e8f0; max-width:650px;">
+                        <div class="dashboard-card-panel" style="padding:25px; max-width:650px;">
                             <h3 style="color:var(--secondary); margin-bottom:12px; font-size:1.2rem;"><i class="fas fa-bell"></i> Desktop & Mobile Browser Notifications</h3>
                             <p style="color:#64748b; font-size:0.9rem; margin-bottom:20px;">Receive instant OBUMSJ announcements and Qirat program updates directly on your computer or phone browser even when you are not browsing the site.</p>
                             
-                            <div style="background:#f8fafc; padding:18px; border-radius:8px; border:1px solid #e2e8f0; margin-bottom:20px;">
+                            <div class="dashboard-card-panel" style="padding:18px; margin-bottom:20px;">
                                 <div style="display:flex; justify-content:space-between; align-items:center;">
                                     <div>
                                         <strong>Browser Permission Status:</strong>
@@ -1770,7 +2479,7 @@ textarea.form-control{
                                 </tr>
                             </thead>
                             <tbody id="auditLogsTableBody">
-                                <tr><td colspan="6" style="text-align:center; color:#888; padding:20px;">Loading audit logs from Firestore...</td></tr>
+                                <tr><td colspan="6" class="table-state-cell"><div class="table-loading-state"><i class="fas fa-spinner"></i><span>Loading audit logs from Firestore...</span></div></td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -1801,7 +2510,7 @@ textarea.form-control{
                     </div>
 
                     <!-- Sector Demographics Breakdown -->
-                    <div style="background:#fff; border:1px solid #e2e8f0; border-radius:12px; padding:22px; margin-bottom:30px;">
+                    <div class="dashboard-card-panel" style="padding:22px; margin-bottom:30px;">
                         <h3 style="color:var(--secondary); font-size:1.15rem; margin-bottom:15px;"><i class="fas fa-chart-bar"></i> Member Allocation by Sector</h3>
                         <div style="overflow-x:auto;">
                             <table class="user-table">
@@ -1813,14 +2522,14 @@ textarea.form-control{
                                     </tr>
                                 </thead>
                                 <tbody id="sectorAnalyticsTableBody">
-                                    <tr><td colspan="3" style="text-align:center; color:#888; padding:15px;">Calculating sector data...</td></tr>
+                                    <tr><td colspan="3" class="table-state-cell"><div class="table-loading-state"><i class="fas fa-spinner"></i><span>Calculating sector data...</span></div></td></tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
 
                     <!-- Export Tools -->
-                    <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px; padding:22px;">
+                    <div class="dashboard-card-panel" style="padding:22px;">
                         <h3 style="color:var(--secondary); font-size:1.15rem; margin-bottom:12px;"><i class="fas fa-file-download"></i> Administrative Data Export</h3>
                         <p style="color:#64748b; font-size:0.88rem; margin-bottom:18px;">Generate clean CSV or JSON archives for offline university administrative reporting and backup records.</p>
                         <div style="display:flex; gap:12px; flex-wrap:wrap;">
@@ -1857,7 +2566,7 @@ textarea.form-control{
                             <label for="settingCampus">Campus Location Address</label>
                             <input type="text" id="settingCampus" class="form-control" value="Oda Bultum University, Chiro Campus, Oromia, Ethiopia">
                         </div>
-                        <div class="form-group" style="grid-column: span 2; background:#f8fafc; padding:15px; border-radius:8px; border:1px solid #e2e8f0;">
+                        <div class="form-group dashboard-card-panel" style="grid-column: span 2; padding:15px;">
                             <label style="display:flex; align-items:center; gap:10px; cursor:pointer; font-weight:700;">
                                 <input type="checkbox" id="settingAllowRegistration" checked>
                                 Allow Public Online Membership Registration
@@ -2081,7 +2790,7 @@ textarea.form-control{
                         </div>
                         <div class="form-group">
                             <label>Email Address</label>
-                            <input type="email" id="modalEmail" class="form-control" readonly style="background:#f1f5f9;">
+                            <input type="email" id="modalEmail" class="form-control" readonly>
                         </div>
                         <div class="form-group">
                             <label>Phone Number</label>
@@ -2136,7 +2845,7 @@ textarea.form-control{
                     <!-- Individual Custom Permission Overrides -->
                     <div style="margin-top:20px; border-top:1px solid #e2e8f0; padding-top:15px;" class="admin-only" id="modalCustomPermSection">
                         <h4 style="color:var(--secondary); font-size:0.95rem; margin-bottom:10px;"><i class="fas fa-key"></i> Custom Permission Overrides For This User</h4>
-                        <div id="modalUserCustomPermsContainer" style="display:grid; grid-template-columns:1fr 1fr; gap:10px; max-height:180px; overflow-y:auto; background:#f8fafc; padding:12px; border-radius:6px;">
+                        <div id="modalUserCustomPermsContainer" style="display:grid; grid-template-columns:1fr 1fr; gap:10px; max-height:180px; overflow-y:auto; background:var(--bg-surface, var(--bg-card)); border:1px solid var(--border-color); padding:12px; border-radius:6px;">
                             <!-- Populated by JS -->
                         </div>
                     </div>
@@ -2172,6 +2881,84 @@ textarea.form-control{
         </div>
     </div>
 
+    <!-- Modal: Application Inspection & Review Modal -->
+    <div class="dashboard-modal" id="applicationReviewModal" style="display:none;">
+        <div class="modal-dialog" style="max-width:620px;">
+            <div class="modal-header">
+                <h3><i class="fas fa-id-card" style="color:var(--primary);"></i> Inspect Member Application</h3>
+                <button type="button" class="modal-close-btn" onclick="window.closeApplicationReviewModal()">&times;</button>
+            </div>
+            <div class="modal-body" style="padding:24px;">
+                <input type="hidden" id="inspectModalUserId">
+                
+                <div style="display:flex; align-items:center; gap:16px; margin-bottom:20px; padding-bottom:16px; border-bottom:1px solid #f1f5f9;">
+                    <div id="inspectModalAvatar" style="width:56px; height:56px; border-radius:50%; background:var(--primary); color:#fff; display:flex; align-items:center; justify-content:center; font-size:1.5rem; font-weight:700;">
+                        U
+                    </div>
+                    <div>
+                        <h4 id="inspectModalFullName" style="margin:0; font-size:1.2rem; color:var(--secondary);">Applicant Name</h4>
+                        <div style="font-size:0.85rem; color:#64748b; margin-top:2px;">
+                            Username: <strong id="inspectModalUsername">@user</strong> &bull; Status: <span class="badge-status badge-status-pending" id="inspectModalStatusBadge">PENDING REVIEW</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-grid" style="grid-template-columns:1fr 1fr; gap:14px; margin-bottom:20px;">
+                    <div class="dashboard-card-panel" style="padding:12px; border-radius:8px;">
+                        <div style="font-size:0.75rem; text-transform:uppercase; color:#94a3b8; font-weight:700; margin-bottom:4px;"><i class="fas fa-envelope"></i> Email Address</div>
+                        <div id="inspectModalEmail" style="font-weight:600; color:#334155; word-break:break-all;">-</div>
+                    </div>
+                    <div class="dashboard-card-panel" style="padding:12px; border-radius:8px;">
+                        <div style="font-size:0.75rem; text-transform:uppercase; color:#94a3b8; font-weight:700; margin-bottom:4px;"><i class="fas fa-phone"></i> Phone Number</div>
+                        <div id="inspectModalPhone" style="font-weight:600; color:#334155;">-</div>
+                    </div>
+                    <div class="dashboard-card-panel" style="padding:12px; border-radius:8px;">
+                        <div style="font-size:0.75rem; text-transform:uppercase; color:#94a3b8; font-weight:700; margin-bottom:4px;"><i class="fas fa-venus-mars"></i> Gender</div>
+                        <div id="inspectModalGender" style="font-weight:600; color:#334155;">-</div>
+                    </div>
+                    <div class="dashboard-card-panel" style="padding:12px; border-radius:8px;">
+                        <div style="font-size:0.75rem; text-transform:uppercase; color:#94a3b8; font-weight:700; margin-bottom:4px;"><i class="fas fa-layer-group"></i> Sector Preference</div>
+                        <div id="inspectModalSector" style="font-weight:600; color:#334155;">-</div>
+                    </div>
+                    <div class="dashboard-card-panel" style="padding:12px; border-radius:8px;">
+                        <div style="font-size:0.75rem; text-transform:uppercase; color:#94a3b8; font-weight:700; margin-bottom:4px;"><i class="far fa-calendar-alt"></i> Applied Date</div>
+                        <div id="inspectModalDate" style="font-weight:600; color:#334155;">-</div>
+                    </div>
+                    <div class="dashboard-card-panel" style="padding:12px; border-radius:8px;">
+                        <div style="font-size:0.75rem; text-transform:uppercase; color:#94a3b8; font-weight:700; margin-bottom:4px;"><i class="fas fa-sign-in-alt"></i> Auth Method</div>
+                        <div id="inspectModalAuthMethod" style="font-weight:600; color:#334155;">-</div>
+                    </div>
+                </div>
+
+                <!-- Role Assignment Selection for Approval -->
+                <div class="inspect-role-box">
+                    <label for="inspectModalAssignRole" style="display:block; font-size:0.85rem; font-weight:700; color:#1e40af; margin-bottom:6px;">
+                        <i class="fas fa-user-tag"></i> Assign Role Upon Approval:
+                    </label>
+                    <select id="inspectModalAssignRole" class="form-control">
+                        <option value="sector_member">Sector Member (Standard)</option>
+                        <option value="female_member">Female Member</option>
+                        <option value="blog_manager">Blog Manager</option>
+                        <option value="amir">Amir</option>
+                        <option value="main_amir">Main Amir</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer" style="display:flex; justify-content:space-between;">
+                <button type="button" class="btn-reject" onclick="window.rejectFromInspectionModal()" style="padding:9px 18px;">
+                    <i class="fas fa-times"></i> Reject Application
+                </button>
+                <div style="display:flex; gap:10px;">
+                    <button type="button" class="action-btn outline" onclick="window.closeApplicationReviewModal()">Close</button>
+                    <button type="button" class="btn-approve" onclick="window.approveFromInspectionModal()" style="padding:9px 20px;">
+                        <i class="fas fa-check"></i> Approve Application
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Modal 3: Blog Article Preview Modal -->
     <div class="dashboard-modal" id="blogPreviewModal">
         <div class="modal-dialog" style="max-width:700px;">
@@ -2181,7 +2968,7 @@ textarea.form-control{
             </div>
             <div class="modal-body">
                 <img id="previewModalImg" src="./IMAGE/Best 7.jpg" alt="Preview Image" style="width:100%; max-height:260px; object-fit:cover; border-radius:8px; margin-bottom:15px;">
-                <span id="previewModalCategory" class="badge-status" style="background:#e8f5e9; color:#1b5e20;">General</span>
+                <span id="previewModalCategory" class="badge-status badge-status-active">General</span>
                 <h2 id="previewModalTitle" style="color:var(--secondary); margin:12px 0 8px 0;">Title</h2>
                 <div style="font-size:0.8rem; color:#94a3b8; margin-bottom:15px;" id="previewModalMeta">By OBUMSJ</div>
                 <div id="previewModalBody" style="line-height:1.7; color:#334155; white-space:pre-wrap;">Article content...</div>
@@ -2224,6 +3011,7 @@ textarea.form-control{
         import { 
             auth, 
             db, 
+            storage,
             signOut, 
             onAuthStateChanged,
             collection, 
@@ -2234,11 +3022,18 @@ textarea.form-control{
             updateDoc, 
             deleteDoc, 
             onSnapshot, 
-            serverTimestamp 
+            query,
+            where,
+            orderBy,
+            serverTimestamp,
+            ref,
+            uploadBytes,
+            getDownloadURL
         } from "./js/firebase.js";
 
         // ================= GLOBAL STATE =================
         let currentUser = null;
+        let isAuthVerified = false;
         let allFirestoreUsers = [];
         let allFirestoreBlogs = [];
         let allFirestoreAnnouncements = [];
@@ -2364,6 +3159,9 @@ textarea.form-control{
         // ================= AUTHORITATIVE PERMISSION CHECKER =================
         function hasPermission(permKey) {
             if (!currentUser) return false;
+            // Never grant permissions based on unverified localStorage; require authoritative Firestore sync
+            if (!isAuthVerified) return false;
+
             // Administrator has absolute authority
             if (currentUser.role === 'admin') return true;
 
@@ -2430,14 +3228,8 @@ textarea.form-control{
                     }
 
                     const userData = snap.data();
-                    if (userData.role === 'pending' || userData.status === 'pending') {
-                        alert("Your registration is pending administrator review. Please wait for an administrator to activate your account.");
-                        await signOut(auth);
-                        localStorage.removeItem('currentUser');
-                        window.location.href = 'member.html';
-                        return;
-                    }
 
+                    // Account suspended check
                     if (userData.status === 'suspended') {
                         alert("This account has been suspended by an administrator. Please contact the Jama'a leadership.");
                         await signOut(auth);
@@ -2446,6 +3238,19 @@ textarea.form-control{
                         return;
                     }
 
+                    // Account rejected check
+                    if (userData.role === 'rejected' || userData.status === 'rejected') {
+                        const reason = userData.rejectionReason ? `\n\nReason: ${userData.rejectionReason}` : '';
+                        alert(`Your membership registration was declined by an administrator.${reason}`);
+                        await signOut(auth);
+                        localStorage.removeItem('currentUser');
+                        window.location.href = 'member.html';
+                        return;
+                    }
+
+                    // Immediate dashboard entry for all valid members (including pending review applicants)
+                    const isPending = (userData.role === 'pending' || userData.status === 'pending');
+                    const canonicalStatus = (userData.status === 'approved' || userData.status === 'active') ? 'active' : (userData.status || (isPending ? 'pending' : 'active'));
                     currentUser = {
                         uid: firebaseUser.uid,
                         email: firebaseUser.email,
@@ -2453,13 +3258,14 @@ textarea.form-control{
                         username: userData.username || firebaseUser.email?.split('@')[0] || 'member',
                         phone: userData.phone || '',
                         gender: userData.gender || 'Not specified',
-                        role: userData.role || 'sector_member',
+                        role: userData.role || (isPending ? 'pending' : 'sector_member'),
                         sector: userData.sector || 'General',
-                        status: userData.status || 'active',
+                        status: canonicalStatus,
                         customPermissions: userData.customPermissions || [],
                         deniedPermissions: userData.deniedPermissions || []
                     };
 
+                    isAuthVerified = true;
                     localStorage.setItem('currentUser', JSON.stringify(currentUser));
 
                     updateUserInfo(currentUser);
@@ -2477,6 +3283,11 @@ textarea.form-control{
 
                 } catch (err) {
                     console.error("Auth state synchronization error:", err);
+                    isAuthVerified = false;
+                    currentUser = null;
+                    localStorage.removeItem('currentUser');
+                    alert("Unable to verify account permissions from the database. Administrative controls have been locked.");
+                    window.location.href = 'member.html';
                 }
             });
         });
@@ -2507,6 +3318,13 @@ textarea.form-control{
             const fRole = document.getElementById('footerRole');
             if (fRole) fRole.textContent = formatRole(user.role);
 
+            // Toggle pending review banner on Member Dashboard
+            const pendingBanner = document.getElementById('pendingMemberBanner');
+            if (pendingBanner) {
+                const isPending = (user.role === 'pending' || user.status === 'pending');
+                pendingBanner.style.display = isPending ? 'block' : 'none';
+            }
+
             // Profile Tab Inputs
             if (document.getElementById('profileName')) document.getElementById('profileName').value = user.fullName || '';
             if (document.getElementById('profileUsername')) document.getElementById('profileUsername').value = user.username || '';
@@ -2536,7 +3354,8 @@ textarea.form-control{
                 'amir': 'Sector leadership overseeing specific committee activities and broadcasts',
                 'sector_member': 'Active member of OBUMSJ sector committees and halaqas',
                 'female_member': 'Member with access to dedicated female programs and events',
-                'blog_manager': 'Editorial content manager for articles and publications'
+                'blog_manager': 'Editorial content manager for articles and publications',
+                'pending': 'Member Dashboard — Registration review in progress'
             };
             return descriptions[role] || 'Member Control Panel';
         }
@@ -2551,6 +3370,12 @@ textarea.form-control{
                     el.style.display = 'none';
                 }
             });
+
+            // Pending stat card on overview (admin/leadership only)
+            const statCardPending = document.getElementById('statCardPending');
+            if (statCardPending) {
+                statCardPending.style.display = hasPermission('users.view') ? 'flex' : 'none';
+            }
 
             // Backward compatible role classes
             if (role === 'admin') {
@@ -2675,25 +3500,63 @@ textarea.form-control{
             }
         }
 
-        // 6. Notifications Listener
+        // 6. Notifications Listener (Secure Query Architecture)
+        let unsubscribeNotifsUid = null;
+        let unsubscribeNotifsRole = null;
+
         function setupNotificationsListener() {
             if (!currentUser) return;
+
+            // Unsubscribe existing listeners
+            if (unsubscribeNotifsUid) { unsubscribeNotifsUid(); unsubscribeNotifsUid = null; }
+            if (unsubscribeNotifsRole) { unsubscribeNotifsRole(); unsubscribeNotifsRole = null; }
+
+            const notifsMap = new Map();
+
+            function updateMergedNotifs() {
+                allFirestoreNotifs = Array.from(notifsMap.values()).sort((a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0));
+                renderNotifications();
+            }
+
             try {
-                onSnapshot(collection(db, "notifications"), (snapshot) => {
-                    const notifs = [];
-                    snapshot.forEach(docSnap => {
-                        const data = docSnap.data();
-                        // Filter relevant to current user or broad target
-                        if (data.targetUid === currentUser.uid || data.targetUid === 'all' || data.targetRole === currentUser.role || currentUser.role === 'admin') {
-                            notifs.push({ id: docSnap.id, ...data });
-                        }
-                    });
-                    notifs.sort((a,b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0));
-                    allFirestoreNotifs = notifs;
-                    renderNotifications();
-                }, (err) => console.warn("Notifications listener:", err.message));
+                if (currentUser.role === 'admin') {
+                    // Admins have permission to query all notifications
+                    unsubscribeNotifsUid = onSnapshot(collection(db, "notifications"), (snapshot) => {
+                        notifsMap.clear();
+                        snapshot.forEach(docSnap => {
+                            notifsMap.set(docSnap.id, { id: docSnap.id, ...docSnap.data() });
+                        });
+                        updateMergedNotifs();
+                    }, (err) => console.warn("Admin notifications listener:", err.message));
+                } else {
+                    // Non-admin query 1: Target to this user or 'all'
+                    const qTarget = query(
+                        collection(db, "notifications"),
+                        where("targetUid", "in", [currentUser.uid, "all"])
+                    );
+                    unsubscribeNotifsUid = onSnapshot(qTarget, (snapshot) => {
+                        snapshot.forEach(docSnap => {
+                            notifsMap.set(docSnap.id, { id: docSnap.id, ...docSnap.data() });
+                        });
+                        updateMergedNotifs();
+                    }, (err) => console.warn("User notifications listener:", err.message));
+
+                    // Non-admin query 2: Target to user's assigned role
+                    if (currentUser.role && currentUser.role !== 'pending') {
+                        const qRole = query(
+                            collection(db, "notifications"),
+                            where("targetRole", "==", currentUser.role)
+                        );
+                        unsubscribeNotifsRole = onSnapshot(qRole, (snapshot) => {
+                            snapshot.forEach(docSnap => {
+                                notifsMap.set(docSnap.id, { id: docSnap.id, ...docSnap.data() });
+                            });
+                            updateMergedNotifs();
+                        }, (err) => console.warn("Role notifications listener:", err.message));
+                    }
+                }
             } catch (e) {
-                console.warn(e);
+                console.warn("Notifications listener setup error:", e);
             }
         }
 
@@ -2791,9 +3654,11 @@ textarea.form-control{
                 if (pendingUsers.length === 0) {
                     pendingListEl.innerHTML = `
                         <tr>
-                            <td colspan="7" style="text-align: center; color: #2e7d32; padding: 25px;">
-                                <i class="fas fa-check-circle" style="font-size: 1.2rem; margin-right: 6px;"></i>
-                                All registration applications have been reviewed! No pending applicants.
+                            <td colspan="7" class="table-state-cell">
+                                <div class="table-empty-state success-empty">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>All registration applications have been reviewed! No pending applicants.</span>
+                                </div>
                             </td>
                         </tr>
                     `;
@@ -2813,6 +3678,9 @@ textarea.form-control{
                                 <td><span class="badge-status badge-status-pending">${formatRole(requestedRole)}</span></td>
                                 <td>${regDate}</td>
                                 <td style="white-space: nowrap;">
+                                    <button class="btn-sm" style="background:#0288d1; color:white;" onclick="window.openApplicationReviewModal('${user.id}')" title="Inspect Application Details">
+                                        <i class="fas fa-eye"></i> Inspect
+                                    </button>
                                     <button class="btn-approve" onclick="window.approveUser('${user.id}', '${requestedRole}')">
                                         <i class="fas fa-check"></i> Approve
                                     </button>
@@ -2837,6 +3705,9 @@ textarea.form-control{
 
             // Render paginated active directory
             renderActiveMembersList();
+
+            // Render dedicated pending applications table
+            renderDedicatedPendingTable();
         }
 
         // ACTIVE MEMBERS LIST WITH SEARCH, MULTI-FILTERS & PAGINATION
@@ -2900,7 +3771,7 @@ textarea.form-control{
             if (nextBtn) nextBtn.disabled = currentPage >= totalPages;
 
             if (pageData.length === 0) {
-                tableBody.innerHTML = `<tr><td colspan="7" style="text-align: center; color: #888; padding: 25px;">No members match the selected filters or search query.</td></tr>`;
+                tableBody.innerHTML = `<tr><td colspan="7" class="table-state-cell"><div class="table-empty-state"><i class="fas fa-user-slash"></i><span>No members match the selected filters or search query.</span></div></td></tr>`;
                 return;
             }
 
@@ -3072,6 +3943,10 @@ textarea.form-control{
 
         // APPROVALS & REJECTIONS
         window.approveUser = async function(uid, targetRole) {
+            if (!hasPermission('applications.approve')) {
+                alert("Unauthorized: You do not have permission to approve applications.");
+                return;
+            }
             try {
                 const user = allFirestoreUsers.find(u => u.id === uid);
                 await updateDoc(doc(db, "users", uid), {
@@ -3120,6 +3995,10 @@ textarea.form-control{
         };
 
         window.confirmRejectApplication = async function() {
+            if (!hasPermission('applications.reject')) {
+                alert("Unauthorized: You do not have permission to reject applications.");
+                return;
+            }
             const uid = document.getElementById('rejectUserId').value;
             const reason = document.getElementById('rejectionReasonInput').value.trim() || "Requirements not met";
             if (!uid) return;
@@ -3138,11 +4017,155 @@ textarea.form-control{
                     summary: `Rejected membership registration for ${user?.fullName || uid}. Reason: ${reason}`
                 });
 
-                alert("Application rejected and archived.");
+                alert("Application rejected and recorded in audit trail.");
                 window.closeRejectModal();
             } catch (err) {
                 alert("Error: " + err.message);
             }
+        };
+
+        // ================= DEDICATED PENDING APPLICATIONS SECTION =================
+        window.renderDedicatedPendingTable = function() {
+            const tableBody = document.getElementById('dedicatedPendingTableBody');
+            if (!tableBody) return;
+
+            const searchInput = document.getElementById('pendingSearchInput');
+            const query = searchInput ? searchInput.value.toLowerCase().trim() : '';
+
+            const pendingUsers = allFirestoreUsers.filter(u => u.role === 'pending' || u.status === 'pending');
+            
+            const badgeEl = document.getElementById('dedicatedPendingCountBadge');
+            if (badgeEl) badgeEl.textContent = `${pendingUsers.length} Total`;
+
+            const filtered = pendingUsers.filter(u => {
+                if (!query) return true;
+                const name = (u.fullName || '').toLowerCase();
+                const email = (u.email || '').toLowerCase();
+                const phone = (u.phone || '').toLowerCase();
+                const uname = (u.username || '').toLowerCase();
+                const sec = (u.sector || '').toLowerCase();
+                return name.includes(query) || email.includes(query) || phone.includes(query) || uname.includes(query) || sec.includes(query);
+            });
+
+            if (filtered.length === 0) {
+                tableBody.innerHTML = `
+                    <tr>
+                        <td colspan="6" class="table-state-cell">
+                            <div class="table-empty-state success-empty">
+                                <i class="fas fa-check-circle"></i>
+                                <span>${query ? 'No pending applications match your search query.' : 'All membership applications have been reviewed! No pending applicants.'}</span>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            tableBody.innerHTML = filtered.map(user => {
+                const regDate = user.createdAt?.seconds 
+                    ? new Date(user.createdAt.seconds * 1000).toLocaleString() 
+                    : 'Recent';
+                const requestedRole = user.requestedRole || 'sector_member';
+
+                return `
+                    <tr>
+                        <td>
+                            <strong>${escapeHtml(user.fullName || 'Applicant')}</strong>
+                            <div style="font-size:0.75rem; color:#888;">@${escapeHtml(user.username || user.email?.split('@')[0])}</div>
+                        </td>
+                        <td>
+                            <div><i class="fas fa-envelope" style="font-size:0.75rem; color:#888;"></i> ${escapeHtml(user.email || '-')}</div>
+                            <div style="font-size:0.78rem; color:#666;"><i class="fas fa-phone" style="font-size:0.75rem; color:#888;"></i> ${escapeHtml(user.phone || '-')}</div>
+                        </td>
+                        <td>${escapeHtml(user.gender || '-')}</td>
+                        <td><span style="font-weight:600; color:var(--secondary);">${escapeHtml(user.sector || 'General')}</span></td>
+                        <td style="font-size:0.8rem; color:#888;">${regDate}</td>
+                        <td style="text-align:right; white-space:nowrap;">
+                            <button class="btn-sm" style="background:#0288d1; color:white;" onclick="window.openApplicationReviewModal('${user.id}')" title="Inspect Application Details">
+                                <i class="fas fa-eye"></i> Inspect
+                            </button>
+                            <button class="btn-approve" onclick="window.approveUser('${user.id}', '${requestedRole}')" title="Approve Application">
+                                <i class="fas fa-check"></i> Approve
+                            </button>
+                            <select id="roleSelect_ded_${user.id}" class="filter-select" style="padding:4px; margin:0 4px; font-size:0.8rem;">
+                                <option value="sector_member" ${requestedRole === 'sector_member' ? 'selected' : ''}>Sector Member</option>
+                                <option value="female_member" ${requestedRole === 'female_member' ? 'selected' : ''}>Female Member</option>
+                                <option value="blog_manager" ${requestedRole === 'blog_manager' ? 'selected' : ''}>Blog Manager</option>
+                                <option value="amir" ${requestedRole === 'amir' ? 'selected' : ''}>Amir</option>
+                                <option value="main_amir" ${requestedRole === 'main_amir' ? 'selected' : ''}>Main Amir</option>
+                                <option value="admin" ${requestedRole === 'admin' ? 'selected' : ''}>Admin</option>
+                            </select>
+                            <button class="btn-sm" style="background:#0288d1; color:white;" onclick="window.approveFromDedicatedRow('${user.id}')" title="Assign Role & Approve">Assign</button>
+                            <button class="btn-reject" onclick="window.openRejectModal('${user.id}')" title="Reject Application">
+                                <i class="fas fa-times"></i> Reject
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        };
+
+        window.approveFromDedicatedRow = function(uid) {
+            const select = document.getElementById('roleSelect_ded_' + uid);
+            const role = select ? select.value : 'sector_member';
+            window.approveUser(uid, role);
+        };
+
+        window.refreshPendingApplications = function() {
+            renderUsersAndApprovals();
+            window.renderDedicatedPendingTable();
+        };
+
+        // ================= APPLICATION INSPECTION MODAL =================
+        window.openApplicationReviewModal = function(userId) {
+            const user = allFirestoreUsers.find(u => u.id === userId);
+            if (!user) return;
+
+            document.getElementById('inspectModalUserId').value = user.id;
+            const avatar = document.getElementById('inspectModalAvatar');
+            if (avatar) avatar.textContent = (user.fullName || user.username || 'U').charAt(0).toUpperCase();
+
+            document.getElementById('inspectModalFullName').textContent = user.fullName || 'Applicant';
+            document.getElementById('inspectModalUsername').textContent = '@' + (user.username || user.email?.split('@')[0] || 'member');
+            document.getElementById('inspectModalEmail').textContent = user.email || 'Not provided';
+            document.getElementById('inspectModalPhone').textContent = user.phone || 'Not provided';
+            document.getElementById('inspectModalGender').textContent = user.gender || 'Not specified';
+            document.getElementById('inspectModalSector').textContent = user.sector || 'General';
+
+            const regDate = user.createdAt?.seconds 
+                ? new Date(user.createdAt.seconds * 1000).toLocaleString() 
+                : 'Recent';
+            document.getElementById('inspectModalDate').textContent = regDate;
+
+            const authMethod = user.authProvider || (user.email && user.email.includes('@') ? 'Email / Password' : 'Google Authentication');
+            document.getElementById('inspectModalAuthMethod').textContent = authMethod;
+
+            const roleSelect = document.getElementById('inspectModalAssignRole');
+            if (roleSelect) {
+                roleSelect.value = user.requestedRole || 'sector_member';
+            }
+
+            document.getElementById('applicationReviewModal').style.display = 'flex';
+        };
+
+        window.closeApplicationReviewModal = function() {
+            document.getElementById('applicationReviewModal').style.display = 'none';
+        };
+
+        window.approveFromInspectionModal = async function() {
+            const uid = document.getElementById('inspectModalUserId').value;
+            if (!uid) return;
+            const roleSelect = document.getElementById('inspectModalAssignRole');
+            const targetRole = roleSelect ? roleSelect.value : 'sector_member';
+            window.closeApplicationReviewModal();
+            await window.approveUser(uid, targetRole);
+        };
+
+        window.rejectFromInspectionModal = function() {
+            const uid = document.getElementById('inspectModalUserId').value;
+            if (!uid) return;
+            window.closeApplicationReviewModal();
+            window.openRejectModal(uid);
         };
 
         // ================= PERMISSION MATRIX MANAGEMENT =================
@@ -3217,7 +4240,7 @@ textarea.form-control{
             if (!container) return;
 
             if (allFirestoreBlogs.length === 0) {
-                container.innerHTML = `<tr><td colspan="6" style="text-align: center; color: #888; padding: 25px;">No blog posts published yet.</td></tr>`;
+                container.innerHTML = `<tr><td colspan="6" class="table-state-cell"><div class="table-empty-state"><i class="fas fa-newspaper"></i><span>No blog posts published yet. Click "Write New Post" to publish an article.</span></div></td></tr>`;
                 return;
             }
 
@@ -3337,7 +4360,7 @@ textarea.form-control{
             if (!tableBody) return;
 
             if (allFirestoreQirat.length === 0) {
-                tableBody.innerHTML = `<tr><td colspan="7" style="text-align: center; color: #888; padding: 25px;">No Qirat programs scheduled yet.</td></tr>`;
+                tableBody.innerHTML = `<tr><td colspan="7" class="table-state-cell"><div class="table-empty-state"><i class="fas fa-quran"></i><span>No Qirat programs scheduled yet. Click "Add Event" to schedule a program.</span></div></td></tr>`;
                 return;
             }
 
@@ -3473,7 +4496,7 @@ textarea.form-control{
             });
 
             if (filtered.length === 0) {
-                tableBody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: #888; padding: 25px;">No audit log records found for this category.</td></tr>`;
+                tableBody.innerHTML = `<tr><td colspan="6" class="table-state-cell"><div class="table-empty-state"><i class="fas fa-inbox"></i><span>No audit log records found matching your filter criteria.</span></div></td></tr>`;
                 return;
             }
 
@@ -3626,8 +4649,10 @@ textarea.form-control{
                 t.style.display = 'none';
             });
 
-            // Handle ID variations
+            // Handle ID variations (e.g. pending-applications -> pendingApplicationsTab)
+            const camelTab = tabName.replace(/-([a-z])/g, (g) => g[1].toUpperCase());
             const targetContent = document.getElementById(tabName + 'Tab') || 
+                                  document.getElementById(camelTab + 'Tab') ||
                                   document.getElementById(tabName) ||
                                   document.getElementById(tabName.replace('-tab', 'Tab'));
             if (targetContent) {
@@ -3833,6 +4858,57 @@ textarea.form-control{
                 });
             }
 
+            // Blog Image Preset Selector
+            const blogPresetSelect = document.getElementById('blogImagePreset');
+            if (blogPresetSelect) {
+                blogPresetSelect.addEventListener('change', function() {
+                    if (this.value) {
+                        document.getElementById('blogImage').value = this.value;
+                    }
+                });
+            }
+
+            // Blog Image File Upload to Firebase Storage
+            const blogFileInput = document.getElementById('blogImageFileInput');
+            if (blogFileInput) {
+                blogFileInput.addEventListener('change', async function(e) {
+                    const file = e.target.files[0];
+                    if (!file) return;
+
+                    if (file.size > 5 * 1024 * 1024) {
+                        alert("Image file size exceeds the 5MB limit.");
+                        return;
+                    }
+
+                    const statusEl = document.getElementById('blogImageUploadStatus');
+                    if (statusEl) {
+                        statusEl.style.display = 'block';
+                        statusEl.style.color = '#1976d2';
+                        statusEl.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading image to Firebase Storage...';
+                    }
+
+                    try {
+                        const cleanName = file.name.replace(/[^a-zA-Z0-9._-]/g, '_');
+                        const storagePath = `blogs/${Date.now()}_${cleanName}`;
+                        const storageReference = ref(storage, storagePath);
+                        await uploadBytes(storageReference, file);
+                        const downloadUrl = await getDownloadURL(storageReference);
+
+                        document.getElementById('blogImage').value = downloadUrl;
+                        if (statusEl) {
+                            statusEl.style.color = '#15803d';
+                            statusEl.innerHTML = '<i class="fas fa-check-circle"></i> Image uploaded successfully to Firebase Storage!';
+                        }
+                    } catch (uploadErr) {
+                        console.error("Storage upload error:", uploadErr);
+                        if (statusEl) {
+                            statusEl.style.color = '#b91c1c';
+                            statusEl.innerHTML = `<i class="fas fa-exclamation-circle"></i> Upload failed: ${uploadErr.message}`;
+                        }
+                    }
+                });
+            }
+
             // Browser Notification Permission
             const btnPush = document.getElementById('btnRequestPushPermission');
             if (btnPush) {
@@ -3872,12 +4948,12 @@ textarea.form-control{
                 btn.addEventListener('click', function() {
                     document.querySelectorAll('.filter-audit-btn').forEach(b => {
                         b.classList.remove('active');
-                        b.style.background = '#e2e8f0';
-                        b.style.color = '#334155';
+                        b.style.background = '';
+                        b.style.color = '';
                     });
                     this.classList.add('active');
-                    this.style.background = '#2f8f3d';
-                    this.style.color = '#fff';
+                    this.style.background = '';
+                    this.style.color = '';
                     auditCategoryFilter = this.getAttribute('data-cat');
                     renderAuditLogs();
                 });
@@ -3978,6 +5054,8 @@ textarea.form-control{
                     await logAdminAction("BLOGS", "BLOG_PUBLISHED", docRef.id, { summary: `Published new blog post: ${title}` });
                     alert("Blog post published to Firestore! It is live on the public Blog page.");
                     document.getElementById('blogPostForm').reset();
+                    const statusEl = document.getElementById('blogImageUploadStatus');
+                    if (statusEl) { statusEl.style.display = 'none'; statusEl.innerHTML = ''; }
                 }
 
                 const btnManage = document.getElementById('btnTabManageBlogs');
@@ -4162,6 +5240,106 @@ textarea.form-control{
             localStorage.removeItem('currentUser');
             window.location.href = 'member.html';
         }
+
+        // ================= COLLAPSIBLE SIDEBAR ENGINE =================
+        (function() {
+            function initCollapsibleSidebar() {
+                var toggleBtn = document.getElementById('sidebarToggleBtn');
+                var container = document.getElementById('dashboardContainer') || document.querySelector('.dashboard-container');
+                var sidebar = document.getElementById('dashboardSidebar') || document.querySelector('.dashboard-sidebar');
+                var backdrop = document.getElementById('sidebarBackdrop');
+
+                if (!toggleBtn || !container) return;
+
+                var isMobile = function() { return window.innerWidth <= 992; };
+
+                // Restore saved desktop state
+                if (!isMobile() && localStorage.getItem('obumsj_sidebar_collapsed') === 'true') {
+                    container.classList.add('sidebar-collapsed');
+                    toggleBtn.setAttribute('aria-expanded', 'false');
+                } else {
+                    toggleBtn.setAttribute('aria-expanded', 'true');
+                }
+
+                function toggle() {
+                    if (isMobile()) {
+                        var isOpen = container.classList.toggle('sidebar-open');
+                        toggleBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+                    } else {
+                        var isCollapsed = container.classList.toggle('sidebar-collapsed');
+                        toggleBtn.setAttribute('aria-expanded', isCollapsed ? 'false' : 'true');
+                        localStorage.setItem('obumsj_sidebar_collapsed', isCollapsed ? 'true' : 'false');
+                    }
+                }
+
+                toggleBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    toggle();
+                });
+
+                var closeBtn = document.getElementById('sidebarCloseBtn');
+                if (closeBtn) {
+                    closeBtn.addEventListener('click', function() {
+                        container.classList.remove('sidebar-open');
+                        toggleBtn.setAttribute('aria-expanded', 'false');
+                    });
+                }
+
+                if (backdrop) {
+                    backdrop.addEventListener('click', function() {
+                        container.classList.remove('sidebar-open');
+                        toggleBtn.setAttribute('aria-expanded', 'false');
+                    });
+                }
+
+                // Modal Backdrop Click Dismissal
+                document.querySelectorAll('.dashboard-modal').forEach(function(modal) {
+                    modal.addEventListener('click', function(e) {
+                        if (e.target === modal) {
+                            modal.style.display = 'none';
+                        }
+                    });
+                });
+
+                // Global Escape Key Listener for Modals & Mobile Sidebar
+                document.addEventListener('keydown', function(e) {
+                    if (e.key === 'Escape') {
+                        var openModals = document.querySelectorAll('.dashboard-modal');
+                        var modalClosed = false;
+                        openModals.forEach(function(modal) {
+                            if (modal.style.display === 'flex' || window.getComputedStyle(modal).display === 'flex') {
+                                modal.style.display = 'none';
+                                modalClosed = true;
+                            }
+                        });
+                        if (modalClosed) return;
+
+                        if (container && container.classList.contains('sidebar-open')) {
+                            container.classList.remove('sidebar-open');
+                            toggleBtn.setAttribute('aria-expanded', 'false');
+                            toggleBtn.focus();
+                        }
+                    }
+                });
+
+                if (sidebar) {
+                    sidebar.querySelectorAll('.menu-item').forEach(function(item) {
+                        item.addEventListener('click', function() {
+                            if (isMobile()) {
+                                container.classList.remove('sidebar-open');
+                                toggleBtn.setAttribute('aria-expanded', 'false');
+                            }
+                        });
+                    });
+                }
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initCollapsibleSidebar);
+            } else {
+                initCollapsibleSidebar();
+            }
+        })();
     </script>
 </body>
 </html>

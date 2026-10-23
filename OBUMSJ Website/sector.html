@@ -6,6 +6,7 @@
     <title data-i18n="page_title">OBUMSJ Sectors - Oda Bultum University Muslim Students' JAMA'A</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+<script src="js/theme-engine.js"></script>
     <link rel="icon" href="favicon.ico">
 </head>
 <body>
@@ -45,11 +46,11 @@
         <div class="logo-container">
             <img src="./IMAGE/OBUMSJ Logo.jpg" alt="OBUMSJ Logo" class="logo">
             <span class="logo-text" data-i18n="logo">OBUMSJ</span>
-            <button id="darkModeToggle" class="dark-btn">ðŸŒ™</button>
+            <button id="darkModeToggle" class="dark-btn" aria-label="Toggle theme"><i class="fas fa-moon theme-icon" aria-hidden="true"></i></button>
         </div>
 
         <div class="lang-dropdown">
-            <button class="lang-btn">ðŸŒ <span class="lang-code">EN</span></button>
+            <button class="lang-btn" aria-label="Select Language"><i class="fas fa-globe" aria-hidden="true"></i> <span class="lang-code">EN</span> <i class="fas fa-chevron-down lang-chevron" aria-hidden="true"></i></button>
             <div class="lang-menu">
                 <a href="#" onclick="setLang('en'); return false;" data-i18n="lang.english">English</a>
                 <a href="#" onclick="setLang('am'); return false;" data-i18n="lang.amharic">Amharic</a>
@@ -108,7 +109,7 @@
     <section class="page-header">
         <div class="container">
             <div class="page-header-content">
-                <h1 class="page-title" data-i18n="sectors.main_title">Our Sectors</h1>
+                <h1 class="page-title typewriter-title" data-i18n="sectors.main_title" data-typewriter-phrases='["Our Sectors", "Diverse Paths of Service", "Excellence in Action"]'>Our Sectors</h1>
                 <p class="page-subtitle" data-i18n="sectors.main_subtitle">Explore all 10 dedicated sectors serving the Muslim student community at Oda Bultum University</p>
                 <div class="breadcrumb">
                     <a href="index.html" data-i18n="nav.home">Home</a> / 
@@ -617,6 +618,7 @@
             });
         });
     </script>
+    <script src="./Script.js"></script>
 </body>
 </html>
 

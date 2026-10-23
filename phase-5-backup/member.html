@@ -1,0 +1,1514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-i18n="login.page_title">Login & Membership | OBUMSJ - Oda Bultum University Muslim Students' JAMA'A</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+<script src="js/theme-engine.js"></script>
+<style>
+/* ================= BRAND COLORS ================= */
+:root,
+[data-theme="light"],
+[data-theme="day"] {
+  --primary: var(--primary, #1b5e20);
+  --secondary: var(--secondary, #2e7d32);
+  --gold: var(--gold, #c59a3f);
+  --bg: var(--bg-base, #fcfaf6);
+  --text: var(--text-body, #2b201a);
+}
+
+[data-theme="dark"],
+[data-theme="night"],
+body.dark-mode {
+  --primary: var(--primary, #d4af37);
+  --secondary: var(--secondary, #e5b85a);
+  --gold: var(--gold, #d4af37);
+  --bg: var(--bg-base, #140c07);
+  --text: var(--text-body, #ebd9c5);
+}
+
+/* Form Card Dark Mode */
+[data-theme="dark"] .form-card,
+[data-theme="night"] .form-card,
+body.dark-mode .form-card {
+  background: rgba(32, 20, 12, 0.95);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  border-top: 5px solid var(--gold);
+  color: var(--text);
+  box-shadow: 0 10px 32px rgba(0,0,0,0.5);
+}
+
+[data-theme="dark"] .form-card h2,
+[data-theme="night"] .form-card h2,
+body.dark-mode .form-card h2 {
+  color: var(--gold);
+}
+
+[data-theme="dark"] .form-card-subtitle,
+[data-theme="night"] .form-card-subtitle,
+body.dark-mode .form-card-subtitle {
+  color: var(--text-muted, #bda88e);
+}
+
+/* RESET */
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,Arial,sans-serif;}
+body{background:var(--bg);color:var(--text);line-height:1.6;}
+
+/* HEADER */
+header{
+  background:linear-gradient(135deg,var(--secondary),var(--primary));
+  color:#fff;
+  padding:80px 20px;
+  text-align:center;
+  margin-top: 80px;
+}
+header h1{font-size:38px;font-weight:700;margin-bottom:8px;}
+header p{max-width:760px;margin:0 auto;font-size:17px;opacity:0.95;}
+
+/* CONTAINER */
+.container{
+  width:90%;
+  max-width:850px;
+  margin:40px auto 60px;
+}
+
+/* FORM CARD */
+.form-card{
+  background:rgba(255,255,255,0.95);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  border-radius:16px;
+  padding:36px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.08);
+  border-top:5px solid var(--primary);
+  margin-bottom: 30px;
+  transition: all 0.3s ease;
+}
+
+.form-card h2{
+  color:var(--secondary);
+  margin-bottom:8px;
+  font-size:1.6rem;
+}
+.form-card-subtitle{
+  color:#6b7280;
+  font-size:0.92rem;
+  margin-bottom:24px;
+}
+
+/* GOOGLE AUTH BUTTON */
+.btn-google {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  padding: 13px 18px;
+  background: #ffffff;
+  color: #1f2937;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 9px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+.btn-google:hover {
+  background: #f9fafb;
+  border-color: #cbd5e1;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+  transform: translateY(-1px);
+}
+.btn-google:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+}
+.btn-google svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+/* AUTH DIVIDER */
+.auth-divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 22px 0;
+  color: #9ca3af;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+.auth-divider::before,
+.auth-divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid #e5e7eb;
+}
+.auth-divider span {
+  padding: 0 14px;
+}
+
+/* FORM ELEMENTS */
+.form-group{
+  margin-bottom:18px;
+}
+
+.form-group label{
+  font-weight:600;
+  display:block;
+  margin-bottom:6px;
+  color: #374151;
+  font-size: 0.92rem;
+}
+
+.form-group input,
+.form-group select{
+  width:100%;
+  padding:12px 14px;
+  border-radius:8px;
+  border:1px solid #d1d5db;
+  outline:none;
+  font-size:14.5px;
+  transition:all 0.25s ease;
+  background: #ffffff;
+  color: var(--text);
+}
+
+.form-group input:focus,
+.form-group select:focus{
+  border-color:var(--primary);
+  box-shadow:0 0 0 3px rgba(47,143,61,0.15);
+}
+
+/* PASSWORD WRAPPER & TOGGLE */
+.password-field-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.password-field-wrapper input {
+  padding-right: 42px;
+}
+.password-toggle-btn {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #9ca3af;
+  cursor: pointer;
+  padding: 6px 8px;
+  font-size: 15px;
+  transition: color 0.2s;
+}
+.password-toggle-btn:hover {
+  color: var(--primary);
+}
+
+/* REMEMBER ME & FORGOT ROW */
+.remember-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 12px 0 20px;
+  font-size: 13.5px;
+}
+.remember-row label {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  cursor: pointer;
+  color: #4b5563;
+  font-weight: 500;
+  margin-bottom: 0;
+  user-select: none;
+}
+.remember-row input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--primary);
+  cursor: pointer;
+}
+.forgot-password-link {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+.forgot-password-link:hover {
+  text-decoration: underline;
+  color: var(--secondary);
+}
+
+/* SUBMIT BUTTON */
+.submit-btn{
+  width:100%;
+  background:var(--primary);
+  color:#fff;
+  padding:14px;
+  font-size:15.5px;
+  font-weight:700;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+  transition:all 0.3s;
+  box-shadow: 0 4px 12px rgba(47,143,61,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.submit-btn:hover{
+  background:var(--secondary);
+  box-shadow: 0 6px 16px rgba(15,61,46,0.3);
+  transform: translateY(-1px);
+}
+.submit-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* SWITCH LINKS */
+.register-link{
+  text-align:center;
+  margin-top:22px;
+  font-size:14px;
+  color: #4b5563;
+}
+.register-link a{
+  color:var(--primary);
+  text-decoration:none;
+  font-weight:700;
+  margin-left: 4px;
+}
+.register-link a:hover{
+  text-decoration:underline;
+}
+
+/* ERROR & SUCCESS MESSAGES */
+.error-message{
+  background:#fef2f2;
+  color:#991b1b;
+  border:1px solid #fecaca;
+  padding:12px 16px;
+  border-radius:8px;
+  margin-bottom:20px;
+  font-size:0.92rem;
+  display:none;
+  line-height: 1.5;
+}
+.success-message{
+  background:#f0fdf4;
+  color:#166534;
+  border:1px solid #bbf7d0;
+  padding:12px 16px;
+  border-radius:8px;
+  margin-bottom:20px;
+  font-size:0.92rem;
+  display:none;
+  line-height: 1.5;
+}
+
+/* TWO COLUMN FORM FOR REGISTRATION */
+.two-column-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.registration-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.back-to-login {
+  background: #f3f4f6;
+  color: #4b5563;
+  border: 1px solid #e5e7eb;
+  padding: 7px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13.5px;
+  font-weight: 500;
+  transition: 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.back-to-login:hover {
+  background: #e5e7eb;
+  color: #111827;
+}
+
+/* INFO NOTICE BOX */
+.notice-box {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  color: #1e40af;
+  padding: 12px 14px;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  header h1{font-size:30px;}
+  .two-column-form { grid-template-columns: 1fr; }
+  .form-card{padding:24px 20px;}
+}
+
+/* ================= MEMBER PORTAL NIGHT MODE REFINEMENTS ================= */
+[data-theme="dark"] .form-group label,
+[data-theme="night"] .form-group label,
+body.dark-mode .form-group label {
+  color: #ebd9c5 !important;
+}
+
+[data-theme="dark"] .form-group input,
+[data-theme="dark"] .form-group select,
+[data-theme="night"] .form-group input,
+[data-theme="night"] .form-group select,
+body.dark-mode .form-group input,
+body.dark-mode .form-group select {
+  background: #180e07 !important;
+  color: #ebd9c5 !important;
+  border: 1.5px solid rgba(212, 175, 55, 0.32) !important;
+}
+
+[data-theme="dark"] .form-group input:focus,
+[data-theme="dark"] .form-group select:focus,
+[data-theme="night"] .form-group input:focus,
+[data-theme="night"] .form-group select:focus,
+body.dark-mode .form-group input:focus,
+body.dark-mode .form-group select:focus {
+  border-color: var(--gold) !important;
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.25) !important;
+}
+
+[data-theme="dark"] .btn-google,
+[data-theme="night"] .btn-google,
+body.dark-mode .btn-google {
+  background: #180e07 !important;
+  color: #ebd9c5 !important;
+  border-color: rgba(212, 175, 55, 0.35) !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3) !important;
+}
+
+[data-theme="dark"] .btn-google:hover,
+[data-theme="night"] .btn-google:hover,
+body.dark-mode .btn-google:hover {
+  background: #24150b !important;
+  border-color: var(--gold) !important;
+  color: #fae084 !important;
+}
+
+[data-theme="dark"] .auth-divider,
+[data-theme="night"] .auth-divider,
+body.dark-mode .auth-divider {
+  color: #bda88e !important;
+}
+
+[data-theme="dark"] .auth-divider::before,
+[data-theme="dark"] .auth-divider::after,
+[data-theme="night"] .auth-divider::before,
+[data-theme="night"] .auth-divider::after,
+body.dark-mode .auth-divider::before,
+body.dark-mode .auth-divider::after {
+  border-bottom-color: rgba(212, 175, 55, 0.2) !important;
+}
+
+[data-theme="dark"] .remember-row label,
+[data-theme="night"] .remember-row label,
+body.dark-mode .remember-row label {
+  color: #bda88e !important;
+}
+
+[data-theme="dark"] .register-link,
+[data-theme="night"] .register-link,
+body.dark-mode .register-link {
+  color: #bda88e !important;
+}
+
+[data-theme="dark"] .register-link a,
+[data-theme="dark"] .forgot-password-link,
+[data-theme="night"] .register-link a,
+[data-theme="night"] .forgot-password-link,
+body.dark-mode .register-link a,
+body.dark-mode .forgot-password-link {
+  color: var(--gold) !important;
+}
+
+[data-theme="dark"] .back-to-login,
+[data-theme="night"] .back-to-login,
+body.dark-mode .back-to-login {
+  background: #180e07 !important;
+  color: #ebd9c5 !important;
+  border-color: rgba(212, 175, 55, 0.3) !important;
+}
+
+[data-theme="dark"] .back-to-login:hover,
+[data-theme="night"] .back-to-login:hover,
+body.dark-mode .back-to-login:hover {
+  background: #27170d !important;
+  color: var(--gold) !important;
+  border-color: var(--gold) !important;
+}
+
+[data-theme="dark"] .error-message,
+[data-theme="night"] .error-message,
+body.dark-mode .error-message {
+  background: rgba(220, 38, 38, 0.2) !important;
+  color: #fca5a5 !important;
+  border-color: rgba(220, 38, 38, 0.45) !important;
+}
+
+[data-theme="dark"] .success-message,
+[data-theme="night"] .success-message,
+body.dark-mode .success-message {
+  background: rgba(34, 197, 94, 0.2) !important;
+  color: #86efac !important;
+  border-color: rgba(34, 197, 94, 0.45) !important;
+}
+
+</style>
+</head>
+
+<body>
+    <!-- Floating Social Media Sidebar -->
+    <div class="social-sidebar" id="socialSidebar">
+        <div class="social-toggle" id="socialToggle">
+            <i class="fas fa-share-alt"></i>
+        </div>
+        <div class="social-icons">
+            <a href="https://t.me/obumsj" target="_blank" title="Telegram" class="social-icon">
+                <i class="fab fa-telegram"></i>
+                <span class="social-tooltip">Telegram</span>
+            </a>
+            <a href="https://facebook.com/obumsj" target="_blank" title="Facebook" class="social-icon">
+                <i class="fab fa-facebook"></i>
+                <span class="social-tooltip">Facebook</span>
+            </a>
+            <a href="https://wa.me/251912345678" target="_blank" title="WhatsApp" class="social-icon">
+                <i class="fab fa-whatsapp"></i>
+                <span class="social-tooltip">WhatsApp</span>
+            </a>
+            <a href="https://youtube.com/obumsj" target="_blank" title="YouTube" class="social-icon">
+                <i class="fab fa-youtube"></i>
+                <span class="social-tooltip">YouTube</span>
+            </a>
+            <a href="https://tiktok.com/@obumsj" target="_blank" title="TikTok" class="social-icon">
+                <i class="fab fa-tiktok"></i>
+                <span class="social-tooltip">TikTok</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo-container">
+            <img src="./IMAGE/OBUMSJ Logo.jpg" alt="OBUMSJ Logo" class="logo">
+            <span class="logo-text" data-i18n="logo">OBUMSJ</span>
+            <button id="darkModeToggle" class="dark-btn" aria-label="Toggle theme"><i class="fas fa-moon theme-icon" aria-hidden="true"></i></button>
+        </div>
+
+        <div class="lang-dropdown">
+            <button class="lang-btn">🌐 <span class="lang-code">EN</span></button>
+            <div class="lang-menu">
+                <a href="#" onclick="setLang('en'); return false;" data-i18n="lang.english">English</a>
+                <a href="#" onclick="setLang('am'); return false;" data-i18n="lang.amharic">Amharic</a>
+                <a href="#" onclick="setLang('om'); return false;" data-i18n="lang.oromo">Oromo</a>
+                <a href="#" onclick="setLang('ar'); return false;" data-i18n="lang.arabic">Arabic</a>
+            </div>
+        </div>
+        
+        <ul class="nav-links">
+            <li><a href="./index.html" data-i18n="nav.home">HOME</a></li>
+            <li><a href="./About-Us.html" data-i18n="nav.about">ABOUT US</a></li>
+            <li class="dropdown">
+                <a href="./sector.html" data-i18n="nav.sectors">SECTORS <i class="fas fa-chevron-down"></i></a>
+                <div class="dropdown-content">
+                    <a href="./Qirat.html" data-i18n="sector.qirat"><i class="fas fa-quran"></i> Qirat</a>
+                    <a href="./Dawah.html" data-i18n="sector.dawah"><i class="fas fa-megaphone"></i> Dawah</a>
+                    <a href="./Social Affairs.html" data-i18n="sector.social"><i class="fas fa-hands-helping"></i> Social Affairs</a>
+                    <a href="./Academy.html" data-i18n="sector.academy"><i class="fas fa-graduation-cap"></i> Academy</a>
+                    <a href="./Finance.html" data-i18n="sector.finance"><i class="fas fa-coins"></i> Finance</a>
+                    <a href="./Ziyara.html" data-i18n="sector.ziyara"><i class="fas fa-kaaba"></i> Ziyara</a>
+                    <a href="./Ruqiya.html" data-i18n="sector.ruqiya"><i class="fas fa-hand-holding-heart"></i> Rukiya</a>
+                    <a href="./Charity.html" data-i18n="sector.charity"><i class="fas fa-donate"></i> Charity</a>
+                    <a href="./Dawrul-hasen.html" data-i18n="sector.dawrul"><i class="fas fa-book"></i> Dawrul Hasen</a>
+                    <a href="./Information.html" data-i18n="sector.information"><i class="fas fa-info-circle"></i> Information</a>
+                </div>
+            </li>
+            <li><a href="Blog.html" data-i18n="nav.blog">BLOG</a></li>
+            <li><a href="contact.html" data-i18n="nav.contact">CONTACT US</a></li>
+            <li><a href="./member.html" data-i18n="nav.membership" style="color:var(--primary); font-weight:700;">MEMBERSHIP</a></li>
+            <li><a href="donate.html" class="btn nav-donate" data-i18n="nav.donate">DONATE HERE</a></li>
+        </ul>
+        
+        <div class="menu-toggle" id="mobile-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <header>
+        <h1 data-i18n="login.title">OBUMSJ Membership Portal</h1>
+        <p data-i18n="login.subtitle">Sign in to your member account or apply for new Jama'a membership</p>
+    </header>
+
+    <div class="container">
+        <!-- ============================================
+             1. LOGIN FORM CONTAINER
+        ============================================ -->
+        <div class="form-card" id="loginFormContainer">
+            <h2 data-i18n="login.form_title">Login to Your Account</h2>
+            <p class="form-card-subtitle" data-i18n="login.form_subtitle">Choose your preferred sign-in method</p>
+            
+            <!-- Global Feedback Messages -->
+            <div id="loginErrorMessage" class="error-message"></div>
+            <div id="loginSuccessMessage" class="success-message"></div>
+            
+            <!-- Option B: Continue with Google -->
+            <button type="button" class="btn-google" id="googleLoginBtn">
+                <svg viewBox="0 0 18 18">
+                    <path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.616z"/>
+                    <path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.258c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332C2.438 15.983 5.482 18 9 18z"/>
+                    <path fill="#FBBC05" d="M3.964 10.707c-.18-.54-.282-1.117-.282-1.707s.102-1.167.282-1.707V4.961H.957C.347 6.175 0 7.55 0 9s.347 2.825.957 4.039l3.007-2.332z"/>
+                    <path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0 5.482 0 2.438 2.017.957 4.961L3.964 7.293C4.672 5.166 6.656 3.58 9 3.58z"/>
+                </svg>
+                <span data-i18n="login.google_btn">Continue with Google</span>
+            </button>
+
+            <div class="auth-divider">
+                <span data-i18n="login.or_divider">or sign in with email / username</span>
+            </div>
+
+            <!-- Option A: Email or Username + Password -->
+            <form id="loginForm" autocomplete="on">
+                <div class="form-group">
+                    <label for="loginIdentifier" data-i18n="login.username">Email or Username</label>
+                    <input type="text" id="loginIdentifier" name="loginIdentifier" placeholder="Enter your email or username" required autocomplete="username">
+                </div>
+
+                <div class="form-group">
+                    <label for="loginPassword" data-i18n="login.password">Password</label>
+                    <div class="password-field-wrapper">
+                        <input type="password" id="loginPassword" name="password" placeholder="Enter your password" required autocomplete="current-password">
+                        <button type="button" class="password-toggle-btn" data-target="loginPassword" aria-label="Toggle password visibility">
+                            <i class="far fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="remember-row">
+                    <label>
+                        <input type="checkbox" id="rememberSession" checked>
+                        <span data-i18n="login.remember_me">Remember session</span>
+                    </label>
+                    <a href="#" id="forgotPasswordBtn" class="forgot-password-link" data-i18n="login.forgot_link">
+                        <i class="fas fa-key"></i> Forgot Password?
+                    </a>
+                </div>
+
+                <button type="submit" class="submit-btn" id="loginSubmitBtn">
+                    <i class="fas fa-sign-in-alt"></i> <span data-i18n="login.submit">Login to Dashboard</span>
+                </button>
+                
+                <div class="register-link">
+                    <span data-i18n="login.no_account">Don't have an account?</span>
+                    <a href="#register" id="showRegistrationLink" data-i18n="login.register_link">Register Here</a>
+                </div>
+            </form>
+        </div>
+
+        <!-- ============================================
+             2. REGISTRATION FORM (INITIALLY HIDDEN)
+        ============================================ -->
+        <div class="form-card" id="registrationFormContainer" style="display:none;">
+            <div class="registration-header">
+                <h2 data-i18n="register.register_form">Apply for Membership</h2>
+                <button type="button" class="back-to-login" id="backToLoginBtn">
+                    <i class="fas fa-arrow-left"></i> <span data-i18n="register.back_login">Back to Login</span>
+                </button>
+            </div>
+            <p class="form-card-subtitle" data-i18n="register.subtitle">Join the Oda Bultum University Muslim Students' Jama'a</p>
+
+            <!-- Registration Feedback Messages -->
+            <div id="regErrorMessage" class="error-message"></div>
+            <div id="regSuccessMessage" class="success-message"></div>
+
+            <!-- Option B: Sign up with Google -->
+            <button type="button" class="btn-google" id="googleRegBtn">
+                <svg viewBox="0 0 18 18">
+                    <path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.616z"/>
+                    <path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.258c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332C2.438 15.983 5.482 18 9 18z"/>
+                    <path fill="#FBBC05" d="M3.964 10.707c-.18-.54-.282-1.117-.282-1.707s.102-1.167.282-1.707V4.961H.957C.347 6.175 0 7.55 0 9s.347 2.825.957 4.039l3.007-2.332z"/>
+                    <path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0 5.482 0 2.438 2.017.957 4.961L3.964 7.293C4.672 5.166 6.656 3.58 9 3.58z"/>
+                </svg>
+                <span data-i18n="register.google_btn">Quick Register with Google</span>
+            </button>
+
+            <div class="auth-divider">
+                <span data-i18n="register.or_divider">or fill registration details</span>
+            </div>
+
+            <div class="notice-box">
+                <i class="fas fa-info-circle" style="font-size:1.1rem; margin-top:2px;"></i>
+                <div>
+                    <strong>Membership Policy:</strong> All new member registrations are reviewed by the Jama'a leadership to ensure community safety. You will receive access upon approval.
+                </div>
+            </div>
+
+            <!-- Registration Form (ROLE SELECTION REMOVED - SECURED ON BACKEND) -->
+            <form id="registerForm" autocomplete="on">
+                <div class="two-column-form">
+                    <div>
+                        <div class="form-group">
+                            <label for="regFullName" data-i18n="register.full_name">Full Name *</label>
+                            <input type="text" id="regFullName" name="fullName" placeholder="e.g. Ahmed Mohammed" required autocomplete="name">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="regUsername" data-i18n="register.username">Username *</label>
+                            <input type="text" id="regUsername" name="username" placeholder="Choose a unique username" required autocomplete="username" pattern="[a-zA-Z0-9._-]{3,25}" title="3-25 alphanumeric characters">
+                            <small style="color:#6b7280; font-size:0.75rem;">Allowed: letters, numbers, dot, underscore (3-25 chars)</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="regEmail" data-i18n="register.email">Email Address *</label>
+                            <input type="email" id="regEmail" name="email" placeholder="name@example.com" required autocomplete="email">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="regPhone" data-i18n="register.phone">Phone Number *</label>
+                            <input type="tel" id="regPhone" name="phone" placeholder="+251 9..." required autocomplete="tel">
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="form-group">
+                            <label for="regGender" data-i18n="register.gender">Gender *</label>
+                            <select id="regGender" name="gender" required>
+                                <option value="" data-i18n="register.select_gender">-- Select Gender --</option>
+                                <option value="Male" data-i18n="register.male">Male</option>
+                                <option value="Female" data-i18n="register.female">Female</option>
+                            </select>
+                        </div>
+
+                        <!-- Jama'a Sector Interest (Replaces administrative role selection) -->
+                        <div class="form-group">
+                            <label for="regSector" data-i18n="register.sector">Primary Sector of Interest</label>
+                            <select id="regSector" name="sector">
+                                <option value="General">General Jama'a Member</option>
+                                <option value="Qirat">Qirat (Quranic Recitation & Tajweed)</option>
+                                <option value="Dawah">Dawah & Outreach</option>
+                                <option value="Social Affairs">Social Affairs & Welfare</option>
+                                <option value="Academy">Academic Support & Tutoring</option>
+                                <option value="Finance">Finance & Sponsorship</option>
+                                <option value="Ziyara">Ziyara & Educational Visits</option>
+                                <option value="Ruqiya">Rukiya & Spiritual Support</option>
+                                <option value="Charity">Charity & Zakat</option>
+                                <option value="Dawrul Hasen">Dawrul Hasen Project</option>
+                                <option value="Information">Information & Media</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="regPassword" data-i18n="register.password">Password *</label>
+                            <div class="password-field-wrapper">
+                                <input type="password" id="regPassword" name="password" placeholder="At least 6 characters" required autocomplete="new-password" minlength="6">
+                                <button type="button" class="password-toggle-btn" data-target="regPassword" aria-label="Toggle password visibility">
+                                    <i class="far fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="regConfirmPassword" data-i18n="register.confirm_password">Confirm Password *</label>
+                            <div class="password-field-wrapper">
+                                <input type="password" id="regConfirmPassword" name="confirmPassword" placeholder="Re-enter your password" required autocomplete="new-password" minlength="6">
+                                <button type="button" class="password-toggle-btn" data-target="regConfirmPassword" aria-label="Toggle password visibility">
+                                    <i class="far fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn" id="regSubmitBtn" style="margin-top: 10px;">
+                    <i class="fas fa-user-plus"></i> <span data-i18n="register.submit">Complete Registration</span>
+                </button>
+                
+                <div class="register-link">
+                    <span data-i18n="register.have_account">Already have an account?</span>
+                    <a href="#login" id="showLoginLink" data-i18n="register.login_link">Login Here</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ============================================
+         3. FORGOT PASSWORD MODAL DIALOG
+    ============================================ -->
+    <div id="forgotPasswordModal" style="display:none; position:fixed; z-index:99999; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.65); align-items:center; justify-content:center; backdrop-filter:blur(4px);">
+        <div style="background:#fff; border-radius:14px; padding:32px; max-width:440px; width:90%; position:relative; box-shadow:0 12px 35px rgba(0,0,0,0.25);">
+            <button type="button" id="closeResetModalBtn" style="position:absolute; right:15px; top:15px; background:none; border:none; font-size:1.5rem; cursor:pointer; color:#6b7280; padding:4px;" aria-label="Close">&times;</button>
+            <h3 style="color:#0f3d2e; margin-bottom:10px; font-size:1.3rem;"><i class="fas fa-key" style="color:#2f8f3d; margin-right:6px;"></i> Reset Password</h3>
+            <p style="font-size:0.9rem; color:#64748b; margin-bottom:18px;">Enter your registered account email and we will send you a secure password reset link.</p>
+            
+            <div id="resetMessage" style="display:none; padding:12px; border-radius:8px; margin-bottom:16px; font-size:0.9rem;"></div>
+            
+            <form id="resetPasswordForm">
+                <div class="form-group" style="margin-bottom:18px;">
+                    <label for="resetEmail" style="font-weight:600; font-size:0.9rem; display:block; margin-bottom:6px;">Registered Email Address</label>
+                    <input type="email" id="resetEmail" required placeholder="name@example.com" style="width:100%; padding:11px 14px; border-radius:8px; border:1px solid #cbd5e1; font-size:0.95rem;">
+                </div>
+                <button type="submit" id="resetSubmitBtn" class="submit-btn" style="padding:12px; font-size:1rem;">
+                    <i class="fas fa-paper-plane"></i> Send Password Reset Link
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3 data-i18n="footer.about">About OBUMSJ</h3>
+                    <p data-i18n="footer.about_text">ODA BULTUM UNIVERSITY MUSLIM STUDENTS' JAMA'A is dedicated to supporting Muslim students in their academic and spiritual journey.</p>
+                    <div class="footer-social">
+                        <a href="https://t.me/obumsj" target="_blank" title="Telegram"><i class="fab fa-telegram"></i></a>
+                        <a href="https://facebook.com/obumsj" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="https://wa.me/251912345678" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://youtube.com/obumsj" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="https://tiktok.com/@obumsj" target="_blank" title="TikTok"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3 data-i18n="footer.quick">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="./index.html" data-i18n="nav.home">Home</a></li>
+                        <li><a href="./About-Us.html" data-i18n="nav.about">About Us</a></li>
+                        <li><a href="./sector.html" data-i18n="nav.sectors">Sectors</a></li>
+                        <li><a href="./Blog.html" data-i18n="nav.blog">Blog</a></li>
+                        <li><a href="./contact.html" data-i18n="nav.contact">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3 data-i18n="footer.sectors">Our Sectors</h3>
+                    <ul class="footer-links">
+                        <li><a href="./Qirat.html" data-i18n="sector.qirat">Qirat</a></li>
+                        <li><a href="./Dawah.html" data-i18n="sector.dawah">Dawah</a></li>
+                        <li><a href="./Social Affairs.html" data-i18n="sector.social">Social Affairs</a></li>
+                        <li><a href="./Academy.html" data-i18n="sector.academy">Academy</a></li>
+                        <li><a href="./Finance.html" data-i18n="sector.finance">Finance</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3 data-i18n="footer.contact">Contact Info</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> <span data-i18n="footer.address">Oda Bultum University, Chiro, Ethiopia</span></li>
+                        <li><i class="fas fa-phone"></i> <span data-i18n="footer.phone">+251 912 345 678</span></li>
+                        <li><i class="fas fa-envelope"></i> <span data-i18n="footer.email">info@obumsj.org</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p data-i18n="footer.copyright">&copy; 2026 OBUMSJ - Oda Bultum University Muslim Students' Jama'a. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Universal Scripts -->
+    <script src="./js/language-system.js"></script>
+    <script src="./Script.js"></script>
+
+    <!-- ============================================
+         FIREBASE AUTHENTICATION & MEMBERSHIP LOGIC
+    ============================================ -->
+    <script type="module">
+        import {
+            auth,
+            db,
+            googleProvider,
+            signInWithEmailAndPassword,
+            createUserWithEmailAndPassword,
+            signInWithPopup,
+            signInWithRedirect,
+            getRedirectResult,
+            setPersistence,
+            browserLocalPersistence,
+            browserSessionPersistence,
+            signOut,
+            onAuthStateChanged,
+            sendPasswordResetEmail,
+            doc,
+            setDoc,
+            getDoc,
+            getDocs,
+            collection,
+            query,
+            where,
+            serverTimestamp
+        } from "./js/firebase.js";
+
+        // DOM elements
+        const loginContainer = document.getElementById("loginFormContainer");
+        const regContainer = document.getElementById("registrationFormContainer");
+        const loginErr = document.getElementById("loginErrorMessage");
+        const loginSucc = document.getElementById("loginSuccessMessage");
+        const regErr = document.getElementById("regErrorMessage");
+        const regSucc = document.getElementById("regSuccessMessage");
+        const loginForm = document.getElementById("loginForm");
+        const registerForm = document.getElementById("registerForm");
+        const loginSubmitBtn = document.getElementById("loginSubmitBtn");
+        const regSubmitBtn = document.getElementById("regSubmitBtn");
+        const googleLoginBtn = document.getElementById("googleLoginBtn");
+        const googleRegBtn = document.getElementById("googleRegBtn");
+
+        // Helper: Clear messages
+        function clearMessages() {
+            [loginErr, loginSucc, regErr, regSucc].forEach(el => {
+                if (el) {
+                    el.style.display = "none";
+                    el.innerHTML = "";
+                }
+            });
+        }
+
+        // View Toggling
+        window.showLoginForm = function() {
+            clearMessages();
+            loginContainer.style.display = "block";
+            regContainer.style.display = "none";
+            history.replaceState(null, null, "#login");
+        };
+
+        window.showRegistrationForm = function() {
+            clearMessages();
+            loginContainer.style.display = "none";
+            regContainer.style.display = "block";
+            history.replaceState(null, null, "#register");
+        };
+
+        // Initialize Router based on URL hash or query params
+        function initViewRouting() {
+            const hash = window.location.hash.toLowerCase();
+            const search = new URLSearchParams(window.location.search);
+            const mode = search.get("mode") || search.get("action");
+
+            if (hash === "#register" || mode === "register" || mode === "signup") {
+                window.showRegistrationForm();
+            } else {
+                window.showLoginForm();
+            }
+        }
+
+        // ============================================
+        // PASSWORD VISIBILITY TOGGLE HANDLER
+        // ============================================
+        document.querySelectorAll(".password-toggle-btn").forEach(btn => {
+            btn.addEventListener("click", function() {
+                const targetId = this.getAttribute("data-target");
+                const input = document.getElementById(targetId);
+                const icon = this.querySelector("i");
+                if (!input) return;
+
+                if (input.type === "password") {
+                    input.type = "text";
+                    icon.classList.remove("fa-eye");
+                    icon.classList.add("fa-eye-slash");
+                } else {
+                    input.type = "password";
+                    icon.classList.remove("fa-eye-slash");
+                    icon.classList.add("fa-eye");
+                }
+            });
+        });
+
+        // ============================================
+        // FORGOT PASSWORD MODAL HANDLER
+        // ============================================
+        const forgotBtn = document.getElementById("forgotPasswordBtn");
+        const forgotModal = document.getElementById("forgotPasswordModal");
+        const closeResetModal = document.getElementById("closeResetModalBtn");
+        const resetForm = document.getElementById("resetPasswordForm");
+
+        if (forgotBtn && forgotModal) {
+            forgotBtn.addEventListener("click", (e) => {
+                e.preventDefault();
+                forgotModal.style.display = "flex";
+                const resetMsg = document.getElementById("resetMessage");
+                if (resetMsg) resetMsg.style.display = "none";
+                const loginId = document.getElementById("loginIdentifier").value.trim();
+                if (loginId.includes("@")) {
+                    document.getElementById("resetEmail").value = loginId;
+                }
+            });
+        }
+
+        if (closeResetModal && forgotModal) {
+            closeResetModal.addEventListener("click", () => {
+                forgotModal.style.display = "none";
+            });
+        }
+
+        window.addEventListener("click", (e) => {
+            if (forgotModal && e.target === forgotModal) {
+                forgotModal.style.display = "none";
+            }
+        });
+
+        if (resetForm) {
+            resetForm.addEventListener("submit", async (e) => {
+                e.preventDefault();
+                const email = document.getElementById("resetEmail").value.trim();
+                const resetMsg = document.getElementById("resetMessage");
+                const submitBtn = document.getElementById("resetSubmitBtn");
+
+                if (!email) return;
+
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending Link...';
+
+                try {
+                    await sendPasswordResetEmail(auth, email);
+                    resetMsg.style.display = "block";
+                    resetMsg.style.background = "#f0fdf4";
+                    resetMsg.style.color = "#166534";
+                    resetMsg.style.border = "1px solid #bbf7d0";
+                    resetMsg.innerHTML = '<i class="fas fa-check-circle"></i> Password reset email sent! Please check your inbox or spam folder.';
+                } catch (err) {
+                    resetMsg.style.display = "block";
+                    resetMsg.style.background = "#fef2f2";
+                    resetMsg.style.color = "#991b1b";
+                    resetMsg.style.border = "1px solid #fecaca";
+                    let msg = err.message;
+                    if (err.code === "auth/user-not-found") msg = "No account found matching this email address.";
+                    else if (err.code === "auth/invalid-email") msg = "Please enter a valid email address.";
+                    resetMsg.innerHTML = '<i class="fas fa-exclamation-circle"></i> ' + msg;
+                } finally {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Password Reset Link';
+                }
+            });
+        }
+
+        // ============================================
+        // RESOLVE USERNAME TO EMAIL (EXACT 1-TO-1 SAFE LOOKUP)
+        // ============================================
+        async function resolveEmailFromIdentifier(identifier) {
+            const raw = identifier.trim();
+            // If already an email, return directly
+            if (raw.includes("@")) {
+                return raw.toLowerCase();
+            }
+
+            const cleanUsername = raw.toLowerCase().replace(/[^a-z0-9_.-]/g, '');
+
+            // Exact match in the usernames index collection (allowed for anonymous visitors by Security Rules)
+            try {
+                const userDocSnap = await getDoc(doc(db, "usernames", cleanUsername));
+                if (userDocSnap.exists() && userDocSnap.data().email) {
+                    return userDocSnap.data().email;
+                }
+            } catch (e) {
+                console.warn("Usernames lookup error:", e);
+                if (e.code === "permission-denied" || e.message?.includes("insufficient permissions")) {
+                    throw new Error("FIRESTORE_RULES_PERMISSION_DENIED");
+                }
+            }
+
+            // Not found in index
+            return null;
+        }
+
+        // ============================================
+        // OPTION A: EMAIL OR USERNAME + PASSWORD LOGIN
+        // ============================================
+        async function handleLoginSubmit(e) {
+            e.preventDefault();
+            clearMessages();
+
+            const identifier = document.getElementById("loginIdentifier").value.trim();
+            const password = document.getElementById("loginPassword").value;
+            const rememberMe = document.getElementById("rememberSession").checked;
+
+            if (!identifier || !password) {
+                showLoginError("Please enter both your email/username and password.");
+                return;
+            }
+
+            loginSubmitBtn.disabled = true;
+            loginSubmitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Authenticating...';
+
+            try {
+                // 1. Apply Session Persistence
+                await setPersistence(auth, rememberMe ? browserLocalPersistence : browserSessionPersistence);
+
+                // 2. Resolve target email
+                let targetEmail = identifier;
+                if (!identifier.includes("@")) {
+                    try {
+                        targetEmail = await resolveEmailFromIdentifier(identifier);
+                    } catch (resolveErr) {
+                        if (resolveErr.message === "FIRESTORE_RULES_PERMISSION_DENIED") {
+                            showLoginError(`<strong>Firestore Permission Notice:</strong> Anonymous username lookup is currently denied by Cloud Firestore security rules. Please sign in using your full <strong>email address</strong> or update and publish your security rules in the Firebase Console.`);
+                            loginSubmitBtn.disabled = false;
+                            loginSubmitBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login to Dashboard';
+                            return;
+                        }
+                    }
+
+                    if (!targetEmail) {
+                        showLoginError(`No account index found for username "<strong>@${identifier}</strong>". Please sign in with your full registered email address.`);
+                        loginSubmitBtn.disabled = false;
+                        loginSubmitBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login to Dashboard';
+                        return;
+                    }
+                }
+
+                // 3. Authenticate with Firebase Auth
+                const cred = await signInWithEmailAndPassword(auth, targetEmail, password);
+                await postAuthVerification(cred.user);
+
+            } catch (err) {
+                console.error("Login authentication error:", err);
+                let message = "Invalid email or password. Please verify your credentials.";
+                if (err.code === "auth/invalid-credential" || err.code === "auth/user-not-found" || err.code === "auth/wrong-password") {
+                    message = "Invalid email/username or password. Please try again or use Forgot Password.";
+                } else if (err.code === "auth/too-many-requests") {
+                    message = "Account temporarily locked due to multiple failed login attempts. Please reset your password or wait a few minutes.";
+                } else if (err.code === "auth/user-disabled") {
+                    message = "This member account has been disabled. Please contact the administrator.";
+                } else if (err.code === "auth/network-request-failed") {
+                    message = "Network connection failed. Please check your internet connection.";
+                } else if (err.code === "permission-denied" || err.message?.includes("insufficient permissions")) {
+                    message = "<strong>Missing or insufficient permissions:</strong> Your member profile could not be verified by Cloud Firestore security rules. Please ensure the latest Security Rules are published in the Firebase Console.";
+                }
+                showLoginError(message);
+                loginSubmitBtn.disabled = false;
+                loginSubmitBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login to Dashboard';
+            }
+        }
+
+        // ============================================
+        // OPTION B: CONTINUE / SIGN UP WITH GOOGLE
+        // ============================================
+        async function handleGoogleSignIn(sourceBtn) {
+            clearMessages();
+            const isReg = (sourceBtn === googleRegBtn);
+            const feedbackFn = isReg ? showRegError : showLoginError;
+            const successFn = isReg ? showRegSuccess : showLoginSuccess;
+
+            sourceBtn.disabled = true;
+            const originalContent = sourceBtn.innerHTML;
+            sourceBtn.innerHTML = '<i class="fas fa-spinner fa-spin" style="margin-right:8px;"></i> Connecting to Google...';
+
+            try {
+                // 1. Ensure local persistence
+                await setPersistence(auth, browserLocalPersistence);
+
+                // 2. Perform Google Sign-in popup
+                const cred = await signInWithPopup(auth, googleProvider);
+                const user = cred.user;
+
+                // 3. Inspect if profile exists in Firestore
+                const userDocRef = doc(db, "users", user.uid);
+                let snap = null;
+                try {
+                    snap = await getDoc(userDocRef);
+                } catch (fsErr) {
+                    console.warn("User profile fetch error:", fsErr);
+                    if (fsErr.code === "permission-denied" || fsErr.message?.includes("insufficient permissions")) {
+                        feedbackFn("<strong>Firestore Security Notice:</strong> Google Sign-In succeeded in Firebase Auth, but reading your profile was denied by Firestore Security Rules. Please ensure rules are published in the Firebase Console.");
+                        return;
+                    }
+                }
+
+                if (!snap || !snap.exists()) {
+                    // Brand new user from Google: create default pending profile
+                    const derivedUsername = (user.email.split('@')[0] || "member").toLowerCase().replace(/[^a-z0-9_]/g, '');
+
+                    try {
+                        await setDoc(userDocRef, {
+                            fullName: user.displayName || "Google Member",
+                            username: derivedUsername,
+                            email: user.email,
+                            phone: user.phoneNumber || "",
+                            gender: "Not specified",
+                            sector: "General",
+                            role: "pending",
+                            status: "pending",
+                            authProvider: "google",
+                            createdAt: serverTimestamp()
+                        });
+                    } catch (writeErr) {
+                        console.error("Firestore user profile create error:", writeErr);
+                        feedbackFn("<strong>Registration Pending Firestore Rules:</strong> Your Google account was verified, but saving your member profile failed due to Firestore security permissions. Please publish the project's Security Rules in the Firebase Console.");
+                        return;
+                    }
+
+                    // Claim username mapping
+                    try {
+                        await setDoc(doc(db, "usernames", derivedUsername), {
+                            uid: user.uid,
+                            email: user.email
+                        });
+                    } catch (e) {
+                        console.warn("Username map warning:", e);
+                    }
+
+                    // Cache session and grant immediate access to Member Dashboard with pending status
+                    localStorage.setItem("currentUser", JSON.stringify({
+                        uid: user.uid,
+                        fullName: user.displayName || "Google Member",
+                        username: derivedUsername,
+                        email: user.email,
+                        phone: user.phoneNumber || "",
+                        gender: "Not specified",
+                        sector: "General",
+                        role: "pending",
+                        status: "pending"
+                    }));
+
+                    successFn(`<i class="fas fa-check-circle"></i> Welcome, <strong>${user.displayName || 'Member'}</strong>! Registration completed. Entering your Member Dashboard...`);
+                    setTimeout(() => {
+                        window.location.href = "Dashboard.html";
+                    }, 800);
+                    return;
+                }
+
+                // Existing user: proceed with standard status check using already fetched profile
+                await postAuthVerification(user, snap);
+
+            } catch (err) {
+                console.error("Google authentication error:", err);
+                let message = "Google Sign-In was cancelled or failed.";
+
+                if (err.code === "auth/unauthorized-domain") {
+                    const currentHost = window.location.hostname || "current domain";
+                    message = `
+                        <div style="text-align:left;">
+                            <strong style="font-size:1rem;"><i class="fas fa-shield-alt"></i> Domain Not Authorized in Firebase</strong>
+                            <p style="margin:6px 0 10px;">Firebase Authentication rejected Google Sign-In because the domain <code>${currentHost}</code> is not on the authorized domains list for this Firebase project.</p>
+                            <div style="background:#fff; border:1px solid #fecaca; border-radius:6px; padding:10px; font-size:0.86rem; color:#1e293b;">
+                                <strong>How to resolve:</strong>
+                                <ol style="margin:6px 0 0 18px; padding:0;">
+                                    ${currentHost === "127.0.0.1" ? `<li><strong>Instant Local Fix:</strong> Switch your browser URL from <code>http://127.0.0.1...</code> to <a href="${window.location.href.replace('127.0.0.1', 'localhost')}" style="color:#2f8f3d; font-weight:700;">${window.location.href.replace('127.0.0.1', 'localhost')}</a> (Firebase authorizes <code>localhost</code> by default).</li>` : ''}
+                                    <li><strong>Permanent Fix:</strong> Go to <a href="https://console.firebase.google.com/" target="_blank" style="color:#0288d1; font-weight:600;">Firebase Console</a> &gt; <strong>Authentication</strong> &gt; <strong>Settings</strong> &gt; <strong>Authorized domains</strong>.</li>
+                                    <li>Click <strong>Add domain</strong> and enter <code>${currentHost}</code>.</li>
+                                </ol>
+                            </div>
+                        </div>
+                    `;
+                } else if (err.code === "auth/popup-blocked") {
+                    message = "Google Sign-in popup was blocked by your browser. Please allow popups for this site and try again.";
+                } else if (err.code === "auth/popup-closed-by-user") {
+                    message = "Google Sign-in window was closed before completion.";
+                } else if (err.code === "auth/account-exists-with-different-credential") {
+                    message = "An account already exists with this email address using a different login method. Please sign in with your email and password.";
+                } else if (err.code === "auth/operation-not-allowed") {
+                    message = "Google Sign-in provider is not enabled in Firebase Console. Please enable Google under <strong>Authentication &gt; Sign-in method</strong>.";
+                } else if (err.message) {
+                    message = err.message;
+                }
+                feedbackFn(message);
+            } finally {
+                sourceBtn.disabled = false;
+                sourceBtn.innerHTML = originalContent;
+            }
+        }
+
+        // ============================================
+        // POST-AUTH VERIFICATION & ROLE ROUTING
+        // ============================================
+        async function postAuthVerification(user, existingSnap = null) {
+            let snap = existingSnap;
+            if (!snap) {
+                try {
+                    snap = await getDoc(doc(db, "users", user.uid));
+                } catch (readErr) {
+                    console.error("Error reading user profile:", readErr);
+                    if (readErr.code === "permission-denied" || readErr.message?.includes("insufficient permissions")) {
+                        showLoginError("<strong>Missing or insufficient permissions:</strong> Unable to verify your member status from Cloud Firestore. Please ensure the updated Security Rules are published in the Firebase Console.");
+                        loginSubmitBtn.disabled = false;
+                        loginSubmitBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login to Dashboard';
+                        return;
+                    }
+                    throw readErr;
+                }
+            }
+
+            if (!snap.exists()) {
+                showLoginError("No member profile record found for this account. Please submit a new registration application.");
+                loginSubmitBtn.disabled = false;
+                loginSubmitBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login to Dashboard';
+                return;
+            }
+
+            const userData = snap.data();
+
+            // Status 1: Suspended account
+            if (userData.status === "suspended") {
+                showLoginError('<i class="fas fa-ban" style="margin-right:6px;"></i> This account has been suspended by the Jama\'a leadership. Please contact an administrator for assistance.');
+                loginSubmitBtn.disabled = false;
+                loginSubmitBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login to Dashboard';
+                return;
+            }
+
+            // Status 2: Rejected application
+            if (userData.role === "rejected" || userData.status === "rejected") {
+                const reasonNotice = userData.rejectionReason 
+                    ? `<br><small style="display:block;margin-top:6px;font-weight:600;">Reason: ${userData.rejectionReason}</small>` 
+                    : '';
+                showLoginError(`<i class="fas fa-times-circle" style="margin-right:6px;"></i> Your membership application was not approved.${reasonNotice}`);
+                loginSubmitBtn.disabled = false;
+                loginSubmitBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login to Dashboard';
+                return;
+            }
+
+            // Status 3: Member Dashboard Access (Pending & Approved Members)
+            // Pending members have immediate access to ordinary dashboard features while their application undergoes review!
+            const isPending = (userData.role === "pending" || userData.status === "pending");
+            const canonicalStatus = (userData.status === "approved" || userData.status === "active") ? "active" : (userData.status || (isPending ? "pending" : "active"));
+            const effectiveRole = userData.role || (isPending ? "pending" : "sector_member");
+            const effectiveStatus = canonicalStatus;
+
+            localStorage.setItem("currentUser", JSON.stringify({
+                uid: user.uid,
+                fullName: userData.fullName || user.displayName || "Member",
+                email: userData.email || user.email,
+                username: userData.username || user.email?.split('@')[0],
+                phone: userData.phone || "",
+                gender: userData.gender || "Not specified",
+                role: effectiveRole,
+                sector: userData.sector || "General",
+                status: effectiveStatus
+            }));
+
+            if (isPending) {
+                showLoginSuccess('<i class="fas fa-check-circle"></i> Login successful! Entering Member Dashboard (Membership Status: Pending Review)...');
+            } else {
+                showLoginSuccess('<i class="fas fa-check-circle"></i> Login successful! Redirecting to dashboard...');
+            }
+
+            setTimeout(() => {
+                window.location.href = "Dashboard.html";
+            }, 500);
+        }
+
+        // ============================================
+        // REGISTRATION FORM SUBMISSION (SECURE DEFAULTS)
+        // ============================================
+        async function handleRegistrationSubmit(e) {
+            e.preventDefault();
+            clearMessages();
+
+            const fullName = document.getElementById("regFullName").value.trim();
+            const rawUsername = document.getElementById("regUsername").value.trim();
+            const email = document.getElementById("regEmail").value.trim().toLowerCase();
+            const phone = document.getElementById("regPhone").value.trim();
+            const gender = document.getElementById("regGender").value;
+            const sector = document.getElementById("regSector").value;
+            const password = document.getElementById("regPassword").value;
+            const confirmPassword = document.getElementById("regConfirmPassword").value;
+
+            // Password confirmation check
+            if (password !== confirmPassword) {
+                showRegError("Passwords do not match. Please re-enter identical passwords.");
+                return;
+            }
+
+            if (password.length < 6) {
+                showRegError("Password must be at least 6 characters in length.");
+                return;
+            }
+
+            const cleanUsername = rawUsername.toLowerCase().replace(/[^a-z0-9_.-]/g, '');
+            if (cleanUsername.length < 3) {
+                showRegError("Username must contain at least 3 alphanumeric characters.");
+                return;
+            }
+
+            regSubmitBtn.disabled = true;
+            regSubmitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting Application...';
+
+            try {
+                // 1. Check if username is already claimed in usernames index
+                try {
+                    const existingUserDoc = await getDoc(doc(db, "usernames", cleanUsername));
+                    if (existingUserDoc.exists()) {
+                        showRegError(`The username "@${cleanUsername}" is already taken. Please choose another username.`);
+                        regSubmitBtn.disabled = false;
+                        regSubmitBtn.innerHTML = '<i class="fas fa-user-plus"></i> Complete Registration';
+                        return;
+                    }
+                } catch (checkErr) {
+                    console.warn("Username availability check warning:", checkErr);
+                    // If rules are still publishing, proceed with account creation
+                }
+
+                // 2. Create Firebase Auth user
+                const cred = await createUserWithEmailAndPassword(auth, email, password);
+
+                // 3. Store user profile in Firestore (ROLE IS ALWAYS "pending" - SECURED AGAINST CLIENT OVERRIDE)
+                try {
+                    await setDoc(doc(db, "users", cred.user.uid), {
+                        fullName,
+                        username: cleanUsername,
+                        email,
+                        phone,
+                        gender,
+                        sector: sector || "General",
+                        role: "pending",
+                        status: "pending",
+                        createdAt: serverTimestamp()
+                    });
+                } catch (dbErr) {
+                    console.error("Firestore user doc write error:", dbErr);
+                    if (dbErr.code === "permission-denied" || dbErr.message?.includes("insufficient permissions")) {
+                        showRegError("<strong>Missing or insufficient permissions:</strong> Your Firebase Auth account was created, but saving your member profile to Firestore was blocked by Firestore Security Rules. Please ensure the updated Security Rules are published in the Firebase Console.");
+                        return;
+                    }
+                    throw dbErr;
+                }
+
+                // 4. Map username in usernames collection
+                try {
+                    await setDoc(doc(db, "usernames", cleanUsername), {
+                        uid: cred.user.uid,
+                        email: email
+                    });
+                } catch (e) {
+                    console.warn("Username map error:", e);
+                }
+
+                // 5. Cache session and grant immediate access to Member Dashboard with pending status
+                localStorage.setItem("currentUser", JSON.stringify({
+                    uid: cred.user.uid,
+                    fullName: fullName,
+                    username: cleanUsername,
+                    email: email,
+                    phone: phone,
+                    gender: gender,
+                    sector: sector || "General",
+                    role: "pending",
+                    status: "pending"
+                }));
+
+                registerForm.reset();
+                showRegSuccess('<i class="fas fa-check-circle" style="font-size:1.1rem; margin-right:6px;"></i> Registration submitted successfully! Welcome to OBUMSJ. Entering your Member Dashboard...');
+
+                setTimeout(() => {
+                    window.location.href = "Dashboard.html";
+                }, 800);
+
+            } catch (err) {
+                console.error("Registration error:", err);
+                let message = err.message;
+                if (err.code === "auth/email-already-in-use") {
+                    message = "This email address is already registered. Please login or use the Forgot Password option.";
+                } else if (err.code === "auth/weak-password") {
+                    message = "Password is too weak. Please use at least 6 characters with mixed letters and numbers.";
+                } else if (err.code === "auth/invalid-email") {
+                    message = "Please enter a valid email address.";
+                } else if (err.code === "permission-denied" || err.message?.includes("insufficient permissions")) {
+                    message = "<strong>Missing or insufficient permissions:</strong> Firestore security rules rejected the profile creation. Please ensure the latest Security Rules are published in the Firebase Console.";
+                }
+                showRegError(message);
+            } finally {
+                regSubmitBtn.disabled = false;
+                regSubmitBtn.innerHTML = '<i class="fas fa-user-plus"></i> Complete Registration';
+            }
+        }
+
+        // ============================================
+        // FEEDBACK HELPERS
+        // ============================================
+        function showLoginError(msg) {
+            loginErr.style.display = "block";
+            loginErr.innerHTML = msg;
+            loginSucc.style.display = "none";
+        }
+
+        function showLoginSuccess(msg) {
+            loginSucc.style.display = "block";
+            loginSucc.innerHTML = msg;
+            loginErr.style.display = "none";
+        }
+
+        function showRegError(msg) {
+            regErr.style.display = "block";
+            regErr.innerHTML = msg;
+            regSucc.style.display = "none";
+        }
+
+        function showRegSuccess(msg) {
+            regSucc.style.display = "block";
+            regSucc.innerHTML = msg;
+            regErr.style.display = "none";
+        }
+
+        // ============================================
+        // EVENT ATTACHMENTS
+        // ============================================
+        document.addEventListener("DOMContentLoaded", () => {
+            initViewRouting();
+
+            // Link listeners
+            const showRegBtn = document.getElementById("showRegistrationLink");
+            if (showRegBtn) showRegBtn.addEventListener("click", (e) => { e.preventDefault(); window.showRegistrationForm(); });
+
+            const showLoginBtn = document.getElementById("showLoginLink");
+            if (showLoginBtn) showLoginBtn.addEventListener("click", (e) => { e.preventDefault(); window.showLoginForm(); });
+
+            const backBtn = document.getElementById("backToLoginBtn");
+            if (backBtn) backBtn.addEventListener("click", (e) => { e.preventDefault(); window.showLoginForm(); });
+
+            // Form listeners
+            if (loginForm) loginForm.addEventListener("submit", handleLoginSubmit);
+            if (registerForm) registerForm.addEventListener("submit", handleRegistrationSubmit);
+
+            // Google button listeners
+            if (googleLoginBtn) googleLoginBtn.addEventListener("click", () => handleGoogleSignIn(googleLoginBtn));
+            if (googleRegBtn) googleRegBtn.addEventListener("click", () => handleGoogleSignIn(googleRegBtn));
+
+            // Check if already authenticated and active
+            onAuthStateChanged(auth, async (user) => {
+                if (user) {
+                    try {
+                        const snap = await getDoc(doc(db, "users", user.uid));
+                        if (snap.exists()) {
+                            const data = snap.data();
+                            if (data.role !== "pending" && data.status === "active") {
+                                // User already authenticated & active
+                                // Only auto-redirect if not specifically viewing register
+                                if (!window.location.hash.includes("register")) {
+                                    window.location.href = "Dashboard.html";
+                                }
+                            }
+                        }
+                    } catch (e) {}
+                }
+            });
+        });
+    </script>
+</body>
+</html>

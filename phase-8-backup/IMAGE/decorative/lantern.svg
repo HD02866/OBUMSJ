@@ -1,0 +1,134 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 380" width="160" height="380">
+  <defs>
+    <!-- Metallic Gold / Brass Gradients -->
+    <linearGradient id="brassGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8a6321" />
+      <stop offset="25%" stop-color="#d4af37" />
+      <stop offset="50%" stop-color="#fae084" />
+      <stop offset="75%" stop-color="#c59a3f" />
+      <stop offset="100%" stop-color="#694813" />
+    </linearGradient>
+
+    <linearGradient id="chainGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#73521a" />
+      <stop offset="50%" stop-color="#e5b85a" />
+      <stop offset="100%" stop-color="#593e11" />
+    </linearGradient>
+
+    <!-- Warm Amber Filament Glow -->
+    <radialGradient id="lampGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="1" />
+      <stop offset="20%" stop-color="#ffeb99" stop-opacity="0.95" />
+      <stop offset="45%" stop-color="#ffb703" stop-opacity="0.75" />
+      <stop offset="70%" stop-color="#fb8500" stop-opacity="0.35" />
+      <stop offset="100%" stop-color="#d4af37" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Outer Ambient Halo -->
+    <radialGradient id="ambientHalo" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffb703" stop-opacity="0.6" />
+      <stop offset="40%" stop-color="#e59819" stop-opacity="0.3" />
+      <stop offset="70%" stop-color="#9a5a00" stop-opacity="0.1" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Glass Pane Inner Shadow / Reflection -->
+    <linearGradient id="glassReflect" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.4" />
+      <stop offset="30%" stop-color="#ffecb3" stop-opacity="0.1" />
+      <stop offset="70%" stop-color="#000000" stop-opacity="0.15" />
+      <stop offset="100%" stop-color="#ffd54f" stop-opacity="0.3" />
+    </linearGradient>
+    
+    <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <filter id="strongGlow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="16" />
+    </filter>
+  </defs>
+
+  <!-- 1. Ambient Halo Behind Lantern (Radiates into room) -->
+  <circle cx="80" cy="230" r="110" fill="url(#ambientHalo)" filter="url(#strongGlow)" opacity="0.85" />
+
+  <!-- 2. Hanging Chain from Ceiling -->
+  <g id="lanternChain">
+    <line x1="80" y1="0" x2="80" y2="110" stroke="url(#chainGrad)" stroke-width="2" />
+    <!-- Chain Links -->
+    <ellipse cx="80" cy="15" rx="3.5" ry="7" fill="none" stroke="url(#chainGrad)" stroke-width="2" />
+    <ellipse cx="80" cy="30" rx="3.5" ry="7" fill="none" stroke="url(#chainGrad)" stroke-width="2" />
+    <ellipse cx="80" cy="45" rx="3.5" ry="7" fill="none" stroke="url(#chainGrad)" stroke-width="2" />
+    <ellipse cx="80" cy="60" rx="3.5" ry="7" fill="none" stroke="url(#chainGrad)" stroke-width="2" />
+    <ellipse cx="80" cy="75" rx="3.5" ry="7" fill="none" stroke="url(#chainGrad)" stroke-width="2" />
+    <ellipse cx="80" cy="90" rx="3.5" ry="7" fill="none" stroke="url(#chainGrad)" stroke-width="2" />
+    <ellipse cx="80" cy="105" rx="4" ry="6" fill="url(#brassGrad)" />
+  </g>
+
+  <!-- 3. Top Crescent & Star Finial -->
+  <g id="topFinial" transform="translate(80, 118)">
+    <circle cx="0" cy="0" r="4" fill="url(#brassGrad)" />
+    <!-- Crescent Moon -->
+    <path d="M-6,-15 A 8 8 0 1 1 6,-3 A 6 6 0 1 0 -6,-15 Z" fill="url(#brassGrad)" />
+    <circle cx="1" cy="-9" r="1.5" fill="#ffe082" />
+    <rect x="-2" y="-1" width="4" height="8" rx="1" fill="url(#brassGrad)" />
+  </g>
+
+  <!-- 4. Ornate Brass Dome / Canopy -->
+  <g id="domeCap">
+    <path d="M54,142 C54,126 70,122 80,122 C90,122 106,126 106,142 Z" fill="url(#brassGrad)" />
+    <!-- Scalloped rim -->
+    <path d="M48,142 L112,142 L116,150 L44,150 Z" fill="url(#brassGrad)" />
+    <!-- Filigree Cuts in Dome -->
+    <ellipse cx="80" cy="133" rx="2" ry="4" fill="#2d1c07" />
+    <ellipse cx="68" cy="136" rx="1.5" ry="3" fill="#2d1c07" />
+    <ellipse cx="92" cy="136" rx="1.5" ry="3" fill="#2d1c07" />
+    <!-- Upper Ring Collar -->
+    <rect x="42" y="150" width="76" height="5" rx="2" fill="url(#brassGrad)" />
+  </g>
+
+  <!-- 5. Glass Chamber & Glowing Amber Core -->
+  <g id="glassChamber">
+    <!-- Outer glass faceted body -->
+    <polygon points="45,155 115,155 125,235 98,285 62,285 35,235" fill="#1b1006" fill-opacity="0.8" />
+    <!-- Radiant Inner Glow -->
+    <circle cx="80" cy="225" r="42" fill="url(#lampGlow)" filter="url(#softGlow)" />
+    
+    <!-- Central Lamp Filament / Flame -->
+    <path d="M80,205 C83,217 88,223 85,233 C83,240 77,240 75,233 C72,223 77,217 80,205 Z" fill="#ffffff" filter="url(#softGlow)" />
+    <ellipse cx="80" cy="228" rx="3" ry="7" fill="#fff5cc" />
+
+    <!-- Ornate Brass Ribs / Struts Framing the Glass -->
+    <line x1="45" y1="155" x2="35" y2="235" stroke="url(#brassGrad)" stroke-width="2.5" />
+    <line x1="35" y1="235" x2="62" y2="285" stroke="url(#brassGrad)" stroke-width="2.5" />
+    <line x1="115" y1="155" x2="125" y2="235" stroke="url(#brassGrad)" stroke-width="2.5" />
+    <line x1="125" y1="235" x2="98" y2="285" stroke="url(#brassGrad)" stroke-width="2.5" />
+    <!-- Central Glass Struts -->
+    <line x1="68" y1="155" x2="65" y2="235" stroke="url(#brassGrad)" stroke-width="1.8" />
+    <line x1="65" y1="235" x2="74" y2="285" stroke="url(#brassGrad)" stroke-width="1.8" />
+    <line x1="92" y1="155" x2="95" y2="235" stroke="url(#brassGrad)" stroke-width="1.8" />
+    <line x1="95" y1="235" x2="86" y2="285" stroke="url(#brassGrad)" stroke-width="1.8" />
+    <!-- Waist Band -->
+    <path d="M35,235 L65,235 L95,235 L125,235" stroke="url(#brassGrad)" stroke-width="2.5" fill="none" />
+    
+    <!-- Glass Highlight Reflection -->
+    <polygon points="46,157 66,157 63,233 37,233" fill="url(#glassReflect)" />
+  </g>
+
+  <!-- 6. Bottom Brass Basin & Drops -->
+  <g id="bottomBase">
+    <!-- Scalloped Lower Rim -->
+    <polygon points="62,285 98,285 92,298 68,298" fill="url(#brassGrad)" />
+    <rect x="66" y="298" width="28" height="5" rx="1.5" fill="url(#brassGrad)" />
+    <!-- Inverted Tiered Finial -->
+    <path d="M72,303 L88,303 L83,315 L77,315 Z" fill="url(#brassGrad)" />
+    <circle cx="80" cy="318" r="4.5" fill="url(#brassGrad)" />
+    <!-- Hanging Jeweled Drop -->
+    <path d="M80,323 C82,328 85,334 85,338 C85,343 80,347 80,347 C80,347 75,343 75,338 C75,334 78,328 80,323 Z" fill="url(#brassGrad)" />
+    <circle cx="80" cy="338" r="2.5" fill="#ffd54f" />
+  </g>
+</svg>

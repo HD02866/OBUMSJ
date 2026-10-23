@@ -1,0 +1,466 @@
+﻿C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\About-Us.html:226: <li><a href="./member.html" data-i18n="nav.membership">MEMBERSHIP</a></li>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Academy-Exams.html:469: <li><a href="./member.html" data-i18n="nav.membership">MEMBERSHIP</a></li>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Academy-Library.html:439: <li><a href="./member.html" data-i18n="nav.membership">MEMBERSHIP</a></li>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Academy-Tutorials.html:357: <li><a href="./member.html" data-i18n="nav.membership">MEMBERSHIP</a></li>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Academy-Tutorials.html:423: <a href="./member.html" class="register-btn" data-i18n="tutorials.register_now">
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Academy.html:440: <li><a href="./member.html" data-i18n="nav.membership">MEMBERSHIP</a></li>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Academy.html:584: <a href="./member.html" class="cta-button">
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\admin-recovery.html:6: <title>Admin Setup & Verification Guide | OBUMSJ</title>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\admin-recovery.html:48: .badge-admin {
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\admin-recovery.html:192: <h1><i class="fas fa-shield-alt"></i> OBUMSJ Administrator Setup & Verification</h1>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\admin-recovery.html:193: <p>Secure, cloud-verified procedure for establishing Chief Administrator access</p>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\admin-recovery.html:198: <h3 style="margin:0; color:#0f3d2e;">Access Status</h3>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\admin-recovery.html:199: <span id="adminStatusBadge" class="badge-anonymous"><i class="fas fa-spinner fa-spin"></i> Checking session...</span>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\admin-recovery.html:218: <div style="color:#64748b; font-size:0.75rem; text-transform:uppercase; font-weight:600;">Firestore Role</div>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\admin-recovery.html:219: <div style="font-weight:700; color:#0f3d2e; font-size:1rem;" id="userRoleDisplay">loading...</div>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\admin-recovery.html:222: <div style="color:#64748b; font-size:0.75rem; text-transform:uppercase; font-weight:600;">Account Status</div>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\admin-recovery.html:223: <div style="font-weight:700; color:#0f3d2e; font-size:1rem;" id="userStatusDisplay">loading...</div>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\admin-recovery.html:233: <button type="button" class="btn-outline" id="btnRefreshStatus" style="flex:1;">
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\admin-recovery.html:234: <i class="fas fa-sync-alt"></i> Re-check Status from Cloud
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\admin-recovery.html:236: <a href="Dashboard.html" id="btnGoDashboard" class="btn-action" style="flex:1; display:none;">
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\admin-recovery.html:237: <i class="fas fa-tachometer-alt"></i> Open Admin Dashboard
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\admin-recovery.html:246: Sign in with the Google account or email address you want to verify or promote as Administrator.
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\admin-recovery.html:264: <i class="fas fa-sign-in-alt"></i> Sign In to Check Status
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\admin-recovery.html:270: <div class="step-title"><i class="fas fa-cloud"></i> How to Promote or Recover Administrator in Firebase</div>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\admin-recovery.html:273: To ensure total application security, <strong>OBUMSJ does not permit public client-side self-elevation</strong>. Initial administrator access is granted securely in the Firebase Console:
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\admin-recovery.html:277: <strong>Register or Sign In</strong> above using your administrator email address.
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\admin-recovery.html:291: <li>Field: <span class="code-pill">role</span> &rarr; Type: <code>string</code> &rarr; Value: <span class="code-pill">admin</span></li>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\admin-recovery.html:292: <li>Field: <span class="code-pill">status</span> &rarr; Type: <code>string</code> &rarr; Value: <span class="code-pill">active</span></li>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\admin-recovery.html:296: Return to this tab and click <strong>"Re-check Status from Cloud"</strong>. You will immediately be granted access to the Dashboard!
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\admin-recovery.html:307: <a href="member.html" style="color:#2f8f3d; font-weight:600; text-decoration:none;">
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\admin-recovery.html:328: const statusBadge = document.getElementById("adminStatusBadge");
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\admin-recovery.html:334: const userRoleDisplay = document.getElementById("userRoleDisplay");
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\admin-recovery.html:335: const userStatusDisplay = document.getElementById("userStatusDisplay");
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\admin-recovery.html:350: // Inspect user role and status in Firestore
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\admin-recovery.html:353: statusBadge.className = "badge-anonymous";
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\admin-recovery.html:354: statusBadge.innerHTML = '<i class="fas fa-user-slash"></i> Not Signed In';
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\admin-recovery.html:369: userRoleDisplay.textContent = "No Profile Record";
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\admin-recovery.html:370: userStatusDisplay.textContent = "Unregistered";
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\admin-recovery.html:371: statusBadge.className = "badge-pending";
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\admin-recovery.html:372: statusBadge.innerHTML = '<i class="fas fa-question-circle"></i> No Firestore Profile';
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\admin-recovery.html:379: const role = data.role || "pending";
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\admin-recovery.html:380: const status = data.status || "pending";
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\admin-recovery.html:382: userRoleDisplay.textContent = role.toUpperCase();
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\admin-recovery.html:383: userStatusDisplay.textContent = status.toUpperCase();
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\admin-recovery.html:385: if (role === "admin" && status === "active") {
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\admin-recovery.html:386: statusBadge.className = "badge-admin";
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\admin-recovery.html:387: statusBadge.innerHTML = '<i class="fas fa-shield-alt"></i> CHIEF ADMINISTRATOR VERIFIED';
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\admin-recovery.html:389: showAlert("<strong>Verification Successful!</strong> Your account is confirmed as an active Administrator. You have full system management access.", "success");
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\admin-recovery.html:391: statusBadge.className = "badge-pending";
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\admin-recovery.html:392: statusBadge.innerHTML = `<i class="fas fa-user"></i> Role: ${role.toUpperCase()}`;
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\admin-recovery.html:394: showAlert(`Current account role is <strong>${role}</strong> (status: <strong>${status}</strong>). To grant Chief Administrator access, update <code>role: "admin"</code> and <code>status: "active"</code> in the Firebase Console.`, "info");
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\admin-recovery.html:413: // Re-check Status Button
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\admin-recovery.html:414: document.getElementById("btnRefreshStatus").addEventListener("click", async () => {
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\admin-recovery.html:416: statusBadge.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Checking...';
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\admin-recovery.html:445: showAlert(`Firebase rejected Google Sign-In because domain <code>${window.location.hostname}</code> is not authorized in Firebase Console &gt; Authentication &gt; Settings &gt; Authorized domains.`, "error");
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Blog.html:395: <li><a href="./member.html" data-i18n="nav.membership">MEMBERSHIP</a></li>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Charity.html:534: <li><a href="./member.html" data-i18n="nav.membership">MEMBERSHIP</a></li>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\contact.html:233: <li><a href="./member.html" data-i18n="nav.membership">MEMBERSHIP</a></li>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:84: .user-role{
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:194: .role-badge{
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:452: /* ROLE CLASSES */
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:453: .admin-only{display:none;}
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:707: /* STATUS BADGES */
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:708: .badge-status{
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:715: .badge-status-active{background:#dcfce7; color:#15803d;}
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:716: .badge-status-pending{background:#fef3c7; color:#b45309;}
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:717: .badge-status-suspended{background:#fee2e2; color:#b91c1c;}
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:718: .badge-status-rejected{background:#f1f5f9; color:#64748b;}
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:990: <div class="user-role" id="sidebarUserRole">Member</div>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:999: <!-- Dedicated Pending Applications Section (Admin & Staff) -->
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1000: <a href="#pending-applications" class="menu-item admin-only main-amir-only" data-tab="pending-applications" data-perm="applications.approve">
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1005: <!-- User Management (Admin & Leadership) -->
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1006: <a href="#users" class="menu-item admin-only main-amir-only" data-tab="users" data-perm="users.view">
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1010: <!-- Roles & Permissions Matrix (Admin Only) -->
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1011: <a href="#permissions" class="menu-item admin-only" data-tab="permissions" data-perm="permissions.manage">
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1012: <i class="fas fa-shield-alt"></i> Roles & Permissions
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1015: <!-- Blog CMS (Admin, Leadership, Blog Manager) -->
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1016: <a href="#blog-manage" class="menu-item blog-manager-only admin-only main-amir-only" data-tab="blog-manage" data-perm="blogs.create">
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1027: <a href="#qirat-manage" class="menu-item admin-only main-amir-only amir-only" data-tab="qirat-manage" data-perm="qirat.manage">
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1037: <!-- Audit Logs (Admin & Leadership) -->
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1038: <a href="#activities" class="menu-item admin-only main-amir-only" data-tab="activities" data-perm="audit.view">
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1042: <!-- Reports & Analytics (Admin & Leadership) -->
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1043: <a href="#analytics" class="menu-item admin-only main-amir-only" data-tab="analytics" data-perm="analytics.view">
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1047: <!-- Website Settings (Admin Only) -->
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1048: <a href="#settings-tab" class="menu-item admin-only" data-tab="settings-tab" data-perm="settings.manage">
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1096: <span class="role-badge" id="roleBadge">Role</span>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1126: <!-- Pending Member Review Status Notice Banner -->
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1137: Assalamualeykum! Your account has been registered successfully. You have immediate access to your profile, daily hadith, daily zakir, and community announcements while our administrators review your membership details.
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1140: <i class="fas fa-shield-alt"></i> Once an administrator verifies and activates your profile, your assigned sector role and committee tools will activate automatically.
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1179: <!-- Recent Administrative Activity -->
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1181: <h2 class="section-title"><i class="fas fa-stream"></i> Recent Administrative & Member Activity</h2>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1189: <h2 class="section-title"><i class="fas fa-rocket"></i> Administrative Quick Actions</h2>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1200: <div class="tab-content admin-only main-amir-only" id="pendingApplicationsTab" data-perm="applications.approve">
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1222: <span id="dedicatedPendingCountBadge" class="badge-status badge-status-pending" style="font-size:0.9rem; padding:4px 10px;">0 Total</span>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1295: <label for="newRole">Role</label>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1296: <select id="newRole" class="form-control">
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1302: <option value="admin">Admin</option>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1322: <p style="font-size:0.88rem; color:#5d4037; margin:8px 0 15px 0;">New members who submitted their registration online. Click <strong>Approve</strong> to assign an active role, or <strong>Reject</strong> with a recorded reason.</p>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1332: <th>Requested Role</th>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1349: <select id="filterRole" class="filter-select">
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1350: <option value="">All Roles</option>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1351: <option value="admin">Admin</option>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1359: <select id="filterStatus" class="filter-select">
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1360: <option value="">All Statuses</option>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1402: <th>Role & Access</th>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1403: <th>Account Status</th>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1426: <!-- TAB 3: ROLES & GRANULAR PERMISSIONS -->
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1427: <div class="tab-content admin-only" id="permissionsTab">
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1429: <h2 class="section-title"><i class="fas fa-shield-alt"></i> Roles & Granular Permissions Governance</h2>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1430: <p style="color:#64748b; margin-bottom:20px;">Configure what each role and individual leader (such as the Amir) is authorized to view, create, edit, publish, or delete across the OBUMSJ platform.</p>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1433: <button class="tab-btn active" data-subtab="perm-role-templates-subtab"><i class="fas fa-layer-group"></i> Role Permission Templates</button>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1437: <!-- Subtab 1: Role Templates -->
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1438: <div class="subtab-content active" id="perm-role-templates-subtab">
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1441: <label for="permTargetRoleSelect" style="font-weight:700; color:var(--secondary);">Select Role to Configure:</label>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1442: <select id="permTargetRoleSelect" class="form-control" style="width:220px; font-weight:600;">
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1443: <option value="admin">Admin (Full System Access)</option>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1452: <button type="button" class="action-btn" id="saveRolePermissionsBtn"><i class="fas fa-save"></i> Save Template to Firestore</button>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1453: <button type="button" class="action-btn outline" id="resetRolePermissionsBtn">Reset to Default</button>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1482: <div class="tab-content blog-manager-only admin-only main-amir-only" id="blogManageTab">
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1580: <button class="tab-btn admin-only main-amir-only amir-only" data-subtab="post-announcement-subtab" data-perm="announcements.create"><i class="fas fa-plus-circle"></i> Post New Announcement</button>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1591: <div class="subtab-content admin-only main-amir-only amir-only" id="post-announcement-subtab" data-perm="announcements.create">
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1603: <option value="admin">Administrators Only</option>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1644: <div class="tab-content admin-only main-amir-only amir-only" id="qiratManageTab" data-perm="qirat.manage">
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1665: <th>Status</th>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1716: <label for="qiratStatus">Initial Status</label>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1717: <select id="qiratStatus" class="form-control">
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1738: <button class="tab-btn admin-only main-amir-only amir-only" data-subtab="dispatch-notif-subtab" data-perm="notifications.send"><i class="fas fa-paper-plane"></i> Dispatch Broadcast Notification</button>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1754: <div class="subtab-content admin-only main-amir-only amir-only" id="dispatch-notif-subtab" data-perm="notifications.send">
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1766: <option value="admin">Administrators</option>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1796: <strong>Browser Permission Status:</strong>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1797: <span id="pushStatusBadge" class="badge-status" style="background:#e2e8f0; color:#334155; margin-left:8px;">Default</span>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1809: <!-- TAB 8: AUDIT LOGS (ADMIN & LEADERSHIP) -->
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1810: <div class="tab-content admin-only main-amir-only" id="activitiesTab" data-perm="audit.view">
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1813: <h2 class="section-title" style="margin:0;"><i class="fas fa-history"></i> Administrative Activity & Audit Trail</h2>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1816: <p style="color:#64748b; font-size:0.88rem; margin-bottom:18px;">Immutable log of all administrative actions, membership approvals, role changes, permission modifications, and published content.</p>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1824: <button type="button" class="btn-sm filter-audit-btn" data-cat="ROLES">Roles</button>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1838: <th>Acting Administrator</th>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1839: <th>Role</th>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1854: <div class="tab-content admin-only main-amir-only" id="analyticsTab" data-perm="analytics.view">
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1897: <h3 style="color:var(--secondary); font-size:1.15rem; margin-bottom:12px;"><i class="fas fa-file-download"></i> Administrative Data Export</h3>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1898: <p style="color:#64748b; font-size:0.88rem; margin-bottom:18px;">Generate clean CSV or JSON archives for offline university administrative reporting and backup records.</p>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1909: <div class="tab-content admin-only" id="settingsTab" data-perm="settings.manage">
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1911: <h2 class="section-title"><i class="fas fa-sliders-h"></i> Platform & Website Administrative Settings</h2>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1938: <p style="font-size:0.8rem; color:#64748b; margin-top:4px; margin-left:24px;">When disabled, the public registration form on member.html will display a notice that applications are currently closed.</p>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1952: <button class="tab-btn admin-only blog-manager-only" data-subtab="post-hadith">Post Hadith</button>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1962: <div class="subtab-content admin-only blog-manager-only" id="post-hadith">
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:1993: <button class="tab-btn admin-only blog-manager-only" data-subtab="post-zakir">Post Zakir</button>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2003: <div class="subtab-content admin-only blog-manager-only" id="post-zakir">
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2055: <label for="profileRole">Role</label>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2056: <input type="text" id="profileRole" class="form-control" readonly>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2144: <h3><i class="fas fa-user-edit" style="color:var(--primary);"></i> Edit Member Profile & Status</h3>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2187: <label>Role</label>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2188: <select id="modalRole" class="form-control">
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2194: <option value="admin">Admin</option>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2199: <label>Account Status</label>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2200: <select id="modalStatus" class="form-control" style="font-weight:600;">
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2210: <div style="margin-top:20px; border-top:1px solid #e2e8f0; padding-top:15px;" class="admin-only" id="modalCustomPermSection">
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2265: Username: <strong id="inspectModalUsername">@user</strong> &bull; Status: <span class="badge-status badge-status-pending" id="inspectModalStatusBadge">PENDING REVIEW</span>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2297: <!-- Role Assignment Selection for Approval -->
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2299: <label for="inspectModalAssignRole" style="display:block; font-size:0.85rem; font-weight:700; color:#1e40af; margin-bottom:6px;">
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2300: <i class="fas fa-user-tag"></i> Assign Role Upon Approval:
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2302: <select id="inspectModalAssignRole" class="form-control" style="background:#fff;">
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2308: <option value="admin">Admin</option>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2335: <span id="previewModalCategory" class="badge-status" style="background:#e8f5e9; color:#1b5e20;">General</span>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2364: <p>&copy; 2026 OBUMSJ Centralized Dashboard. Logged in as: <span id="footerUser">User</span> (<span id="footerRole">Role</span>)</p>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2373: <!-- REAL-TIME FIRESTORE & ADMIN LOGIC -->
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2399: let systemRolePermissions = {};
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2403: let roleFilter = '';
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2404: let statusFilter = '';
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2422: { key: "users.edit", label: "Edit Member Profiles", desc: "Update user details, sectors, and roles" },
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2423: { key: "users.status", label: "Account Status Control", desc: "Activate, suspend, or restore member accounts" },
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2430: name: "Role & Permission Governance",
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2433: { key: "roles.assign", label: "Assign Roles", desc: "Promote or change member roles" },
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2434: { key: "permissions.manage", label: "Manage Permission Matrix", desc: "Configure role templates and user overrides" }
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2471: { key: "audit.view", label: "View Audit Trail", desc: "Access immutable administrative activity logs" },
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2478: const DEFAULT_ROLE_PERMISSIONS = {
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2479: admin: [
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2480: "users.view", "users.view_sensitive", "users.create", "users.edit", "users.status", "users.delete_permanent",
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2481: "applications.approve", "applications.reject", "roles.assign", "permissions.manage",
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2487: "users.view", "users.view_sensitive", "users.create", "users.edit", "users.status",
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2488: "applications.approve", "applications.reject", "roles.assign",
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2518: // Administrator has absolute authority
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2519: if (currentUser.role === 'admin') return true;
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2527: // Fallback to role template
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2528: const rolePerms = systemRolePermissions[currentUser.role] || DEFAULT_ROLE_PERMISSIONS[currentUser.role] || [];
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2529: return rolePerms.includes(permKey);
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2533: async function logAdminAction(category, actionType, targetId, details) {
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2540: actingName: currentUser.fullName || currentUser.username || "Admin",
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2541: actingRole: currentUser.role,
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2559: loadRoleSpecificContent(currentUser.role);
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2569: window.location.href = 'member.html';
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2579: window.location.href = 'member.html';
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2586: if (userData.status === 'suspended') {
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2587: alert("This account has been suspended by an administrator. Please contact the Jama'a leadership.");
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2590: window.location.href = 'member.html';
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2595: if (userData.role === 'rejected' || userData.status === 'rejected') {
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2597: alert(`Your membership registration was declined by an administrator.${reason}`);
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2600: window.location.href = 'member.html';
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2605: const isPending = (userData.role === 'pending' || userData.status === 'pending');
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2613: role: userData.role || (isPending ? 'pending' : 'sector_member'),
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2615: status: userData.status || (isPending ? 'pending' : 'active'),
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2623: loadRoleSpecificContent(currentUser.role);
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2649: const roleEl = document.getElementById('sidebarUserRole');
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2650: if (roleEl) roleEl.textContent = formatRole(user.role);
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2656: if (subEl) subEl.textContent = getRoleDescription(user.role);
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2658: const badgeEl = document.getElementById('roleBadge');
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2659: if (badgeEl) badgeEl.textContent = formatRole(user.role);
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2664: const fRole = document.getElementById('footerRole');
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2665: if (fRole) fRole.textContent = formatRole(user.role);
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2670: const isPending = (user.role === 'pending' || user.status === 'pending');
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2680: if (document.getElementById('profileRole')) document.getElementById('profileRole').value = formatRole(user.role);
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2683: function formatRole(role) {
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2684: const roleMap = {
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2685: 'admin': 'Chief Administrator',
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2693: return roleMap[role] || (role ? role.replace('_', ' ') : 'Member');
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2696: function getRoleDescription(role) {
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2698: 'admin': 'Full administrative control over all platform modules, roles, and settings',
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2706: return descriptions[role] || 'Member Control Panel';
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2709: function loadRoleSpecificContent(role) {
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2720: // Pending stat card on overview (admin/leadership only)
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2726: // Backward compatible role classes
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2727: if (role === 'admin') {
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2728: document.querySelectorAll('.admin-only').forEach(el => el.style.display = el.tagName === 'A' ? 'flex' : 'block');
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2729: } else if (role === 'main_amir') {
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2731: } else if (role === 'amir') {
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2733: } else if (role === 'female_member') {
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2735: } else if (role === 'sector_member') {
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2737: } else if (role === 'blog_manager') {
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2748: if (snap.exists() && snap.data().rolePermissions) {
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2749: systemRolePermissions = snap.data().rolePermissions;
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2751: systemRolePermissions = DEFAULT_ROLE_PERMISSIONS;
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2754: loadRoleSpecificContent(currentUser?.role);
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2756: systemRolePermissions = DEFAULT_ROLE_PERMISSIONS;
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2858: if (data.targetUid === currentUser.uid || data.targetUid === 'all' || data.targetRole === currentUser.role || currentUser.role === 'admin') {
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2894: const activeApproved = allFirestoreUsers.filter(u => u.role !== 'pending' && u.status !== 'rejected' && u.status !== 'suspended');
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2895: const pendingUsers = allFirestoreUsers.filter(u => u.role === 'pending' || u.status === 'pending');
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2923: if (totalQiratEl) totalQiratEl.textContent = allFirestoreQirat.filter(q => q.status === 'upcoming' || q.status === 'ongoing').length;
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2946: <strong>${escapeHtml(log.actingName)}</strong> (${formatRole(log.actingRole)}): ${escapeHtml(actionDesc)}
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2956: const pendingUsers = allFirestoreUsers.filter(u => u.role === 'pending' || u.status === 'pending');
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2976: const requestedRole = user.requestedRole || 'sector_member';
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2984: <td><span class="badge-status badge-status-pending">${formatRole(requestedRole)}</span></td>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2990: <button class="btn-approve" onclick="window.approveUser('${user.id}', '${requestedRole}')">
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2993: <select id="roleSelect_${user.id}" class="filter-select" style="padding:4px; margin:0 4px; font-size:0.8rem;">
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2994: <option value="sector_member" ${requestedRole === 'sector_member' ? 'selected' : ''}>Sector Member</option>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2995: <option value="female_member" ${requestedRole === 'female_member' ? 'selected' : ''}>Female Member</option>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2996: <option value="blog_manager" ${requestedRole === 'blog_manager' ? 'selected' : ''}>Blog Manager</option>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2997: <option value="amir" ${requestedRole === 'amir' ? 'selected' : ''}>Amir</option>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2998: <option value="main_amir" ${requestedRole === 'main_amir' ? 'selected' : ''}>Main Amir</option>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:2999: <option value="admin" ${requestedRole === 'admin' ? 'selected' : ''}>Admin</option>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3001: <button class="btn-sm" style="background:#0288d1; color:white;" onclick="window.approveWithRole('${user.id}')">Assign</button>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3026: if (u.role === 'pending' && (!statusFilter || statusFilter !== 'pending')) return false;
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3034: const role = (u.role || '').toLowerCase();
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3036: if (!name.includes(q) && !email.includes(q) && !phone.includes(q) && !role.includes(q) && !sector.includes(q)) {
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3041: // Role filter
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3042: if (roleFilter && u.role !== roleFilter) return false;
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3044: // Status filter
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3045: if (statusFilter && (u.status || 'active') !== statusFilter) return false;
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3088: const status = user.status || 'active';
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3089: const statusClass = `badge-status-${status}`;
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3103: <td><span style="font-weight:600; color:var(--secondary);">${formatRole(user.role)}</span></td>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3104: <td><span class="badge-status ${statusClass}">${status.toUpperCase()}</span></td>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3111: ${status === 'active' ? `
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3112: <button class="btn-sm" style="background:#fee2e2; color:#b91c1c;" onclick="window.toggleUserStatus('${user.id}', 'suspended')" title="Suspend User">
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3116: <button class="btn-sm" style="background:#dcfce7; color:#15803d;" onclick="window.toggleUserStatus('${user.id}', 'active')" title="Activate User">
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3143: document.getElementById('modalRole').value = user.role || 'sector_member';
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3144: document.getElementById('modalStatus').value = user.status || 'active';
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3175: const role = document.getElementById('modalRole').value;
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3176: const status = document.getElementById('modalStatus').value;
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3190: role,
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3191: status,
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3194: updatedBy: currentUser.fullName || "Admin"
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3197: await logAdminAction("USERS", "USER_UPDATED", uid, {
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3198: summary: `Updated member profile for ${fullName} (${formatRole(role)}, Sector: ${sector}, Status: ${status})`
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3209: window.toggleUserStatus = async function(userId, newStatus) {
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3211: if (!confirm(`Are you sure you want to change account status for ${user?.fullName || 'this user'} to ${newStatus.toUpperCase()}?`)) return;
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3215: status: newStatus,
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3219: await logAdminAction("USERS", "STATUS_CHANGE", userId, {
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3220: summary: `Changed status of ${user?.fullName || userId} to ${newStatus}`
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3223: alert(`Account status updated to ${newStatus}.`);
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3234: await logAdminAction("USERS", "USER_DELETED", userId, {
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3251: window.approveUser = async function(uid, targetRole) {
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3259: role: targetRole,
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3260: status: "active",
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3262: approvedBy: currentUser.fullName || currentUser.username || "Admin"
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3265: await logAdminAction("USERS", "APPLICATION_APPROVED", uid, {
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3266: summary: `Approved registration for ${user?.fullName || uid} as ${formatRole(targetRole)}`
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3273: message: `Assalamualeykum! Your OBUMSJ membership has been approved as ${formatRole(targetRole)}. Welcome to the Jama'a.`,
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3280: alert(`User approved successfully with role: ${formatRole(targetRole)}`);
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3287: window.approveWithRole = function(uid) {
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3288: const select = document.getElementById('roleSelect_' + uid);
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3315: role: "pending",
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3316: status: "rejected",
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3319: rejectedBy: currentUser.fullName || "Admin"
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3322: await logAdminAction("USERS", "APPLICATION_REJECTED", uid, {
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3341: const pendingUsers = allFirestoreUsers.filter(u => u.role === 'pending' || u.status === 'pending');
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3372: const requestedRole = user.requestedRole || 'sector_member';
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3391: <button class="btn-approve" onclick="window.approveUser('${user.id}', '${requestedRole}')" title="Approve Application">
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3394: <select id="roleSelect_ded_${user.id}" class="filter-select" style="padding:4px; margin:0 4px; font-size:0.8rem;">
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3395: <option value="sector_member" ${requestedRole === 'sector_member' ? 'selected' : ''}>Sector Member</option>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3396: <option value="female_member" ${requestedRole === 'female_member' ? 'selected' : ''}>Female Member</option>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3397: <option value="blog_manager" ${requestedRole === 'blog_manager' ? 'selected' : ''}>Blog Manager</option>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3398: <option value="amir" ${requestedRole === 'amir' ? 'selected' : ''}>Amir</option>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3399: <option value="main_amir" ${requestedRole === 'main_amir' ? 'selected' : ''}>Main Amir</option>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3400: <option value="admin" ${requestedRole === 'admin' ? 'selected' : ''}>Admin</option>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3402: <button class="btn-sm" style="background:#0288d1; color:white;" onclick="window.approveFromDedicatedRow('${user.id}')" title="Assign Role & Approve">Assign</button>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3413: const select = document.getElementById('roleSelect_ded_' + uid);
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3414: const role = select ? select.value : 'sector_member';
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3415: window.approveUser(uid, role);
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3447: const roleSelect = document.getElementById('inspectModalAssignRole');
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3448: if (roleSelect) {
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3449: roleSelect.value = user.requestedRole || 'sector_member';
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3462: const roleSelect = document.getElementById('inspectModalAssignRole');
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3463: const targetRole = roleSelect ? roleSelect.value : 'sector_member';
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3465: await window.approveUser(uid, targetRole);
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3480: const selectedRole = document.getElementById('permTargetRoleSelect')?.value || 'amir';
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3481: const rolePerms = systemRolePermissions[selectedRole] || DEFAULT_ROLE_PERMISSIONS[selectedRole] || [];
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3490: const isChecked = rolePerms.includes(p.key) || selectedRole === 'admin';
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3491: const isDisabled = selectedRole === 'admin'; // Admin always has full access
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3507: async function saveRolePermissionsTemplate() {
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3508: const selectedRole = document.getElementById('permTargetRoleSelect').value;
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3509: if (selectedRole === 'admin') {
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3510: alert("The Chief Administrator role permanently retains all system permissions.");
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3519: systemRolePermissions[selectedRole] = updatedPerms;
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3523: rolePermissions: systemRolePermissions,
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3525: updatedBy: currentUser.fullName || "Admin"
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3528: await logAdminAction("PERMISSIONS", "ROLE_PERMISSIONS_UPDATED", selectedRole, {
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3529: summary: `Updated default permission matrix template for role: ${formatRole(selectedRole)} (${updatedPerms.length} permissions)`
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3532: alert(`Permissions template for ${formatRole(selectedRole)} saved to Firestore successfully!`);
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3561: <td><span class="badge-status badge-status-active">${escapeHtml(blog.category || 'General')}</span></td>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3608: await logAdminAction("BLOGS", "BLOG_DELETED", blogId, { summary: "Deleted blog post" });
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3654: await logAdminAction("ANNOUNCEMENTS", "ANNOUNCEMENT_DELETED", id, { summary: "Deleted announcement" });
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3679: <td><span class="badge-status badge-status-active">${escapeHtml(p.target || 'All')}</span></td>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3680: <td><span class="badge-status ${p.status === 'upcoming' ? 'badge-status-pending' : 'badge-status-active'}">${(p.status || 'UPCOMING').toUpperCase()}</span></td>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3693: await logAdminAction("QIRAT", "QIRAT_PROGRAM_DELETED", id, { summary: "Removed Qirat program" });
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3764: window.location.href = navLink;
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3817: <td><span style="font-size:0.8rem; background:#f1f5f9; padding:2px 8px; border-radius:10px;">${formatRole(log.actingRole)}</span></td>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3818: <td><span class="badge-status badge-status-active">${escapeHtml(log.category)}</span></td>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3829: const approved = allFirestoreUsers.filter(u => u.status !== 'rejected' && u.role !== 'pending').length;
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3878: const headers = ["Full Name", "Username", "Email", "Phone", "Gender", "Sector", "Role", "Status", "Created At"];
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3886: `"${(u.role || '').replace(/"/g, '""')}"`,
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3887: `"${(u.status || 'active').replace(/"/g, '""')}"`,
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3900: const headers = ["Timestamp", "Acting Administrator", "Role", "Category", "Action Type", "Target Record", "Details"];
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3904: `"${(l.actingRole || '').replace(/"/g, '""')}"`,
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3918: exportedBy: currentUser?.fullName || "Admin",
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:3927: permissions: systemRolePermissions
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:4044: const rFilter = document.getElementById('filterRole');
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:4045: if (rFilter) rFilter.addEventListener('change', function() { roleFilter = this.value; currentPage = 1; renderActiveMembersList(); });
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:4047: const sFilter = document.getElementById('filterStatus');
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:4048: if (sFilter) sFilter.addEventListener('change', function() { statusFilter = this.value; currentPage = 1; renderActiveMembersList(); });
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:4064: userSearchQuery = ''; roleFilter = ''; statusFilter = ''; sectorFilter = ''; genderFilter = '';
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:4129: // Permissions Matrix Role Selector & Save
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:4130: const permRoleSel = document.getElementById('permTargetRoleSelect');
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:4131: if (permRoleSel) permRoleSel.addEventListener('change', renderPermissionsMatrix);
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:4133: const savePermsBtn = document.getElementById('saveRolePermissionsBtn');
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:4134: if (savePermsBtn) savePermsBtn.addEventListener('click', saveRolePermissionsTemplate);
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:4136: const resetPermsBtn = document.getElementById('resetRolePermissionsBtn');
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:4139: const selRole = permRoleSel.value;
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:4140: systemRolePermissions[selRole] = [...(DEFAULT_ROLE_PERMISSIONS[selRole] || [])];
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:4168: updatePushStatusBadge();
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:4175: updatePushStatusBadge();
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:4190: body: "This is a verified test notification from the OBUMSJ Admin Dashboard.",
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:4223: function updatePushStatusBadge() {
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:4224: const badge = document.getElementById('pushStatusBadge');
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:4251: const role = document.getElementById('newRole').value;
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:4261: role,
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:4262: status: "active",
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:4264: createdBy: currentUser?.fullName || "Admin"
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:4267: await logAdminAction("USERS", "USER_CREATED", docRef.id, {
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:4268: summary: `Created member profile for ${fullName} (${formatRole(role)}, Sector: ${sector})`
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:4297: await logAdminAction("BLOGS", "BLOG_UPDATED", editingId, { summary: `Updated blog post: ${title}` });
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:4307: await logAdminAction("BLOGS", "BLOG_PUBLISHED", docRef.id, { summary: `Published new blog post: ${title}` });
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:4335: author: currentUser?.fullName || "Admin",
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:4336: authorRole: currentUser?.role || "admin",
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:4337: status: "published",
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:4341: await logAdminAction("ANNOUNCEMENTS", "ANNOUNCEMENT_PUBLISHED", docRef.id, {
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:4348: targetRole: targetAudience !== 'all' ? targetAudience : '',
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:4375: const status = document.getElementById('qiratStatus').value;
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:4380: registrationUrl: regUrl, status,
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:4382: createdBy: currentUser?.fullName || "Admin"
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:4385: await logAdminAction("QIRAT", "QIRAT_PROGRAM_CREATED", docRef.id, {
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:4418: targetRole: target !== 'all' ? target : '',
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:4425: dispatchedBy: currentUser?.fullName || "Admin"
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:4428: await logAdminAction("NOTIFICATIONS", "NOTIFICATION_DISPATCHED", "", {
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:4452: updatedBy: currentUser?.fullName || "Admin"
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:4455: await logAdminAction("SETTINGS", "SETTINGS_UPDATED", "general", {
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dashboard.html:4492: window.location.href = 'member.html';
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dawah.html:377: <li><a href="./member.html" data-i18n="nav.membership">MEMBERSHIP</a></li>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dawah.html:496: <p data-i18n="dawah.video3_desc">Clarifying the true status and rights given to women in Islam, addressing common misconceptions and stereotypes.</p>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dawah.html:554: <p data-i18n="dawah.message3_text">Islam establishes justice and equality for all human beings regardless of race, ethnicity, or social status. All are equal before Allah.</p>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Dawrul-hasen.html:194: <li><a href="./member.html" data-i18n="nav.membership">MEMBERSHIP</a></li>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\donate.html:363: <li><a href="./member.html" data-i18n="nav.membership">LOGIN</a></li>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Finance.html:195: <li><a href="./member.html" data-i18n="nav.membership">MEMBERSHIP</a></li>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\index.html:81: <li id="loginNavItem"><a href="./member.html" id="loginBtn" data-i18n="nav.membership">MEMBERSHIP</a></li>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\index.html:84: <a href="Dashboard.html" id="dashboardLink" class="btn" style="padding:6px 12px; font-size:0.85rem;"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\index.html:514: <p class="author-role">Computer Science, 3rd Year</p>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\index.html:535: <p class="author-role">Medicine, 2nd Year</p>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\index.html:556: <p class="author-role">Engineering, 4th Year</p>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Information.html:194: <li><a href="./member.html" data-i18n="nav.membership">MEMBERSHIP</a></li>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\login.html:5: <meta http-equiv="refresh" content="0; url=member.html#login">
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\login.html:8: window.location.replace("member.html#login");
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\login.html:12: <p>Redirecting to <a href="member.html#login">OBUMSJ Login</a>...</p>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\member.html:408: <li><a href="./member.html" data-i18n="nav.membership" style="color:var(--primary); font-weight:700;">MEMBERSHIP</a></li>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\member.html:527: <!-- Registration Form (ROLE SELECTION REMOVED - SECURED ON BACKEND) -->
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\member.html:563: <!-- Jama'a Sector Interest (Replaces administrative role selection) -->
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\member.html:762: const hash = window.location.hash.toLowerCase();
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\member.html:763: const search = new URLSearchParams(window.location.search);
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\member.html:939: await postAuthVerification(cred.user);
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\member.html:949: message = "This member account has been disabled. Please contact the administrator.";
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\member.html:1007: role: "pending",
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\member.html:1008: status: "pending",
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\member.html:1028: // Cache session and grant immediate access to Member Dashboard with pending status
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\member.html:1037: role: "pending",
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\member.html:1038: status: "pending"
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\member.html:1043: window.location.href = "Dashboard.html";
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\member.html:1048: // Existing user: proceed with standard status check using already fetched profile
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\member.html:1049: await postAuthVerification(user, snap);
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\member.html:1056: const currentHost = window.location.hostname || "current domain";
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\member.html:1064: ${currentHost === "127.0.0.1" ? `<li><strong>Instant Local Fix:</strong> Switch your browser URL from <code>http://127.0.0.1...</code> to <a href="${window.location.href.replace('127.0.0.1', 'localhost')}" style="color:#2f8f3d; font-weight:700;">${window.location.href.replace('127.0.0.1', 'localhost')}</a> (Firebase authorizes <code>localhost</code> by default).</li>` : ''}
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\member.html:1090: // POST-AUTH VERIFICATION & ROLE ROUTING
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\member.html:1092: async function postAuthVerification(user, existingSnap = null) {
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\member.html:1100: showLoginError("<strong>Missing or insufficient permissions:</strong> Unable to verify your member status from Cloud Firestore. Please ensure the updated Security Rules are published in the Firebase Console.");
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\member.html:1118: // Status 1: Suspended account
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\member.html:1119: if (userData.status === "suspended") {
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\member.html:1120: showLoginError('<i class="fas fa-ban" style="margin-right:6px;"></i> This account has been suspended by the Jama\'a leadership. Please contact an administrator for assistance.');
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\member.html:1126: // Status 2: Rejected application
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\member.html:1127: if (userData.role === "rejected" || userData.status === "rejected") {
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\member.html:1137: // Status 3: Member Dashboard Access (Pending & Approved Members)
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\member.html:1139: const isPending = (userData.role === "pending" || userData.status === "pending");
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\member.html:1140: const effectiveRole = userData.role || (isPending ? "pending" : "sector_member");
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\member.html:1141: const effectiveStatus = userData.status || (isPending ? "pending" : "active");
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\member.html:1150: role: effectiveRole,
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\member.html:1152: status: effectiveStatus
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\member.html:1156: showLoginSuccess('<i class="fas fa-check-circle"></i> Login successful! Entering Member Dashboard (Membership Status: Pending Review)...');
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\member.html:1162: window.location.href = "Dashboard.html";
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\member.html:1220: // 3. Store user profile in Firestore (ROLE IS ALWAYS "pending" - SECURED AGAINST CLIENT OVERRIDE)
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\member.html:1229: role: "pending",
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\member.html:1230: status: "pending",
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\member.html:1252: // 5. Cache session and grant immediate access to Member Dashboard with pending status
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\member.html:1261: role: "pending",
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\member.html:1262: status: "pending"
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\member.html:1269: window.location.href = "Dashboard.html";
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\member.html:1349: if (data.role !== "pending" && data.status === "active") {
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\member.html:1352: if (!window.location.hash.includes("register")) {
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\member.html:1353: window.location.href = "Dashboard.html";
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Qirat.html:591: <li><a href="./member.html" data-i18n="nav.membership">MEMBERSHIP</a></li>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Qirat.html:2228: if (data.status === 'upcoming' || data.status === 'ongoing') {
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Qirat.html:2257: <span style="background: #dcfce7; color: #15803d; font-size: 0.75rem; font-weight: 700; padding: 2px 8px; border-radius: 10px; text-transform: uppercase;">${p.status || 'UPCOMING'}</span>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Ruqiya.html:510: <li><a href="./member.html" data-i18n="nav.membership">MEMBERSHIP</a></li>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Script.js:56: function checkLoginStatus() {
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Script.js:70: dashboardLink.href = 'Dashboard.html';
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Script.js:71: dashboardLink.innerHTML = `<i class="fas fa-tachometer-alt"></i> ${formatRole(currentUser.role)} Dashboard`;
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Script.js:80: window.location.reload();
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Script.js:86: function formatRole(role) {
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Script.js:87: const roleMap = {
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Script.js:88: 'admin': 'Admin',
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Script.js:95: return roleMap[role] || role;
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Script.js:291: // Check login status
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Script.js:292: checkLoginStatus();
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\sector.html:81: <li><a href="./member.html" data-i18n="nav.membership">MEMBERSHIP</a></li>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\sector.html:87: <a href="member.html" class="btn" id="loginBtn" style="background: var(--accent);">
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\sector.html:484: <a href="member.html" class="btn btn-primary" data-i18n="sectors.join_us">Become a Member</a>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\signup.html:5: <meta http-equiv="refresh" content="0; url=member.html#register">
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\signup.html:8: window.location.replace("member.html#register");
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\signup.html:12: <p>Redirecting to <a href="member.html#register">OBUMSJ Registration</a>...</p>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Social Affairs.html:194: <li><a href="./member.html" data-i18n="nav.membership">MEMBERSHIP</a></li>
+C:\Users\mmm\Desktop\OBUMSJ Website\OBUMSJ Website\Ziyara.html:194: <li><a href="./member.html" data-i18n="nav.membership">MEMBERSHIP</a></li>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        button { padding: 10px 20px; margin: 5px; }
+        .test-box { 
+            background: #f0f0f0; 
+            padding: 20px; 
+            margin: 20px 0; 
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Language System Test</h1>
+    
+    <div>
+        <button onclick="testLang('en')">English</button>
+        <button onclick="testLang('am')">Amharic</button>
+        <button onclick="testLang('om')">Oromo</button>
+        <button onclick="testLang('ar')">Arabic</button>
+    </div>
+    
+    <div class="test-box">
+        <h2 data-i18n="title">Welcome to OBUMSJ</h2>
+        <p data-i18n="description">We serve the community</p>
+        <button data-i18n="button">Donate Now</button>
+    </div>
+    
+    <div id="result" style="background: #e8f5e8; padding: 15px; margin-top: 20px; border-radius: 5px;"></div>
+
+    <script>
+        // Simple test function
+        async function testLang(lang) {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = `<p>Testing language: <strong>${lang}</strong></p>`;
+            
+            try {
+                // Try to load from /js/ folder
+                const response = await fetch(`./js/${lang}.json`);
+                
+                if (!response.ok) {
+                    resultDiv.innerHTML += `<p style="color: red;">❌ File not found: /js/${lang}.json</p>`;
+                    return;
+                }
+                
+                const data = await response.json();
+                resultDiv.innerHTML += `<p style="color: green;">✅ File loaded successfully!</p>`;
+                resultDiv.innerHTML += `<p>Number of keys: ${Object.keys(data).length}</p>`;
+                
+                // Check for specific keys
+                const keysToCheck = ['title', 'description', 'button'];
+                keysToCheck.forEach(key => {
+                    if (data[key]) {
+                        resultDiv.innerHTML += `<p>✅ Key "${key}": "${data[key]}"</p>`;
+                    } else {
+                        resultDiv.innerHTML += `<p style="color: orange;">⚠️ Key "${key}" not found</p>`;
+                    }
+                });
+                
+                // Apply translations
+                document.querySelectorAll('[data-i18n]').forEach(el => {
+                    const key = el.getAttribute('data-i18n');
+                    if (data[key]) {
+                        el.textContent = data[key];
+                    }
+                });
+                
+            } catch (error) {
+                resultDiv.innerHTML += `<p style="color: red;">❌ Error: ${error.message}</p>`;
+            }
+        }
+        
+        // Test on load
+        testLang('en');
+    </script>
+</body>
+</html>

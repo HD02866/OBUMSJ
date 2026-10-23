@@ -6,6 +6,7 @@
     <title data-i18n="contact.page_title">Contact Us - OBUMSJ - Oda Bultum University Muslim Students' JAMA'A</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+<script src="js/theme-engine.js"></script>
     <style>
         /* Add your existing contact.css styles here */
         /* MAIN COLORS */
@@ -194,11 +195,11 @@
         <div class="logo-container">
             <img src="./IMAGE/OBUMSJ Logo.jpg" alt="OBUMSJ Logo" class="logo">
             <span class="logo-text" data-i18n="logo">OBUMSJ</span>
-             <button id="darkModeToggle" class="dark-btn">🌙</button>
+             <button id="darkModeToggle" class="dark-btn" aria-label="Toggle theme"><i class="fas fa-moon theme-icon" aria-hidden="true"></i></button>
         </div>
 
        <div class="lang-dropdown">
-  <button class="lang-btn">🌐 <span class="lang-code">EN</span></button>
+  <button class="lang-btn" aria-label="Select Language"><i class="fas fa-globe" aria-hidden="true"></i> <span class="lang-code">EN</span> <i class="fas fa-chevron-down lang-chevron" aria-hidden="true"></i></button>
   <div class="lang-menu">
     <a href="#" onclick="setLang('en'); return false;" data-i18n="lang.english">English</a>
     <a href="#" onclick="setLang('am'); return false;" data-i18n="lang.amharic">Amharic</a>
@@ -246,7 +247,7 @@
             <div class="contact-content">
                 <!-- LEFT SIDE -->
                 <div class="contact-info">
-                    <h2 data-i18n="contact.hero_title">Get In Touch</h2>
+                    <h2 class="typewriter-title" data-i18n="contact.hero_title" data-typewriter-phrases='["Get In Touch", "Connect with OBUMSJ", "We Love to Hear from You"]'>Get In Touch</h2>
                     <p data-i18n="contact.hero_subtitle">We'd love to hear from you. Reach out to us with any questions or inquiries.</p>
 
                     <div class="contact-item">

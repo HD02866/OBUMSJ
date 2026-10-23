@@ -1,55 +1,45 @@
 ﻿// Script.js - Clean and organized with NEW FEATURES
 
-// ================= FLOATING SOCIAL MEDIA SIDEBAR (NEW FEATURE) =================
+// ================= FLOATING SOCIAL MEDIA SIDEBAR =================
 const socialSidebar = document.getElementById('socialSidebar');
 const socialToggle = document.getElementById('socialToggle');
-let isSocialExpanded = true;
 
 if (socialToggle && socialSidebar) {
-    socialToggle.addEventListener('click', function() {
-        isSocialExpanded = !isSocialExpanded;
-        
-        if (isSocialExpanded) {
-            socialSidebar.classList.remove('collapsed');
-            socialToggle.innerHTML = '<i class="fas fa-times"></i>';
-        } else {
+    const isMobile = window.innerWidth <= 768;
+    const savedState = localStorage.getItem('obumsj_social_collapsed');
+    
+    // Default to collapsed on mobile or if user explicitly chose collapsed
+    let isSocialCollapsed = savedState !== null ? (savedState === 'true') : isMobile;
+    
+    function updateSocialUI() {
+        if (isSocialCollapsed) {
             socialSidebar.classList.add('collapsed');
             socialToggle.innerHTML = '<i class="fas fa-share-alt"></i>';
+            socialToggle.setAttribute('aria-expanded', 'false');
+            socialToggle.title = 'Show social channels';
+        } else {
+            socialSidebar.classList.remove('collapsed');
+            socialToggle.innerHTML = '<i class="fas fa-times"></i>';
+            socialToggle.setAttribute('aria-expanded', 'true');
+            socialToggle.title = 'Hide social channels';
         }
+    }
+    
+    updateSocialUI();
+
+    socialToggle.addEventListener('click', function(e) {
+        e.preventDefault();
+        isSocialCollapsed = !isSocialCollapsed;
+        updateSocialUI();
+        localStorage.setItem('obumsj_social_collapsed', isSocialCollapsed ? 'true' : 'false');
     });
 }
 
-// ================= ANIMATED COUNTER (NEW FEATURE) - FIXED FOR MOBILE =================
+// ================= ANIMATED COUNTER (DELEGATED TO OBUMSJ_MOTION) =================
 function animateCounter() {
-    const counters = document.querySelectorAll('.counter');
-    
-    counters.forEach(counter => {
-        // Skip if already counted
-        if (counter.classList.contains('counted')) return;
-        
-        const target = parseInt(counter.getAttribute('data-target'));
-        const speed = 50; // Lower = faster
-        const increment = target / speed;
-        let current = 0;
-        
-        // Mark as counted before starting animation
-        counter.classList.add('counted');
-        
-        const updateCounter = () => {
-            current += increment;
-            if (current < target) {
-                counter.textContent = Math.ceil(current) + (counter.getAttribute('data-target') === '500' || 
-                    counter.getAttribute('data-target') === '50' ? '+' : '');
-                setTimeout(updateCounter, 30);
-            } else {
-                counter.textContent = target + (counter.getAttribute('data-target') === '500' || 
-                    counter.getAttribute('data-target') === '50' ? '+' : '');
-                counter.classList.add('animated');
-            }
-        };
-        
-        updateCounter();
-    });
+    if (window.OBUMSJ_MOTION && window.OBUMSJ_MOTION.animateAllCounters) {
+        window.OBUMSJ_MOTION.animateAllCounters();
+    }
 }
 
 // ================= LOGIN/LOGOUT FUNCTIONALITY =================
@@ -100,32 +90,9 @@ let counterObserver;
 let isCounterRunning = false;
 
 function setupCounterObserver() {
-    const aboutSection = document.getElementById('about');
-    
-    if (!aboutSection) return;
-    
-    // Remove any existing observer
-    if (counterObserver) {
-        counterObserver.disconnect();
+    if (window.OBUMSJ_MOTION && window.OBUMSJ_MOTION.initCounters) {
+        window.OBUMSJ_MOTION.initCounters();
     }
-    
-    // Set up new observer with better mobile detection
-    counterObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting && !isCounterRunning) {
-                // Small delay to ensure content is fully visible on mobile
-                setTimeout(() => {
-                    animateCounter();
-                    isCounterRunning = true;
-                }, 300);
-            }
-        });
-    }, { 
-        threshold: 0.3, // Lower threshold for mobile
-        rootMargin: '0px 0px -50px 0px' // Trigger 50px before element enters viewport
-    });
-    
-    counterObserver.observe(aboutSection);
 }
 
 // ================= FALLBACK COUNTER FOR MOBILE TOUCH/SCROLL =================
@@ -170,14 +137,59 @@ function setupMobileCounterFallback() {
     setTimeout(checkCounterPosition, 1000);
 }
 
-// ================= MOBILE MENU =================
+// ================= MOBILE NAVIGATION & ACCESSIBILITY =================
 const mobileMenu = document.getElementById('mobile-menu');
 const navLinks = document.querySelector('.nav-links');
 
+// Ensure backdrop overlay exists
+let navBackdrop = document.querySelector('.nav-backdrop');
+if (!navBackdrop && navLinks) {
+    navBackdrop = document.createElement('div');
+    navBackdrop.className = 'nav-backdrop';
+    document.body.appendChild(navBackdrop);
+}
+
+function openMobileNav() {
+    if (!navLinks || !mobileMenu) return;
+    navLinks.classList.add('active');
+    mobileMenu.classList.add('active');
+    mobileMenu.setAttribute('aria-expanded', 'true');
+    if (navBackdrop) navBackdrop.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeMobileNav() {
+    if (!navLinks || !mobileMenu) return;
+    navLinks.classList.remove('active');
+    mobileMenu.classList.remove('active');
+    mobileMenu.setAttribute('aria-expanded', 'false');
+    if (navBackdrop) navBackdrop.classList.remove('active');
+    document.body.style.overflow = '';
+}
+
 if (mobileMenu && navLinks) {
-    mobileMenu.addEventListener('click', function() {
-        navLinks.classList.toggle('active');
-        mobileMenu.classList.toggle('active');
+    mobileMenu.setAttribute('aria-expanded', 'false');
+    mobileMenu.setAttribute('aria-label', 'Toggle navigation menu');
+
+    mobileMenu.addEventListener('click', function(e) {
+        e.stopPropagation();
+        if (navLinks.classList.contains('active')) {
+            closeMobileNav();
+        } else {
+            openMobileNav();
+        }
+    });
+
+    if (navBackdrop) {
+        navBackdrop.addEventListener('click', function() {
+            closeMobileNav();
+        });
+    }
+
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 992 && navLinks.classList.contains('active')) {
+            closeMobileNav();
+        }
     });
 }
 
@@ -186,57 +198,64 @@ const langBtn = document.querySelector('.lang-btn');
 const langDropdown = document.querySelector('.lang-dropdown');
 
 if (langBtn && langDropdown) {
+    langBtn.setAttribute('aria-haspopup', 'true');
+    langBtn.setAttribute('aria-expanded', 'false');
+
     langBtn.addEventListener('click', function(e) {
         e.stopPropagation();
-        langDropdown.classList.toggle('active');
+        var isActive = langDropdown.classList.toggle('active');
+        langBtn.setAttribute('aria-expanded', isActive ? 'true' : 'false');
     });
     
     // Close when clicking outside
     document.addEventListener('click', function(e) {
         if (!langDropdown.contains(e.target)) {
             langDropdown.classList.remove('active');
+            langBtn.setAttribute('aria-expanded', 'false');
         }
     });
 }
+
+// Global Keyboard Escape Handler for Menus & Drawers
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        if (langDropdown && langDropdown.classList.contains('active')) {
+            langDropdown.classList.remove('active');
+            if (langBtn) {
+                langBtn.setAttribute('aria-expanded', 'false');
+                langBtn.focus();
+            }
+        }
+        if (navLinks && navLinks.classList.contains('active')) {
+            closeMobileNav();
+            if (mobileMenu) mobileMenu.focus();
+        }
+    }
+});
 
 // ================= SECTORS DROPDOWN =================
 const dropdown = document.querySelector('.dropdown');
 const dropdownContent = document.querySelector('.dropdown-content');
 
 if (dropdown && dropdownContent) {
-    // Desktop - hover
-    dropdown.addEventListener('mouseenter', function() {
-        if (window.innerWidth > 768) {
-            dropdownContent.style.display = 'block';
-        }
-    });
-    
-    dropdown.addEventListener('mouseleave', function() {
-        if (window.innerWidth > 768) {
-            dropdownContent.style.display = 'none';
-        }
-    });
-    
-    // Mobile - click
+    // Desktop hover handled via CSS; touch/click toggle for mobile
     const dropdownToggle = dropdown.querySelector('a');
     if (dropdownToggle) {
         dropdownToggle.addEventListener('click', function(e) {
-            if (window.innerWidth <= 768) {
+            if (window.innerWidth <= 992) {
                 e.preventDefault();
-                dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+                dropdown.classList.toggle('active');
             }
         });
     }
 }
 
-// Close dropdowns when clicking on nav links (for mobile)
-const navLinksList = document.querySelectorAll('.nav-links a');
+// Close drawer when clicking on standard links inside nav
+const navLinksList = document.querySelectorAll('.nav-links a:not(.dropdown > a)');
 navLinksList.forEach(link => {
     link.addEventListener('click', function() {
-        if (window.innerWidth <= 768) {
-            if (navLinks) navLinks.classList.remove('active');
-            if (mobileMenu) mobileMenu.classList.remove('active');
-            if (dropdownContent) dropdownContent.style.display = 'none';
+        if (window.innerWidth <= 992) {
+            closeMobileNav();
         }
     });
 });
@@ -261,27 +280,34 @@ function showSlides() {
     setTimeout(showSlides, 5000);
 }
 
-// ================= DARK MODE =================
+// ================= THEME SYSTEM INTEGRATION =================
 const darkToggle = document.getElementById('darkModeToggle');
-
-if (darkToggle) {
-    // Load saved theme
-    const currentTheme = localStorage.getItem('theme');
-    if (currentTheme === 'dark') {
+if (window.OBUMSJ_THEME) {
+    window.OBUMSJ_THEME.refreshButtons();
+} else if (darkToggle) {
+    var savedTheme = localStorage.getItem('obumsj_theme') || localStorage.getItem('theme');
+    if (savedTheme === 'dark' || savedTheme === 'night') {
         document.body.classList.add('dark-mode');
-        darkToggle.textContent = "â˜€ï¸";
+        document.documentElement.setAttribute('data-theme', 'night');
     }
-
-    darkToggle.addEventListener('click', function() {
-        document.body.classList.toggle('dark-mode');
-        if (document.body.classList.contains('dark-mode')) {
-            darkToggle.textContent = "â˜€ï¸";
-            localStorage.setItem('theme', 'dark');
+    darkToggle.addEventListener('click', function(e) {
+        e.preventDefault();
+        if (window.OBUMSJ_THEME) {
+            window.OBUMSJ_THEME.toggleTheme();
         } else {
-            darkToggle.textContent = "ðŸŒ™";
-            localStorage.setItem('theme', 'light');
+            var isDark = document.body.classList.toggle('dark-mode');
+            document.documentElement.setAttribute('data-theme', isDark ? 'night' : 'day');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
         }
     });
+}
+
+
+// ================= SCROLL REVEAL ANIMATIONS =================
+function initScrollReveal() {
+    if (window.OBUMSJ_MOTION && window.OBUMSJ_MOTION.initScrollReveal) {
+        window.OBUMSJ_MOTION.initScrollReveal();
+    }
 }
 
 // ================= INITIALIZATION =================
@@ -290,6 +316,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Check login status
     checkLoginStatus();
+    initScrollReveal();
     
     // Start slideshow
     if (slides.length > 0) {

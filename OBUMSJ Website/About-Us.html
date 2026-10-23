@@ -6,6 +6,7 @@
     <title data-i18n="about_page.page_title">About Us | OBUMSJ - Oda Bultum University Muslim Students' JAMA'A</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+<script src="js/theme-engine.js"></script>
     <style>
         /* Add your existing About page styles here */
         :root{
@@ -187,11 +188,11 @@
         <div class="logo-container">
             <img src="./IMAGE/OBUMSJ Logo.jpg" alt="OBUMSJ Logo" class="logo">
             <span class="logo-text" data-i18n="logo">OBUMSJ</span>
-             <button id="darkModeToggle" class="dark-btn">🌙</button>
+             <button id="darkModeToggle" class="dark-btn" aria-label="Toggle theme"><i class="fas fa-moon theme-icon" aria-hidden="true"></i></button>
         </div>
 
        <div class="lang-dropdown">
-  <button class="lang-btn">🌐 <span class="lang-code">EN</span></button>
+  <button class="lang-btn" aria-label="Select Language"><i class="fas fa-globe" aria-hidden="true"></i> <span class="lang-code">EN</span> <i class="fas fa-chevron-down lang-chevron" aria-hidden="true"></i></button>
   <div class="lang-menu">
     <a href="#" onclick="setLang('en'); return false;" data-i18n="lang.english">English</a>
     <a href="#" onclick="setLang('am'); return false;" data-i18n="lang.amharic">Amharic</a>
@@ -235,7 +236,7 @@
     </nav>
 
     <header>
-        <h1 data-i18n="about_page.hero_title">About Our Community</h1>
+        <h1 class="typewriter-title" data-i18n="about_page.hero_title" data-typewriter-phrases='["About Our Community", "Faith, Unity & Knowledge", "Serving Muslim Students"]'>About Our Community</h1>
         <p data-i18n="about_page.hero_subtitle">We are a Muslim student community dedicated to spiritual growth, academic excellence, and social responsibility. Our mission is to build ethical leaders who serve society with knowledge, faith, and integrity.</p>
     </header>
 
@@ -417,68 +418,5 @@
     <!-- Include the universal language system -->
     <script src="./js/language-system.js"></script>
     <script src="./Script.js"></script>
-    <script>
-        // Scroll animation
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('show');
-                    
-                    // Start counting animation for the stats section
-                    if (entry.target.id === 'community-stats') {
-                        startCountingAnimation();
-                    }
-                }
-            });
-        });
-        document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
-
-        // Counting animation function
-        function startCountingAnimation() {
-            const counters = document.querySelectorAll('.counter');
-            let started = false;
-            
-            if (started) return;
-            started = true;
-            
-            counters.forEach(counter => {
-                const target = parseInt(counter.getAttribute('data-target'));
-                const speed = parseInt(counter.getAttribute('data-speed')) || 50;
-                let count = 0;
-                
-                const updateCount = () => {
-                    const increment = target / speed;
-                    
-                    if (count < target) {
-                        count += increment;
-                        counter.innerText = Math.ceil(count);
-                        setTimeout(updateCount, 30);
-                    } else {
-                        counter.innerText = target;
-                    }
-                };
-                
-                updateCount();
-            });
-        }
-        
-        // Also start counting if the stats section is already in view on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            const statsSection = document.getElementById('community-stats');
-            if (statsSection) {
-                const rect = statsSection.getBoundingClientRect();
-                const isVisible = (
-                    rect.top >= 0 &&
-                    rect.left >= 0 &&
-                    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-                    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-                );
-                
-                if (isVisible) {
-                    startCountingAnimation();
-                }
-            }
-        });
-    </script>
 </body>
 </html>

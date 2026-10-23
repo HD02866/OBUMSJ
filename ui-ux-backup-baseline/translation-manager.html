@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Translation Manager</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: #f5f5f5; }
+        .container { max-width: 1200px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; }
+        h1 { color: #333; margin-bottom: 30px; }
+        .language-tabs { display: flex; gap: 10px; margin-bottom: 20px; }
+        .language-tabs button { padding: 10px 20px; border: none; background: #4CAF50; color: white; border-radius: 5px; cursor: pointer; }
+        .language-tabs button.active { background: #2E7D32; }
+        .translation-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        .translation-table th, .translation-table td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+        .translation-table th { background: #f0f0f0; }
+        .key-column { width: 30%; background: #f9f9f9; font-family: monospace; }
+        .translation-input { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; }
+        .save-btn { background: #2196F3; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin-top: 20px; }
+        .save-btn:hover { background: #1976D2; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Translation Manager</h1>
+        
+        <div class="language-tabs">
+            <button onclick="switchLanguage('en')" class="active">English</button>
+            <button onclick="switchLanguage('am')">Amharic</button>
+            <button onclick="switchLanguage('om')">Oromo</button>
+            <button onclick="switchLanguage('ar')">Arabic</button>
+        </div>
+        
+        <table class="translation-table">
+            <thead>
+                <tr>
+                    <th>Translation Key</th>
+                    <th>Translation Value</th>
+                    <th>Character Count</th>
+                </tr>
+            </thead>
+            <tbody id="translationBody">
+                <!-- Will be populated by JavaScript -->
+            </tbody>
+        </table>
+        
+        <button class="save-btn" onclick="saveTranslations()">Save Translations</button>
+    </div>
+
+    <script>
+        let currentLanguage = 'en';
+        let translations = {};
+        
+        // Load English translation as template
+        fetch('./js/en.json')
+            .then(response => response.json())
+            .then(data => {
+                translations.en = data;
+                loadLanguage('en');
+            });
+        
+        function switchLanguage(lang) {
+            currentLanguage = lang;
+            
+            // Update active tab
+            document.querySelectorAll('.language-tabs button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Load translations for this language
+            loadLanguage(lang);
+        }
+        
+        function loadLanguage(lang) {
+            fetch(`./js/${lang}.json`)
+                .then(response => response.json())
+                .then(data => {
+                    translations[lang] = data;
+                    populateTable();
+                })
+                .catch(error => {
+                    console.log(`No translations found for ${lang}, starting with empty`);
+                    translations[lang] = {};
+                    populateTable();
+                });
+        }
+        
+        function populateTable() {
+            const tbody = document.getElementById('translationBody');
+            tbody.innerHTML = '';
+            
+            const keys = Object.keys(translations.en).sort();
+            
+            keys.forEach(key => {
+                const row = document.createElement('tr');
+                
+                // Key column
+                const keyCell = document.createElement('td');
+                keyCell.className = 'key-column';
+                keyCell.textContent = key;
+                
+                // Translation column
+                const transCell = document.createElement('td');
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.className = 'translation-input';
+                input.value = translations[currentLanguage][key] || '';
+                input.oninput = function() {
+                    translations[currentLanguage][key] = this.value;
+                    updateCharacterCount(row, this.value);
+                };
+                transCell.appendChild(input);
+                
+                // Character count column
+                const countCell = document.createElement('td');
+                countCell.className = 'char-count';
+                countCell.textContent = input.value.length;
+                
+                row.appendChild(keyCell);
+                row.appendChild(transCell);
+                row.appendChild(countCell);
+                tbody.appendChild(row);
+                
+                // Initial character count
+                updateCharacterCount(row, input.value);
+            });
+        }
+        
+        function updateCharacterCount(row, value) {
+            const countCell = row.querySelector('.char-count');
+            countCell.textContent = value.length;
+            
+            // Highlight long translations
+            if (value.length > 200) {
+                countCell.style.color = 'red';
+                countCell.style.fontWeight = 'bold';
+            } else {
+                countCell.style.color = 'inherit';
+                countCell.style.fontWeight = 'normal';
+            }
+        }
+        
+        function saveTranslations() {
+            // Save to JSON file (this would need a server-side script in production)
+            const dataStr = JSON.stringify(translations[currentLanguage], null, 2);
+            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+            
+            // Create download link
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(dataBlob);
+            link.download = `${currentLanguage}.json`;
+            link.click();
+            
+            alert(`Translations for ${currentLanguage} downloaded. Replace the file in /js/ folder.`);
+        }
+    </script>
+</body>
+</html>

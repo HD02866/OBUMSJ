@@ -1,0 +1,165 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ============================================
+    // HELPER FUNCTIONS
+    // ============================================
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    function userDocExists() {
+      return isAuthenticated() && exists(/databases/$(database)/documents/users/$(request.auth.uid));
+    }
+
+    function getUserData() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
+    }
+
+    function hasRole(roles) {
+      return isAuthenticated() && userDocExists() && (getUserData().get('role', '') in roles);
+    }
+
+    function isAdmin() {
+      return hasRole(['admin']);
+    }
+
+    function isLeadership() {
+      return hasRole(['admin', 'main_amir']);
+    }
+
+    function isStaff() {
+      return hasRole(['admin', 'main_amir', 'amir']);
+    }
+
+    function isBlogEditor() {
+      return hasRole(['admin', 'main_amir', 'blog_manager']);
+    }
+
+    // ============================================
+    // USERNAMES INDEX (for secure 1-to-1 username lookup)
+    // ============================================
+    match /usernames/{username} {
+      // Allow exact single document lookup (for login via username & pre-registration availability check)
+      allow get: if true;
+      // Disallow collection queries/listing to prevent user enumeration
+      allow list: if false;
+      // Allow authenticated user to claim a username mapping to their own UID
+      allow create: if isAuthenticated() && request.resource.data.uid == request.auth.uid;
+      // Only administrators can update or delete mappings
+      allow update, delete: if isAdmin();
+    }
+
+    // ============================================
+    // USERS COLLECTION
+    // ============================================
+    match /users/{userId} {
+      // 1. Single profile lookup (getDoc):
+      // An authenticated user can ALWAYS read their own profile without any document lookups.
+      // Leadership & staff can view member profiles for management.
+      allow get: if isAuthenticated() && (request.auth.uid == userId || isStaff());
+
+      // 2. Collection listing (onSnapshot / getDocs on collection):
+      // Only leadership & staff can list users; regular users cannot query the collection.
+      allow list: if isStaff();
+
+      // 3. Profile Creation:
+      // An authenticated user can create their own profile with role: 'pending' and status: 'pending'.
+      // Leadership can create user accounts directly.
+      allow create: if isAuthenticated() && (
+        (
+          request.auth.uid == userId &&
+          request.resource.data.role == 'pending' &&
+          request.resource.data.status == 'pending'
+        ) || isLeadership()
+      );
+
+      // 4. Profile Update:
+      // Users can update their own personal info (cannot change role, status, approval metadata, or permission overrides).
+      // Leadership can update all fields (including role promotion & approval).
+      allow update: if isAuthenticated() && (
+        (
+          request.auth.uid == userId &&
+          !request.resource.data.diff(resource.data).affectedKeys().hasAny([
+            'role',
+            'status',
+            'approvedAt',
+            'approvedBy',
+            'customPermissions',
+            'deniedPermissions'
+          ])
+        ) || isLeadership()
+      );
+
+      // 5. Permanent Profile Deletion:
+      // Only Chief Administrators can delete a user profile record.
+      allow delete: if isAdmin();
+    }
+
+    // ============================================
+    // BLOGS COLLECTION
+    // ============================================
+    match /blogs/{blogId} {
+      allow read: if true;
+      allow create, update, delete: if isBlogEditor();
+    }
+
+    // ============================================
+    // ANNOUNCEMENTS COLLECTION
+    // ============================================
+    match /announcements/{announcementId} {
+      allow read: if true;
+      allow create, update, delete: if isStaff();
+    }
+
+    // ============================================
+    // QIRAT PROGRAMS COLLECTION
+    // ============================================
+    match /qirat_programs/{programId} {
+      allow read: if true;
+      allow create, update, delete: if isStaff();
+    }
+
+    // ============================================
+    // NOTIFICATIONS COLLECTION
+    // ============================================
+    match /notifications/{notifId} {
+      allow read: if isAuthenticated() && (
+        resource.data.targetUid in [request.auth.uid, 'all'] ||
+        resource.data.targetUid == request.auth.uid ||
+        resource.data.targetUid == 'all' ||
+        (userDocExists() && resource.data.targetRole == getUserData().get('role', '')) ||
+        isAdmin()
+      );
+      allow create: if isStaff();
+      allow update, delete: if isAuthenticated() && (resource.data.targetUid == request.auth.uid || isAdmin());
+    }
+
+    // ============================================
+    // AUDIT LOGS COLLECTION (Immutable Audit Trail)
+    // ============================================
+    match /audit_logs/{logId} {
+      allow read: if isLeadership();
+      allow create: if isAuthenticated();
+      allow update, delete: if false;
+    }
+
+    // ============================================
+    // SETTINGS COLLECTION
+    // ============================================
+    match /settings/{settingId} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin();
+    }
+
+    // Default catch-all denies anything unlisted
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
