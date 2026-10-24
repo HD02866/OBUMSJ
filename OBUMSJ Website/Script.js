@@ -586,18 +586,40 @@ document.addEventListener('DOMContentLoaded', function() {
 
     initDonationCopyButtons();
 
-    // ================= PWA INSTALLATION SYSTEM (Requirement 3) =================
+    // ================= PWA INSTALLATION SYSTEM & SAFE UPDATE LIFECYCLE (Phase 3) =================
     function initPwaInstall() {
+        let swRegistration = null;
+        let isRefreshing = false;
+
+        // Controllerchange listener: safe single reload upon activation
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.addEventListener('controllerchange', () => {
+                if (isRefreshing) return;
+                isRefreshing = true;
+                console.log('[OBUMSJ PWA] Controller changed; safely reloading into updated version...');
+                window.location.reload();
+            });
+        }
+
         // Register Service Worker on localhost or HTTPS
         if ('serviceWorker' in navigator && (window.location.protocol === 'https:' || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
             navigator.serviceWorker.register('./sw.js').then(reg => {
+                swRegistration = reg;
                 console.log('[OBUMSJ PWA] Service Worker registered successfully with scope:', reg.scope);
+
+                // If a new worker is already waiting, present update toast
+                if (reg.waiting && navigator.serviceWorker.controller) {
+                    showUpdateToast(reg.waiting);
+                }
+
+                // Listen for new worker updates
                 reg.addEventListener('updatefound', () => {
                     const newWorker = reg.installing;
                     if (newWorker) {
                         newWorker.addEventListener('statechange', () => {
                             if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                                console.log('[OBUMSJ PWA] New update available; assets cached safely.');
+                                console.log('[OBUMSJ PWA] New update installed and ready for safe activation.');
+                                showUpdateToast(newWorker);
                             }
                         });
                     }
@@ -605,6 +627,95 @@ document.addEventListener('DOMContentLoaded', function() {
             }).catch(err => {
                 console.warn('[OBUMSJ PWA] Service Worker registration skipped or failed:', err);
             });
+        }
+
+        // Reconnection & Offline awareness
+        window.addEventListener('online', () => {
+            console.log('[OBUMSJ PWA] Device returned online.');
+            showConnectionBadge(true);
+            if (swRegistration && typeof swRegistration.update === 'function') {
+                swRegistration.update().catch(err => {
+                    console.warn('[OBUMSJ PWA] Reconnection update check failed:', err);
+                });
+            }
+        });
+
+        window.addEventListener('offline', () => {
+            console.log('[OBUMSJ PWA] Device is offline.');
+            showConnectionBadge(false);
+        });
+
+        // Discrete Update Notification Toast
+        function showUpdateToast(worker) {
+            if (document.getElementById('obumsjUpdateToast')) return;
+            const toast = document.createElement('div');
+            toast.id = 'obumsjUpdateToast';
+            toast.className = 'obumsj-update-toast';
+            toast.setAttribute('role', 'alert');
+            toast.setAttribute('aria-live', 'polite');
+            toast.innerHTML = `
+                <div class="obumsj-update-toast-header">
+                    <i class="fas fa-arrow-circle-up obumsj-update-toast-icon" aria-hidden="true"></i>
+                    <h4 class="obumsj-update-toast-title">Update Available</h4>
+                </div>
+                <p class="obumsj-update-toast-body">A newer version of OBUMSJ is ready with fresh content and offline enhancements.</p>
+                <div class="obumsj-update-toast-actions">
+                    <button type="button" class="obumsj-dismiss-btn" id="obumsjDismissUpdate">Later</button>
+                    <button type="button" class="obumsj-update-btn" id="obumsjApplyUpdate">Update Now</button>
+                </div>
+            `;
+            document.body.appendChild(toast);
+
+            const applyBtn = document.getElementById('obumsjApplyUpdate');
+            const dismissBtn = document.getElementById('obumsjDismissUpdate');
+
+            if (applyBtn) {
+                applyBtn.addEventListener('click', () => {
+                    if (worker && worker.postMessage) {
+                        worker.postMessage({ action: 'skipWaiting' });
+                    }
+                    toast.remove();
+                });
+            }
+
+            if (dismissBtn) {
+                dismissBtn.addEventListener('click', () => {
+                    toast.remove();
+                });
+            }
+        }
+
+        // Subtle Connection Status Badge
+        let connectionBadgeTimeout = null;
+        function showConnectionBadge(isOnline) {
+            let badge = document.getElementById('obumsjConnectionBadge');
+            if (!badge) {
+                badge = document.createElement('div');
+                badge.id = 'obumsjConnectionBadge';
+                badge.className = 'obumsj-connection-badge';
+                badge.setAttribute('role', 'status');
+                badge.setAttribute('aria-live', 'polite');
+                document.body.appendChild(badge);
+            }
+            if (connectionBadgeTimeout) {
+                clearTimeout(connectionBadgeTimeout);
+                connectionBadgeTimeout = null;
+            }
+            if (!isOnline) {
+                badge.className = 'obumsj-connection-badge is-offline';
+                badge.innerHTML = '<i class="fas fa-wifi-slash" aria-hidden="true"></i> <span>Offline Mode &bull; Viewing Cached Content</span>';
+                badge.style.display = 'inline-flex';
+                badge.style.opacity = '1';
+            } else {
+                badge.className = 'obumsj-connection-badge is-online';
+                badge.innerHTML = '<i class="fas fa-check-circle" aria-hidden="true"></i> <span>Connection Restored</span>';
+                badge.style.display = 'inline-flex';
+                badge.style.opacity = '1';
+                connectionBadgeTimeout = setTimeout(() => {
+                    badge.style.opacity = '0';
+                    setTimeout(() => { badge.style.display = 'none'; }, 300);
+                }, 3500);
+            }
         }
 
         let deferredPrompt = null;

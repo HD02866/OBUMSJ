@@ -2958,3 +2958,160 @@ body.dark-mode .table-empty-state.success-empty {
     transform: scale(1) translateY(0);
   }
 }
+
+/* ============================================================
+   17. PWA OFFLINE & UPDATE LIFECYCLE UI (Phase 3)
+   Discrete update toast, connection state badge, and fallbacks
+   ============================================================ */
+
+.obumsj-update-toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: var(--z-modal, 99999);
+  max-width: 380px;
+  width: calc(100% - 48px);
+  background: var(--bg-card, #23160e);
+  color: var(--text-primary, #f7f3ee);
+  border: 1px solid var(--border-gold, rgba(212, 175, 55, 0.4));
+  border-radius: var(--radius-lg, 12px);
+  padding: 16px 18px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  animation: obumsjToastSlideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html[dir="rtl"] .obumsj-update-toast {
+  right: auto;
+  left: 24px;
+}
+
+@keyframes obumsjToastSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.obumsj-update-toast-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.obumsj-update-toast-icon {
+  color: var(--gold, #d4af37);
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.obumsj-update-toast-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #ffffff;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.obumsj-update-toast-body {
+  font-size: 0.85rem;
+  color: var(--text-secondary, #d1c7be);
+  margin: 0;
+  line-height: 1.45;
+}
+
+.obumsj-update-toast-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.obumsj-update-btn {
+  background: linear-gradient(135deg, var(--gold, #d4af37), #aa820a);
+  color: #140c07;
+  font-weight: 700;
+  font-size: 0.85rem;
+  border: none;
+  border-radius: var(--radius-sm, 6px);
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.obumsj-update-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.35);
+}
+
+.obumsj-dismiss-btn {
+  background: transparent;
+  color: var(--text-secondary, #d1c7be);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-sm, 6px);
+  font-size: 0.85rem;
+  padding: 8px 14px;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.obumsj-dismiss-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+}
+
+/* Connection State Badge */
+.obumsj-connection-badge {
+  position: fixed;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: var(--z-modal, 99999);
+  padding: 6px 16px;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+}
+
+.obumsj-connection-badge.is-offline {
+  background: rgba(35, 22, 14, 0.94);
+  color: #fcd34d;
+  border: 1px solid rgba(252, 211, 77, 0.4);
+}
+
+.obumsj-connection-badge.is-online {
+  background: rgba(20, 50, 30, 0.94);
+  color: #86efac;
+  border: 1px solid rgba(74, 222, 128, 0.4);
+}
+
+@media (max-width: 480px) {
+  .obumsj-update-toast {
+    bottom: 16px;
+    left: 16px !important;
+    right: 16px !important;
+    width: auto;
+    max-width: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .obumsj-update-toast {
+    animation: none !important;
+  }
+}

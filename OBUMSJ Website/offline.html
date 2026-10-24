@@ -31,15 +31,28 @@
             width: 100%;
             box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6);
         }
-        .offline-icon {
-            font-size: 3.5rem;
-            color: #d4af37;
+        .offline-icon-wrap {
             margin-bottom: 20px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            color: #d4af37;
+        }
+        .offline-icon-wrap svg {
+            width: 44px;
+            height: 44px;
+            fill: currentColor;
         }
         .offline-title {
             font-size: 1.8rem;
             margin: 0 0 12px 0;
             color: #ffffff;
+            font-weight: 700;
         }
         .offline-message {
             font-size: 1rem;
@@ -47,12 +60,19 @@
             line-height: 1.6;
             margin: 0 0 26px 0;
         }
+        .offline-btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            align-items: center;
+        }
         .retry-btn {
             background: linear-gradient(135deg, #d4af37, #aa820a);
             color: #140c07;
             border: none;
-            padding: 12px 28px;
-            font-size: 1rem;
+            padding: 12px 24px;
+            font-size: 0.95rem;
             font-weight: 700;
             border-radius: 8px;
             cursor: pointer;
@@ -60,23 +80,59 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
+            text-decoration: none;
         }
         .retry-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 18px rgba(212, 175, 55, 0.3);
         }
+        .home-btn {
+            background: rgba(255, 255, 255, 0.08);
+            color: #f7f3ee;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            padding: 12px 24px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s ease, transform 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+        .home-btn:hover {
+            background: rgba(212, 175, 55, 0.15);
+            transform: translateY(-2px);
+        }
+        .btn-icon-svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
     </style>
 </head>
 <body>
     <div class="offline-card">
-        <div class="offline-icon"><i class="fas fa-wifi-slash"></i></div>
+        <div class="offline-icon-wrap" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+                <path d="M12 4C7.31 4 3.07 5.9 0 8.98L12 21 24 8.98A16.88 16.88 0 0 0 12 4zm0 2.9c3.27 0 6.27 1.15 8.65 3.06L12 18.61 3.35 9.96C5.73 8.05 8.73 6.9 12 6.9zM2.81 2.81 1.39 4.22l2.14 2.14C1.94 7.42.59 8.76 0 8.98L12 21l3.77-3.77 4.01 4.01 1.41-1.41L2.81 2.81z"/>
+            </svg>
+        </div>
         <h1 class="offline-title">You're Currently Offline</h1>
         <p class="offline-message">
-            It looks like your internet connection is unavailable. Cached public pages you previously visited are still accessible. Please reconnect to access real-time features.
+            Your device is disconnected from the internet. All cached pages and features remain accessible. Reconnect to access live services, membership updates, and account management.
         </p>
-        <button class="retry-btn" onclick="window.location.reload()">
-            <i class="fas fa-rotate-right"></i> Try Reconnecting
-        </button>
+        <div class="offline-btn-group">
+            <button class="retry-btn" onclick="window.location.reload()">
+                <svg class="btn-icon-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.65 6.35A7.958 7.958 0 0 0 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08A5.99 5.99 0 0 1 12 18c-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>
+                <span>Try Reconnecting</span>
+            </button>
+            <a href="./index.html" class="home-btn">
+                <svg class="btn-icon-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+                <span>Return to Home</span>
+            </a>
+        </div>
     </div>
 </body>
 </html>
