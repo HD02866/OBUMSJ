@@ -57,20 +57,41 @@ const EXCLUDE_URL_PATTERNS = [
   /token/i
 ];
 
-// Helper: match request in caches, with clean URL normalization (/About-Us -> /About-Us.html)
+// Helper: match request in caches, with clean URL normalization and homepage equivalence
 async function matchInAnyCache(request) {
-  const cached = await caches.match(request);
-  if (cached) {
-    return cached;
+  const directMatch = await caches.match(request);
+  if (directMatch) {
+    return directMatch;
   }
 
   try {
     const url = new URL(request.url);
-    if (!url.pathname.includes('.') && url.pathname !== '/' && url.pathname !== '') {
-      const htmlUrl = new URL(url.pathname + '.html', url.origin).href;
-      const htmlCached = await caches.match(htmlUrl);
+    const cleanPath = url.pathname;
+
+    // Homepage equivalence: / <==> /index.html (with launcher query parameter tolerance)
+    if (cleanPath === '/' || cleanPath === '' || cleanPath.endsWith('/index.html') || cleanPath.endsWith('/index')) {
+      const rootMatch = await caches.match('./', { ignoreSearch: true }) || await caches.match('/', { ignoreSearch: true });
+      if (rootMatch) return rootMatch;
+
+      const indexMatch = await caches.match('./index.html', { ignoreSearch: true }) || await caches.match('/index.html', { ignoreSearch: true });
+      if (indexMatch) return indexMatch;
+    }
+
+    // Clean URL normalization (/About-Us -> /About-Us.html)
+    if (!cleanPath.includes('.') && cleanPath !== '/' && cleanPath !== '') {
+      const htmlUrl = new URL(cleanPath + '.html', url.origin).href;
+      const htmlCached = await caches.match(htmlUrl, { ignoreSearch: true });
       if (htmlCached) {
         return htmlCached;
+      }
+    }
+
+    // Static asset query parameter tolerance (e.g. style.css?v=1 or favicon.ico?v=2)
+    if (url.search && (cleanPath.includes('.') || request.mode === 'navigate')) {
+      const pathOnlyUrl = new URL(cleanPath, url.origin).href;
+      const pathOnlyCached = await caches.match(pathOnlyUrl, { ignoreSearch: true });
+      if (pathOnlyCached) {
+        return pathOnlyCached;
       }
     }
   } catch (e) {
@@ -82,11 +103,11 @@ async function matchInAnyCache(request) {
 
 // Helper: get offline fallback response
 async function getOfflineFallback() {
-  const fallback = await caches.match('./offline.html');
+  const fallback = await caches.match('./offline.html', { ignoreSearch: true });
   if (fallback) return fallback;
-  const rootFallback = await caches.match('/offline.html');
+  const rootFallback = await caches.match('/offline.html', { ignoreSearch: true });
   if (rootFallback) return rootFallback;
-  return caches.match('offline.html');
+  return caches.match('offline.html', { ignoreSearch: true });
 }
 
 // Install Event - Pre-cache essential static app shell (NO automatic skipWaiting)
