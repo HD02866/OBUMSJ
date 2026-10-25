@@ -586,6 +586,26 @@ document.addEventListener('DOMContentLoaded', function() {
 
     initDonationCopyButtons();
 
+    // Global offline notification message and helper constants
+    window.OBUMSJ_OFFLINE_NOTICE = "You're currently offline. Please connect to the internet to sign in, create an account, or access live member services.";
+
+    window.isObumsjOffline = function() {
+        return typeof navigator !== 'undefined' && navigator.onLine === false;
+    };
+
+    window.isFirebaseNetworkError = function(err) {
+        if (!err) return false;
+        const code = err.code || '';
+        const msg = (err.message || '').toLowerCase();
+        return code === 'auth/network-request-failed' ||
+               code === 'unavailable' ||
+               msg.includes('network-request-failed') ||
+               msg.includes('failed to get document because the client is offline') ||
+               msg.includes('the network connection was lost') ||
+               msg.includes('network error') ||
+               msg.includes('offline');
+    };
+
     // ================= PWA INSTALLATION SYSTEM & SAFE UPDATE LIFECYCLE (Phase 3) =================
     function initPwaInstall() {
         let swRegistration = null;
@@ -617,9 +637,15 @@ document.addEventListener('DOMContentLoaded', function() {
                     const newWorker = reg.installing;
                     if (newWorker) {
                         newWorker.addEventListener('statechange', () => {
-                            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                                console.log('[OBUMSJ PWA] New update installed and ready for safe activation.');
-                                showUpdateToast(newWorker);
+                            if (newWorker.state === 'installed') {
+                                if (navigator.serviceWorker.controller) {
+                                    console.log('[OBUMSJ PWA] New update installed and ready for safe activation.');
+                                    showUpdateToast(newWorker);
+                                } else {
+                                    // First install: activate immediately for offline protection
+                                    console.log('[OBUMSJ PWA] Initial service worker installed. Activating...');
+                                    newWorker.postMessage({ action: 'skipWaiting' });
+                                }
                             }
                         });
                     }
@@ -644,6 +670,11 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log('[OBUMSJ PWA] Device is offline.');
             showConnectionBadge(false);
         });
+
+        // Immediate offline check on initial page load
+        if (typeof navigator !== 'undefined' && navigator.onLine === false) {
+            showConnectionBadge(false);
+        }
 
         // Discrete Update Notification Toast
         function showUpdateToast(worker) {

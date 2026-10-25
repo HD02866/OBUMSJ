@@ -7,6 +7,21 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <link rel="stylesheet" href="style.css">
 <script src="js/theme-engine.js"></script>
+<script>
+    // Offline alert banner synchronization
+    function syncMemberOfflineBanner() {
+        const banner = document.getElementById("memberOfflineAlert");
+        if (!banner) return;
+        if (typeof navigator !== 'undefined' && navigator.onLine === false) {
+            banner.style.display = "flex";
+        } else {
+            banner.style.display = "none";
+        }
+    }
+    window.addEventListener("online", syncMemberOfflineBanner);
+    window.addEventListener("offline", syncMemberOfflineBanner);
+    syncMemberOfflineBanner();
+</script>
 <style>
 /* ================= BRAND COLORS ================= */
 :root,
@@ -572,6 +587,11 @@ body.dark-mode .success-message {
     </header>
 
     <div class="container">
+        <!-- Global Offline Notice Banner -->
+        <div id="memberOfflineAlert" class="obumsj-auth-offline-alert" style="display:none;" role="alert">
+            <i class="fas fa-wifi-slash" aria-hidden="true"></i>
+            <span>You're currently offline. Please connect to the internet to sign in, create an account, or access live member services.</span>
+        </div>
         <!-- ============================================
              1. LOGIN FORM CONTAINER
         ============================================ -->
@@ -839,6 +859,84 @@ body.dark-mode .success-message {
     <script src="./js/language-system.js"></script>
     <script src="./Script.js"></script>
 
+    <!-- Reliable Offline Interceptor for Auth & Member Services -->
+    <script>
+        (function() {
+            function showFormOfflineNotice(targetId) {
+                const el = document.getElementById(targetId);
+                if (el) {
+                    el.style.display = 'block';
+                    el.innerHTML = '<i class="fas fa-wifi-slash" style="margin-right:8px;"></i>' +
+                        (window.OBUMSJ_OFFLINE_NOTICE || "You're currently offline. Please connect to the internet to sign in, create an account, or access live member services.");
+                }
+            }
+
+            function setupAuthOfflineInterceptors() {
+                const loginForm = document.getElementById('loginForm');
+                const regForm = document.getElementById('registerForm');
+                const googleLoginBtn = document.getElementById('googleLoginBtn');
+                const googleRegBtn = document.getElementById('googleRegBtn');
+                const forgotForm = document.getElementById('resetPasswordForm');
+
+                if (loginForm) {
+                    loginForm.addEventListener('submit', function(e) {
+                        if ((typeof window.isObumsjOffline === 'function' && window.isObumsjOffline()) || !navigator.onLine) {
+                            e.preventDefault();
+                            e.stopImmediatePropagation();
+                            showFormOfflineNotice('loginErrorMessage');
+                        }
+                    }, true);
+                }
+
+                if (regForm) {
+                    regForm.addEventListener('submit', function(e) {
+                        if ((typeof window.isObumsjOffline === 'function' && window.isObumsjOffline()) || !navigator.onLine) {
+                            e.preventDefault();
+                            e.stopImmediatePropagation();
+                            showFormOfflineNotice('regErrorMessage');
+                        }
+                    }, true);
+                }
+
+                if (googleLoginBtn) {
+                    googleLoginBtn.addEventListener('click', function(e) {
+                        if ((typeof window.isObumsjOffline === 'function' && window.isObumsjOffline()) || !navigator.onLine) {
+                            e.preventDefault();
+                            e.stopImmediatePropagation();
+                            showFormOfflineNotice('loginErrorMessage');
+                        }
+                    }, true);
+                }
+
+                if (googleRegBtn) {
+                    googleRegBtn.addEventListener('click', function(e) {
+                        if ((typeof window.isObumsjOffline === 'function' && window.isObumsjOffline()) || !navigator.onLine) {
+                            e.preventDefault();
+                            e.stopImmediatePropagation();
+                            showFormOfflineNotice('regErrorMessage');
+                        }
+                    }, true);
+                }
+
+                if (forgotForm) {
+                    forgotForm.addEventListener('submit', function(e) {
+                        if ((typeof window.isObumsjOffline === 'function' && window.isObumsjOffline()) || !navigator.onLine) {
+                            e.preventDefault();
+                            e.stopImmediatePropagation();
+                            showFormOfflineNotice('resetMessage');
+                        }
+                    }, true);
+                }
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', setupAuthOfflineInterceptors);
+            } else {
+                setupAuthOfflineInterceptors();
+            }
+        })();
+    </script>
+
     <!-- ============================================
          FIREBASE AUTHENTICATION & MEMBERSHIP LOGIC
     ============================================ -->
@@ -984,6 +1082,15 @@ body.dark-mode .success-message {
 
                 if (!email) return;
 
+                if ((typeof window.isObumsjOffline === 'function' && window.isObumsjOffline()) || !navigator.onLine) {
+                    resetMsg.style.display = "block";
+                    resetMsg.style.background = "#fef2f2";
+                    resetMsg.style.color = "#991b1b";
+                    resetMsg.style.border = "1px solid #fecaca";
+                    resetMsg.innerHTML = '<i class="fas fa-wifi-slash"></i> ' + (window.OBUMSJ_OFFLINE_NOTICE || "You're currently offline. Please connect to the internet to sign in, create an account, or access live member services.");
+                    return;
+                }
+
                 submitBtn.disabled = true;
                 submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending Link...';
 
@@ -1046,6 +1153,12 @@ body.dark-mode .success-message {
             e.preventDefault();
             clearMessages();
 
+            // Connectivity pre-check
+            if ((typeof window.isObumsjOffline === 'function' && window.isObumsjOffline()) || !navigator.onLine) {
+                showLoginError(window.OBUMSJ_OFFLINE_NOTICE || "You're currently offline. Please connect to the internet to sign in, create an account, or access live member services.");
+                return;
+            }
+
             const identifier = document.getElementById("loginIdentifier").value.trim();
             const password = document.getElementById("loginPassword").value;
             const rememberMe = document.getElementById("rememberSession").checked;
@@ -1097,8 +1210,8 @@ body.dark-mode .success-message {
                     message = "Account temporarily locked due to multiple failed login attempts. Please reset your password or wait a few minutes.";
                 } else if (err.code === "auth/user-disabled") {
                     message = "This member account has been disabled. Please contact the administrator.";
-                } else if (err.code === "auth/network-request-failed") {
-                    message = "Network connection failed. Please check your internet connection.";
+                } else if (err.code === "auth/network-request-failed" || (typeof window.isFirebaseNetworkError === 'function' && window.isFirebaseNetworkError(err)) || !navigator.onLine) {
+                    message = window.OBUMSJ_OFFLINE_NOTICE || "You're currently offline. Please connect to the internet to sign in, create an account, or access live member services.";
                 } else if (err.code === "permission-denied" || err.message?.includes("insufficient permissions")) {
                     message = "<strong>Missing or insufficient permissions:</strong> Your member profile could not be verified by Cloud Firestore security rules. Please ensure the latest Security Rules are published in the Firebase Console.";
                 }
@@ -1116,6 +1229,11 @@ body.dark-mode .success-message {
             const isReg = (sourceBtn === googleRegBtn);
             const feedbackFn = isReg ? showRegError : showLoginError;
             const successFn = isReg ? showRegSuccess : showLoginSuccess;
+
+            if ((typeof window.isObumsjOffline === 'function' && window.isObumsjOffline()) || !navigator.onLine) {
+                feedbackFn(window.OBUMSJ_OFFLINE_NOTICE || "You're currently offline. Please connect to the internet to sign in, create an account, or access live member services.");
+                return;
+            }
 
             sourceBtn.disabled = true;
             const originalContent = sourceBtn.innerHTML;
@@ -1226,6 +1344,8 @@ body.dark-mode .success-message {
                     message = "An account already exists with this email address using a different login method. Please sign in with your email and password.";
                 } else if (err.code === "auth/operation-not-allowed") {
                     message = "Google Sign-in provider is not enabled in Firebase Console. Please enable Google under <strong>Authentication &gt; Sign-in method</strong>.";
+                } else if (err.code === "auth/network-request-failed" || (typeof window.isFirebaseNetworkError === 'function' && window.isFirebaseNetworkError(err)) || !navigator.onLine) {
+                    message = window.OBUMSJ_OFFLINE_NOTICE || "You're currently offline. Please connect to the internet to sign in, create an account, or access live member services.";
                 } else if (err.message) {
                     message = err.message;
                 }
@@ -1429,6 +1549,8 @@ body.dark-mode .success-message {
                     message = "Password is too weak. Please use at least 6 characters with mixed letters and numbers.";
                 } else if (err.code === "auth/invalid-email") {
                     message = "Please enter a valid email address.";
+                } else if (err.code === "auth/network-request-failed" || (typeof window.isFirebaseNetworkError === 'function' && window.isFirebaseNetworkError(err)) || !navigator.onLine) {
+                    message = window.OBUMSJ_OFFLINE_NOTICE || "You're currently offline. Please connect to the internet to sign in, create an account, or access live member services.";
                 } else if (err.code === "permission-denied" || err.message?.includes("insufficient permissions")) {
                     message = "<strong>Missing or insufficient permissions:</strong> Firestore security rules rejected the profile creation. Please ensure the latest Security Rules are published in the Firebase Console.";
                 }

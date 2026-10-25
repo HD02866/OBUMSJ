@@ -7,6 +7,21 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <link rel="stylesheet" href="style.css">
 <script src="js/theme-engine.js"></script>
+<script>
+    // Synchronize Dashboard offline banner
+    function syncDashboardOfflineBanner() {
+        const banner = document.getElementById("dashboardOfflineBanner");
+        if (!banner) return;
+        if (typeof navigator !== 'undefined' && navigator.onLine === false) {
+            banner.style.display = "flex";
+        } else {
+            banner.style.display = "none";
+        }
+    }
+    window.addEventListener("online", syncDashboardOfflineBanner);
+    window.addEventListener("offline", syncDashboardOfflineBanner);
+    syncDashboardOfflineBanner();
+</script>
 <style>
 /* ================= DASHBOARD CORE STYLES ================= */
 :root,
@@ -1604,6 +1619,11 @@ body.dark-mode .quick-actions .action-btn.gold {
 
     <!-- Dashboard Layout -->
     <div class="dashboard-container" id="dashboardContainer">
+        <!-- Persistent Offline Status Banner -->
+        <div id="dashboardOfflineBanner" class="obumsj-offline-banner" style="display:none;" role="status" aria-live="polite">
+            <i class="fas fa-wifi-slash" aria-hidden="true"></i>
+            <span>You're currently offline. Please connect to the internet to sign in, create an account, or access live member services.</span>
+        </div>
         <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
         <!-- Sidebar -->
         <aside class="dashboard-sidebar" id="dashboardSidebar">
@@ -3921,6 +3941,10 @@ body.dark-mode .quick-actions .action-btn.gold {
         };
 
         window.confirmDeleteUser = async function(userId, name) {
+            if ((typeof window.isObumsjOffline === 'function' && window.isObumsjOffline()) || !navigator.onLine) {
+                alert(window.OBUMSJ_OFFLINE_NOTICE || "You're currently offline. Please connect to the internet to sign in, create an account, or access live member services.");
+                return;
+            }
             if (!confirm(`CAUTION: Are you sure you want to permanently delete user "${name}" from Firestore? This action cannot be undone.`)) return;
 
             try {
@@ -3943,6 +3967,10 @@ body.dark-mode .quick-actions .action-btn.gold {
 
         // APPROVALS & REJECTIONS
         window.approveUser = async function(uid, targetRole) {
+            if ((typeof window.isObumsjOffline === 'function' && window.isObumsjOffline()) || !navigator.onLine) {
+                alert(window.OBUMSJ_OFFLINE_NOTICE || "You're currently offline. Please connect to the internet to sign in, create an account, or access live member services.");
+                return;
+            }
             if (!hasPermission('applications.approve')) {
                 alert("Unauthorized: You do not have permission to approve applications.");
                 return;
@@ -4201,10 +4229,21 @@ body.dark-mode .quick-actions .action-btn.gold {
         }
 
         async function saveRolePermissionsTemplate() {
+            if ((typeof window.isObumsjOffline === 'function' && window.isObumsjOffline()) || !navigator.onLine) {
+                alert(window.OBUMSJ_OFFLINE_NOTICE || "You're currently offline. Please connect to the internet to sign in, create an account, or access live member services.");
+                return;
+            }
             const selectedRole = document.getElementById('permTargetRoleSelect').value;
             if (selectedRole === 'admin') {
                 alert("The Chief Administrator role permanently retains all system permissions.");
                 return;
+            }
+
+            const saveBtn = document.getElementById('saveRolePermissionsBtn');
+            const origHtml = saveBtn ? saveBtn.innerHTML : '';
+            if (saveBtn) {
+                saveBtn.disabled = true;
+                saveBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving Template...';
             }
 
             const updatedPerms = [];
@@ -4227,7 +4266,17 @@ body.dark-mode .quick-actions .action-btn.gold {
 
                 alert(`Permissions template for ${formatRole(selectedRole)} saved to Firestore successfully!`);
             } catch (err) {
-                alert("Error saving permissions: " + err.message);
+                const isNetErr = (typeof window.isFirebaseNetworkError === 'function' && window.isFirebaseNetworkError(err)) || !navigator.onLine;
+                if (isNetErr) {
+                    alert(window.OBUMSJ_OFFLINE_NOTICE || "You're currently offline. Please connect to the internet to sign in, create an account, or access live member services.");
+                } else {
+                    alert("Error saving permissions: " + err.message);
+                }
+            } finally {
+                if (saveBtn) {
+                    saveBtn.disabled = false;
+                    saveBtn.innerHTML = origHtml;
+                }
             }
         }
 
@@ -4298,13 +4347,22 @@ body.dark-mode .quick-actions .action-btn.gold {
         };
 
         window.deleteBlog = async function(blogId) {
+            if ((typeof window.isObumsjOffline === 'function' && window.isObumsjOffline()) || !navigator.onLine) {
+                alert(window.OBUMSJ_OFFLINE_NOTICE || "You're currently offline. Please connect to the internet to sign in, create an account, or access live member services.");
+                return;
+            }
             if (!confirm("Are you sure you want to delete this blog post from Firestore?")) return;
             try {
                 await deleteDoc(doc(db, "blogs", blogId));
                 await logAdminAction("BLOGS", "BLOG_DELETED", blogId, { summary: "Deleted blog post" });
                 alert("Blog post deleted from Firestore.");
             } catch (err) {
-                alert("Error: " + err.message);
+                const isNetErr = (typeof window.isFirebaseNetworkError === 'function' && window.isFirebaseNetworkError(err)) || !navigator.onLine;
+                if (isNetErr) {
+                    alert(window.OBUMSJ_OFFLINE_NOTICE || "You're currently offline. Please connect to the internet to sign in, create an account, or access live member services.");
+                } else {
+                    alert("Error: " + err.message);
+                }
             }
         };
 
@@ -4344,13 +4402,22 @@ body.dark-mode .quick-actions .action-btn.gold {
         }
 
         window.deleteAnnouncement = async function(id) {
+            if ((typeof window.isObumsjOffline === 'function' && window.isObumsjOffline()) || !navigator.onLine) {
+                alert(window.OBUMSJ_OFFLINE_NOTICE || "You're currently offline. Please connect to the internet to sign in, create an account, or access live member services.");
+                return;
+            }
             if (!confirm("Are you sure you want to delete this announcement?")) return;
             try {
                 await deleteDoc(doc(db, "announcements", id));
                 await logAdminAction("ANNOUNCEMENTS", "ANNOUNCEMENT_DELETED", id, { summary: "Deleted announcement" });
                 alert("Announcement deleted from Firestore.");
             } catch (err) {
-                alert("Error: " + err.message);
+                const isNetErr = (typeof window.isFirebaseNetworkError === 'function' && window.isFirebaseNetworkError(err)) || !navigator.onLine;
+                if (isNetErr) {
+                    alert(window.OBUMSJ_OFFLINE_NOTICE || "You're currently offline. Please connect to the internet to sign in, create an account, or access live member services.");
+                } else {
+                    alert("Error: " + err.message);
+                }
             }
         };
 
@@ -4383,13 +4450,22 @@ body.dark-mode .quick-actions .action-btn.gold {
         }
 
         window.deleteQiratProgram = async function(id) {
+            if ((typeof window.isObumsjOffline === 'function' && window.isObumsjOffline()) || !navigator.onLine) {
+                alert(window.OBUMSJ_OFFLINE_NOTICE || "You're currently offline. Please connect to the internet to sign in, create an account, or access live member services.");
+                return;
+            }
             if (!confirm("Are you sure you want to remove this Qirat program?")) return;
             try {
                 await deleteDoc(doc(db, "qirat_programs", id));
                 await logAdminAction("QIRAT", "QIRAT_PROGRAM_DELETED", id, { summary: "Removed Qirat program" });
                 alert("Qirat program removed.");
             } catch (err) {
-                alert("Error: " + err.message);
+                const isNetErr = (typeof window.isFirebaseNetworkError === 'function' && window.isFirebaseNetworkError(err)) || !navigator.onLine;
+                if (isNetErr) {
+                    alert(window.OBUMSJ_OFFLINE_NOTICE || "You're currently offline. Please connect to the internet to sign in, create an account, or access live member services.");
+                } else {
+                    alert("Error: " + err.message);
+                }
             }
         };
 
@@ -4990,6 +5066,17 @@ body.dark-mode .quick-actions .action-btn.gold {
 
         async function handleNewUserSubmit(e) {
             e.preventDefault();
+            if ((typeof window.isObumsjOffline === 'function' && window.isObumsjOffline()) || !navigator.onLine) {
+                alert(window.OBUMSJ_OFFLINE_NOTICE || "You're currently offline. Please connect to the internet to sign in, create an account, or access live member services.");
+                return;
+            }
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            const origHtml = submitBtn ? submitBtn.innerHTML : '';
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating Member...';
+            }
+
             const fullName = document.getElementById('newFullName').value.trim();
             const email = document.getElementById('newEmail').value.trim();
             const phone = document.getElementById('newPhone').value.trim();
@@ -5020,12 +5107,33 @@ body.dark-mode .quick-actions .action-btn.gold {
                 document.getElementById('createUserForm').style.display = 'none';
                 document.getElementById('createUserBtn').style.display = 'inline-flex';
             } catch (err) {
-                alert("Error: " + err.message);
+                const isNetErr = (typeof window.isFirebaseNetworkError === 'function' && window.isFirebaseNetworkError(err)) || !navigator.onLine;
+                if (isNetErr) {
+                    alert(window.OBUMSJ_OFFLINE_NOTICE || "You're currently offline. Please connect to the internet to sign in, create an account, or access live member services.");
+                } else {
+                    alert("Error: " + err.message);
+                }
+            } finally {
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = origHtml;
+                }
             }
         }
 
         async function handleBlogSubmit(e) {
             e.preventDefault();
+            if ((typeof window.isObumsjOffline === 'function' && window.isObumsjOffline()) || !navigator.onLine) {
+                alert(window.OBUMSJ_OFFLINE_NOTICE || "You're currently offline. Please connect to the internet to sign in, create an account, or access live member services.");
+                return;
+            }
+            const submitBtn = document.getElementById('blogSubmitBtn') || e.target.querySelector('button[type="submit"]');
+            const origHtml = submitBtn ? submitBtn.innerHTML : '';
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving to Firestore...';
+            }
+
             const editingId = document.getElementById('editingBlogId').value;
             const title = document.getElementById('blogTitle').value.trim();
             const category = document.getElementById('blogCategory').value;
@@ -5061,12 +5169,33 @@ body.dark-mode .quick-actions .action-btn.gold {
                 const btnManage = document.getElementById('btnTabManageBlogs');
                 if (btnManage) btnManage.click();
             } catch (err) {
-                alert("Error: " + err.message);
+                const isNetErr = (typeof window.isFirebaseNetworkError === 'function' && window.isFirebaseNetworkError(err)) || !navigator.onLine;
+                if (isNetErr) {
+                    alert(window.OBUMSJ_OFFLINE_NOTICE || "You're currently offline. Please connect to the internet to sign in, create an account, or access live member services.");
+                } else {
+                    alert("Error: " + err.message);
+                }
+            } finally {
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = origHtml;
+                }
             }
         }
 
         async function handleAnnouncementSubmit(e) {
             e.preventDefault();
+            if ((typeof window.isObumsjOffline === 'function' && window.isObumsjOffline()) || !navigator.onLine) {
+                alert(window.OBUMSJ_OFFLINE_NOTICE || "You're currently offline. Please connect to the internet to sign in, create an account, or access live member services.");
+                return;
+            }
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            const origHtml = submitBtn ? submitBtn.innerHTML : '';
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Publishing...';
+            }
+
             const title = document.getElementById('annTitle').value.trim();
             const targetAudience = document.getElementById('annTarget').value;
             const priority = document.getElementById('annPriority').value;
@@ -5108,12 +5237,33 @@ body.dark-mode .quick-actions .action-btn.gold {
                 document.getElementById('firestoreAnnouncementForm').reset();
                 window.switchTabDirectly('announcements');
             } catch (err) {
-                alert("Error: " + err.message);
+                const isNetErr = (typeof window.isFirebaseNetworkError === 'function' && window.isFirebaseNetworkError(err)) || !navigator.onLine;
+                if (isNetErr) {
+                    alert(window.OBUMSJ_OFFLINE_NOTICE || "You're currently offline. Please connect to the internet to sign in, create an account, or access live member services.");
+                } else {
+                    alert("Error: " + err.message);
+                }
+            } finally {
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = origHtml;
+                }
             }
         }
 
         async function handleQiratSubmit(e) {
             e.preventDefault();
+            if ((typeof window.isObumsjOffline === 'function' && window.isObumsjOffline()) || !navigator.onLine) {
+                alert(window.OBUMSJ_OFFLINE_NOTICE || "You're currently offline. Please connect to the internet to sign in, create an account, or access live member services.");
+                return;
+            }
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            const origHtml = submitBtn ? submitBtn.innerHTML : '';
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving Program...';
+            }
+
             const title = document.getElementById('qiratTitle').value.trim();
             const dateTime = document.getElementById('qiratDateTime').value;
             const location = document.getElementById('qiratLocation').value.trim();
@@ -5150,12 +5300,33 @@ body.dark-mode .quick-actions .action-btn.gold {
                 document.getElementById('qiratProgramForm').reset();
                 window.switchTabDirectly('qirat-manage');
             } catch (err) {
-                alert("Error: " + err.message);
+                const isNetErr = (typeof window.isFirebaseNetworkError === 'function' && window.isFirebaseNetworkError(err)) || !navigator.onLine;
+                if (isNetErr) {
+                    alert(window.OBUMSJ_OFFLINE_NOTICE || "You're currently offline. Please connect to the internet to sign in, create an account, or access live member services.");
+                } else {
+                    alert("Error: " + err.message);
+                }
+            } finally {
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = origHtml;
+                }
             }
         }
 
         async function handleDispatchNotificationSubmit(e) {
             e.preventDefault();
+            if ((typeof window.isObumsjOffline === 'function' && window.isObumsjOffline()) || !navigator.onLine) {
+                alert(window.OBUMSJ_OFFLINE_NOTICE || "You're currently offline. Please connect to the internet to sign in, create an account, or access live member services.");
+                return;
+            }
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            const origHtml = submitBtn ? submitBtn.innerHTML : '';
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Dispatching...';
+            }
+
             const title = document.getElementById('dispatchTitle').value.trim();
             const target = document.getElementById('dispatchTarget').value;
             const link = document.getElementById('dispatchLink').value.trim();
@@ -5181,12 +5352,33 @@ body.dark-mode .quick-actions .action-btn.gold {
                 alert("Broadcast notification dispatched!");
                 document.getElementById('dispatchNotificationForm').reset();
             } catch (err) {
-                alert("Error: " + err.message);
+                const isNetErr = (typeof window.isFirebaseNetworkError === 'function' && window.isFirebaseNetworkError(err)) || !navigator.onLine;
+                if (isNetErr) {
+                    alert(window.OBUMSJ_OFFLINE_NOTICE || "You're currently offline. Please connect to the internet to sign in, create an account, or access live member services.");
+                } else {
+                    alert("Error: " + err.message);
+                }
+            } finally {
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = origHtml;
+                }
             }
         }
 
         async function handleSettingsSubmit(e) {
             e.preventDefault();
+            if ((typeof window.isObumsjOffline === 'function' && window.isObumsjOffline()) || !navigator.onLine) {
+                alert(window.OBUMSJ_OFFLINE_NOTICE || "You're currently offline. Please connect to the internet to sign in, create an account, or access live member services.");
+                return;
+            }
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            const origHtml = submitBtn ? submitBtn.innerHTML : '';
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving Settings...';
+            }
+
             const email = document.getElementById('settingOrgEmail').value.trim();
             const phone = document.getElementById('settingOrgPhone').value.trim();
             const telegram = document.getElementById('settingTelegram').value.trim();
@@ -5207,7 +5399,17 @@ body.dark-mode .quick-actions .action-btn.gold {
 
                 alert("Platform settings saved to Firestore successfully!");
             } catch (err) {
-                alert("Error: " + err.message);
+                const isNetErr = (typeof window.isFirebaseNetworkError === 'function' && window.isFirebaseNetworkError(err)) || !navigator.onLine;
+                if (isNetErr) {
+                    alert(window.OBUMSJ_OFFLINE_NOTICE || "You're currently offline. Please connect to the internet to sign in, create an account, or access live member services.");
+                } else {
+                    alert("Error: " + err.message);
+                }
+            } finally {
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = origHtml;
+                }
             }
         }
 
