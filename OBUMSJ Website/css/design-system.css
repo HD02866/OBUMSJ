@@ -374,6 +374,7 @@ p, span, li, a, td, th, label {
   animation: lanternSwayRight 9s ease-in-out infinite 0.7s;
 }
 
+<<<<<<< HEAD
 /* Day Mode: Lanterns strictly hidden as per Requirement 7 */
 .islamic-corner-lantern,
 [data-theme="light"] .islamic-corner-lantern,
@@ -411,6 +412,24 @@ body.dark-mode .islamic-corner-lantern img {
   }
 }
 
+=======
+/* Day Mode: softer lantern presence with subtle golden warm reflection */
+[data-theme="light"] .islamic-corner-lantern img,
+[data-theme="day"] .islamic-corner-lantern img,
+:root:not([data-theme="dark"]):not([data-theme="night"]) .islamic-corner-lantern img {
+  opacity: 0.85;
+  filter: drop-shadow(0 6px 16px rgba(180, 130, 50, 0.22));
+}
+
+/* Night Mode: glowing amber beacon with ambient halo */
+[data-theme="dark"] .islamic-corner-lantern img,
+[data-theme="night"] .islamic-corner-lantern img,
+body.dark-mode .islamic-corner-lantern img {
+  opacity: 0.98;
+  filter: drop-shadow(0 12px 32px rgba(255, 183, 3, 0.5));
+}
+
+>>>>>>> origin/main
 /* Natural pendulum sway keyframes */
 @keyframes lanternSwayLeft {
   0%, 100% {
@@ -722,6 +741,7 @@ button:disabled,
   }
 }
 
+<<<<<<< HEAD
 /* ============================================================
    CARD ANIMATED CORNER BORDER ACCENT (Requirement 2 & 5)
    Restrained perimeter tracing inspired by moving ribbon button
@@ -802,6 +822,8 @@ body.dark-mode .card-animated-border {
   }
 }
 
+=======
+>>>>>>> origin/main
 /* Primary Button (Islamic Forest Emerald) */
 .btn-primary {
   background: #1b5e20 !important;
@@ -1851,6 +1873,7 @@ body.dark-mode .lang-btn {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+<<<<<<< HEAD
   width: 44px;
   height: 44px;
   min-width: 44px;
@@ -1864,6 +1887,17 @@ body.dark-mode .lang-btn {
   transition: border-color 0.2s ease, background 0.2s ease;
   box-sizing: border-box;
   flex-shrink: 0;
+=======
+  width: 42px;
+  height: 42px;
+  cursor: pointer;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  background: var(--bg-card-subtle);
+  padding: 8px;
+  gap: 5px;
+  transition: border-color 0.2s ease, background 0.2s ease;
+>>>>>>> origin/main
 }
 
 .menu-toggle:hover {
@@ -1873,15 +1907,25 @@ body.dark-mode .lang-btn {
 .menu-toggle span {
   display: block;
   width: 22px;
+<<<<<<< HEAD
   height: 2.5px;
   background: var(--text-primary);
   border-radius: 2px;
   margin: 2px 0;
+=======
+  height: 2px;
+  background: var(--text-primary);
+  border-radius: 2px;
+>>>>>>> origin/main
   transition: transform 0.25s ease, opacity 0.25s ease;
 }
 
 .menu-toggle.active span:nth-child(1) {
+<<<<<<< HEAD
   transform: translateY(6.5px) rotate(45deg);
+=======
+  transform: translateY(7px) rotate(45deg);
+>>>>>>> origin/main
 }
 
 .menu-toggle.active span:nth-child(2) {
@@ -1889,7 +1933,11 @@ body.dark-mode .lang-btn {
 }
 
 .menu-toggle.active span:nth-child(3) {
+<<<<<<< HEAD
   transform: translateY(-6.5px) rotate(-45deg);
+=======
+  transform: translateY(-7px) rotate(-45deg);
+>>>>>>> origin/main
 }
 
 /* Mobile Nav Drawer & Backdrop */
@@ -1897,11 +1945,18 @@ body.dark-mode .lang-btn {
   display: none;
   position: fixed;
   inset: 0;
+<<<<<<< HEAD
   top: 70px;
   background: rgba(0, 0, 0, 0.62);
   backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(3px);
   z-index: 995; /* Strictly behind .navbar (1000) and .nav-links drawer (1100) */
+=======
+  top: 80px;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(3px);
+  z-index: var(--z-backdrop);
+>>>>>>> origin/main
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s ease;
@@ -1914,6 +1969,7 @@ body.dark-mode .lang-btn {
 }
 
 @media (max-width: 992px) {
+<<<<<<< HEAD
   .navbar {
     padding: 0 14px !important;
     height: 70px !important;
@@ -2004,21 +2060,34 @@ body.dark-mode .lang-btn {
 
   .navbar.menu-open {
     z-index: 1200 !important;
+=======
+  .menu-toggle {
+    display: flex;
+>>>>>>> origin/main
   }
 
   .navbar .nav-links {
     position: fixed;
+<<<<<<< HEAD
     top: 70px !important;
     left: -100%;
     width: 320px;
     max-width: 85vw;
     height: calc(100vh - 70px) !important;
+=======
+    top: 80px;
+    left: -100%;
+    width: 320px;
+    max-width: 85vw;
+    height: calc(100vh - 80px);
+>>>>>>> origin/main
     background-color: var(--bg-surface) !important;
     border-right: 1px solid var(--border-color);
     flex-direction: column;
     align-items: stretch;
     padding: 24px 20px;
     overflow-y: auto;
+<<<<<<< HEAD
     -webkit-overflow-scrolling: touch;
     z-index: 1100 !important;
     backdrop-filter: none !important;
@@ -2073,6 +2142,12 @@ body.dark-mode .lang-btn {
     margin: 0 4px 0 0 !important;
   }
 }
+=======
+    z-index: var(--z-sidebar);
+    box-shadow: 4px 0 30px rgba(0, 0, 0, 0.45);
+    transition: left 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+>>>>>>> origin/main
 
   .navbar .nav-links.active {
     left: 0;
@@ -2398,6 +2473,7 @@ html.js-reveal-ready .reveal-description:not(.is-revealed) {
   transition-delay: 120ms; /* Subtle staggered follow-through */
 }
 
+<<<<<<< HEAD
 /* Right-to-Left Text Entrance Animation (~5s Duration, Requirement 5) */
 .reveal-horizontal {
   opacity: 1;
@@ -2465,6 +2541,13 @@ html.js-reveal-ready .reveal-image-up.is-revealed {
     transform: none !important;
     transition: none !important;
   }
+=======
+html.js-reveal-ready .reveal-on-scroll.is-revealed,
+html.js-reveal-ready .reveal-up.is-revealed,
+html.js-reveal-ready .reveal-description.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+>>>>>>> origin/main
 }
 
 /* ============================================================

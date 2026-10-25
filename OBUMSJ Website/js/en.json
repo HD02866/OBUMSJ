@@ -202,8 +202,14 @@
         "register.confirm_password": "Confirm Password",
         "register.submit": "Complete Registration",
         "register.have_account": "Already have an account?",
+<<<<<<< HEAD
         "register.login_link": "Login Here",
         "sector.view_details": "View Details",
         "testimonials.view_details": "Read More About Our Community & Leadership",
         "about.read_more": "Learn More About Us"
+=======
+        "register.login_link": "Login Here"
+       
+    
+>>>>>>> origin/main
 }

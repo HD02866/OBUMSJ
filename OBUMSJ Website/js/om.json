@@ -214,8 +214,13 @@
         "register.confirm_password": "Jecha Darbii Mirkaneessaa",
         "register.submit": "Galmee Xumuraa",
         "register.have_account": "Duraan akkaawuntii qabduu?",
+<<<<<<< HEAD
         "register.login_link": "Asitti Seenaa",
         "sector.view_details": "Bal'ina Ilaalaa",
         "testimonials.view_details": "Waa'ee Hawaasa Keenyaa fi Hoggansa Dabalataan Dubbisaa",
         "about.read_more": "Waa'ee Keenya Dabalataan Baraa"
+=======
+        "register.login_link": "Asitti Seenaa"
+
+>>>>>>> origin/main
 }

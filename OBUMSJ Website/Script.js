@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 // Script.js - Clean and organized with NEW FEATURES
+=======
+﻿// Script.js - Clean and organized with NEW FEATURES
+>>>>>>> origin/main
 
 // ================= FLOATING SOCIAL MEDIA SIDEBAR =================
 const socialSidebar = document.getElementById('socialSidebar');
@@ -151,8 +155,11 @@ if (!navBackdrop && navLinks) {
 
 function openMobileNav() {
     if (!navLinks || !mobileMenu) return;
+<<<<<<< HEAD
     const navbar = document.querySelector('.navbar');
     if (navbar) navbar.classList.add('menu-open');
+=======
+>>>>>>> origin/main
     navLinks.classList.add('active');
     mobileMenu.classList.add('active');
     mobileMenu.setAttribute('aria-expanded', 'true');
@@ -162,8 +169,11 @@ function openMobileNav() {
 
 function closeMobileNav() {
     if (!navLinks || !mobileMenu) return;
+<<<<<<< HEAD
     const navbar = document.querySelector('.navbar');
     if (navbar) navbar.classList.remove('menu-open');
+=======
+>>>>>>> origin/main
     navLinks.classList.remove('active');
     mobileMenu.classList.remove('active');
     mobileMenu.setAttribute('aria-expanded', 'false');
@@ -184,6 +194,7 @@ if (mobileMenu && navLinks) {
         }
     });
 
+<<<<<<< HEAD
     mobileMenu.addEventListener('keydown', function(e) {
         if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault();
@@ -195,6 +206,8 @@ if (mobileMenu && navLinks) {
         }
     });
 
+=======
+>>>>>>> origin/main
     if (navBackdrop) {
         navBackdrop.addEventListener('click', function() {
             closeMobileNav();
@@ -392,6 +405,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
+<<<<<<< HEAD
     // ================= TESTIMONIALS CAROUSEL (Requirement 4) =================
     function initTestimonialCarousel() {
         const carousel = document.getElementById('testimonialsCarousel');
@@ -738,6 +752,9 @@ document.addEventListener('DOMContentLoaded', function() {
     initScrollRevealObserver();
 
     // Scroll animations (legacy backward compatibility)
+=======
+    // Scroll animations
+>>>>>>> origin/main
     const scrollObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
