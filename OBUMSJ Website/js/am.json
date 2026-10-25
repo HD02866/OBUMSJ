@@ -148,12 +148,8 @@
         "register.confirm_password": "የይለፍ ቃል ያረጋግጡ",
         "register.submit": "ምዝገባውን ያጠናቅቁ",
         "register.have_account": "ቀደም ሲል መለያ አለዎት?",
-<<<<<<< HEAD
         "register.login_link": "እዚህ ይግቡ",
         "sector.view_details": "ዝርዝሩን ይመልከቱ",
         "testimonials.view_details": "ስለ ማህበረሰባችን እና አመራሩ የበለጠ ያንብቡ",
         "about.read_more": "ስለ እኛ የበለጠ ይወቁ"
-=======
-        "register.login_link": "እዚህ ይግቡ"
->>>>>>> origin/main
 }

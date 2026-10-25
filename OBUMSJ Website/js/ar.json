@@ -183,12 +183,8 @@
         "register.confirm_password": "تأكيد كلمة المرور",
         "register.submit": "إتمام التسجيل",
         "register.have_account": "هل لديك حساب بالفعل؟",
-<<<<<<< HEAD
         "register.login_link": "سجل الدخول هنا",
         "sector.view_details": "عرض التفاصيل",
         "testimonials.view_details": "اقرأ المزيد عن مجتمعنا وقيادتنا",
         "about.read_more": "تعرف علينا أكثر"
-=======
-        "register.login_link": "سجل الدخول هنا"
->>>>>>> origin/main
 }
