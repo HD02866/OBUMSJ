@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Setup & Verification Guide | OBUMSJ</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+<style>
+:root {
+  --primary:#2f8f3d;
+  --secondary:#0f3d2e;
+  --dark:#1e293b;
+}
+body {
+  background: #f1f5f9;
+  font-family: Poppins, Arial, sans-serif;
+  color: #334155;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+}
+.recovery-header {
+  background: linear-gradient(135deg, #0f3d2e, #1e3a8a);
+  color: #fff;
+  padding: 60px 20px;
+  text-align: center;
+}
+.recovery-header h1 {
+  font-size: 2rem;
+  margin-bottom: 8px;
+}
+.recovery-header p {
+  opacity: 0.9;
+  max-width: 650px;
+  margin: 0 auto;
+  font-size: 0.95rem;
+}
+.recovery-card {
+  max-width: 680px;
+  margin: -30px auto 60px;
+  background: #fff;
+  border-radius: 14px;
+  padding: 35px 30px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  border-top: 5px solid #2f8f3d;
+}
+.badge-admin {
+  background: #dcfce7;
+  color: #15803d;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.badge-pending {
+  background: #fef9c3;
+  color: #a16207;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.badge-anonymous {
+  background: #f1f5f9;
+  color: #64748b;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.step-box {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+.step-title {
+  font-weight: 700;
+  color: #0f3d2e;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.05rem;
+}
+.btn-google {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 12px;
+  background: #fff;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 15px;
+  transition: 0.2s;
+}
+.btn-google:hover { background: #f8fafc; }
+.btn-google svg { width: 18px; height: 18px; }
+.form-input {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  margin-bottom: 14px;
+  box-sizing: border-box;
+  font-size: 0.95rem;
+}
+.btn-action {
+  width: 100%;
+  padding: 13px;
+  background: #2f8f3d;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-decoration: none;
+}
+.btn-action:hover { background: #0f3d2e; }
+.btn-outline {
+  width: 100%;
+  padding: 11px;
+  background: transparent;
+  color: #0f3d2e;
+  border: 1.5px solid #0f3d2e;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.btn-outline:hover { background: #f0fdf4; }
+.alert-box {
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  font-size: 0.92rem;
+  display: none;
+}
+.alert-error { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
+.alert-success { background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; }
+.alert-info { background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; }
+.code-pill {
+  background: #1e293b;
+  color: #38bdf8;
+  padding: 3px 8px;
+  border-radius: 5px;
+  font-family: monospace;
+  font-size: 0.88rem;
+  user-select: all;
+}
+.copy-btn {
+  background: #e2e8f0;
+  border: none;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  margin-left: 6px;
+}
+.copy-btn:hover { background: #cbd5e1; }
+</style>
+</head>
+<body>
+
+<div class="recovery-header">
+  <h1><i class="fas fa-shield-alt"></i> OBUMSJ Administrator Setup & Verification</h1>
+  <p>Secure, cloud-verified procedure for establishing Chief Administrator access</p>
+</div>
+
+<div class="recovery-card">
+  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; flex-wrap:wrap; gap:10px;">
+    <h3 style="margin:0; color:#0f3d2e;">Access Status</h3>
+    <span id="adminStatusBadge" class="badge-anonymous"><i class="fas fa-spinner fa-spin"></i> Checking session...</span>
+  </div>
+
+  <div id="alertBox" class="alert-box"></div>
+
+  <!-- Authenticated User Info Banner -->
+  <div id="userInfoPanel" style="display:none; background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:18px; margin-bottom:24px;">
+    <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:10px;">
+      <div>
+        <div style="font-weight:700; color:#1e293b; font-size:1.05rem;" id="userNameDisplay">Member Name</div>
+        <div style="font-size:0.88rem; color:#64748b;" id="userEmailDisplay">user@example.com</div>
+      </div>
+      <button type="button" id="btnSignOut" class="btn-outline" style="width:auto; padding:6px 12px; font-size:0.8rem;">
+        <i class="fas fa-sign-out-alt"></i> Sign Out
+      </button>
+    </div>
+    
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:12px; font-size:0.88rem;">
+      <div style="background:#fff; padding:10px; border-radius:6px; border:1px solid #e2e8f0;">
+        <div style="color:#64748b; font-size:0.75rem; text-transform:uppercase; font-weight:600;">Firestore Role</div>
+        <div style="font-weight:700; color:#0f3d2e; font-size:1rem;" id="userRoleDisplay">loading...</div>
+      </div>
+      <div style="background:#fff; padding:10px; border-radius:6px; border:1px solid #e2e8f0;">
+        <div style="color:#64748b; font-size:0.75rem; text-transform:uppercase; font-weight:600;">Account Status</div>
+        <div style="font-weight:700; color:#0f3d2e; font-size:1rem;" id="userStatusDisplay">loading...</div>
+      </div>
+    </div>
+
+    <div style="margin-top:12px; font-size:0.85rem; color:#475569;">
+      <strong>User UID:</strong> <span class="code-pill" id="userUidDisplay">none</span>
+      <button type="button" class="copy-btn" id="btnCopyUid" title="Copy UID to clipboard"><i class="far fa-copy"></i> Copy UID</button>
+    </div>
+
+    <div style="margin-top:15px; display:flex; gap:10px;">
+      <button type="button" class="btn-outline" id="btnRefreshStatus" style="flex:1;">
+        <i class="fas fa-sync-alt"></i> Re-check Status from Cloud
+      </button>
+      <a href="Dashboard.html" id="btnGoDashboard" class="btn-action" style="flex:1; display:none;">
+        <i class="fas fa-tachometer-alt"></i> Open Admin Dashboard
+      </a>
+    </div>
+  </div>
+
+  <!-- Sign In Section (Shown if unauthenticated) -->
+  <div id="signInPanel" class="step-box">
+    <div class="step-title"><i class="fas fa-user-lock"></i> Step 1: Sign in with your Account</div>
+    <p style="font-size:0.88rem; color:#64748b; margin-bottom:14px;">
+      Sign in with the Google account or email address you want to verify or promote as Administrator.
+    </p>
+
+    <button type="button" class="btn-google" id="btnGoogleAuth">
+      <svg viewBox="0 0 18 18">
+        <path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.616z"/>
+        <path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.258c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332C2.438 15.983 5.482 18 9 18z"/>
+        <path fill="#FBBC05" d="M3.964 10.707c-.18-.54-.282-1.117-.282-1.707s.102-1.167.282-1.707V4.961H.957C.347 6.175 0 7.55 0 9s.347 2.825.957 4.039l3.007-2.332z"/>
+        <path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0 5.482 0 2.438 2.017.957 4.961L3.964 7.293C4.672 5.166 6.656 3.58 9 3.58z"/>
+      </svg>
+      <span>Sign in with Google</span>
+    </button>
+
+    <div style="text-align:center; margin:10px 0; font-size:12px; color:#94a3b8; font-weight:600;">— OR SIGN IN WITH EMAIL —</div>
+
+    <input type="email" id="authEmail" class="form-input" placeholder="Registered Email Address">
+    <input type="password" id="authPassword" class="form-input" placeholder="Password">
+    <button type="button" class="btn-action" id="btnEmailLogin">
+      <i class="fas fa-sign-in-alt"></i> Sign In to Check Status
+    </button>
+  </div>
+
+  <!-- Instruction Guide -->
+  <div class="step-box">
+    <div class="step-title"><i class="fas fa-cloud"></i> How to Promote or Recover Administrator in Firebase</div>
+    <div style="font-size:0.9rem; color:#475569; line-height:1.6;">
+      <p style="margin-bottom:10px;">
+        To ensure total application security, <strong>OBUMSJ does not permit public client-side self-elevation</strong>. Initial administrator access is granted securely in the Firebase Console:
+      </p>
+      <ol style="margin-left:20px; padding:0; margin-bottom:14px;">
+        <li style="margin-bottom:8px;">
+          <strong>Register or Sign In</strong> above using your administrator email address.
+        </li>
+        <li style="margin-bottom:8px;">
+          Copy your <strong>UID</strong> shown in the panel above.
+        </li>
+        <li style="margin-bottom:8px;">
+          Open the <a href="https://console.firebase.google.com/project/obumsj-ed1f2/firestore" target="_blank" style="color:#0288d1; font-weight:600;">Firebase Console &gt; Firestore Database</a>.
+        </li>
+        <li style="margin-bottom:8px;">
+          Navigate to the <span class="code-pill">users</span> collection and locate the document matching your UID.
+        </li>
+        <li style="margin-bottom:8px;">
+          Update or add these two fields:
+          <ul style="margin:4px 0 4px 18px;">
+            <li>Field: <span class="code-pill">role</span> &rarr; Type: <code>string</code> &rarr; Value: <span class="code-pill">admin</span></li>
+            <li>Field: <span class="code-pill">status</span> &rarr; Type: <code>string</code> &rarr; Value: <span class="code-pill">active</span></li>
+          </ul>
+        </li>
+        <li>
+          Return to this tab and click <strong>"Re-check Status from Cloud"</strong>. You will immediately be granted access to the Dashboard!
+        </li>
+      </ol>
+
+      <div style="background:#eff6ff; border:1px solid #bfdbfe; border-radius:8px; padding:12px; font-size:0.85rem; color:#1e40af;">
+        <i class="fas fa-info-circle"></i> <strong>Authorized Domain Notice:</strong> If testing locally, make sure your domain (e.g. <code>localhost</code>, <code>127.0.0.1</code>) is listed under <strong>Firebase Console &gt; Authentication &gt; Settings &gt; Authorized domains</strong>.
+      </div>
+    </div>
+  </div>
+
+  <div style="text-align:center; margin-top:20px;">
+    <a href="member.html" style="color:#2f8f3d; font-weight:600; text-decoration:none;">
+      <i class="fas fa-arrow-left"></i> Return to Membership Portal
+    </a>
+  </div>
+</div>
+
+<script type="module">
+  import {
+    auth,
+    db,
+    googleProvider,
+    signInWithEmailAndPassword,
+    signInWithPopup,
+    signOut,
+    onAuthStateChanged,
+    doc,
+    getDoc
+  } from "./js/firebase.js";
+
+  let activeUser = null;
+
+  const statusBadge = document.getElementById("adminStatusBadge");
+  const alertBox = document.getElementById("alertBox");
+  const userInfoPanel = document.getElementById("userInfoPanel");
+  const signInPanel = document.getElementById("signInPanel");
+  const userNameDisplay = document.getElementById("userNameDisplay");
+  const userEmailDisplay = document.getElementById("userEmailDisplay");
+  const userRoleDisplay = document.getElementById("userRoleDisplay");
+  const userStatusDisplay = document.getElementById("userStatusDisplay");
+  const userUidDisplay = document.getElementById("userUidDisplay");
+  const btnGoDashboard = document.getElementById("btnGoDashboard");
+
+  function showAlert(msg, type = "error") {
+    alertBox.style.display = "block";
+    alertBox.className = "alert-box " + (type === "success" ? "alert-success" : type === "info" ? "alert-info" : "alert-error");
+    alertBox.innerHTML = msg;
+  }
+
+  function clearAlert() {
+    alertBox.style.display = "none";
+    alertBox.innerHTML = "";
+  }
+
+  // Inspect user role and status in Firestore
+  async function inspectUserAccess(user) {
+    if (!user) {
+      statusBadge.className = "badge-anonymous";
+      statusBadge.innerHTML = '<i class="fas fa-user-slash"></i> Not Signed In';
+      userInfoPanel.style.display = "none";
+      signInPanel.style.display = "block";
+      return;
+    }
+
+    userInfoPanel.style.display = "block";
+    signInPanel.style.display = "none";
+    userNameDisplay.textContent = user.displayName || user.email?.split('@')[0] || "User";
+    userEmailDisplay.textContent = user.email || "No email";
+    userUidDisplay.textContent = user.uid;
+
+    try {
+      const snap = await getDoc(doc(db, "users", user.uid));
+      if (!snap.exists()) {
+        userRoleDisplay.textContent = "No Profile Record";
+        userStatusDisplay.textContent = "Unregistered";
+        statusBadge.className = "badge-pending";
+        statusBadge.innerHTML = '<i class="fas fa-question-circle"></i> No Firestore Profile';
+        btnGoDashboard.style.display = "none";
+        showAlert("No Firestore profile document was found for your account UID. Please register via the Membership portal first or create the document in Firebase Console.", "info");
+        return;
+      }
+
+      const data = snap.data();
+      const role = data.role || "pending";
+      const status = data.status || "pending";
+
+      userRoleDisplay.textContent = role.toUpperCase();
+      userStatusDisplay.textContent = status.toUpperCase();
+
+      if (role === "admin" && status === "active") {
+        statusBadge.className = "badge-admin";
+        statusBadge.innerHTML = '<i class="fas fa-shield-alt"></i> CHIEF ADMINISTRATOR VERIFIED';
+        btnGoDashboard.style.display = "inline-flex";
+        showAlert("<strong>Verification Successful!</strong> Your account is confirmed as an active Administrator. You have full system management access.", "success");
+      } else {
+        statusBadge.className = "badge-pending";
+        statusBadge.innerHTML = `<i class="fas fa-user"></i> Role: ${role.toUpperCase()}`;
+        btnGoDashboard.style.display = "none";
+        showAlert(`Current account role is <strong>${role}</strong> (status: <strong>${status}</strong>). To grant Chief Administrator access, update <code>role: "admin"</code> and <code>status: "active"</code> in the Firebase Console.`, "info");
+      }
+
+    } catch (err) {
+      console.error("Firestore user inspection error:", err);
+      if (err.code === "permission-denied" || err.message?.includes("insufficient permissions")) {
+        showAlert("<strong>Missing or insufficient permissions:</strong> Firestore security rules rejected reading your profile. Please ensure the latest Security Rules are published in the Firebase Console.", "error");
+      } else {
+        showAlert("Error inspecting access: " + err.message, "error");
+      }
+    }
+  }
+
+  // Auth State Listener
+  onAuthStateChanged(auth, async (user) => {
+    activeUser = user;
+    await inspectUserAccess(user);
+  });
+
+  // Re-check Status Button
+  document.getElementById("btnRefreshStatus").addEventListener("click", async () => {
+    clearAlert();
+    statusBadge.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Checking...';
+    if (activeUser) {
+      await inspectUserAccess(activeUser);
+    }
+  });
+
+  // Copy UID Button
+  document.getElementById("btnCopyUid").addEventListener("click", () => {
+    if (activeUser) {
+      navigator.clipboard.writeText(activeUser.uid);
+      showAlert("UID copied to clipboard: <code>" + activeUser.uid + "</code>", "success");
+    }
+  });
+
+  // Sign Out Button
+  document.getElementById("btnSignOut").addEventListener("click", async () => {
+    await signOut(auth);
+    localStorage.removeItem("currentUser");
+    clearAlert();
+    showAlert("Signed out successfully.", "info");
+  });
+
+  // Google Sign In
+  document.getElementById("btnGoogleAuth").addEventListener("click", async () => {
+    clearAlert();
+    try {
+      await signInWithPopup(auth, googleProvider);
+    } catch (e) {
+      if (e.code === "auth/unauthorized-domain") {
+        showAlert(`Firebase rejected Google Sign-In because domain <code>${window.location.hostname}</code> is not authorized in Firebase Console &gt; Authentication &gt; Settings &gt; Authorized domains.`, "error");
+      } else {
+        showAlert("Google Sign In failed: " + e.message, "error");
+      }
+    }
+  });
+
+  // Email Sign In
+  document.getElementById("btnEmailLogin").addEventListener("click", async () => {
+    clearAlert();
+    const email = document.getElementById("authEmail").value.trim();
+    const pass = document.getElementById("authPassword").value;
+    if (!email || !pass) return showAlert("Please enter both email and password.");
+    try {
+      await signInWithEmailAndPassword(auth, email, pass);
+    } catch (e) {
+      showAlert("Login error: " + e.message, "error");
+    }
+  });
+</script>
+
+</body>
+</html>

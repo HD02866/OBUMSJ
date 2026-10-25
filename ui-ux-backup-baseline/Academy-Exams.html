@@ -1,0 +1,854 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-i18n="exams.page_title">Exam Bank | OBUMSJ - Oda Bultum University Muslim Students' JAMA'A</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+<style>
+
+/* ================= BRAND COLORS ================= */
+:root {
+    --primary: #2f8f3d;   /* Main Green */
+    --secondary: #0f3d2e; /* Dark Green */
+    --gold: #d4af37;      /* Luxury Gold */
+    --bg-light: #f5f7f6;
+    --text-dark: #222;
+}
+
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    background: var(--bg-light);
+    color: var(--text-dark);
+}
+
+/* ================= DEPARTMENT HEADER ================= */
+.dept-header {
+    background: linear-gradient(135deg, var(--secondary), var(--primary));
+    padding: 100px 20px 80px;
+    text-align: center;
+    color: white;
+    margin-top: 80px;
+}
+
+.dept-header h1 {
+    font-size: 42px;
+    font-weight: bold;
+}
+
+.dept-header p {
+    max-width: 800px;
+    margin: 15px auto 0;
+    font-size: 17px;
+    line-height: 1.6;
+}
+
+/* ================= CONTAINER ================= */
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 50px auto;
+}
+
+/* ================= FRAME CARD ================= */
+.frame-card {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    margin-bottom: 40px;
+    border-left: 6px solid var(--primary);
+}
+
+.frame-card h2 {
+    color: var(--secondary);
+    font-size: 28px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--gold);
+    padding-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.frame-card h2 i {
+    color: var(--gold);
+}
+
+/* ================= BACK BUTTON ================= */
+.back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    margin-bottom: 30px;
+    padding: 10px 20px;
+    background: white;
+    border-radius: 25px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    transition: all 0.3s;
+}
+
+.back-btn:hover {
+    background: var(--primary);
+    color: white;
+    transform: translateX(-5px);
+}
+
+/* ================= FILTERS ================= */
+.filters-section {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    margin-bottom: 30px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+}
+
+.filter-row {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.filter-group {
+    flex: 1;
+    min-width: 200px;
+}
+
+.filter-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--secondary);
+    font-weight: 500;
+}
+
+.filter-group select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid var(--primary);
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    background: white;
+}
+
+.filter-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.filter-btn {
+    padding: 12px 30px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.filter-btn:hover {
+    background: var(--secondary);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* ================= EXAMS GRID ================= */
+.exams-section {
+    margin: 60px 0;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.section-header h2 {
+    color: var(--secondary);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.exams-count {
+    background: var(--primary);
+    color: white;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 14px;
+}
+
+.exams-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.exam-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    transition: all 0.3s;
+    border: 1px solid #e0e0e0;
+}
+
+.exam-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+}
+
+.exam-header {
+    background: linear-gradient(135deg, var(--secondary), var(--primary));
+    padding: 20px;
+    color: white;
+    position: relative;
+}
+
+.exam-year {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: var(--gold);
+    color: var(--secondary);
+    padding: 3px 10px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.exam-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.exam-course {
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+.exam-body {
+    padding: 20px;
+}
+
+.exam-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    font-size: 14px;
+    color: #666;
+}
+
+.exam-info span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.exam-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.download-btn {
+    flex: 1;
+    padding: 10px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.3s;
+}
+
+.download-btn:hover {
+    background: var(--secondary);
+    transform: translateY(-2px);
+}
+
+.view-btn {
+    padding: 10px 15px;
+    background: white;
+    color: var(--primary);
+    border: 2px solid var(--primary);
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: all 0.3s;
+}
+
+.view-btn:hover {
+    background: var(--primary);
+    color: white;
+}
+
+/* ================= UPLOAD SECTION ================= */
+.upload-section {
+    background: linear-gradient(135deg, var(--secondary), var(--primary));
+    padding: 40px;
+    border-radius: 15px;
+    color: white;
+    margin: 60px 0;
+    text-align: center;
+}
+
+.upload-section h2 {
+    margin-bottom: 20px;
+    font-size: 32px;
+}
+
+.upload-section p {
+    max-width: 700px;
+    margin: 0 auto 30px;
+    line-height: 1.6;
+}
+
+.upload-btn {
+    background: var(--gold);
+    color: var(--secondary);
+    padding: 15px 40px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 18px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s;
+}
+
+.upload-btn:hover {
+    background: white;
+    color: var(--secondary);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+    }
+    
+    .dept-header {
+        padding: 80px 15px 60px;
+        margin-top: 70px;
+    }
+    
+    .dept-header h1 {
+        font-size: 32px;
+    }
+    
+    .filter-row {
+        flex-direction: column;
+    }
+    
+    .exams-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .exam-actions {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    .frame-card {
+        padding: 20px;
+    }
+    
+    .upload-section {
+        padding: 30px 20px;
+    }
+}
+</style>
+</head>
+
+<body>
+    <!-- =========================================
+        FLOATING SOCIAL MEDIA SIDEBAR
+    ========================================= -->
+    <div class="social-sidebar" id="socialSidebar">
+        <div class="social-toggle" id="socialToggle">
+            <i class="fas fa-share-alt"></i>
+        </div>
+        <div class="social-icons">
+            <a href="https://t.me/obumsj" target="_blank" title="Telegram" class="social-icon">
+                <i class="fab fa-telegram"></i>
+                <span class="social-tooltip">Telegram</span>
+            </a>
+            <a href="https://facebook.com/obumsj" target="_blank" title="Facebook" class="social-icon">
+                <i class="fab fa-facebook"></i>
+                <span class="social-tooltip">Facebook</span>
+            </a>
+            <a href="https://wa.me/251912345678" target="_blank" title="WhatsApp" class="social-icon">
+                <i class="fab fa-whatsapp"></i>
+                <span class="social-tooltip">WhatsApp</span>
+            </a>
+            <a href="https://youtube.com/obumsj" target="_blank" title="YouTube" class="social-icon">
+                <i class="fab fa-youtube"></i>
+                <span class="social-tooltip">YouTube</span>
+            </a>
+            <a href="https://tiktok.com/@obumsj" target="_blank" title="TikTok" class="social-icon">
+                <i class="fab fa-tiktok"></i>
+                <span class="social-tooltip">TikTok</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo-container">
+            <img src="./IMAGE/OBUMSJ Logo.jpg" alt="OBUMSJ Logo" class="logo">
+            <span class="logo-text" data-i18n="logo">OBUMSJ</span>
+             <button id="darkModeToggle" class="dark-btn">🌙</button>
+        </div>
+
+       <div class="lang-dropdown">
+  <button class="lang-btn">🌐 <span class="lang-code">EN</span></button>
+  <div class="lang-menu">
+    <a href="#" onclick="setLang('en'); return false;" data-i18n="lang.english">English</a>
+    <a href="#" onclick="setLang('am'); return false;" data-i18n="lang.amharic">Amharic</a>
+    <a href="#" onclick="setLang('om'); return false;" data-i18n="lang.oromo">Oromo</a>
+    <a href="#" onclick="setLang('ar'); return false;" data-i18n="lang.arabic">Arabic</a>
+  </div>
+</div>
+
+        <ul class="nav-links">
+            <li><a href="./index.html" data-i18n="nav.home">HOME</a></li>
+            <li><a href="./About-Us.html" data-i18n="nav.about">ABOUT US</a></li>
+            <li class="dropdown">
+                <a href="#sectors" data-i18n="nav.sectors">SECTORS <i class="fas fa-chevron-down"></i></a>
+                <div class="dropdown-content">
+                    <a href="./Qirat.html" data-i18n="sector.qirat"><i class="fas fa-quran"></i> Qirat</a>
+                    <a href="./Dawah.html" data-i18n="sector.dawah"><i class="fas fa-megaphone"></i> Dawah</a>
+                    <a href="./Social Affairs.html" data-i18n="sector.social"><i class="fas fa-hands-helping"></i> Social Affairs</a>
+                    <a href="./Academy.html" data-i18n="sector.academy"><i class="fas fa-graduation-cap"></i> Academy</a>
+                    <a href="./Academy-Tutorials.html" data-i18n="sector.tutorials"><i class="fas fa-chalkboard-teacher"></i> Tutorials</a>
+                    <a href="./Academy-Library.html" data-i18n="sector.elibrary"><i class="fas fa-book-open"></i> E-Library</a>
+                    <a href="./Academy-Exams.html" data-i18n="sector.exambank"><i class="fas fa-file-alt"></i> Exam Bank</a>
+                    <a href="./Finance.html" data-i18n="sector.finance"><i class="fas fa-coins"></i> Finance</a>
+                    <a href="./Ziyara.html" data-i18n="sector.ziyara"><i class="fas fa-kaaba"></i> Ziyara</a>
+                    <a href="./Ruqiya.html" data-i18n="sector.ruqiya"><i class="fas fa-hand-holding-heart"></i> Rukiya</a>
+                    <a href="./Charity.html" data-i18n="sector.charity"><i class="fas fa-donate"></i> Charity</a>
+                    <a href="./Dawrul-hasen.html" data-i18n="sector.dawrul"><i class="fas fa-book"></i> Dawrul Hasen</a>
+                    <a href="./Information.html" data-i18n="sector.information"><i class="fas fa-info-circle"></i> Information</a>
+                </div>
+            </li>
+            <li><a href="Blog.html" data-i18n="nav.blog">BLOG</a></li>
+            <li><a href="contact.html" data-i18n="nav.contact">CONTACT US</a></li>
+            <li><a href="./member.html" data-i18n="nav.membership">MEMBERSHIP</a></li>
+            <li><a href="donate.html" class="btn nav-donate" data-i18n="nav.donate">DONATE HERE</a></li>
+        </ul>
+        
+        <div class="menu-toggle" id="mobile-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+<!-- ================= HEADER ================= -->
+<section class="dept-header">
+    <h1 data-i18n="exams.title">Exam Bank</h1>
+    <p data-i18n="exams.description">
+        Access past exam papers, practice tests, and study materials 
+        to prepare for your examinations effectively.
+    </p>
+</section>
+
+<div class="container">
+    <!-- Back Button -->
+    <a href="./Academy.html" class="back-btn">
+        <i class="fas fa-arrow-left"></i> Back to Academy Sector
+    </a>
+
+    <!-- Filters -->
+    <div class="filters-section">
+        <div class="filter-row">
+            <div class="filter-group">
+                <label data-i18n="exams.filter_level">Student Level</label>
+                <select id="levelFilter">
+                    <option value="all" data-i18n="exams.all_levels">All Levels</option>
+                    <option value="remedial" data-i18n="exams.remedial">Remedial</option>
+                    <option value="freshman" data-i18n="exams.freshman">Freshman</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label data-i18n="exams.filter_stream">Stream</label>
+                <select id="streamFilter">
+                    <option value="all" data-i18n="exams.all_streams">All Streams</option>
+                    <option value="natural" data-i18n="exams.natural_science">Natural Science</option>
+                    <option value="social" data-i18n="exams.social_science">Social Science</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label data-i18n="exams.filter_year">Academic Year</label>
+                <select id="yearFilter">
+                    <option value="all" data-i18n="exams.all_years">All Years</option>
+                    <option value="2023">2023</option>
+                    <option value="2022">2022</option>
+                    <option value="2021">2021</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="filter-buttons">
+            <button class="filter-btn" onclick="filterExams()">
+                <i class="fas fa-filter"></i>
+                <span data-i18n="exams.apply_filters">Apply Filters</span>
+            </button>
+            <button class="filter-btn" onclick="resetFilters()">
+                <i class="fas fa-redo"></i>
+                <span data-i18n="exams.reset">Reset</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Exams Grid -->
+    <div class="exams-section">
+        <div class="section-header">
+            <h2><i class="fas fa-file-alt"></i> <span data-i18n="exams.available_exams">Available Exams</span></h2>
+            <div class="exams-count" id="examsCount">10 exams</div>
+        </div>
+        
+        <div class="exams-grid" id="examsGrid">
+            <!-- Exams will be populated by JavaScript -->
+        </div>
+    </div>
+
+    <!-- Upload Section -->
+    <div class="upload-section">
+        <h2 data-i18n="exams.contribute_title">Contribute to Exam Bank</h2>
+        <p data-i18n="exams.contribute_desc">
+            Have past exam papers or study materials that could help other students? 
+            Contribute to our exam bank and help build a stronger academic community.
+        </p>
+        <a href="contact.html" class="upload-btn" data-i18n="exams.upload_exams">
+            <i class="fas fa-upload"></i> Upload Exams
+        </a>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3 data-i18n="footer.about">About OBUMSJ</h3>
+                <p data-i18n="footer.about_text">ODA BULTUM UNIVERSITY MUSLIM STUDENTS' JAMA'A is dedicated to supporting Muslim students in their academic and spiritual journey.</p>
+                <div class="footer-social">
+                    <a href="https://t.me/obumsj" target="_blank" title="Telegram"><i class="fab fa-telegram"></i></a>
+                    <a href="https://facebook.com/obumsj" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="https://wa.me/251912345678" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://youtube.com/obumsj" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="https://tiktok.com/@obumsj" target="_blank" title="TikTok"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3 data-i18n="footer.quick">Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="./index.html" data-i18n="nav.home">Home</a></li>
+                    <li><a href="./About-Us.html" data-i18n="nav.about">About Us</a></li>
+                    <li><a href="./index.html#sectors" data-i18n="nav.sectors">Sectors</a></li>
+                    <li><a href="./Blog.html" data-i18n="nav.blog">Blog</a></li>
+                    <li><a href="./contact.html" data-i18n="nav.contact">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3 data-i18n="footer.sectors">Our Sectors</h3>
+                <ul class="footer-links">
+                    <li><a href="./Qirat.html" data-i18n="sector.qirat">Qirat</a></li>
+                    <li><a href="./Dawah.html" data-i18n="sector.dawah">Dawah</a></li>
+                    <li><a href="./Social Affairs.html" data-i18n="sector.social">Social Affairs</a></li>
+                    <li><a href="./Academy.html" data-i18n="sector.academy">Academy</a></li>
+                    <li><a href="./Academy-Tutorials.html" data-i18n="sector.tutorials">Tutorials</a></li>
+                    <li><a href="./Academy-Library.html" data-i18n="sector.elibrary">E-Library</a></li>
+                    <li><a href="./Academy-Exams.html" data-i18n="sector.exambank">Exam Bank</a></li>
+                    <li><a href="./Finance.html" data-i18n="sector.finance">Finance</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3 data-i18n="footer.contact">Contact Info</h3>
+                <ul class="footer-links">
+                    <li><i class="fas fa-map-marker-alt"></i> <span data-i18n="footer.address">Oda Bultum University, Chiro, Ethiopia</span></li>
+                    <li><i class="fas fa-phone"></i> <span data-i18n="footer.phone">+251 912 345 678</span></li>
+                    <li><i class="fas fa-envelope"></i> <span data-i18n="footer.email">exambank@obumsj.org</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p data-i18n="footer.copyright">&copy; 2023 OBUMSJ - Oda Bultum University Muslim Students' JAMA'A. All Rights Reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- Include the universal language system -->
+<script src="./js/language-system.js"></script>
+<script src="./Script.js"></script>
+
+<script>
+// Exams data
+const examsData = [
+    {
+        id: 1,
+        title: "Mathematics Midterm Exam",
+        course: "Basic Mathematics",
+        level: "remedial",
+        stream: "natural",
+        year: 2023,
+        fileType: "PDF",
+        pages: 6,
+        telegramLink: "https://t.me/obumsj_exams/1"
+    },
+    {
+        id: 2,
+        title: "Physics Final Exam",
+        course: "Introduction to Physics",
+        level: "remedial",
+        stream: "natural",
+        year: 2023,
+        fileType: "PDF",
+        pages: 8,
+        telegramLink: "https://t.me/obumsj_exams/2"
+    },
+    {
+        id: 3,
+        title: "Chemistry Practice Test",
+        course: "Chemistry Fundamentals",
+        level: "remedial",
+        stream: "natural",
+        year: 2023,
+        fileType: "PDF",
+        pages: 7,
+        telegramLink: "https://t.me/obumsj_exams/3"
+    },
+    {
+        id: 4,
+        title: "English Grammar Exam",
+        course: "Academic English",
+        level: "remedial",
+        stream: "social",
+        year: 2023,
+        fileType: "PDF",
+        pages: 5,
+        telegramLink: "https://t.me/obumsj_exams/4"
+    },
+    {
+        id: 5,
+        title: "Economics Midterm",
+        course: "Introduction to Economics",
+        level: "remedial",
+        stream: "social",
+        year: 2023,
+        fileType: "PDF",
+        pages: 9,
+        telegramLink: "https://t.me/obumsj_exams/5"
+    },
+    {
+        id: 6,
+        title: "General Chemistry I Final",
+        course: "General Chemistry",
+        level: "freshman",
+        stream: "natural",
+        year: 2023,
+        fileType: "PDF",
+        pages: 10,
+        telegramLink: "https://t.me/obumsj_exams/6"
+    },
+    {
+        id: 7,
+        title: "General Physics I Exam",
+        course: "General Physics",
+        level: "freshman",
+        stream: "natural",
+        year: 2023,
+        fileType: "PDF",
+        pages: 8,
+        telegramLink: "https://t.me/obumsj_exams/7"
+    },
+    {
+        id: 8,
+        title: "Calculus I Practice",
+        course: "Calculus I",
+        level: "freshman",
+        stream: "natural",
+        year: 2023,
+        fileType: "PDF",
+        pages: 6,
+        telegramLink: "https://t.me/obumsj_exams/8"
+    },
+    {
+        id: 9,
+        title: "Principles of Economics I",
+        course: "Economics I",
+        level: "freshman",
+        stream: "social",
+        year: 2023,
+        fileType: "PDF",
+        pages: 7,
+        telegramLink: "https://t.me/obumsj_exams/9"
+    },
+    {
+        id: 10,
+        title: "Sociology Final Exam",
+        course: "Introduction to Sociology",
+        level: "freshman",
+        stream: "social",
+        year: 2023,
+        fileType: "PDF",
+        pages: 8,
+        telegramLink: "https://t.me/obumsj_exams/10"
+    }
+];
+
+// Initialize exams
+function initializeExams() {
+    displayExams(examsData);
+    updateExamsCount();
+}
+
+// Display exams
+function displayExams(exams) {
+    const examsGrid = document.getElementById('examsGrid');
+    examsGrid.innerHTML = '';
+    
+    if (exams.length === 0) {
+        examsGrid.innerHTML = `
+            <div style="grid-column: 1/-1; text-align: center; padding: 40px; color: #666;">
+                <i class="fas fa-file-alt" style="font-size: 60px; margin-bottom: 20px;"></i>
+                <h3 data-i18n="exams.no_exams">No exams found</h3>
+                <p data-i18n="exams.try_different">Try different filters</p>
+            </div>
+        `;
+        return;
+    }
+    
+    exams.forEach(exam => {
+        const examCard = document.createElement('div');
+        examCard.className = 'exam-card';
+        
+        examCard.innerHTML = `
+            <div class="exam-header">
+                <div class="exam-year">${exam.year}</div>
+                <div class="exam-title">${exam.title}</div>
+                <div class="exam-course">${exam.course}</div>
+            </div>
+            <div class="exam-body">
+                <div class="exam-info">
+                    <span>
+                        <i class="fas fa-user-graduate"></i>
+                        ${exam.level === 'remedial' ? 'Remedial' : 'Freshman'}
+                    </span>
+                    <span>
+                        <i class="fas fa-stream"></i>
+                        ${exam.stream === 'natural' ? 'Natural Science' : 'Social Science'}
+                    </span>
+                    <span>
+                        <i class="fas fa-file-pdf"></i>
+                        ${exam.pages} pages
+                    </span>
+                </div>
+                <div class="exam-actions">
+                    <button class="download-btn" onclick="downloadExam('${exam.telegramLink}')">
+                        <i class="fab fa-telegram"></i>
+                        <span data-i18n="exams.download">Download</span>
+                    </button>
+                    <button class="view-btn" onclick="viewExam(${exam.id})">
+                        <i class="fas fa-eye"></i>
+                        <span data-i18n="exams.preview">Preview</span>
+                    </button>
+                </div>
+            </div>
+        `;
+        
+        examsGrid.appendChild(examCard);
+    });
+}
+
+// Filter exams
+function filterExams() {
+    const level = document.getElementById('levelFilter').value;
+    const stream = document.getElementById('streamFilter').value;
+    const year = document.getElementById('yearFilter').value;
+    
+    let filteredExams = examsData;
+    
+    if (level !== 'all') {
+        filteredExams = filteredExams.filter(exam => exam.level === level);
+    }
+    
+    if (stream !== 'all') {
+        filteredExams = filteredExams.filter(exam => exam.stream === stream);
+    }
+    
+    if (year !== 'all') {
+        filteredExams = filteredExams.filter(exam => exam.year === parseInt(year));
+    }
+    
+    displayExams(filteredExams);
+    updateExamsCount(filteredExams.length);
+}
+
+// Reset filters
+function resetFilters() {
+    document.getElementById('levelFilter').value = 'all';
+    document.getElementById('streamFilter').value = 'all';
+    document.getElementById('yearFilter').value = 'all';
+    
+    displayExams(examsData);
+    updateExamsCount();
+}
+
+// Update exams count
+function updateExamsCount(count = examsData.length) {
+    document.getElementById('examsCount').textContent = `${count} ${count === 1 ? 'exam' : 'exams'}`;
+}
+
+// Download exam
+function downloadExam(telegramLink) {
+    window.open(telegramLink, '_blank');
+}
+
+// View exam preview
+function viewExam(examId) {
+    const exam = examsData.find(e => e.id === examId);
+    if (exam) {
+        alert(`Preview for: ${exam.title}\n\nThis feature will show a preview of the exam.\nClick Download to get the full PDF from Telegram.`);
+    }
+}
+
+// Initialize on load
+document.addEventListener('DOMContentLoaded', initializeExams);
+</script>
+</body>
+</html>

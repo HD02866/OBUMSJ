@@ -1,0 +1,1282 @@
+/* ============================================================
+   OBUMSJ MASTER DESIGN SYSTEM (PHASE 2 - GLOBAL FOUNDATION)
+   Oda Bultum University Muslim Students' Jama'a
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Amiri:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* ============================================================
+   1. SHARED DESIGN TOKENS & CSS CUSTOM PROPERTIES
+   ============================================================ */
+
+:root {
+  /* Theme Identification */
+  --theme-mode: "day";
+
+  /* Typography */
+  --font-family-base: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-heading: 'Cinzel', 'Amiri', 'Georgia', serif;
+
+  /* Color Palette - Day Theme (Warm Ivory, Soft Cream, Ochre & Burnished Gold) */
+  --bg-base: #faf6ee;
+  --bg-surface: #ffffff;
+  --bg-card: #ffffff;
+  --bg-card-subtle: #f8f4ec;
+  --bg-card-hover: #f3ede2;
+  --bg-overlay: rgba(250, 246, 238, 0.96);
+
+  /* Brand Primary & Secondary */
+  --primary: #1b5e20;
+  --primary-hover: #144918;
+  --primary-light: rgba(27, 94, 32, 0.08);
+  --secondary: #2e7d32;
+  --secondary-hover: #1b5e20;
+
+  /* Gold & Brass Accents */
+  --gold: #c59a3f;
+  --gold-primary: #c59a3f;
+  --gold-light: #e5b85a;
+  --gold-dark: #8a6321;
+  --gold-glow: rgba(197, 154, 63, 0.22);
+  --accent: #c59a3f;
+
+  /* Typography Colors */
+  --text-main: #1e1610;
+  --text-primary: #1e1610;
+  --text-body: #2c2017;
+  --text-secondary: #5c4d41;
+  --text-muted: #8c786a;
+  --text-inverse: #ffffff;
+  --text-gold: #8a6321;
+
+  /* Functional Status Colors */
+  --success: #2e7d32;
+  --success-bg: #e8f5e9;
+  --success-border: #a5d6a7;
+  --success-text: #1b5e20;
+
+  --warning: #d97706;
+  --warning-bg: #fffbeb;
+  --warning-border: #fcd34d;
+  --warning-text: #92400e;
+
+  --danger: #c0392b;
+  --danger-bg: #fdeeee;
+  --danger-border: #f5b7b1;
+  --danger-text: #922b21;
+
+  --info: #1976d2;
+  --info-bg: #e3f2fd;
+  --info-border: #90caf9;
+  --info-text: #0d47a1;
+
+  /* Borders & Dividers */
+  --border-color: rgba(160, 113, 45, 0.22);
+  --border-subtle: rgba(160, 113, 45, 0.14);
+  --border-light: rgba(18, 38, 63, 0.09);
+  --border-gold: rgba(197, 154, 63, 0.4);
+
+  /* Day Mode Shadows (Subtle Blue-Toned Shadows for Clean Separation) */
+  --shadow-sm: 0 2px 8px rgba(18, 38, 63, 0.06);
+  --shadow-md: 0 6px 18px rgba(18, 38, 63, 0.08);
+  --shadow-lg: 0 12px 32px rgba(18, 38, 63, 0.12);
+  --shadow-hover: 0 14px 36px rgba(18, 38, 63, 0.16);
+
+  /* Focus Ring */
+  --focus-ring: 0 0 0 3px rgba(197, 154, 63, 0.38);
+
+  /* Radii Scale */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  /* Spacing Scale */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-8: 48px;
+
+  /* Z-Index Scale */
+  --z-background: -2;
+  --z-decor: -1;
+  --z-base: 1;
+  --z-dropdown: 500;
+  --z-sticky: 900;
+  --z-sidebar: 950;
+  --z-backdrop: 980;
+  --z-navbar: 1000;
+  --z-modal: 1100;
+  --z-toast: 1200;
+
+  /* Transitions */
+  --transition-speed: 0.3s;
+  --transition-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Legacy Compatibility Aliases */
+  --white: #ffffff;
+  --dark: #1b5e20;
+  --sidebar-bg: #ffffff;
+  --lantern-glow: rgba(255, 183, 3, 0.35);
+  --bg-pattern: url("../IMAGE/decorative/islamic-day-texture-seamless.jpg");
+  --bg-pattern-opacity: 0.055;
+  --bg-pattern-size: 309px 408px;
+}
+
+/* ============================================================
+   NIGHT THEME (DARK MODE) TOKENS
+   ============================================================ */
+
+[data-theme="dark"],
+[data-theme="night"],
+body.dark-mode {
+  --theme-mode: "night";
+
+  /* Color Palette - Night Theme (Deep Chocolate, Obsidian, Antique Gold & Amber) */
+  --bg-base: #140c07;
+  --bg-surface: #1b1009;
+  --bg-card: #20140c;
+  --bg-card-subtle: #27190f;
+  --bg-card-hover: #2b1c11;
+  --bg-overlay: rgba(20, 12, 7, 0.96);
+
+  /* Brand Primary & Secondary */
+  --primary: #d4af37;
+  --primary-hover: #fae084;
+  --primary-light: rgba(212, 175, 55, 0.15);
+  --secondary: #e5b85a;
+  --secondary-hover: #c59a3f;
+
+  /* Gold & Brass Accents */
+  --gold: #d4af37;
+  --gold-primary: #d4af37;
+  --gold-light: #fae084;
+  --gold-dark: #a0712d;
+  --gold-glow: rgba(212, 175, 55, 0.35);
+  --accent: #d4af37;
+
+  /* Typography Colors */
+  --text-main: #f5ebd7;
+  --text-primary: #f5ebd7;
+  --text-body: #ebd9c5;
+  --text-secondary: #c4b5a0;
+  --text-muted: #8f7d6a;
+  --text-inverse: #140c07;
+  --text-gold: #fae084;
+
+  /* Functional Status Colors */
+  --success: #4caf50;
+  --success-bg: rgba(46, 125, 50, 0.22);
+  --success-border: rgba(76, 175, 80, 0.45);
+  --success-text: #a5d6a7;
+
+  --warning: #f59e0b;
+  --warning-bg: rgba(217, 119, 6, 0.22);
+  --warning-border: rgba(245, 158, 11, 0.45);
+  --warning-text: #fcd34d;
+
+  --danger: #ef4444;
+  --danger-bg: rgba(192, 57, 43, 0.22);
+  --danger-border: rgba(239, 68, 68, 0.45);
+  --danger-text: #fca5a5;
+
+  --info: #38bdf8;
+  --info-bg: rgba(14, 165, 233, 0.22);
+  --info-border: rgba(56, 189, 248, 0.45);
+  --info-text: #bae6fd;
+
+  /* Borders & Dividers */
+  --border-color: rgba(212, 175, 55, 0.25);
+  --border-subtle: rgba(212, 175, 55, 0.15);
+  --border-light: rgba(255, 255, 255, 0.08);
+  --border-gold: rgba(212, 175, 55, 0.4);
+
+  /* Night Mode Shadows (Restrained Warm Amber/Gold Shadows) */
+  --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.6);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.7), 0 0 14px rgba(212, 175, 55, 0.09);
+  --shadow-lg: 0 14px 40px rgba(0, 0, 0, 0.82), 0 0 24px rgba(212, 175, 55, 0.16);
+  --shadow-hover: 0 16px 46px rgba(0, 0, 0, 0.88), 0 0 32px rgba(212, 175, 55, 0.25);
+
+  /* Focus Ring */
+  --focus-ring: 0 0 0 3px rgba(212, 175, 55, 0.45);
+
+  /* Legacy Compatibility Aliases */
+  --white: #ffffff;
+  --dark: #140c07;
+  --sidebar-bg: #1b1009;
+  --lantern-glow: rgba(255, 183, 3, 0.75);
+  --bg-pattern: url("../IMAGE/decorative/islamic-night-texture-seamless.jpg");
+  --bg-pattern-opacity: 0.12;
+  --bg-pattern-size: 180px 180px;
+}
+
+/* ============================================================
+   2. GLOBAL BODY & FOUNDATION
+   ============================================================ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  font-family: var(--font-family-base);
+  margin: 0;
+  padding: 0;
+  line-height: 1.65;
+  transition: background-color var(--transition-speed) var(--transition-ease),
+              color var(--transition-speed) var(--transition-ease);
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-primary);
+  font-family: var(--font-heading);
+  letter-spacing: 0.02em;
+  margin-top: 0;
+}
+
+p, span, li, a, td, th, label {
+  color: inherit;
+}
+
+/* Background Atmosphere Layers */
+.islamic-bg-wallpaper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: var(--bg-pattern);
+  background-repeat: repeat;
+  background-size: var(--bg-pattern-size, 180px 180px);
+  opacity: var(--bg-pattern-opacity);
+  pointer-events: none;
+  z-index: var(--z-background);
+  transition: opacity var(--transition-speed) var(--transition-ease),
+              background-image var(--transition-speed) var(--transition-ease);
+}
+
+.islamic-lighting-vignette {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Night Mode default radial lighting diffusion (warm amber from upper corners + ambient ceiling) */
+  background: 
+    radial-gradient(circle 340px at 45px 120px, rgba(255, 183, 3, 0.14) 0%, transparent 70%),
+    radial-gradient(circle 340px at calc(100% - 45px) 120px, rgba(255, 183, 3, 0.14) 0%, transparent 70%),
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(212, 175, 55, 0.08) 0%, transparent 60%),
+    radial-gradient(circle at 50% 50%, transparent 40%, rgba(15, 8, 4, 0.55) 100%);
+  pointer-events: none;
+  z-index: var(--z-decor);
+  transition: opacity var(--transition-speed) var(--transition-ease);
+}
+
+[data-theme="light"] .islamic-lighting-vignette,
+[data-theme="day"] .islamic-lighting-vignette,
+:root:not([data-theme="dark"]):not([data-theme="night"]) .islamic-lighting-vignette {
+  /* Day Mode soft champagne and cream-white warmth */
+  background: 
+    radial-gradient(circle 360px at 45px 120px, rgba(230, 200, 145, 0.20) 0%, transparent 70%),
+    radial-gradient(circle 360px at calc(100% - 45px) 120px, rgba(230, 200, 145, 0.20) 0%, transparent 70%),
+    radial-gradient(ellipse 85% 55% at 50% 0%, rgba(255, 255, 255, 0.6) 0%, transparent 70%),
+    radial-gradient(circle at 50% 50%, transparent 50%, rgba(225, 215, 195, 0.3) 100%);
+}
+
+/* ============================================================
+   ISLAMIC HANGING LANTERNS (Physically Anchored to Header)
+   Moves naturally with scroll; does not float over content
+   ============================================================ */
+
+.islamic-corner-lantern {
+  position: absolute;
+  top: 72px; /* Hangs immediately below the fixed navigation bar */
+  width: 72px;
+  height: 171px;
+  pointer-events: none;
+  z-index: 95; /* Below modals and dropdowns, above wallpaper */
+  transform-origin: top center;
+  transition: opacity var(--transition-speed) ease, transform 0.4s ease;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.islamic-corner-lantern img,
+.islamic-corner-lantern svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.islamic-corner-lantern.lantern-left {
+  left: 24px;
+  animation: lanternSwayLeft 8s ease-in-out infinite;
+}
+
+.islamic-corner-lantern.lantern-right {
+  right: 24px;
+  animation: lanternSwayRight 9s ease-in-out infinite 0.7s;
+}
+
+/* Day Mode: softer lantern presence with subtle golden warm reflection */
+[data-theme="light"] .islamic-corner-lantern img,
+[data-theme="day"] .islamic-corner-lantern img,
+:root:not([data-theme="dark"]):not([data-theme="night"]) .islamic-corner-lantern img {
+  opacity: 0.85;
+  filter: drop-shadow(0 6px 16px rgba(180, 130, 50, 0.22));
+}
+
+/* Night Mode: glowing amber beacon with ambient halo */
+[data-theme="dark"] .islamic-corner-lantern img,
+[data-theme="night"] .islamic-corner-lantern img,
+body.dark-mode .islamic-corner-lantern img {
+  opacity: 0.98;
+  filter: drop-shadow(0 12px 32px rgba(255, 183, 3, 0.5));
+}
+
+/* Natural pendulum sway keyframes */
+@keyframes lanternSwayLeft {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(1.6deg);
+  }
+}
+
+@keyframes lanternSwayRight {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-1.6deg);
+  }
+}
+
+/* Sidebar Awareness (Suppress left lantern if admin sidebar is present) */
+body:has(.dashboard-sidebar) .islamic-corner-lantern.lantern-left,
+.dashboard-container .islamic-corner-lantern.lantern-left,
+.admin-sidebar ~ * .islamic-corner-lantern.lantern-left,
+body.has-sidebar .islamic-corner-lantern.lantern-left {
+  display: none !important;
+}
+
+/* Responsive Scaling: adjusts smoothly across device widths */
+@media (max-width: 1200px) {
+  .islamic-corner-lantern {
+    width: 60px;
+    height: 142px;
+  }
+  .islamic-corner-lantern.lantern-left {
+    left: 12px;
+  }
+  .islamic-corner-lantern.lantern-right {
+    right: 12px;
+  }
+}
+
+@media (max-width: 860px) {
+  .islamic-corner-lantern {
+    width: 50px;
+    height: 118px;
+    top: 64px;
+  }
+  .islamic-corner-lantern.lantern-left {
+    left: 8px;
+  }
+  .islamic-corner-lantern.lantern-right {
+    right: 8px;
+  }
+}
+
+@media (max-width: 640px) {
+  /* On compact mobile screens, hide left lantern and keep subtle right lantern to avoid clutter */
+  .islamic-corner-lantern.lantern-left {
+    display: none !important;
+  }
+  .islamic-corner-lantern.lantern-right {
+    width: 42px;
+    height: 100px;
+    right: 6px;
+    top: 60px;
+    opacity: 0.7;
+  }
+}
+
+@media (max-width: 420px) {
+  /* On very narrow phones, hide lanterns completely to maximize reading area */
+  .islamic-corner-lantern {
+    display: none !important;
+  }
+}
+
+/* Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .islamic-corner-lantern {
+    animation: none !important;
+  }
+}
+
+/* Ambient Particles Canvas */
+.islamic-particles-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* ============================================================
+   3. PROFESSIONAL BUTTON SYSTEM
+   ============================================================ */
+
+.btn,
+button,
+.hero-btn,
+.btn-primary,
+.btn-secondary,
+.btn-gold,
+.btn-donate {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 24px;
+  font-family: var(--font-family-base);
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.4;
+  text-decoration: none;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+  white-space: nowrap;
+}
+
+.btn:hover,
+button:hover,
+.hero-btn:hover,
+.btn-primary:hover,
+.btn-secondary:hover,
+.btn-gold:hover,
+.btn-donate:hover {
+  transform: translateY(-2px);
+}
+
+.btn:active,
+button:active {
+  transform: translateY(0);
+}
+
+.btn:focus-visible,
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.btn:disabled,
+button:disabled,
+.btn.disabled {
+  opacity: 0.55 !important;
+  cursor: not-allowed !important;
+  pointer-events: none !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Primary Button (Islamic Forest Emerald) */
+.btn-primary,
+.btn-donate {
+  background: #1b5e20 !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(212, 175, 55, 0.4) !important;
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-primary:hover,
+.btn-donate:hover {
+  background: #144918 !important;
+  color: #ffffff !important;
+  box-shadow: var(--shadow-md);
+  border-color: var(--gold-light) !important;
+}
+
+/* Secondary Button */
+.btn-secondary {
+  background: var(--bg-card-subtle) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border-color) !important;
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-secondary:hover {
+  background: var(--bg-card-hover) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--gold-primary) !important;
+}
+
+/* Gold CTA Button */
+.btn-gold,
+.btn-premium-gold {
+  background: linear-gradient(135deg, var(--gold-dark) 0%, var(--gold-primary) 50%, var(--gold-light) 100%) !important;
+  color: #140c07 !important;
+  font-weight: 700 !important;
+  border: 1px solid #fae084 !important;
+  box-shadow: 0 4px 16px rgba(197, 154, 63, 0.35);
+}
+
+.btn-gold:hover,
+.btn-premium-gold:hover {
+  background: linear-gradient(135deg, var(--gold-primary) 0%, #fae084 100%) !important;
+  color: #140c07 !important;
+  box-shadow: 0 6px 22px rgba(197, 154, 63, 0.5);
+}
+
+/* Action Success, Warning & Danger */
+.btn-success,
+.btn-approve {
+  background: #2e7d32 !important;
+  color: #ffffff !important;
+  border: 1px solid #81c784 !important;
+}
+.btn-success:hover,
+.btn-approve:hover {
+  background: #1b5e20 !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 12px rgba(46, 125, 50, 0.4);
+}
+
+.btn-warning {
+  background: #d97706 !important;
+  color: #ffffff !important;
+  border: 1px solid #fcd34d !important;
+}
+.btn-warning:hover {
+  background: #b45309 !important;
+  color: #ffffff !important;
+}
+
+.btn-danger,
+.btn-reject {
+  background: #c0392b !important;
+  color: #ffffff !important;
+  border: 1px solid #f5b7b1 !important;
+}
+.btn-danger:hover,
+.btn-reject:hover {
+  background: #962d22 !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 12px rgba(192, 57, 43, 0.4);
+}
+
+/* Outline Buttons */
+.btn-outline {
+  background: transparent !important;
+  color: var(--text-primary) !important;
+  border: 1.5px solid var(--border-color) !important;
+}
+
+.btn-outline:hover {
+  background: var(--primary-light) !important;
+  border-color: var(--gold-primary) !important;
+  color: var(--gold-primary) !important;
+}
+
+/* ============================================================
+   4. FORM CONTROLS & INPUTS (PERFECT CONTRAST GUARANTEE)
+   ============================================================ */
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="tel"],
+input[type="url"],
+input[type="date"],
+input[type="search"],
+textarea,
+select {
+  width: 100%;
+  padding: 12px 16px;
+  font-family: var(--font-family-base);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  background-color: var(--bg-surface) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: var(--radius-md);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+[data-theme="dark"] input[type="text"],
+[data-theme="dark"] input[type="email"],
+[data-theme="dark"] input[type="password"],
+[data-theme="dark"] input[type="number"],
+[data-theme="dark"] input[type="tel"],
+[data-theme="dark"] input[type="url"],
+[data-theme="dark"] input[type="date"],
+[data-theme="dark"] input[type="search"],
+[data-theme="dark"] textarea,
+[data-theme="dark"] select,
+body.dark-mode input[type="text"],
+body.dark-mode input[type="email"],
+body.dark-mode input[type="password"],
+body.dark-mode input[type="number"],
+body.dark-mode input[type="tel"],
+body.dark-mode input[type="url"],
+body.dark-mode input[type="date"],
+body.dark-mode input[type="search"],
+body.dark-mode textarea,
+body.dark-mode select {
+  background-color: #1a1008 !important;
+  color: #f5ebd7 !important;
+  border: 1px solid rgba(212, 175, 55, 0.3) !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--text-muted) !important;
+  opacity: 0.85;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--gold-primary) !important;
+  box-shadow: var(--focus-ring) !important;
+  outline: none !important;
+}
+
+input:disabled,
+textarea:disabled,
+select:disabled {
+  background-color: var(--bg-card-subtle) !important;
+  color: var(--text-muted) !important;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* Form Labels */
+label,
+.form-label {
+  display: inline-block;
+  font-family: var(--font-family-base);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+  letter-spacing: 0.01em;
+}
+
+[data-theme="dark"] label,
+[data-theme="dark"] .form-label,
+body.dark-mode label,
+body.dark-mode .form-label {
+  color: var(--text-secondary) !important;
+}
+
+/* ============================================================
+   5. DROPDOWNS & SELECT MENUS
+   ============================================================ */
+
+.dropdown,
+.lang-dropdown {
+  position: relative;
+}
+
+.dropdown-content,
+.lang-menu {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: var(--radius-md) !important;
+  box-shadow: var(--shadow-lg) !important;
+  z-index: var(--z-dropdown) !important;
+  padding: 8px 0;
+  min-width: 180px;
+}
+
+[data-theme="dark"] .dropdown-content,
+[data-theme="dark"] .lang-menu,
+body.dark-mode .dropdown-content,
+body.dark-mode .lang-menu {
+  background: #1c120a !important;
+  border: 1px solid rgba(212, 175, 55, 0.35) !important;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.85), 0 0 16px rgba(212, 175, 55, 0.12) !important;
+}
+
+.dropdown-content a,
+.lang-menu a,
+.dropdown-item {
+  display: block;
+  padding: 10px 18px;
+  color: var(--text-primary) !important;
+  text-decoration: none;
+  font-size: 0.92rem;
+  font-weight: 500;
+  transition: background 0.2s ease, color 0.2s ease, padding-left 0.2s ease;
+}
+
+.dropdown-content a:hover,
+.lang-menu a:hover,
+.dropdown-item:hover {
+  background: rgba(212, 175, 55, 0.14) !important;
+  color: var(--gold-primary) !important;
+  padding-left: 22px;
+}
+
+/* ============================================================
+   6. CARDS, SURFACES & SECTORS
+   ============================================================ */
+
+.card,
+.stat-card,
+.feature-card,
+.sector-card,
+.sector-detailed-card,
+.frame-card,
+.member-card,
+.blog-card,
+.form-card,
+.vm-card {
+  background: var(--bg-card) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.card:hover,
+.stat-card:hover,
+.feature-card:hover,
+.sector-card:hover,
+.sector-detailed-card:hover,
+.frame-card:hover,
+.member-card:hover,
+.blog-card:hover,
+.vm-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--gold-primary) !important;
+}
+
+[data-theme="dark"] .card,
+[data-theme="dark"] .stat-card,
+[data-theme="dark"] .feature-card,
+[data-theme="dark"] .sector-card,
+[data-theme="dark"] .sector-detailed-card,
+[data-theme="dark"] .frame-card,
+[data-theme="dark"] .member-card,
+[data-theme="dark"] .blog-card,
+[data-theme="dark"] .form-card,
+[data-theme="dark"] .vm-card,
+body.dark-mode .card,
+body.dark-mode .stat-card,
+body.dark-mode .feature-card,
+body.dark-mode .sector-card,
+body.dark-mode .sector-detailed-card,
+body.dark-mode .frame-card,
+body.dark-mode .member-card,
+body.dark-mode .blog-card,
+body.dark-mode .form-card,
+body.dark-mode .vm-card {
+  background: #20140c !important;
+  color: #f5ebd7 !important;
+  border: 1px solid rgba(212, 175, 55, 0.22) !important;
+}
+
+/* Frame Card Border Accent */
+.frame-card {
+  border-left: 6px solid var(--gold-primary) !important;
+}
+
+/* Sector Headers */
+.dept-header {
+  border-bottom: 2px solid var(--gold-primary) !important;
+  box-shadow: var(--shadow-md);
+}
+
+[data-theme="dark"] .dept-header,
+body.dark-mode .dept-header {
+  background: linear-gradient(135deg, #091a13 0%, #133a24 50%, #1e4a30 100%) !important;
+  border-bottom: 2px solid var(--gold-primary) !important;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.6) !important;
+}
+
+/* ============================================================
+   7. TABLES & DATA GRIDS (PROFESSIONAL CONTRAST)
+   ============================================================ */
+
+table,
+.data-table,
+.user-table,
+.translation-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  margin: 16px 0;
+}
+
+table th,
+.data-table th,
+.user-table th,
+.translation-table th {
+  background: #1b5e20 !important;
+  color: #ffffff !important;
+  padding: 14px 16px;
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 2px solid var(--gold-primary) !important;
+  text-align: left;
+}
+
+[data-theme="dark"] table th,
+[data-theme="dark"] .data-table th,
+[data-theme="dark"] .user-table th,
+[data-theme="dark"] .translation-table th,
+body.dark-mode table th,
+body.dark-mode .data-table th,
+body.dark-mode .user-table th,
+body.dark-mode .translation-table th {
+  background: #180e07 !important;
+  color: var(--gold-light) !important;
+  border-bottom: 2px solid var(--gold-primary) !important;
+}
+
+table td,
+.data-table td,
+.user-table td,
+.translation-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  font-size: 0.92rem;
+  transition: background 0.15s ease;
+}
+
+table tr:nth-child(even) td,
+.data-table tr:nth-child(even) td,
+.user-table tr:nth-child(even) td {
+  background: var(--bg-card-subtle);
+}
+
+table tr:hover td,
+.data-table tr:hover td,
+.user-table tr:hover td {
+  background: var(--bg-card-hover) !important;
+}
+
+/* ============================================================
+   8. TABS, MODALS & DIALOGS
+   ============================================================ */
+
+/* Tabs */
+.tabs,
+.nav-tabs {
+  display: flex;
+  gap: 8px;
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 8px;
+  margin-bottom: 24px;
+}
+
+.tab-button,
+.tab-btn {
+  background: transparent !important;
+  color: var(--text-secondary) !important;
+  border: none !important;
+  padding: 10px 20px;
+  font-family: var(--font-family-base);
+  font-weight: 600;
+  font-size: 0.94rem;
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+
+.tab-button:hover,
+.tab-btn:hover {
+  color: var(--gold-primary) !important;
+  background: rgba(212, 175, 55, 0.08) !important;
+}
+
+.tab-button.active,
+.tab-btn.active {
+  color: var(--gold-primary) !important;
+  font-weight: 700;
+  border-bottom: 3px solid var(--gold-primary) !important;
+}
+
+/* Modals */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(4px);
+  z-index: var(--z-modal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal-content {
+  background: var(--bg-card) !important;
+  color: var(--text-primary) !important;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
+  border-top: 5px solid var(--gold-primary) !important;
+  box-shadow: var(--shadow-lg);
+  max-width: 600px;
+  width: 100%;
+  overflow: hidden;
+  animation: modalScaleIn 0.25s var(--transition-ease);
+}
+
+@keyframes modalScaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.modal-header {
+  padding: 18px 24px;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header h2,
+.modal-header h3 {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 1.25rem;
+}
+
+.modal-body {
+  padding: 24px;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.modal-footer {
+  padding: 16px 24px;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+/* ============================================================
+   9. BADGES, ALERTS & TOOLTIPS
+   ============================================================ */
+
+.badge,
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: var(--radius-full);
+  line-height: 1;
+}
+
+.badge-success {
+  background: var(--success-bg) !important;
+  color: var(--success-text) !important;
+  border: 1px solid var(--success-border) !important;
+}
+
+.badge-warning {
+  background: var(--warning-bg) !important;
+  color: var(--warning-text) !important;
+  border: 1px solid var(--warning-border) !important;
+}
+
+.badge-danger {
+  background: var(--danger-bg) !important;
+  color: var(--danger-text) !important;
+  border: 1px solid var(--danger-border) !important;
+}
+
+.badge-info {
+  background: var(--info-bg) !important;
+  color: var(--info-text) !important;
+  border: 1px solid var(--info-border) !important;
+}
+
+/* Alerts */
+.alert {
+  padding: 14px 20px;
+  border-radius: var(--radius-md);
+  margin-bottom: 18px;
+  font-size: 0.94rem;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-left: 4px solid currentColor;
+}
+
+.alert-success {
+  background: var(--success-bg);
+  color: var(--success-text);
+  border-color: var(--success);
+}
+
+.alert-danger {
+  background: var(--danger-bg);
+  color: var(--danger-text);
+  border-color: var(--danger);
+}
+
+.alert-warning {
+  background: var(--warning-bg);
+  color: var(--warning-text);
+  border-color: var(--warning);
+}
+
+.alert-info {
+  background: var(--info-bg);
+  color: var(--info-text);
+  border-color: var(--info);
+}
+
+/* ============================================================
+   10. NAVBAR, THEME TOGGLE & SOCIAL SIDEBAR
+   ============================================================ */
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  z-index: var(--z-navbar);
+  background-color: var(--bg-surface) !important;
+  border-bottom: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  transition: height 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+}
+
+[data-theme="dark"] .navbar,
+body.dark-mode .navbar {
+  background-color: #140c07 !important;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.25) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6) !important;
+}
+
+.navbar .logo-text {
+  color: var(--text-primary) !important;
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.navbar .nav-links a {
+  color: var(--text-primary) !important;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.navbar .nav-links a:hover {
+  color: var(--gold-primary) !important;
+}
+
+/* Theme Toggle Button */
+.theme-toggle-btn,
+.dark-btn {
+  background: var(--bg-card-subtle) !important;
+  color: var(--gold-primary) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: var(--radius-full) !important;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.theme-toggle-btn:hover,
+.dark-btn:hover {
+  transform: scale(1.08);
+  border-color: var(--gold-primary) !important;
+  background: var(--bg-card-hover) !important;
+}
+
+/* Floating Social Media Sidebar */
+.social-sidebar {
+  position: fixed;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: var(--z-sticky);
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border-color);
+  border-right: none;
+  border-radius: 12px 0 0 12px;
+  box-shadow: var(--shadow-md);
+  transition: transform 0.35s var(--transition-ease);
+}
+
+[data-theme="dark"] .social-sidebar,
+body.dark-mode .social-sidebar {
+  background: #1b1009 !important;
+  border: 1px solid rgba(212, 175, 55, 0.3) !important;
+  border-right: none !important;
+}
+
+.social-sidebar.collapsed {
+  transform: translateY(-50%) translateX(calc(100% - 46px));
+}
+
+.social-toggle {
+  background: var(--gold-primary) !important;
+  color: #140c07 !important;
+  width: 46px;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 12px 0 0 0;
+}
+
+.social-icon {
+  color: var(--text-primary) !important;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+
+.social-icon:hover {
+  color: var(--gold-primary) !important;
+  background: rgba(212, 175, 55, 0.12);
+}
+
+/* ============================================================
+   11. COLLAPSIBLE SIDEBAR ARCHITECTURE (MEMBER & ADMIN)
+   ============================================================ */
+
+.dashboard-container {
+  display: flex;
+  min-height: calc(100vh - 80px);
+  margin-top: 80px;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.dashboard-sidebar {
+  width: 280px;
+  background: var(--bg-surface) !important;
+  border-right: 1px solid var(--border-color);
+  transition: margin-left 0.3s var(--transition-ease), transform 0.3s var(--transition-ease);
+  z-index: var(--z-sidebar);
+}
+
+[data-theme="dark"] .dashboard-sidebar,
+body.dark-mode .dashboard-sidebar {
+  background: #1b1009 !important;
+  border-right: 1px solid rgba(212, 175, 55, 0.25) !important;
+}
+
+.dashboard-main {
+  flex: 1;
+  padding: 28px;
+  transition: width 0.3s var(--transition-ease), margin-left 0.3s var(--transition-ease);
+}
+
+@media (min-width: 993px) {
+  .dashboard-container.sidebar-collapsed .dashboard-sidebar {
+    margin-left: -280px;
+  }
+  .dashboard-container.sidebar-collapsed .dashboard-main {
+    margin-left: 0 !important;
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 992px) {
+  .dashboard-sidebar {
+    position: fixed !important;
+    top: 80px !important;
+    left: 0 !important;
+    height: calc(100vh - 80px) !important;
+    transform: translateX(-100%);
+    box-shadow: 4px 0 30px rgba(0, 0, 0, 0.5) !important;
+  }
+  .dashboard-container.sidebar-open .dashboard-sidebar {
+    transform: translateX(0);
+  }
+  .sidebar-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    top: 80px;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(2px);
+    z-index: var(--z-backdrop);
+  }
+  .dashboard-container.sidebar-open .sidebar-backdrop {
+    display: block;
+  }
+}
+
+/* ============================================================
+   12. ACCESSIBILITY & PREFERS-REDUCED-MOTION
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

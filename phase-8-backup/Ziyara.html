@@ -1,0 +1,310 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-i18n="ziyara.page_title">Ziyara Sector | OBUMSJ - Oda Bultum University Muslim Students' JAMA'A</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+<script src="js/theme-engine.js"></script>
+<style>
+
+/* ================= BRAND COLORS ================= */
+:root {
+    --primary: #2f8f3d;   /* Main Green */
+    --secondary: #0f3d2e; /* Dark Green */
+    --gold: #d4af37;      /* Luxury Gold */
+    --bg-light: #f5f7f6;
+    --text-dark: #222;
+}
+
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    background: var(--bg-light);
+    color: var(--text-dark);
+}
+
+/* ================= DEPARTMENT HEADER ================= */
+.dept-header {
+    background: linear-gradient(135deg, var(--secondary), var(--primary));
+    padding: 100px 20px 80px;
+    text-align: center;
+    color: white;
+    margin-top: 80px;
+}
+
+.dept-header h1 {
+    font-size: 42px;
+    font-weight: bold;
+}
+
+.dept-header p {
+    max-width: 800px;
+    margin: 15px auto 0;
+    font-size: 17px;
+    line-height: 1.6;
+}
+
+/* ================= CONTAINER ================= */
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 50px auto;
+}
+
+/* ================= FRAME CARD ================= */
+.frame-card {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    margin-bottom: 40px;
+    border-left: 6px solid var(--primary);
+}
+
+/* ================= MEMBER CARD ================= */
+.member-card {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    background: white;
+    padding: 20px;
+    border-radius: 14px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    margin-bottom: 25px;
+    transition: 0.3s;
+}
+
+.member-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+}
+
+/* IMAGE */
+.member-card img {
+    width: 120px;
+    height: 120px;
+    border-radius: 12px;
+    object-fit: cover;
+    border: 3px solid var(--primary);
+}
+
+/* TEXT */
+.member-info h3 {
+    font-size: 22px;
+    color: var(--secondary);
+}
+
+.member-info p {
+    font-size: 16px;
+    color: var(--primary);
+    font-weight: bold;
+}
+
+/* RESPONSIVE */
+@media (max-width: 700px) {
+    .member-card {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+</style>
+</head>
+
+<body>
+    <!-- =========================================
+        FLOATING SOCIAL MEDIA SIDEBAR (NEW FEATURE)
+    ========================================= -->
+    <div class="social-sidebar" id="socialSidebar">
+        <div class="social-toggle" id="socialToggle">
+            <i class="fas fa-share-alt"></i>
+        </div>
+        <div class="social-icons">
+            <a href="https://t.me/obumsj" target="_blank" title="Telegram" class="social-icon">
+                <i class="fab fa-telegram"></i>
+                <span class="social-tooltip">Telegram</span>
+            </a>
+            <a href="https://facebook.com/obumsj" target="_blank" title="Facebook" class="social-icon">
+                <i class="fab fa-facebook"></i>
+                <span class="social-tooltip">Facebook</span>
+            </a>
+            <a href="https://wa.me/251912345678" target="_blank" title="WhatsApp" class="social-icon">
+                <i class="fab fa-whatsapp"></i>
+                <span class="social-tooltip">WhatsApp</span>
+            </a>
+            <a href="https://youtube.com/obumsj" target="_blank" title="YouTube" class="social-icon">
+                <i class="fab fa-youtube"></i>
+                <span class="social-tooltip">YouTube</span>
+            </a>
+            <a href="https://tiktok.com/@obumsj" target="_blank" title="TikTok" class="social-icon">
+                <i class="fab fa-tiktok"></i>
+                <span class="social-tooltip">TikTok</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo-container">
+            <img src="./IMAGE/OBUMSJ Logo.jpg" alt="OBUMSJ Logo" class="logo">
+            <span class="logo-text" data-i18n="logo">OBUMSJ</span>
+             <button id="darkModeToggle" class="dark-btn" aria-label="Toggle theme"><i class="fas fa-moon theme-icon" aria-hidden="true"></i></button>
+        </div>
+
+       <div class="lang-dropdown">
+  <button class="lang-btn" aria-label="Select Language"><i class="fas fa-globe" aria-hidden="true"></i> <span class="lang-code">EN</span> <i class="fas fa-chevron-down lang-chevron" aria-hidden="true"></i></button>
+  <div class="lang-menu">
+    <a href="#" onclick="setLang('en'); return false;" data-i18n="lang.english">English</a>
+    <a href="#" onclick="setLang('am'); return false;" data-i18n="lang.amharic">Amharic</a>
+    <a href="#" onclick="setLang('om'); return false;" data-i18n="lang.oromo">Oromo</a>
+    <a href="#" onclick="setLang('ar'); return false;" data-i18n="lang.arabic">Arabic</a>
+  </div>
+</div>
+
+
+        
+        <ul class="nav-links">
+            <li><a href="./index.html" data-i18n="nav.home">HOME</a></li>
+            <li><a href="./About-Us.html" data-i18n="nav.about">ABOUT US</a></li>
+            <li class="dropdown">
+                <a href="#sectors" data-i18n="nav.sectors">SECTORS <i class="fas fa-chevron-down"></i></a>
+                <div class="dropdown-content">
+                    <a href="./Qirat.html" data-i18n="sector.qirat"><i class="fas fa-quran"></i> Qirat</a>
+                    <a href="./Dawah.html" data-i18n="sector.dawah"><i class="fas fa-megaphone"></i> Dawah</a>
+                    <a href="./Social Affairs.html" data-i18n="sector.social"><i class="fas fa-hands-helping"></i> Social Affairs</a>
+                    
+                    <a href="./Academy.html" data-i18n="sector.academy"><i class="fas fa-graduation-cap"></i> Academy</a>
+                    <a href="./Finance.html" data-i18n="sector.finance"><i class="fas fa-coins"></i> Finance</a>
+                    <a href="./Ziyara.html" data-i18n="sector.ziyara"><i class="fas fa-kaaba"></i> Ziyara</a>
+                    <a href="./Ruqiya.html" data-i18n="sector.ruqiya"><i class="fas fa-hand-holding-heart"></i> Rukiya</a>
+                    <a href="./Charity.html" data-i18n="sector.charity"><i class="fas fa-donate"></i> Charity</a>
+                    <a href="./Dawrul-hasen.html" data-i18n="sector.dawrul"><i class="fas fa-book"></i> Dawrul Hasen</a>
+                    <a href="./Information.html" data-i18n="sector.information"><i class="fas fa-info-circle"></i> Information</a>
+                </div>
+            </li>
+            <li><a href="Blog.html" data-i18n="nav.blog">BLOG</a></li>
+            <li><a href="contact.html" data-i18n="nav.contact">CONTACT US</a></li>
+            <li><a href="./member.html" data-i18n="nav.membership">MEMBERSHIP</a></li>
+            <li><a href="donate.html" class="btn nav-donate" data-i18n="nav.donate">DONATE HERE</a></li>
+        </ul>
+        
+        <div class="menu-toggle" id="mobile-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+<!-- ================= HEADER ================= -->
+<section class="dept-header">
+    <h1 data-i18n="ziyara.title">Ziyara Sector</h1>
+    <p data-i18n="ziyara.description">
+        The Ziyara Sector is responsible for Quran recitation programs, Tajweed training, 
+        and organizing competitions to enhance Quranic skills among members.
+    </p>
+</section>
+
+<div class="container">
+
+    <!-- ================= ABOUT FRAME ================= -->
+    <div class="frame-card">
+        <h2 data-i18n="ziyara.about_title">About Ziyara Sector</h2>
+        <p data-i18n="ziyara.about_text">
+            This department focuses on teaching correct Quran recitation, 
+            promoting memorization, and nurturing students to become skilled Qaris 
+            who represent the community in national and international competitions.
+        </p>
+    </div>
+
+    <!-- ================= AMIR ================= -->
+    <div class="member-card">
+        <img src="./IMAGE/We are visted.jpg" alt="Amir">
+        <div class="member-info">
+            <h3>Sheikh Ahmed Ali</h3>
+            <p data-i18n="ziyara.amir">Amir of Ziyara Sector</p>
+        </div>
+    </div>
+
+    <!-- ================= VICE AMIR ================= -->
+    <div class="member-card">
+        <img src="./IMAGE/Best 4.jpg" alt="Vice Amir">
+        <div class="member-info">
+            <h3>Mohammed Yusuf</h3>
+            <p data-i18n="ziyara.vice_amir">Vice Amir of Ziyara Sector</p>
+        </div>
+    </div>
+
+    <!-- ================= WRITER ================= -->
+    <div class="member-card">
+        <img src="./IMAGE/Best 7.jpg" alt="Writer">
+        <div class="member-info">
+            <h3>Abdellah Hassan</h3>
+            <p data-i18n="ziyara.writer">Writer of Ziyara Sector</p>
+        </div>
+    </div>
+
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3 data-i18n="footer.about">About OBUMSJ</h3>
+                <p data-i18n="footer.about_text">ODA BULTUM UNIVERSITY MUSLIM STUDENTS' JAMA'A is dedicated to supporting Muslim students in their academic and spiritual journey.</p>
+                <div class="footer-social">
+                    <a href="https://t.me/obumsj" target="_blank" title="Telegram"><i class="fab fa-telegram"></i></a>
+                    <a href="https://facebook.com/obumsj" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="https://wa.me/251912345678" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://youtube.com/obumsj" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="https://tiktok.com/@obumsj" target="_blank" title="TikTok"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3 data-i18n="footer.quick">Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="./index.html" data-i18n="nav.home">Home</a></li>
+                    <li><a href="./About-Us.html" data-i18n="nav.about">About Us</a></li>
+                    <li><a href="./index.html#sectors" data-i18n="nav.sectors">Sectors</a></li>
+                    <li><a href="./Blog.html" data-i18n="nav.blog">Blog</a></li>
+                    <li><a href="./contact.html" data-i18n="nav.contact">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3 data-i18n="footer.sectors">Our Sectors</h3>
+                <ul class="footer-links">
+                    <li><a href="./Qirat.html" data-i18n="sector.qirat">Qirat</a></li>
+                    <li><a href="./Dawah.html" data-i18n="sector.dawah">Dawah</a></li>
+                    <li><a href="./Social Affairs.html" data-i18n="sector.social">Social Affairs</a></li>
+                    <li><a href="./Academy.html" data-i18n="sector.academy">Academy</a></li>
+                    <li><a href="./Finance.html" data-i18n="sector.finance">Finance</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3 data-i18n="footer.contact">Contact Info</h3>
+                <ul class="footer-links">
+                    <li><i class="fas fa-map-marker-alt"></i> <span data-i18n="footer.address">Oda Bultum University, Chiro, Ethiopia</span></li>
+                    <li><i class="fas fa-phone"></i> <span data-i18n="footer.phone">+251 912 345 678</span></li>
+                    <li><i class="fas fa-envelope"></i> <span data-i18n="footer.email">info@obumsj.org</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p data-i18n="footer.copyright">&copy; 2023 OBUMSJ - Oda Bultum University Muslim Students' JAMA'A. All Rights Reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- Include the universal language system -->
+<script src="./js/language-system.js"></script>
+<script src="./Script.js"></script>
+</body>
+</html>

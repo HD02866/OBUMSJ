@@ -1,0 +1,379 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="contact.page_title">Contact Us - OBUMSJ - Oda Bultum University Muslim Students' JAMA'A</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Add your existing contact.css styles here */
+        /* MAIN COLORS */
+        :root {
+            --brand-green: #3bb54a;
+            --dark-green: #1e6b2d;
+            --light-bg: #f6f6f6;
+            --text-dark: #222;
+        }
+
+        /* SECTION */
+        .contact-section {
+            padding: 80px 0;
+            background: #fff;
+            margin-top: 80px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        /* FLEX LAYOUT */
+        .contact-content {
+            display: flex;
+            gap: 50px;
+            align-items: flex-start;
+        }
+
+        /* LEFT INFO */
+        .contact-info {
+            flex: 1;
+        }
+
+        .contact-info h2 {
+            font-size: 36px;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        .contact-info p {
+            color: var(--text-light);
+            margin-bottom: 30px;
+        }
+
+        /* CONTACT ITEMS */
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .contact-icon {
+            width: 55px;
+            height: 55px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 22px;
+        }
+
+        /* SOCIAL ICONS */
+        .social-links {
+            margin-top: 25px;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            width: 40px;
+            height: 40px;
+            background: var(--dark);
+            color: #fff;
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-size: 18px;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--accent);
+        }
+
+        /* RIGHT FORM */
+        .contact-form {
+            flex: 1;
+            background: var(--light);
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 0 25px rgba(0,0,0,0.05);
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+            color: var(--dark);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            outline: none;
+            font-size: 14px;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--accent);
+        }
+
+        /* SEND BUTTON */
+        .send-btn {
+            width: 100%;
+            background: var(--accent);
+            color: white;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .send-btn:hover {
+            background: var(--secondary);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            .contact-content {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- =========================================
+        FLOATING SOCIAL MEDIA SIDEBAR (NEW FEATURE)
+    ========================================= -->
+    <div class="social-sidebar" id="socialSidebar">
+        <div class="social-toggle" id="socialToggle">
+            <i class="fas fa-share-alt"></i>
+        </div>
+        <div class="social-icons">
+            <a href="https://t.me/obumsj" target="_blank" title="Telegram" class="social-icon">
+                <i class="fab fa-telegram"></i>
+                <span class="social-tooltip">Telegram</span>
+            </a>
+            <a href="https://facebook.com/obumsj" target="_blank" title="Facebook" class="social-icon">
+                <i class="fab fa-facebook"></i>
+                <span class="social-tooltip">Facebook</span>
+            </a>
+            <a href="https://wa.me/251912345678" target="_blank" title="WhatsApp" class="social-icon">
+                <i class="fab fa-whatsapp"></i>
+                <span class="social-tooltip">WhatsApp</span>
+            </a>
+            <a href="https://youtube.com/obumsj" target="_blank" title="YouTube" class="social-icon">
+                <i class="fab fa-youtube"></i>
+                <span class="social-tooltip">YouTube</span>
+            </a>
+            <a href="https://tiktok.com/@obumsj" target="_blank" title="TikTok" class="social-icon">
+                <i class="fab fa-tiktok"></i>
+                <span class="social-tooltip">TikTok</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo-container">
+            <img src="./IMAGE/OBUMSJ Logo.jpg" alt="OBUMSJ Logo" class="logo">
+            <span class="logo-text" data-i18n="logo">OBUMSJ</span>
+             <button id="darkModeToggle" class="dark-btn">🌙</button>
+        </div>
+
+       <div class="lang-dropdown">
+  <button class="lang-btn">🌐 <span class="lang-code">EN</span></button>
+  <div class="lang-menu">
+    <a href="#" onclick="setLang('en'); return false;" data-i18n="lang.english">English</a>
+    <a href="#" onclick="setLang('am'); return false;" data-i18n="lang.amharic">Amharic</a>
+    <a href="#" onclick="setLang('om'); return false;" data-i18n="lang.oromo">Oromo</a>
+    <a href="#" onclick="setLang('ar'); return false;" data-i18n="lang.arabic">Arabic</a>
+  </div>
+</div>
+
+
+        
+        <ul class="nav-links">
+            <li><a href="./index.html" data-i18n="nav.home">HOME</a></li>
+            <li><a href="./About-Us.html" data-i18n="nav.about">ABOUT US</a></li>
+            <li class="dropdown">
+                <a href="#sectors" data-i18n="nav.sectors">SECTORS <i class="fas fa-chevron-down"></i></a>
+                <div class="dropdown-content">
+                    <a href="./Qirat.html" data-i18n="sector.qirat"><i class="fas fa-quran"></i> Qirat</a>
+                    <a href="./Dawah.html" data-i18n="sector.dawah"><i class="fas fa-megaphone"></i> Dawah</a>
+                    <a href="./Social Affairs.html" data-i18n="sector.social"><i class="fas fa-hands-helping"></i> Social Affairs</a>
+                   
+                    <a href="./Academy.html" data-i18n="sector.academy"><i class="fas fa-graduation-cap"></i> Academy</a>
+                    <a href="./Finance.html" data-i18n="sector.finance"><i class="fas fa-coins"></i> Finance</a>
+                    <a href="./Ziyara.html" data-i18n="sector.ziyara"><i class="fas fa-kaaba"></i> Ziyara</a>
+                    <a href="./Ruqiya.html" data-i18n="sector.ruqiya"><i class="fas fa-hand-holding-heart"></i> Rukiya</a>
+                    <a href="./Charity.html" data-i18n="sector.charity"><i class="fas fa-donate"></i> Charity</a>
+                    <a href="./Dawrul-hasen.html" data-i18n="sector.dawrul"><i class="fas fa-book"></i> Dawrul Hasen</a>
+                    <a href="./Information.html" data-i18n="sector.information"><i class="fas fa-info-circle"></i> Information</a>
+                </div>
+            </li>
+            <li><a href="Blog.html" data-i18n="nav.blog">BLOG</a></li>
+            <li><a href="contact.html" data-i18n="nav.contact">CONTACT US</a></li>
+            <li><a href="./member.html" data-i18n="nav.membership">MEMBERSHIP</a></li>
+            <li><a href="donate.html" class="btn nav-donate" data-i18n="nav.donate">DONATE HERE</a></li>
+        </ul>
+        
+        <div class="menu-toggle" id="mobile-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <div class="contact-content">
+                <!-- LEFT SIDE -->
+                <div class="contact-info">
+                    <h2 data-i18n="contact.hero_title">Get In Touch</h2>
+                    <p data-i18n="contact.hero_subtitle">We'd love to hear from you. Reach out to us with any questions or inquiries.</p>
+
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div>
+                            <h4 data-i18n="contact.location">Our Location</h4>
+                            <p data-i18n="footer.address">Oda Bultum University, Chiro, Ethiopia</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fas fa-phone"></i></div>
+                        <div>
+                            <h4 data-i18n="contact.phone">Phone Number</h4>
+                            <p data-i18n="footer.phone">+251 912 345 678</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                        <div>
+                            <h4 data-i18n="contact.email">Email Address</h4>
+                            <p data-i18n="footer.email">info@obumsj.org</p>
+                        </div>
+                    </div>
+
+                    <!-- Social Icons -->
+                    <div class="social-links">
+                        <a href="https://t.me/obumsj" target="_blank"><i class="fab fa-telegram"></i></a>
+                        <a href="https://facebook.com/obumsj" target="_blank"><i class="fab fa-facebook"></i></a>
+                        <a href="https://wa.me/251912345678" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://youtube.com/obumsj" target="_blank"><i class="fab fa-youtube"></i></a>
+                        <a href="https://tiktok.com/@obumsj" target="_blank"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+
+                <!-- RIGHT SIDE FORM -->
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label data-i18n="contact.your_name">Your Name</label>
+                            <input type="text" data-i18n-placeholder="contact.your_name" placeholder="Enter your name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label data-i18n="contact.your_email">Your Email</label>
+                            <input type="email" data-i18n-placeholder="contact.your_email" placeholder="Enter your email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label data-i18n="contact.subject">Subject</label>
+                            <input type="text" data-i18n-placeholder="contact.subject" placeholder="Enter subject" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label data-i18n="contact.your_message">Your Message</label>
+                            <textarea rows="5" data-i18n-placeholder="contact.your_message" placeholder="Enter your message" required></textarea>
+                        </div>
+
+                        <button type="submit" class="send-btn" data-i18n="contact.send_message">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3 data-i18n="footer.about">About OBUMSJ</h3>
+                    <p data-i18n="footer.about_text">ODA BULTUM UNIVERSITY MUSLIM STUDENTS' JAMA'A is dedicated to supporting Muslim students in their academic and spiritual journey.</p>
+                    <div class="footer-social">
+                        <a href="https://t.me/obumsj" target="_blank" title="Telegram"><i class="fab fa-telegram"></i></a>
+                        <a href="https://facebook.com/obumsj" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="https://wa.me/251912345678" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://youtube.com/obumsj" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="https://tiktok.com/@obumsj" target="_blank" title="TikTok"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3 data-i18n="footer.quick">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="./index.html" data-i18n="nav.home">Home</a></li>
+                        <li><a href="./About-Us.html" data-i18n="nav.about">About Us</a></li>
+                        <li><a href="./index.html#sectors" data-i18n="nav.sectors">Sectors</a></li>
+                        <li><a href="./Blog.html" data-i18n="nav.blog">Blog</a></li>
+                        <li><a href="./contact.html" data-i18n="nav.contact">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3 data-i18n="footer.sectors">Our Sectors</h3>
+                    <ul class="footer-links">
+                        <li><a href="./Qirat.html" data-i18n="sector.qirat">Qirat</a></li>
+                        <li><a href="./Dawah.html" data-i18n="sector.dawah">Dawah</a></li>
+                        <li><a href="./Social Affairs.html" data-i18n="sector.social">Social Affairs</a></li>
+                        <li><a href="./Academy.html" data-i18n="sector.academy">Academy</a></li>
+                        <li><a href="./Finance.html" data-i18n="sector.finance">Finance</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3 data-i18n="footer.contact">Contact Info</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> <span data-i18n="footer.address">Oda Bultum University, Chiro, Ethiopia</span></li>
+                        <li><i class="fas fa-phone"></i> <span data-i18n="footer.phone">+251 912 345 678</span></li>
+                        <li><i class="fas fa-envelope"></i> <span data-i18n="footer.email">info@obumsj.org</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p data-i18n="footer.copyright">&copy; 2023 OBUMSJ - Oda Bultum University Muslim Students' JAMA'A. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Include the universal language system -->
+    <script src="./js/language-system.js"></script>
+    <script src="./Script.js"></script>
+    <script>
+        // Contact form submission
+        document.getElementById("contactForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+            const message = LanguageSystem.t('contact.success_message', '✅ Your message has been sent successfully!');
+            alert(message);
+            this.reset();
+        });
+    </script>
+</body>
+</html>

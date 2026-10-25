@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offline - OBUMSJ</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/design-system.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #140c07;
+            color: #f7f3ee;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .offline-card {
+            background: #23160e;
+            border: 1px solid rgba(212, 175, 55, 0.35);
+            border-radius: 16px;
+            padding: 40px 30px;
+            max-width: 480px;
+            width: 100%;
+            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6);
+        }
+        .offline-icon {
+            font-size: 3.5rem;
+            color: #d4af37;
+            margin-bottom: 20px;
+        }
+        .offline-title {
+            font-size: 1.8rem;
+            margin: 0 0 12px 0;
+            color: #ffffff;
+        }
+        .offline-message {
+            font-size: 1rem;
+            color: #d1c7be;
+            line-height: 1.6;
+            margin: 0 0 26px 0;
+        }
+        .retry-btn {
+            background: linear-gradient(135deg, #d4af37, #aa820a);
+            color: #140c07;
+            border: none;
+            padding: 12px 28px;
+            font-size: 1rem;
+            font-weight: 700;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .retry-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(212, 175, 55, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="offline-card">
+        <div class="offline-icon"><i class="fas fa-wifi-slash"></i></div>
+        <h1 class="offline-title">You're Currently Offline</h1>
+        <p class="offline-message">
+            It looks like your internet connection is unavailable. Cached public pages you previously visited are still accessible. Please reconnect to access real-time features.
+        </p>
+        <button class="retry-btn" onclick="window.location.reload()">
+            <i class="fas fa-rotate-right"></i> Try Reconnecting
+        </button>
+    </div>
+</body>
+</html>
