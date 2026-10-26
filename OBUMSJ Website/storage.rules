@@ -17,6 +17,12 @@ service firebase.storage {
       allow write: if isAuthenticated() && isImageFile();
     }
 
+    // Sector leadership photos - public read, authenticated upload for staff
+    match /sectors/{allPaths=**} {
+      allow read: if true;
+      allow write: if isAuthenticated() && isImageFile();
+    }
+
     // User profile images - public read, owner write
     match /profiles/{userId}/{allPaths=**} {
       allow read: if true;

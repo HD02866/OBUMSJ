@@ -126,6 +126,14 @@ service cloud.firestore {
     }
 
     // ============================================
+    // SECTORS COLLECTION (Content & Leadership)
+    // ============================================
+    match /sectors/{sectorId} {
+      allow read: if true;
+      allow create, update, delete: if isStaff();
+    }
+
+    // ============================================
     // NOTIFICATIONS COLLECTION
     // ============================================
     match /notifications/{notifId} {

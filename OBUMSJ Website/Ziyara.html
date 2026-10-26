@@ -27,7 +27,7 @@
 }
 
 body {
-    background: var(--bg-light);
+    /* background handled by design system */
     color: var(--text-dark);
 }
 
@@ -61,7 +61,7 @@ body {
 
 /* ================= FRAME CARD ================= */
 .frame-card {
-    background: white;
+    /* background: translucent glass */
     padding: 30px;
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.08);
@@ -74,7 +74,7 @@ body {
     display: flex;
     align-items: center;
     gap: 25px;
-    background: white;
+    /* background: translucent glass */
     padding: 20px;
     border-radius: 14px;
     box-shadow: 0 8px 25px rgba(0,0,0,0.08);
@@ -154,49 +154,69 @@ body {
     <!-- Navigation -->
     <nav class="navbar">
         <div class="logo-container">
-            <img src="./IMAGE/OBUMSJ Logo.jpg" alt="OBUMSJ Logo" class="logo">
+            <img src="./IMAGE/OBUMSJ Logo.jpg" alt="OBUMSJ Logo" class="logo" loading="lazy" decoding="async">
             <span class="logo-text" data-i18n="logo">OBUMSJ</span>
-             <button id="darkModeToggle" class="dark-btn" aria-label="Toggle theme"><i class="fas fa-moon theme-icon" aria-hidden="true"></i></button>
+            <button id="darkModeToggle" class="dark-btn" aria-label="Toggle theme"><i class="fas fa-moon theme-icon" aria-hidden="true"></i></button>
         </div>
 
        <div class="lang-dropdown">
-  <button class="lang-btn" aria-label="Select Language"><i class="fas fa-globe" aria-hidden="true"></i> <span class="lang-code">EN</span> <i class="fas fa-chevron-down lang-chevron" aria-hidden="true"></i></button>
-  <div class="lang-menu">
-    <a href="#" onclick="setLang('en'); return false;" data-i18n="lang.english">English</a>
-    <a href="#" onclick="setLang('am'); return false;" data-i18n="lang.amharic">Amharic</a>
-    <a href="#" onclick="setLang('om'); return false;" data-i18n="lang.oromo">Oromo</a>
-    <a href="#" onclick="setLang('ar'); return false;" data-i18n="lang.arabic">Arabic</a>
+  <button class="lang-btn" aria-label="Select Language"><span class="selected-flag-icon"><svg class="flag-icon" viewBox="0 0 60 30" width="20" height="14" aria-hidden="true"><clipPath id="uk-c-btn"><path d="M0 0v30h60V0z"/></clipPath><clipPath id="uk-d-btn"><path d="M30 15h30v15zv15H30zh-30v-15zv-15h30z"/></clipPath><g clip-path="url(#uk-c-btn)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" clip-path="url(#uk-d-btn)" stroke="#C8102E" stroke-width="4"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#C8102E" stroke-width="6"/></g></svg></span> <span class="lang-code">EN</span> <i class="fas fa-chevron-down lang-chevron" aria-hidden="true"></i></button>
+  <div class="lang-menu" role="listbox" aria-label="Select Language">
+    <a href="#" onclick="setLang('en'); return false;" class="lang-option active" data-lang="en" role="option" aria-selected="true">
+      <span class="flag-icon-wrap"><svg class="flag-icon" viewBox="0 0 60 30" width="20" height="14" aria-hidden="true"><clipPath id="uk-c-opt"><path d="M0 0v30h60V0z"/></clipPath><clipPath id="uk-d-opt"><path d="M30 15h30v15zv15H30zh-30v-15zv-15h30z"/></clipPath><g clip-path="url(#uk-c-opt)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" clip-path="url(#uk-d-opt)" stroke="#C8102E" stroke-width="4"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#C8102E" stroke-width="6"/></g></svg></span>
+      <span data-i18n="lang.english">English</span>
+    </a>
+    <a href="#" onclick="setLang('am'); return false;" class="lang-option" data-lang="am" role="option" aria-selected="false">
+      <span class="flag-icon-wrap"><svg class="flag-icon" viewBox="0 0 60 30" width="20" height="14" aria-hidden="true"><rect width="60" height="10" fill="#078930"/><rect y="10" width="60" height="10" fill="#FCDD09"/><rect y="20" width="60" height="10" fill="#DA121A"/><circle cx="30" cy="15" r="7" fill="#0F47AF"/><polygon points="30,9.5 31.6,13.8 36,13.8 32.4,16.4 33.8,20.5 30,17.8 26.2,20.5 27.6,16.4 24,13.8 28.4,13.8" fill="#FCDD09"/></svg></span>
+      <span data-i18n="lang.amharic">Amharic</span>
+    </a>
+    <a href="#" onclick="setLang('om'); return false;" class="lang-option" data-lang="om" role="option" aria-selected="false">
+      <span class="flag-icon-wrap"><svg class="flag-icon" viewBox="0 0 60 30" width="20" height="14" aria-hidden="true"><rect width="60" height="10" fill="#DA121A"/><rect y="10" width="60" height="10" fill="#FFFFFF"/><rect y="20" width="60" height="10" fill="#000000"/><path d="M29 19.5h2v-2.5h-2z" fill="#078930"/><path d="M30 11.5c-3.2 0-5.5 1.8-5.5 3.8c0 1 0.8 1.8 1.8 2.3c-0.8 0.5-0.8 1.4 0.2 1.8c1.2 0.1 2.2-0.5 3.5-1c1.3 0.5 2.3 1.1 3.5 1c1-0.4 1-1.3 0.2-1.8c1-0.5 1.8-1.3 1.8-2.3c0-2-2.3-3.8-5.5-3.8z" fill="#078930"/></svg></span>
+      <span data-i18n="lang.oromo">Oromo</span>
+    </a>
+    <a href="#" onclick="setLang('ar'); return false;" class="lang-option" data-lang="ar" role="option" aria-selected="false">
+      <span class="flag-icon-wrap"><svg class="flag-icon" viewBox="0 0 60 30" width="20" height="14" aria-hidden="true"><rect width="60" height="30" fill="#006C35"/><path d="M14 11h32M16 8h8M28 8h10M40 8h4M18 13.5h24" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round"/><path d="M16 17.5h26M16 16v3M14 17.5h2M38 17.5l4-1.5l-2 1.5l2 1.5z" stroke="#FFFFFF" stroke-width="1.4" fill="#FFFFFF"/></svg></span>
+      <span data-i18n="lang.arabic">Arabic</span>
+    </a>
   </div>
 </div>
 
-
-        
         <ul class="nav-links">
             <li><a href="./index.html" data-i18n="nav.home">HOME</a></li>
             <li><a href="./About-Us.html" data-i18n="nav.about">ABOUT US</a></li>
             <li class="dropdown">
-                <a href="#sectors" data-i18n="nav.sectors">SECTORS <i class="fas fa-chevron-down"></i></a>
+                <a href="./sector.html" data-i18n="nav.sectors" aria-haspopup="true" aria-expanded="false">SECTORS <i class="fas fa-chevron-down" aria-hidden="true"></i></a>
                 <div class="dropdown-content">
-                    <a href="./Qirat.html" data-i18n="sector.qirat"><i class="fas fa-quran"></i> Qirat</a>
-                    <a href="./Dawah.html" data-i18n="sector.dawah"><i class="fas fa-megaphone"></i> Dawah</a>
-                    <a href="./Social Affairs.html" data-i18n="sector.social"><i class="fas fa-hands-helping"></i> Social Affairs</a>
-                    
-                    <a href="./Academy.html" data-i18n="sector.academy"><i class="fas fa-graduation-cap"></i> Academy</a>
-                    <a href="./Finance.html" data-i18n="sector.finance"><i class="fas fa-coins"></i> Finance</a>
-                    <a href="./Ziyara.html" data-i18n="sector.ziyara"><i class="fas fa-kaaba"></i> Ziyara</a>
-                    <a href="./Ruqiya.html" data-i18n="sector.ruqiya"><i class="fas fa-hand-holding-heart"></i> Rukiya</a>
-                    <a href="./Charity.html" data-i18n="sector.charity"><i class="fas fa-donate"></i> Charity</a>
-                    <a href="./Dawrul-hasen.html" data-i18n="sector.dawrul"><i class="fas fa-book"></i> Dawrul Hasen</a>
-                    <a href="./Information.html" data-i18n="sector.information"><i class="fas fa-info-circle"></i> Information</a>
+                    <a href="./Qirat.html" data-i18n="sector.qirat"><i class="fas fa-quran" aria-hidden="true"></i> Qirat Sector</a>
+                    <a href="./Dawah.html" data-i18n="sector.dawah"><i class="fas fa-megaphone" aria-hidden="true"></i> Dawah Sector</a>
+                    <a href="./Social Affairs.html" data-i18n="sector.social"><i class="fas fa-hands-helping" aria-hidden="true"></i> Social Affairs Sector</a>
+                    <a href="./Academy.html" data-i18n="sector.academy"><i class="fas fa-graduation-cap" aria-hidden="true"></i> Academy & Education Sector</a>
+                    <a href="./Finance.html" data-i18n="sector.finance"><i class="fas fa-coins" aria-hidden="true"></i> Finance Sector</a>
+                    <a href="./Ziyara.html" data-i18n="sector.ziyara"><i class="fas fa-kaaba" aria-hidden="true"></i> Ziyara & Outreach Sector</a>
+                    <a href="./Ruqiya.html" data-i18n="sector.ruqiya"><i class="fas fa-hand-holding-heart" aria-hidden="true"></i> Ruqiyah Sector</a>
+                    <a href="./Charity.html" data-i18n="sector.charity"><i class="fas fa-donate" aria-hidden="true"></i> Charity Sector</a>
+                    <a href="./Dawrul-hasen.html" data-i18n="sector.dawrul"><i class="fas fa-book" aria-hidden="true"></i> Dawr Al-Hasan Sector</a>
+                    <a href="./Information.html" data-i18n="sector.information"><i class="fas fa-info-circle" aria-hidden="true"></i> Information & Media Sector</a>
                 </div>
             </li>
             <li><a href="Blog.html" data-i18n="nav.blog">BLOG</a></li>
             <li><a href="contact.html" data-i18n="nav.contact">CONTACT US</a></li>
-            <li><a href="./member.html" data-i18n="nav.membership">MEMBERSHIP</a></li>
+            <li id="loginNavItem"><a href="./member.html" id="loginBtn" data-i18n="nav.membership">MEMBERSHIP</a></li>
+            <li id="userMenuNavItem" style="display:none;">
+                <div id="userMenu" style="display:none; gap:8px; align-items:center;">
+                    <a href="Dashboard.html" id="dashboardLink" class="btn" style="padding:6px 12px; font-size:0.85rem;"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                    <a href="#" class="btn logout-btn" style="padding:6px 10px; font-size:0.85rem; background:#fee2e2; color:#b91c1c;"><i class="fas fa-sign-out-alt"></i></a>
+                </div>
+            </li>
             <li><a href="donate.html" class="btn nav-donate" data-i18n="nav.donate">DONATE HERE</a></li>
         </ul>
-        
-        <div class="menu-toggle" id="mobile-menu">
+
+        <!-- Mobile Navbar PWA Installation Control (Requirement 3) -->
+        <button id="mobileNavInstallBtn" class="nav-install-btn" aria-label="Install App" title="Install App">
+            <i class="fas fa-download" aria-hidden="true"></i> <span class="install-btn-text">App</span>
+        </button>
+
+        <div class="menu-toggle" id="mobile-menu" aria-label="Toggle navigation menu" role="button" tabindex="0">
             <span></span>
             <span></span>
             <span></span>
@@ -207,7 +227,7 @@ body {
 <section class="dept-header">
     <h1 data-i18n="ziyara.title">Ziyara Sector</h1>
     <p data-i18n="ziyara.description">
-        The Ziyara Sector is responsible for Quran recitation programs, Tajweed training, 
+        The Ziyara Sector is responsible for Quran recitation programs, Tajweed training,
         and organizing competitions to enhance Quranic skills among members.
     </p>
 </section>
@@ -215,18 +235,18 @@ body {
 <div class="container">
 
     <!-- ================= ABOUT FRAME ================= -->
-    <div class="frame-card">
+    <div class="frame-card card-animated-border reveal-horizontal">
         <h2 data-i18n="ziyara.about_title">About Ziyara Sector</h2>
         <p data-i18n="ziyara.about_text">
-            This department focuses on teaching correct Quran recitation, 
-            promoting memorization, and nurturing students to become skilled Qaris 
+            This department focuses on teaching correct Quran recitation,
+            promoting memorization, and nurturing students to become skilled Qaris
             who represent the community in national and international competitions.
         </p>
     </div>
 
     <!-- ================= AMIR ================= -->
-    <div class="member-card">
-        <img src="./IMAGE/We are visted.jpg" alt="Amir">
+    <div class="member-card card-animated-border reveal-horizontal stagger-1">
+        <img src="./IMAGE/We are visted.jpg" alt="Amir" loading="lazy" decoding="async">
         <div class="member-info">
             <h3>Sheikh Ahmed Ali</h3>
             <p data-i18n="ziyara.amir">Amir of Ziyara Sector</p>
@@ -234,8 +254,8 @@ body {
     </div>
 
     <!-- ================= VICE AMIR ================= -->
-    <div class="member-card">
-        <img src="./IMAGE/Best 4.jpg" alt="Vice Amir">
+    <div class="member-card card-animated-border reveal-horizontal stagger-2">
+        <img src="./IMAGE/Best 4.jpg" alt="Vice Amir" loading="lazy" decoding="async">
         <div class="member-info">
             <h3>Mohammed Yusuf</h3>
             <p data-i18n="ziyara.vice_amir">Vice Amir of Ziyara Sector</p>
@@ -243,8 +263,8 @@ body {
     </div>
 
     <!-- ================= WRITER ================= -->
-    <div class="member-card">
-        <img src="./IMAGE/Best 7.jpg" alt="Writer">
+    <div class="member-card card-animated-border reveal-horizontal stagger-3">
+        <img src="./IMAGE/Best 7.jpg" alt="Writer" loading="lazy" decoding="async">
         <div class="member-info">
             <h3>Abdellah Hassan</h3>
             <p data-i18n="ziyara.writer">Writer of Ziyara Sector</p>
@@ -306,5 +326,76 @@ body {
 <!-- Include the universal language system -->
 <script src="./js/language-system.js"></script>
 <script src="./Script.js"></script>
+<!-- Real-time Firestore Sector Content & Leadership Sync -->
+<script type="module">
+    import { db, doc, onSnapshot } from "./js/firebase.js";
+
+    const SECTOR_SLUG = "ziyara";
+
+    try {
+        onSnapshot(doc(db, "sectors", SECTOR_SLUG), (docSnap) => {
+            if (!docSnap.exists()) return;
+            const data = docSnap.data();
+
+            // 1. Update Sector Hero Title & Description
+            const headerTitle = document.querySelector('.dept-header h1');
+            if (headerTitle && data.name) {
+                headerTitle.textContent = data.name;
+            }
+
+            const headerDesc = document.querySelector('.dept-header p');
+            if (headerDesc && data.description) {
+                headerDesc.textContent = data.description;
+            }
+
+            // 2. Update About Frame Section
+            const aboutH2 = document.querySelector('.frame-card h2');
+            if (aboutH2 && data.aboutTitle) {
+                aboutH2.textContent = data.aboutTitle;
+            }
+
+            const aboutP = document.querySelector('.frame-card p');
+            if (aboutP && data.aboutText) {
+                aboutP.textContent = data.aboutText;
+            }
+
+            // 3. Update Executive Leadership Cards (Amir, Vice Amir, Writer)
+            if (data.leadership) {
+                const memberCards = document.querySelectorAll('.member-card');
+                const positions = ['amir', 'viceAmir', 'writer'];
+
+                positions.forEach((posKey, idx) => {
+                    const card = memberCards[idx];
+                    if (!card) return;
+                    const leader = data.leadership[posKey];
+
+                    if (leader && leader.name && leader.name.trim() !== '') {
+                        card.style.display = 'flex';
+                        const img = card.querySelector('img');
+                        const h3 = card.querySelector('.member-info h3');
+                        const p = card.querySelector('.member-info p');
+
+                        if (img && leader.photoUrl) {
+                            img.src = leader.photoUrl;
+                        }
+                        if (h3) {
+                            h3.textContent = leader.name;
+                        }
+                        if (p && leader.title) {
+                            p.textContent = leader.title;
+                        }
+                    } else {
+                        // Vacant position: gracefully hide card
+                        card.style.display = 'none';
+                    }
+                });
+            }
+        }, (err) => {
+            console.warn("[OBUMSJ Sectors] Real-time sync for " + SECTOR_SLUG + ":", err);
+        });
+    } catch (e) {
+        console.error("[OBUMSJ Sectors] Connection error for " + SECTOR_SLUG + ":", e);
+    }
+</script>
 </body>
 </html>

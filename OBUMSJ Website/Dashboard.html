@@ -1578,39 +1578,61 @@ body.dark-mode .quick-actions .action-btn.gold {
                 <i class="fas fa-bars"></i>
             </button>
             <img src="./IMAGE/OBUMSJ Logo.jpg" alt="OBUMSJ Logo" class="logo">
-            <span class="logo-text">OBUMSJ</span>
-            <button id="darkModeToggle" class="dark-btn" aria-label="Toggle dark mode" aria-label="Toggle theme"><i class="fas fa-moon theme-icon" aria-hidden="true"></i></button>
+            <span class="logo-text" data-i18n="logo">OBUMSJ</span>
+            <button id="darkModeToggle" class="dark-btn" aria-label="Toggle theme"><i class="fas fa-moon theme-icon" aria-hidden="true"></i></button>
         </div>
 
-        <div class="lang-dropdown">
-            <button class="lang-btn" aria-label="Select Language"><i class="fas fa-globe" aria-hidden="true"></i> <span class="lang-code">EN</span> <i class="fas fa-chevron-down lang-chevron" aria-hidden="true"></i></button>
-            <div class="lang-menu">
-                <a href="#" onclick="setLang('en'); return false;" data-i18n="lang.english">English</a>
-                <a href="#" onclick="setLang('am'); return false;" data-i18n="lang.amharic">Amharic</a>
-                <a href="#" onclick="setLang('om'); return false;" data-i18n="lang.oromo">Oromo</a>
-                <a href="#" onclick="setLang('ar'); return false;" data-i18n="lang.arabic">Arabic</a>
-            </div>
-        </div>
+       <div class="lang-dropdown">
+  <button class="lang-btn" aria-label="Select Language"><span class="selected-flag-icon"><svg class="flag-icon" viewBox="0 0 60 30" width="20" height="14" aria-hidden="true"><clipPath id="uk-c-btn"><path d="M0 0v30h60V0z"/></clipPath><clipPath id="uk-d-btn"><path d="M30 15h30v15zv15H30zh-30v-15zv-15h30z"/></clipPath><g clip-path="url(#uk-c-btn)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" clip-path="url(#uk-d-btn)" stroke="#C8102E" stroke-width="4"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#C8102E" stroke-width="6"/></g></svg></span> <span class="lang-code">EN</span> <i class="fas fa-chevron-down lang-chevron" aria-hidden="true"></i></button>
+  <div class="lang-menu" role="listbox" aria-label="Select Language">
+    <a href="#" onclick="setLang('en'); return false;" class="lang-option active" data-lang="en" role="option" aria-selected="true">
+      <span class="flag-icon-wrap"><svg class="flag-icon" viewBox="0 0 60 30" width="20" height="14" aria-hidden="true"><clipPath id="uk-c-opt"><path d="M0 0v30h60V0z"/></clipPath><clipPath id="uk-d-opt"><path d="M30 15h30v15zv15H30zh-30v-15zv-15h30z"/></clipPath><g clip-path="url(#uk-c-opt)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" clip-path="url(#uk-d-opt)" stroke="#C8102E" stroke-width="4"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#C8102E" stroke-width="6"/></g></svg></span>
+      <span data-i18n="lang.english">English</span>
+    </a>
+    <a href="#" onclick="setLang('am'); return false;" class="lang-option" data-lang="am" role="option" aria-selected="false">
+      <span class="flag-icon-wrap"><svg class="flag-icon" viewBox="0 0 60 30" width="20" height="14" aria-hidden="true"><rect width="60" height="10" fill="#078930"/><rect y="10" width="60" height="10" fill="#FCDD09"/><rect y="20" width="60" height="10" fill="#DA121A"/><circle cx="30" cy="15" r="7" fill="#0F47AF"/><polygon points="30,9.5 31.6,13.8 36,13.8 32.4,16.4 33.8,20.5 30,17.8 26.2,20.5 27.6,16.4 24,13.8 28.4,13.8" fill="#FCDD09"/></svg></span>
+      <span data-i18n="lang.amharic">Amharic</span>
+    </a>
+    <a href="#" onclick="setLang('om'); return false;" class="lang-option" data-lang="om" role="option" aria-selected="false">
+      <span class="flag-icon-wrap"><svg class="flag-icon" viewBox="0 0 60 30" width="20" height="14" aria-hidden="true"><rect width="60" height="10" fill="#DA121A"/><rect y="10" width="60" height="10" fill="#FFFFFF"/><rect y="20" width="60" height="10" fill="#000000"/><path d="M29 19.5h2v-2.5h-2z" fill="#078930"/><path d="M30 11.5c-3.2 0-5.5 1.8-5.5 3.8c0 1 0.8 1.8 1.8 2.3c-0.8 0.5-0.8 1.4 0.2 1.8c1.2 0.1 2.2-0.5 3.5-1c1.3 0.5 2.3 1.1 3.5 1c1-0.4 1-1.3 0.2-1.8c1-0.5 1.8-1.3 1.8-2.3c0-2-2.3-3.8-5.5-3.8z" fill="#078930"/></svg></span>
+      <span data-i18n="lang.oromo">Oromo</span>
+    </a>
+    <a href="#" onclick="setLang('ar'); return false;" class="lang-option" data-lang="ar" role="option" aria-selected="false">
+      <span class="flag-icon-wrap"><svg class="flag-icon" viewBox="0 0 60 30" width="20" height="14" aria-hidden="true"><rect width="60" height="30" fill="#006C35"/><path d="M14 11h32M16 8h8M28 8h10M40 8h4M18 13.5h24" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round"/><path d="M16 17.5h26M16 16v3M14 17.5h2M38 17.5l4-1.5l-2 1.5l2 1.5z" stroke="#FFFFFF" stroke-width="1.4" fill="#FFFFFF"/></svg></span>
+      <span data-i18n="lang.arabic">Arabic</span>
+    </a>
+  </div>
+</div>
 
         <ul class="nav-links">
-            <li><a href="./index.html">HOME</a></li>
-            <li><a href="./About-Us.html">ABOUT US</a></li>
+            <li><a href="./index.html" data-i18n="nav.home">HOME</a></li>
+            <li><a href="./About-Us.html" data-i18n="nav.about">ABOUT US</a></li>
             <li class="dropdown">
-                <a href="#sectors">SECTORS <i class="fas fa-chevron-down"></i></a>
+                <a href="./sector.html" data-i18n="nav.sectors" aria-haspopup="true" aria-expanded="false">SECTORS <i class="fas fa-chevron-down" aria-hidden="true"></i></a>
                 <div class="dropdown-content">
-                    <a href="./Qirat.html"><i class="fas fa-quran"></i> Qirat</a>
-                    <a href="./Dawah.html"><i class="fas fa-megaphone"></i> Dawah</a>
-                    <a href="./Social Affairs.html"><i class="fas fa-hands-helping"></i> Social Affairs</a>
-                    <a href="./Academy.html"><i class="fas fa-graduation-cap"></i> Academy</a>
-                    <a href="./Finance.html"><i class="fas fa-coins"></i> Finance</a>
+                    <a href="./Qirat.html" data-i18n="sector.qirat"><i class="fas fa-quran" aria-hidden="true"></i> Qirat Sector</a>
+                    <a href="./Dawah.html" data-i18n="sector.dawah"><i class="fas fa-megaphone" aria-hidden="true"></i> Dawah Sector</a>
+                    <a href="./Social Affairs.html" data-i18n="sector.social"><i class="fas fa-hands-helping" aria-hidden="true"></i> Social Affairs Sector</a>
+                    <a href="./Academy.html" data-i18n="sector.academy"><i class="fas fa-graduation-cap" aria-hidden="true"></i> Academy & Education Sector</a>
+                    <a href="./Finance.html" data-i18n="sector.finance"><i class="fas fa-coins" aria-hidden="true"></i> Finance Sector</a>
+                    <a href="./Ziyara.html" data-i18n="sector.ziyara"><i class="fas fa-kaaba" aria-hidden="true"></i> Ziyara & Outreach Sector</a>
+                    <a href="./Ruqiya.html" data-i18n="sector.ruqiya"><i class="fas fa-hand-holding-heart" aria-hidden="true"></i> Ruqiyah Sector</a>
+                    <a href="./Charity.html" data-i18n="sector.charity"><i class="fas fa-donate" aria-hidden="true"></i> Charity Sector</a>
+                    <a href="./Dawrul-hasen.html" data-i18n="sector.dawrul"><i class="fas fa-book" aria-hidden="true"></i> Dawr Al-Hasan Sector</a>
+                    <a href="./Information.html" data-i18n="sector.information"><i class="fas fa-info-circle" aria-hidden="true"></i> Information & Media Sector</a>
                 </div>
             </li>
-            <li><a href="Blog.html">BLOG</a></li>
-            <li><a href="contact.html">CONTACT</a></li>
+            <li><a href="Blog.html" data-i18n="nav.blog">BLOG</a></li>
+            <li><a href="contact.html" data-i18n="nav.contact">CONTACT US</a></li>
             <li id="userNavItem"></li>
         </ul>
 
-        <div class="menu-toggle" id="mobile-menu">
+        <!-- Mobile Navbar PWA Installation Control (Requirement 3) -->
+        <button id="mobileNavInstallBtn" class="nav-install-btn" aria-label="Install App" title="Install App">
+            <i class="fas fa-download" aria-hidden="true"></i> <span class="install-btn-text">App</span>
+        </button>
+
+        <div class="menu-toggle" id="mobile-menu" aria-label="Toggle navigation menu" role="button" tabindex="0">
             <span></span>
             <span></span>
             <span></span>
@@ -1632,13 +1654,13 @@ body.dark-mode .quick-actions .action-btn.gold {
                 <h2>OBUMSJ Management</h2>
                 <p>Oda Bultum University</p>
             </div>
-            
+
             <div class="user-info">
                 <div class="user-avatar" id="userAvatar">U</div>
                 <div class="user-name" id="sidebarUserName">Loading...</div>
                 <div class="user-role" id="sidebarUserRole">Member</div>
             </div>
-            
+
             <nav class="sidebar-menu" id="sidebarMenu">
                 <!-- Overview -->
                 <a href="#overview" class="menu-item active" data-tab="overview">
@@ -1650,7 +1672,7 @@ body.dark-mode .quick-actions .action-btn.gold {
                     <i class="fas fa-user-clock"></i> Pending Applications
                     <span id="sidebarPendingBadge" class="menu-badge" style="background:#ff9800; color:#fff; display:none;">0</span>
                 </a>
-                
+
                 <!-- User Management (Admin & Leadership) -->
                 <a href="#users" class="menu-item admin-only main-amir-only" data-tab="users" data-perm="users.view">
                     <i class="fas fa-users-cog"></i> User Management
@@ -1660,7 +1682,7 @@ body.dark-mode .quick-actions .action-btn.gold {
                 <a href="#permissions" class="menu-item admin-only" data-tab="permissions" data-perm="permissions.manage">
                     <i class="fas fa-shield-alt"></i> Roles & Permissions
                 </a>
-                
+
                 <!-- Blog CMS (Admin, Leadership, Blog Manager) -->
                 <a href="#blog-manage" class="menu-item blog-manager-only admin-only main-amir-only" data-tab="blog-manage" data-perm="blogs.create">
                     <i class="fas fa-feather-alt"></i> Blog CMS
@@ -1675,6 +1697,11 @@ body.dark-mode .quick-actions .action-btn.gold {
                 <!-- Qirat Programs (Staff manage, members view) -->
                 <a href="#qirat-manage" class="menu-item admin-only main-amir-only amir-only" data-tab="qirat-manage" data-perm="qirat.manage">
                     <i class="fas fa-quran"></i> Qirat Programs
+                </a>
+
+                <!-- Sectors & Leadership Management (Admin & Main Amir) -->
+                <a href="#sectors-manage" class="menu-item admin-only main-amir-only" data-tab="sectors-manage" data-perm="sectors.manage">
+                    <i class="fas fa-sitemap"></i> Sectors & Leadership
                 </a>
 
                 <!-- Notification Center (All users) -->
@@ -1702,33 +1729,33 @@ body.dark-mode .quick-actions .action-btn.gold {
                 <a href="#hadith" class="menu-item" data-tab="hadith">
                     <i class="fas fa-book-open"></i> Daily Hadith
                 </a>
-                
+
                 <!-- Zakir -->
                 <a href="#zakir" class="menu-item" data-tab="zakir">
                     <i class="fas fa-star-and-crescent"></i> Daily Zakir
                 </a>
-                
+
                 <!-- Profile -->
                 <a href="#profile" class="menu-item" data-tab="profile">
                     <i class="fas fa-user-circle"></i> My Profile
                 </a>
-                
+
                 <!-- Female Section Only -->
                 <a href="#female-section" class="menu-item female-only" data-tab="female-section">
                     <i class="fas fa-female"></i> Female Section
                 </a>
-                
+
                 <!-- Sector Member Only -->
                 <a href="#sector-tools" class="menu-item sector-member-only" data-tab="sector-tools">
                     <i class="fas fa-tools"></i> Sector Tools
                 </a>
-                
+
                 <!-- Amir Tools Only -->
                 <a href="#amir-tools" class="menu-item amir-only main-amir-only" data-tab="amir-tools">
                     <i class="fas fa-user-shield"></i> Amir Tools
                 </a>
             </nav>
-            
+
             <div class="logout-btn" id="logoutBtn">
                 <i class="fas fa-sign-out-alt"></i> Logout
             </div>
@@ -1751,7 +1778,7 @@ body.dark-mode .quick-actions .action-btn.gold {
                             <i class="fas fa-bell"></i>
                             <span class="notif-badge" id="headerNotifBadge" style="display:none;">0</span>
                         </button>
-                        
+
                         <div class="notif-tray" id="notifTray">
                             <div class="notif-tray-header">
                                 <h4><i class="fas fa-bell" style="color:var(--primary);"></i> Notifications</h4>
@@ -1799,7 +1826,7 @@ body.dark-mode .quick-actions .action-btn.gold {
                         <div class="stat-value" id="totalMembers">0</div>
                         <div class="stat-label">Active Approved Members</div>
                     </div>
-                    
+
                     <div class="stat-card orange" id="statCardPending" onclick="window.switchTabDirectly('pending-applications')" style="cursor:pointer;" title="Click to review pending applications">
                         <div class="stat-icon" style="background:rgba(255,152,0,0.1); color:#ff9800;"><i class="fas fa-user-clock"></i></div>
                         <div class="stat-value" id="totalPendingRegistrations" style="color:#ff9800;">0</div>
@@ -1957,7 +1984,7 @@ body.dark-mode .quick-actions .action-btn.gold {
                             </div>
                         </form>
                     </div>
-                    
+
                     <!-- PENDING APPLICATIONS ACCORDION/SECTION -->
                     <div class="roles-info-banner">
                         <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
@@ -1969,7 +1996,7 @@ body.dark-mode .quick-actions .action-btn.gold {
                             </span>
                         </div>
                         <p style="font-size:0.88rem; color:#5d4037; margin:8px 0 15px 0;">New members who submitted their registration online. Click <strong>Approve</strong> to assign an active role, or <strong>Reject</strong> with a recorded reason.</p>
-                        
+
                         <div style="overflow-x:auto;">
                             <table class="user-table">
                                 <thead>
@@ -1994,7 +2021,7 @@ body.dark-mode .quick-actions .action-btn.gold {
                     <div class="filter-toolbar">
                         <div class="filter-group">
                             <input type="text" id="memberSearchInput" class="search-box" placeholder="Search by name, email, phone...">
-                            
+
                             <select id="filterRole" class="filter-select">
                                 <option value="">All Roles</option>
                                 <option value="admin">Admin</option>
@@ -2039,7 +2066,7 @@ body.dark-mode .quick-actions .action-btn.gold {
                             <button type="button" class="btn-sm" id="exportUsersBtn" style="background:#2e7d32; color:#fff; padding:8px 12px;"><i class="fas fa-file-csv"></i> Export CSV</button>
                         </div>
                     </div>
-                    
+
                     <!-- ACTIVE MEMBERS TABLE -->
                     <div style="overflow-x:auto;">
                         <table class="user-table">
@@ -2131,13 +2158,13 @@ body.dark-mode .quick-actions .action-btn.gold {
             <div class="tab-content blog-manager-only admin-only main-amir-only" id="blogManageTab">
                 <div class="dashboard-section">
                     <h2 class="section-title"><i class="fas fa-feather-alt"></i> Blog CMS (Cloud Articles Management)</h2>
-                    
+
                     <div class="tabs">
                         <button class="tab-btn active" data-subtab="create-blog-section" id="btnTabWriteBlog"><i class="fas fa-pen"></i> Write / Edit Post</button>
                         <button class="tab-btn" data-subtab="manage-blogs-section" id="btnTabManageBlogs"><i class="fas fa-newspaper"></i> Published Posts (<span id="blogCountBadge">0</span>)</button>
                         <a href="./Blog.html" target="_blank" class="tab-btn" style="text-decoration:none;"><i class="fas fa-external-link-alt"></i> Open Public Blog</a>
                     </div>
-                    
+
                     <!-- Subtab 1: Create / Edit Blog Post -->
                     <div class="subtab-content active" id="create-blog-section">
                         <div class="dashboard-card-panel" style="padding:25px;">
@@ -2230,19 +2257,19 @@ body.dark-mode .quick-actions .action-btn.gold {
             <div class="tab-content" id="announcementsTab">
                 <div class="dashboard-section">
                     <h2 class="section-title"><i class="fas fa-bullhorn"></i> Announcements & Broadcasts</h2>
-                    
+
                     <div class="tabs">
                         <button class="tab-btn active" data-subtab="view-announcements-subtab"><i class="fas fa-list"></i> Active Announcements</button>
                         <button class="tab-btn admin-only main-amir-only amir-only" data-subtab="post-announcement-subtab" data-perm="announcements.create"><i class="fas fa-plus-circle"></i> Post New Announcement</button>
                     </div>
-                    
+
                     <!-- Subtab 1: View Announcements -->
                     <div class="subtab-content active" id="view-announcements-subtab">
                         <div class="posts-grid" id="firestoreAnnouncementsList">
                             <div style="padding:20px; text-align:center; color:#888;">Loading announcements from Firestore...</div>
                         </div>
                     </div>
-                    
+
                     <!-- Subtab 2: Post Announcement -->
                     <div class="subtab-content admin-only main-amir-only amir-only" id="post-announcement-subtab" data-perm="announcements.create">
                         <div class="dashboard-card-panel" style="padding:25px;">
@@ -2332,8 +2359,9 @@ body.dark-mode .quick-actions .action-btn.gold {
                     <!-- Subtab 2: Schedule Form -->
                     <div class="subtab-content" id="qirat-create-program-subtab">
                         <div class="dashboard-card-panel" style="padding:25px;">
-                            <h3 style="color:var(--secondary); margin-bottom:18px; font-size:1.2rem;"><i class="fas fa-calendar-plus"></i> Schedule Qirat Program</h3>
+                            <h3 style="color:var(--secondary); margin-bottom:18px; font-size:1.2rem;"><i class="fas fa-calendar-plus" id="qiratFormIcon"></i> <span id="qiratFormHeading">Schedule Qirat Program</span></h3>
                             <form id="qiratProgramForm" class="form-grid">
+                                <input type="hidden" id="qiratEditDocId" value="">
                                 <div class="form-group" style="grid-column: span 2;">
                                     <label for="qiratTitle">Program Title *</label>
                                     <input type="text" id="qiratTitle" class="form-control" required placeholder="e.g. Advanced Tajweed Intensive & Ijaza Prep">
@@ -2375,8 +2403,189 @@ body.dark-mode .quick-actions .action-btn.gold {
                                         <option value="ongoing">Ongoing</option>
                                     </select>
                                 </div>
+                                <div class="form-group" style="grid-column: span 2; display:flex; gap:12px; align-items:center;">
+                                    <button type="submit" id="qiratSubmitBtn" class="action-btn"><i class="fas fa-save"></i> <span id="qiratSubmitBtnText">Save & Publish Qirat Program</span></button>
+                                    <button type="button" id="qiratCancelEditBtn" class="action-btn secondary" style="display:none;" onclick="window.cancelQiratEdit()"><i class="fas fa-times"></i> Cancel Edit</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- TAB: SECTORS & SECTOR LEADERSHIP MANAGEMENT -->
+            <div class="tab-content admin-only main-amir-only" id="sectorsManageTab" data-perm="sectors.manage">
+                <div class="dashboard-section">
+                    <h2 class="section-title"><i class="fas fa-sitemap"></i> Sectors & Leadership Management</h2>
+                    <p style="color:#64748b; margin-bottom:20px;">Manage descriptions, overview narratives, and executive leadership (Amir, Vice Amir, Writer) across all 10 official OBUMSJ sectors. Changes synchronize in real time to the public website.</p>
+
+                    <div class="tabs">
+                        <button class="tab-btn active" data-subtab="sectors-registry-subtab"><i class="fas fa-layer-group"></i> Official Sectors (10)</button>
+                        <button class="tab-btn" data-subtab="sector-edit-subtab" id="sectorEditSubtabBtn" style="display:none;"><i class="fas fa-edit"></i> Edit Sector & Leadership</button>
+                    </div>
+
+                    <!-- Subtab 1: Sectors Registry Table -->
+                    <div class="subtab-content active" id="sectors-registry-subtab">
+                        <div class="dashboard-card-panel" style="padding:20px; overflow-x:auto;">
+                            <table class="user-table">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Sector Name</th>
+                                        <th>Public Page</th>
+                                        <th>Amir</th>
+                                        <th>Vice Amir</th>
+                                        <th>Writer</th>
+                                        <th>Status</th>
+                                        <th style="min-width:140px;">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="sectorsTableBody">
+                                    <tr><td colspan="8" class="table-state-cell"><div class="table-loading-state"><i class="fas fa-spinner"></i><span>Loading official sectors from Firestore...</span></div></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Subtab 2: Sector & Leadership Edit Panel -->
+                    <div class="subtab-content" id="sector-edit-subtab">
+                        <div class="dashboard-card-panel" style="padding:25px;">
+                            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; border-bottom:1px solid #e2e8f0; padding-bottom:14px;">
+                                <h3 style="color:var(--secondary); margin:0; font-size:1.25rem;">
+                                    <i class="fas fa-pen-fancy"></i> <span id="sectorEditHeading">Edit Sector Information</span>
+                                </h3>
+                                <button type="button" class="btn-sm" style="background:#e2e8f0; color:#334155;" onclick="window.cancelSectorEdit()"><i class="fas fa-times"></i> Close / Back to Registry</button>
+                            </div>
+
+                            <form id="sectorEditForm" class="form-grid">
+                                <input type="hidden" id="editSectorSlug" value="">
+
+                                <!-- Sector General Info -->
+                                <div class="form-group">
+                                    <label for="sectorDisplayName">Sector Display Name *</label>
+                                    <input type="text" id="sectorDisplayName" class="form-control" required placeholder="e.g. Social Affairs Sector">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="sectorPageFile">Public HTML Page (Read-Only Identity)</label>
+                                    <input type="text" id="sectorPageFile" class="form-control" readonly style="background:#f1f5f9; cursor:not-allowed;">
+                                </div>
+
                                 <div class="form-group" style="grid-column: span 2;">
-                                    <button type="submit" class="action-btn"><i class="fas fa-save"></i> Save & Publish Qirat Program</button>
+                                    <label for="sectorHeroDesc">Hero Subtitle / Short Description *</label>
+                                    <textarea id="sectorHeroDesc" class="form-control" rows="2" required placeholder="Short overview displayed in the department header..."></textarea>
+                                </div>
+
+                                <div class="form-group" style="grid-column: span 2;">
+                                    <label for="sectorAboutTitle">About Section Title *</label>
+                                    <input type="text" id="sectorAboutTitle" class="form-control" required placeholder="e.g. About Social Affairs Sector">
+                                </div>
+
+                                <div class="form-group" style="grid-column: span 2;">
+                                    <label for="sectorAboutText">About Section Narrative Text *</label>
+                                    <textarea id="sectorAboutText" class="form-control" rows="3" required placeholder="Detailed department narrative and objectives..."></textarea>
+                                </div>
+
+                                <!-- Leadership Management Divider -->
+                                <div style="grid-column: span 2; margin-top:20px; margin-bottom:10px;">
+                                    <h4 style="color:var(--secondary); border-bottom:2px solid var(--gold-primary, #d4af37); padding-bottom:8px; font-size:1.15rem; display:flex; align-items:center; gap:8px;">
+                                        <i class="fas fa-users-cog"></i> Executive Sector Leadership (3 Positions)
+                                    </h4>
+                                    <p style="color:#64748b; font-size:0.88rem; margin-top:4px;">Manage the Amir, Vice Amir, and Writer. You can upload custom portraits to Firebase Storage or provide an image URL. If a position is vacant, clear the person's name.</p>
+                                </div>
+
+                                <!-- Position 1: Amir -->
+                                <div class="dashboard-card-panel" style="grid-column: span 2; padding:20px; background:#f8fafc; border:1px solid #e2e8f0; border-left:5px solid #1b5e20;">
+                                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                                        <strong style="color:#1b5e20; font-size:1rem;"><i class="fas fa-user-tie"></i> 1. Sector Amir (President)</strong>
+                                        <button type="button" class="btn-sm" style="color:#b91c1c; background:#fee2e2;" onclick="window.clearLeaderPosition('amir')" title="Clear Position"><i class="fas fa-user-minus"></i> Mark Vacant</button>
+                                    </div>
+                                    <div style="display:grid; grid-template-columns: 120px 1fr 1fr; gap:18px; align-items:start;">
+                                        <div style="text-align:center;">
+                                            <img id="amirPhotoPreview" src="./IMAGE/We are visted.jpg" alt="Amir Preview" style="width:100px; height:100px; border-radius:50%; object-fit:cover; border:3px solid #d4af37; box-shadow:0 3px 10px rgba(0,0,0,0.12);">
+                                        </div>
+                                        <div>
+                                            <label for="amirName">Person's Full Name</label>
+                                            <input type="text" id="amirName" class="form-control" placeholder="e.g. Sheikh Ahmed Ali (Leave empty if vacant)">
+                                            <label for="amirTitle" style="margin-top:8px;">Displayed Title</label>
+                                            <input type="text" id="amirTitle" class="form-control" placeholder="e.g. Amir of Social Affairs Sector">
+                                        </div>
+                                        <div>
+                                            <label for="amirPhotoFile">Upload New Photo</label>
+                                            <input type="file" id="amirPhotoFile" class="form-control" accept="image/*" onchange="window.handleLeaderPhotoUpload(event, 'amir')">
+                                            <label for="amirPhotoUrl" style="margin-top:8px;">Or Image URL / Path</label>
+                                            <input type="text" id="amirPhotoUrl" class="form-control" placeholder="./IMAGE/We are visted.jpg" oninput="document.getElementById('amirPhotoPreview').src = this.value || './IMAGE/OBUMSJ Logo.jpg'">
+                                            <small id="amirUploadStatus" style="display:none; font-size:0.8rem; margin-top:4px;"></small>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Position 2: Vice Amir -->
+                                <div class="dashboard-card-panel" style="grid-column: span 2; padding:20px; background:#f8fafc; border:1px solid #e2e8f0; border-left:5px solid #0f3d2e;">
+                                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                                        <strong style="color:#0f3d2e; font-size:1rem;"><i class="fas fa-user-check"></i> 2. Sector Vice Amir</strong>
+                                        <button type="button" class="btn-sm" style="color:#b91c1c; background:#fee2e2;" onclick="window.clearLeaderPosition('viceAmir')" title="Clear Position"><i class="fas fa-user-minus"></i> Mark Vacant</button>
+                                    </div>
+                                    <div style="display:grid; grid-template-columns: 120px 1fr 1fr; gap:18px; align-items:start;">
+                                        <div style="text-align:center;">
+                                            <img id="viceAmirPhotoPreview" src="./IMAGE/Best 4.jpg" alt="Vice Amir Preview" style="width:100px; height:100px; border-radius:50%; object-fit:cover; border:3px solid #d4af37; box-shadow:0 3px 10px rgba(0,0,0,0.12);">
+                                        </div>
+                                        <div>
+                                            <label for="viceAmirName">Person's Full Name</label>
+                                            <input type="text" id="viceAmirName" class="form-control" placeholder="e.g. Mohammed Yusuf (Leave empty if vacant)">
+                                            <label for="viceAmirTitle" style="margin-top:8px;">Displayed Title</label>
+                                            <input type="text" id="viceAmirTitle" class="form-control" placeholder="e.g. Vice Amir of Social Affairs Sector">
+                                        </div>
+                                        <div>
+                                            <label for="viceAmirPhotoFile">Upload New Photo</label>
+                                            <input type="file" id="viceAmirPhotoFile" class="form-control" accept="image/*" onchange="window.handleLeaderPhotoUpload(event, 'viceAmir')">
+                                            <label for="viceAmirPhotoUrl" style="margin-top:8px;">Or Image URL / Path</label>
+                                            <input type="text" id="viceAmirPhotoUrl" class="form-control" placeholder="./IMAGE/Best 4.jpg" oninput="document.getElementById('viceAmirPhotoPreview').src = this.value || './IMAGE/OBUMSJ Logo.jpg'">
+                                            <small id="viceAmirUploadStatus" style="display:none; font-size:0.8rem; margin-top:4px;"></small>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Position 3: Writer / Secretary -->
+                                <div class="dashboard-card-panel" style="grid-column: span 2; padding:20px; background:#f8fafc; border:1px solid #e2e8f0; border-left:5px solid #d4af37;">
+                                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                                        <strong style="color:#92400e; font-size:1rem;"><i class="fas fa-pen-alt"></i> 3. Sector Writer / General Secretary</strong>
+                                        <button type="button" class="btn-sm" style="color:#b91c1c; background:#fee2e2;" onclick="window.clearLeaderPosition('writer')" title="Clear Position"><i class="fas fa-user-minus"></i> Mark Vacant</button>
+                                    </div>
+                                    <div style="display:grid; grid-template-columns: 120px 1fr 1fr; gap:18px; align-items:start;">
+                                        <div style="text-align:center;">
+                                            <img id="writerPhotoPreview" src="./IMAGE/Best 7.jpg" alt="Writer Preview" style="width:100px; height:100px; border-radius:50%; object-fit:cover; border:3px solid #d4af37; box-shadow:0 3px 10px rgba(0,0,0,0.12);">
+                                        </div>
+                                        <div>
+                                            <label for="writerName">Person's Full Name</label>
+                                            <input type="text" id="writerName" class="form-control" placeholder="e.g. Abdellah Hassan (Leave empty if vacant)">
+                                            <label for="writerTitle" style="margin-top:8px;">Displayed Title</label>
+                                            <input type="text" id="writerTitle" class="form-control" placeholder="e.g. Writer of Social Affairs Sector">
+                                        </div>
+                                        <div>
+                                            <label for="writerPhotoFile">Upload New Photo</label>
+                                            <input type="file" id="writerPhotoFile" class="form-control" accept="image/*" onchange="window.handleLeaderPhotoUpload(event, 'writer')">
+                                            <label for="writerPhotoUrl" style="margin-top:8px;">Or Image URL / Path</label>
+                                            <input type="text" id="writerPhotoUrl" class="form-control" placeholder="./IMAGE/Best 7.jpg" oninput="document.getElementById('writerPhotoPreview').src = this.value || './IMAGE/OBUMSJ Logo.jpg'">
+                                            <small id="writerUploadStatus" style="display:none; font-size:0.8rem; margin-top:4px;"></small>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Status & Submission -->
+                                <div class="form-group">
+                                    <label for="sectorIsActive">Sector Visibility Status</label>
+                                    <select id="sectorIsActive" class="form-control">
+                                        <option value="true">Active (Visible on Website)</option>
+                                        <option value="false">Archived / Inactive</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group" style="grid-column: span 2; display:flex; gap:12px; align-items:center; margin-top:14px;">
+                                    <button type="submit" id="saveSectorBtn" class="action-btn"><i class="fas fa-save"></i> Save Sector & Leadership Changes</button>
+                                    <button type="button" class="action-btn secondary" onclick="window.cancelSectorEdit()"><i class="fas fa-times"></i> Cancel</button>
+                                    <button type="button" class="btn-sm" style="margin-left:auto; background:#fee2e2; color:#b91c1c; padding:10px 16px;" onclick="window.toggleSectorArchive()"><i class="fas fa-archive"></i> Toggle Archive / Deactivate</button>
                                 </div>
                             </form>
                         </div>
@@ -2388,7 +2597,7 @@ body.dark-mode .quick-actions .action-btn.gold {
             <div class="tab-content" id="notificationsCenterTab">
                 <div class="dashboard-section">
                     <h2 class="section-title"><i class="fas fa-bell"></i> Centralized Notification Center</h2>
-                    
+
                     <div class="tabs">
                         <button class="tab-btn active" data-subtab="my-notifs-subtab"><i class="fas fa-inbox"></i> My Notifications</button>
                         <button class="tab-btn admin-only main-amir-only amir-only" data-subtab="dispatch-notif-subtab" data-perm="notifications.send"><i class="fas fa-paper-plane"></i> Dispatch Broadcast Notification</button>
@@ -2445,7 +2654,7 @@ body.dark-mode .quick-actions .action-btn.gold {
                         <div class="dashboard-card-panel" style="padding:25px; max-width:650px;">
                             <h3 style="color:var(--secondary); margin-bottom:12px; font-size:1.2rem;"><i class="fas fa-bell"></i> Desktop & Mobile Browser Notifications</h3>
                             <p style="color:#64748b; font-size:0.9rem; margin-bottom:20px;">Receive instant OBUMSJ announcements and Qirat program updates directly on your computer or phone browser even when you are not browsing the site.</p>
-                            
+
                             <div class="dashboard-card-panel" style="padding:18px; margin-bottom:20px;">
                                 <div style="display:flex; justify-content:space-between; align-items:center;">
                                     <div>
@@ -2455,7 +2664,7 @@ body.dark-mode .quick-actions .action-btn.gold {
                                     <button type="button" class="action-btn" id="btnRequestPushPermission"><i class="fas fa-check-circle"></i> Enable Notifications</button>
                                 </div>
                             </div>
-                            
+
                             <button type="button" class="btn-sm" id="btnTestBrowserNotif" style="background:#1976d2; color:white; padding:8px 14px;"><i class="fas fa-paper-plane"></i> Send Test Browser Alert</button>
                         </div>
                     </div>
@@ -2510,7 +2719,7 @@ body.dark-mode .quick-actions .action-btn.gold {
             <div class="tab-content admin-only main-amir-only" id="analyticsTab" data-perm="analytics.view">
                 <div class="dashboard-section">
                     <h2 class="section-title"><i class="fas fa-chart-pie"></i> Platform Demographics, Reports & Analytics</h2>
-                    
+
                     <div class="stats-grid">
                         <div class="stat-card">
                             <div class="stat-icon"><i class="fas fa-user-check"></i></div>
@@ -2607,14 +2816,14 @@ body.dark-mode .quick-actions .action-btn.gold {
                         <button class="tab-btn active" data-subtab="view-hadith">View Hadith</button>
                         <button class="tab-btn admin-only blog-manager-only" data-subtab="post-hadith">Post Hadith</button>
                     </div>
-                    
+
                     <div class="subtab-content active" id="view-hadith">
                         <h2 class="section-title">Daily/Weekly Hadith Posts</h2>
                         <div class="posts-grid" id="hadithPosts">
                             <!-- Hadiths loaded here -->
                         </div>
                     </div>
-                    
+
                     <div class="subtab-content admin-only blog-manager-only" id="post-hadith">
                         <h2 class="section-title">Post New Hadith</h2>
                         <form id="hadithForm" class="form-grid">
@@ -2648,14 +2857,14 @@ body.dark-mode .quick-actions .action-btn.gold {
                         <button class="tab-btn active" data-subtab="view-zakir">View Zakir</button>
                         <button class="tab-btn admin-only blog-manager-only" data-subtab="post-zakir">Post Zakir</button>
                     </div>
-                    
+
                     <div class="subtab-content active" id="view-zakir">
                         <h2 class="section-title">Daily/Weekly Zakir</h2>
                         <div class="posts-grid" id="zakirPosts">
                             <!-- Zakirs loaded here -->
                         </div>
                     </div>
-                    
+
                     <div class="subtab-content admin-only blog-manager-only" id="post-zakir">
                         <h2 class="section-title">Post New Zakir</h2>
                         <form id="zakirForm" class="form-grid">
@@ -2712,7 +2921,7 @@ body.dark-mode .quick-actions .action-btn.gold {
                             <input type="text" id="profileRole" class="form-control" readonly>
                         </div>
                     </div>
-                    
+
                     <h3 class="section-title" style="margin-top:30px;"><i class="fas fa-key"></i> Change Password</h3>
                     <form id="changePasswordForm" class="form-grid">
                         <div class="form-group">
@@ -2739,13 +2948,13 @@ body.dark-mode .quick-actions .action-btn.gold {
                 <div class="dashboard-section">
                     <h2 class="section-title"><i class="fas fa-female"></i> Female Section</h2>
                     <p>Welcome to the female members section. Dedicated resources and events for sisters.</p>
-                    
+
                     <div class="quick-actions">
                         <a href="#female-resources" class="action-btn">Female Resources</a>
                         <a href="#women-events" class="action-btn">Women Events</a>
                         <a href="#female-community" class="action-btn">Female Community</a>
                     </div>
-                    
+
                     <div class="posts-grid" style="margin-top:30px;">
                         <div class="post-card announcement">
                             <div class="post-title">Women's Quran Study Group</div>
@@ -2766,7 +2975,7 @@ body.dark-mode .quick-actions .action-btn.gold {
                 <div class="dashboard-section">
                     <h2 class="section-title"><i class="fas fa-tools"></i> Sector Tools</h2>
                     <p>Access tools and resources specific to your assigned sector.</p>
-                    
+
                     <div class="quick-actions">
                         <a href="#sector-activities" class="action-btn">Sector Activities</a>
                         <a href="#sector-reports" class="action-btn">Sector Reports</a>
@@ -2780,7 +2989,7 @@ body.dark-mode .quick-actions .action-btn.gold {
                 <div class="dashboard-section">
                     <h2 class="section-title"><i class="fas fa-user-shield"></i> Amir Tools & Leadership</h2>
                     <p>Leadership coordination for executive committee members and amirs.</p>
-                    
+
                     <div class="quick-actions">
                         <button type="button" class="action-btn" onclick="window.switchTabDirectly('qirat-manage')"><i class="fas fa-quran"></i> Manage Qirat Programs</button>
                         <button type="button" class="action-btn secondary" onclick="window.switchTabDirectly('announcements')"><i class="fas fa-bullhorn"></i> Post Announcement</button>
@@ -2910,7 +3119,7 @@ body.dark-mode .quick-actions .action-btn.gold {
             </div>
             <div class="modal-body" style="padding:24px;">
                 <input type="hidden" id="inspectModalUserId">
-                
+
                 <div style="display:flex; align-items:center; gap:16px; margin-bottom:20px; padding-bottom:16px; border-bottom:1px solid #f1f5f9;">
                     <div id="inspectModalAvatar" style="width:56px; height:56px; border-radius:50%; background:var(--primary); color:#fff; display:flex; align-items:center; justify-content:center; font-size:1.5rem; font-weight:700;">
                         U
@@ -3028,20 +3237,20 @@ body.dark-mode .quick-actions .action-btn.gold {
 
     <!-- REAL-TIME FIRESTORE & ADMIN LOGIC -->
     <script type="module">
-        import { 
-            auth, 
-            db, 
+        import {
+            auth,
+            db,
             storage,
-            signOut, 
+            signOut,
             onAuthStateChanged,
-            collection, 
-            doc, 
-            getDoc, 
-            setDoc, 
-            addDoc, 
-            updateDoc, 
-            deleteDoc, 
-            onSnapshot, 
+            collection,
+            doc,
+            getDoc,
+            setDoc,
+            addDoc,
+            updateDoc,
+            deleteDoc,
+            onSnapshot,
             query,
             where,
             orderBy,
@@ -3215,6 +3424,519 @@ body.dark-mode .quick-actions .action-btn.gold {
             }
         }
 
+
+        // ============================================================
+        // PHASE 3: ADVANCED QIRAT & SECTOR LEADERSHIP MANAGEMENT LOGIC
+        // ============================================================
+
+        let allFirestoreSectors = [];
+
+        // Baseline Registry of 10 Official Sectors
+        const OFFICIAL_SECTOR_REGISTRY = [
+            {
+                id: "qirat",
+                name: "Qirat Sector",
+                pageFile: "Qirat.html",
+                description: "The Qirat Sector is responsible for Quran recitation programs, Tajweed training, and organizing competitions to enhance Quranic skills among members.",
+                aboutTitle: "About Qirat Sector",
+                aboutText: "This department focuses on teaching correct Quran recitation, promoting memorization, and nurturing students to become skilled Qaris who represent the community in national and international competitions.",
+                leadership: {
+                    amir: { name: "Sheikh Ahmed Ali", title: "Amir of Qirat Sector", photoUrl: "./IMAGE/We are visted.jpg", order: 1 },
+                    viceAmir: { name: "Mohammed Yusuf", title: "Vice Amir of Qirat Sector", photoUrl: "./IMAGE/Best 4.jpg", order: 2 },
+                    writer: { name: "Abdellah Hassan", title: "Writer of Qirat Sector", photoUrl: "./IMAGE/Best 7.jpg", order: 3 }
+                },
+                isActive: true
+            },
+            {
+                id: "dawah",
+                name: "Dawah Sector",
+                pageFile: "Dawah.html",
+                description: "The Dawah Sector is dedicated to spreading authentic Islamic knowledge, organizing public lectures, and fostering Islamic understanding across campus.",
+                aboutTitle: "About Dawah Sector",
+                aboutText: "We organize campus-wide Islamic lectures, distribute authentic literature, conduct workshops on Islamic morals, and arrange interfaith dialogues to build harmony and moral strength.",
+                leadership: {
+                    amir: { name: "Ustaz Fuad Mohammed", title: "Amir of Dawah Sector", photoUrl: "./IMAGE/We are visted.jpg", order: 1 },
+                    viceAmir: { name: "Bilal Jemal", title: "Vice Amir of Dawah Sector", photoUrl: "./IMAGE/Best 4.jpg", order: 2 },
+                    writer: { name: "Zubayr Khalid", title: "Writer of Dawah Sector", photoUrl: "./IMAGE/Best 7.jpg", order: 3 }
+                },
+                isActive: true
+            },
+            {
+                id: "social-affairs",
+                name: "Social Affairs Sector",
+                pageFile: "Social Affairs.html",
+                description: "The Social Affairs Sector strengthens community bonds, student welfare, cultural integration, and fraternal unity among university students.",
+                aboutTitle: "About Social Affairs Sector",
+                aboutText: "This department fosters strong brotherhood and sisterhood among Muslim students through fraternal visits, social gatherings, dispute resolution, and member welfare programs.",
+                leadership: {
+                    amir: { name: "Sheikh Ahmed Ali", title: "Amir of Social Affairs Sector", photoUrl: "./IMAGE/We are visted.jpg", order: 1 },
+                    viceAmir: { name: "Mohammed Yusuf", title: "Vice Amir of Social Affairs Sector", photoUrl: "./IMAGE/Best 4.jpg", order: 2 },
+                    writer: { name: "Abdellah Hassan", title: "Writer of Social Affairs Sector", photoUrl: "./IMAGE/Best 7.jpg", order: 3 }
+                },
+                isActive: true
+            },
+            {
+                id: "academy",
+                name: "Academy & Education Sector",
+                pageFile: "Academy.html",
+                description: "The Academy & Education Sector provides comprehensive tutorial classes, academic resource sharing, and exam preparation programs.",
+                aboutTitle: "About Academy & Education Sector",
+                aboutText: "We coordinate senior student tutors, distribute past examination papers and reference textbooks, and mentor students toward academic excellence across all university faculties.",
+                leadership: {
+                    amir: { name: "Dr. Mustapha Idris", title: "Amir of Academy & Education Sector", photoUrl: "./IMAGE/We are visted.jpg", order: 1 },
+                    viceAmir: { name: "Khadija Ahmed", title: "Vice Amir of Academy & Education Sector", photoUrl: "./IMAGE/Best 4.jpg", order: 2 },
+                    writer: { name: "Ibrahim Nur", title: "Writer of Academy & Education Sector", photoUrl: "./IMAGE/Best 7.jpg", order: 3 }
+                },
+                isActive: true
+            },
+            {
+                id: "finance",
+                name: "Finance Sector",
+                pageFile: "Finance.html",
+                description: "The Finance Sector manages the community treasury with transparency, oversees project budgets, and coordinates fundraising efforts.",
+                aboutTitle: "About Finance Sector",
+                aboutText: "This department oversees budgeting, ensures financial accountability, facilitates audit trails, and coordinates donations for student support and infrastructure projects.",
+                leadership: {
+                    amir: { name: "Abdurahman Jemal", title: "Amir of Finance Sector", photoUrl: "./IMAGE/We are visted.jpg", order: 1 },
+                    viceAmir: { name: "Hamza Faruq", title: "Vice Amir of Finance Sector", photoUrl: "./IMAGE/Best 4.jpg", order: 2 },
+                    writer: { name: "Zayd Qasim", title: "Writer of Finance Sector", photoUrl: "./IMAGE/Best 7.jpg", order: 3 }
+                },
+                isActive: true
+            },
+            {
+                id: "ziyara",
+                name: "Ziyara & Outreach Sector",
+                pageFile: "Ziyara.html",
+                description: "The Ziyara & Outreach Sector coordinates visits to hospitals, prisons, senior homes, and neighboring university Muslim communities.",
+                aboutTitle: "About Ziyara & Outreach Sector",
+                aboutText: "Our mission is to extend compassion beyond campus by visiting the sick, comforting the distressed, connecting with alumni, and strengthening ties with regional Islamic associations.",
+                leadership: {
+                    amir: { name: "Ustaz Anas Dawud", title: "Amir of Ziyara & Outreach Sector", photoUrl: "./IMAGE/We are visted.jpg", order: 1 },
+                    viceAmir: { name: "Tariq Aziz", title: "Vice Amir of Ziyara & Outreach Sector", photoUrl: "./IMAGE/Best 4.jpg", order: 2 },
+                    writer: { name: "Yahya Zakariya", title: "Writer of Ziyara & Outreach Sector", photoUrl: "./IMAGE/Best 7.jpg", order: 3 }
+                },
+                isActive: true
+            },
+            {
+                id: "ruqiya",
+                name: "Ruqiyah Sector",
+                pageFile: "Ruqiya.html",
+                description: "The Ruqiyah Sector provides spiritual counseling, authentic Quranic healing education according to the Sunnah, and protective adhkar guidance.",
+                aboutTitle: "About Ruqiyah Sector",
+                aboutText: "We offer spiritual guidance strictly adhering to the Quran and authentic Prophetic traditions, teaching students morning and evening adhkar and providing consultation for spiritual wellness.",
+                leadership: {
+                    amir: { name: "Sheikh Zakariya Al-Athari", title: "Amir of Ruqiyah Sector", photoUrl: "./IMAGE/We are visted.jpg", order: 1 },
+                    viceAmir: { name: "Abu Bakr Sadiq", title: "Vice Amir of Ruqiyah Sector", photoUrl: "./IMAGE/Best 4.jpg", order: 2 },
+                    writer: { name: "Uthman Faruq", title: "Writer of Ruqiyah Sector", photoUrl: "./IMAGE/Best 7.jpg", order: 3 }
+                },
+                isActive: true
+            },
+            {
+                id: "charity",
+                name: "Charity Sector",
+                pageFile: "Charity.html",
+                description: "The Charity Sector coordinates humanitarian relief, student meal assistance, clothing drives, and medical aid for underprivileged students.",
+                aboutTitle: "About Charity Sector",
+                aboutText: "This department mobilizes funds and volunteer resources to ensure no Muslim student faces hunger or drops out due to financial distress, providing emergency grants and food support.",
+                leadership: {
+                    amir: { name: "Sulaiman Abdi", title: "Amir of Charity Sector", photoUrl: "./IMAGE/We are visted.jpg", order: 1 },
+                    viceAmir: { name: "Zeyneba Kedir", title: "Vice Amir of Charity Sector", photoUrl: "./IMAGE/Best 4.jpg", order: 2 },
+                    writer: { name: "Hamza Omar", title: "Writer of Charity Sector", photoUrl: "./IMAGE/Best 7.jpg", order: 3 }
+                },
+                isActive: true
+            },
+            {
+                id: "dawrul-hasen",
+                name: "Dawr Al-Hasan Sector",
+                pageFile: "Dawrul-hasen.html",
+                description: "Dawr Al-Hasan Sector coordinates ethical character development, tarbiyah mentoring, moral refinement, and Islamic leadership workshops.",
+                aboutTitle: "About Dawr Al-Hasan Sector",
+                aboutText: "We nurture student character through Islamic ethics seminars, peer mentorship, personal accountability circles, and spiritual development retreats.",
+                leadership: {
+                    amir: { name: "Ustaz Hashim Al-Habashi", title: "Amir of Dawr Al-Hasan Sector", photoUrl: "./IMAGE/We are visted.jpg", order: 1 },
+                    viceAmir: { name: "Bilal Rashid", title: "Vice Amir of Dawr Al-Hasan Sector", photoUrl: "./IMAGE/Best 4.jpg", order: 2 },
+                    writer: { name: "Amr Khalid", title: "Writer of Dawr Al-Hasan Sector", photoUrl: "./IMAGE/Best 7.jpg", order: 3 }
+                },
+                isActive: true
+            },
+            {
+                id: "information",
+                name: "Information & Media Sector",
+                pageFile: "Information.html",
+                description: "The Information & Media Sector manages the digital presence, website, social channels, photography, announcements, and media production for OBUMSJ.",
+                aboutTitle: "About Information & Media Sector",
+                aboutText: "This department operates the OBUMSJ website, produces digital posters and video coverage, manages social media channels, and archives all community events.",
+                leadership: {
+                    amir: { name: "Yusuf Al-Amin", title: "Amir of Information & Media Sector", photoUrl: "./IMAGE/We are visted.jpg", order: 1 },
+                    viceAmir: { name: "Amina Idris", title: "Vice Amir of Information & Media Sector", photoUrl: "./IMAGE/Best 4.jpg", order: 2 },
+                    writer: { name: "Salim Nur", title: "Writer of Information & Media Sector", photoUrl: "./IMAGE/Best 7.jpg", order: 3 }
+                },
+                isActive: true
+            }
+        ];
+
+        // 1. QIRAT PROGRAM EDIT & CANCEL FUNCTIONS
+        window.editQiratProgram = function(id) {
+            const prog = allFirestoreQirat.find(p => p.id === id);
+            if (!prog) return;
+
+            document.getElementById('qiratEditDocId').value = prog.id;
+            document.getElementById('qiratTitle').value = prog.title || '';
+            document.getElementById('qiratDateTime').value = prog.dateTime || '';
+            document.getElementById('qiratLocation').value = prog.location || '';
+            document.getElementById('qiratInstructor').value = prog.instructor || '';
+            document.getElementById('qiratTarget').value = prog.target || 'All Students';
+            document.getElementById('qiratDesc').value = prog.description || '';
+            document.getElementById('qiratRegUrl').value = prog.registrationUrl || '';
+            document.getElementById('qiratStatus').value = prog.status || 'upcoming';
+
+            const heading = document.getElementById('qiratFormHeading');
+            if (heading) heading.textContent = 'Edit Qirat Program';
+            const icon = document.getElementById('qiratFormIcon');
+            if (icon) icon.className = 'fas fa-edit';
+            const submitBtnText = document.getElementById('qiratSubmitBtnText');
+            if (submitBtnText) submitBtnText.textContent = 'Update Qirat Program';
+
+            const cancelBtn = document.getElementById('qiratCancelEditBtn');
+            if (cancelBtn) cancelBtn.style.display = 'inline-flex';
+
+            const tabsContainer = document.querySelector('#qiratManageTab .tabs');
+            if (tabsContainer) {
+                tabsContainer.querySelectorAll('.tab-btn').forEach(btn => {
+                    if (btn.getAttribute('data-subtab') === 'qirat-create-program-subtab') {
+                        btn.click();
+                    }
+                });
+            }
+        };
+
+        window.cancelQiratEdit = function() {
+            const form = document.getElementById('qiratProgramForm');
+            if (form) form.reset();
+            const editId = document.getElementById('qiratEditDocId');
+            if (editId) editId.value = '';
+
+            const heading = document.getElementById('qiratFormHeading');
+            if (heading) heading.textContent = 'Schedule Qirat Program';
+            const icon = document.getElementById('qiratFormIcon');
+            if (icon) icon.className = 'fas fa-calendar-plus';
+            const submitBtnText = document.getElementById('qiratSubmitBtnText');
+            if (submitBtnText) submitBtnText.textContent = 'Save & Publish Qirat Program';
+
+            const cancelBtn = document.getElementById('qiratCancelEditBtn');
+            if (cancelBtn) cancelBtn.style.display = 'none';
+
+            const tabsContainer = document.querySelector('#qiratManageTab .tabs');
+            if (tabsContainer) {
+                tabsContainer.querySelectorAll('.tab-btn').forEach(btn => {
+                    if (btn.getAttribute('data-subtab') === 'qirat-programs-list-subtab') {
+                        btn.click();
+                    }
+                });
+            }
+        };
+
+        // 2. SECTORS REGISTRY & REAL-TIME LISTENER
+        function initSectorsListener() {
+            try {
+                onSnapshot(collection(db, "sectors"), async (snapshot) => {
+                    if (snapshot.empty) {
+                        console.log("[OBUMSJ Sectors] Seeding official sectors registry...");
+                        for (const sec of OFFICIAL_SECTOR_REGISTRY) {
+                            await setDoc(doc(db, "sectors", sec.id), {
+                                ...sec,
+                                updatedAt: serverTimestamp(),
+                                updatedBy: "System Baseline"
+                            });
+                        }
+                        return;
+                    }
+
+                    allFirestoreSectors = [];
+                    snapshot.forEach(docSnap => {
+                        allFirestoreSectors.push({ id: docSnap.id, ...docSnap.data() });
+                    });
+
+                    renderSectorsTable();
+                }, (err) => {
+                    console.warn("[OBUMSJ Sectors] Real-time listener:", err);
+                });
+            } catch (e) {
+                console.error("[OBUMSJ Sectors] Connection error:", e);
+            }
+        }
+
+        function renderSectorsTable() {
+            const tableBody = document.getElementById('sectorsTableBody');
+            if (!tableBody) return;
+
+            const displaySectors = OFFICIAL_SECTOR_REGISTRY.map(base => {
+                const found = allFirestoreSectors.find(s => s.id === base.id);
+                return found || base;
+            });
+
+            tableBody.innerHTML = displaySectors.map((sec, idx) => {
+                const amir = sec.leadership?.amir?.name || '<em style="color:#94a3b8;">Vacant</em>';
+                const vice = sec.leadership?.viceAmir?.name || '<em style="color:#94a3b8;">Vacant</em>';
+                const writer = sec.leadership?.writer?.name || '<em style="color:#94a3b8;">Vacant</em>';
+                const statusBadge = sec.isActive !== false
+                    ? '<span class="badge-status badge-status-active">ACTIVE</span>'
+                    : '<span class="badge-status" style="background:#f1f5f9; color:#64748b;">ARCHIVED</span>';
+
+                return `
+                    <tr>
+                        <td><strong>${idx + 1}</strong></td>
+                        <td>
+                            <div style="font-weight:600; color:var(--secondary);">${escapeHtml(sec.name || '')}</div>
+                            <small style="color:#64748b;">ID: ${sec.id}</small>
+                        </td>
+                        <td><a href="./${sec.pageFile}" target="_blank" style="color:var(--primary); text-decoration:none;"><i class="fas fa-external-link-alt"></i> ${sec.pageFile}</a></td>
+                        <td>${amir}</td>
+                        <td>${vice}</td>
+                        <td>${writer}</td>
+                        <td>${statusBadge}</td>
+                        <td>
+                            <button class="btn-sm btn-edit" title="Manage Sector & Leadership" onclick="window.manageSector('${sec.id}')" style="background:var(--primary); color:#fff; padding:6px 12px; font-size:0.85rem; border-radius:6px;">
+                                <i class="fas fa-edit"></i> Manage
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        // 3. SECTOR EDIT & LEADERSHIP FORM MANAGEMENT
+        window.manageSector = function(slug) {
+            let sec = allFirestoreSectors.find(s => s.id === slug);
+            if (!sec) {
+                sec = OFFICIAL_SECTOR_REGISTRY.find(s => s.id === slug);
+            }
+            if (!sec) return;
+
+            document.getElementById('editSectorSlug').value = sec.id;
+            document.getElementById('sectorDisplayName').value = sec.name || '';
+            document.getElementById('sectorPageFile').value = sec.pageFile || '';
+            document.getElementById('sectorHeroDesc').value = sec.description || '';
+            document.getElementById('sectorAboutTitle').value = sec.aboutTitle || '';
+            document.getElementById('sectorAboutText').value = sec.aboutText || '';
+            document.getElementById('sectorIsActive').value = (sec.isActive !== false) ? 'true' : 'false';
+
+            const heading = document.getElementById('sectorEditHeading');
+            if (heading) heading.textContent = `Manage ${sec.name || 'Sector'}`;
+
+            // Leadership: Amir
+            const amir = sec.leadership?.amir || {};
+            document.getElementById('amirName').value = amir.name || '';
+            document.getElementById('amirTitle').value = amir.title || `Amir of ${sec.name}`;
+            document.getElementById('amirPhotoUrl').value = amir.photoUrl || '';
+            document.getElementById('amirPhotoPreview').src = amir.photoUrl || './IMAGE/We are visted.jpg';
+
+            // Leadership: Vice Amir
+            const vice = sec.leadership?.viceAmir || {};
+            document.getElementById('viceAmirName').value = vice.name || '';
+            document.getElementById('viceAmirTitle').value = vice.title || `Vice Amir of ${sec.name}`;
+            document.getElementById('viceAmirPhotoUrl').value = vice.photoUrl || '';
+            document.getElementById('viceAmirPhotoPreview').src = vice.photoUrl || './IMAGE/Best 4.jpg';
+
+            // Leadership: Writer
+            const writer = sec.leadership?.writer || {};
+            document.getElementById('writerName').value = writer.name || '';
+            document.getElementById('writerTitle').value = writer.title || `Writer of ${sec.name}`;
+            document.getElementById('writerPhotoUrl').value = writer.photoUrl || '';
+            document.getElementById('writerPhotoPreview').src = writer.photoUrl || './IMAGE/Best 7.jpg';
+
+            const editSubtabBtn = document.getElementById('sectorEditSubtabBtn');
+            if (editSubtabBtn) {
+                editSubtabBtn.style.display = 'inline-flex';
+                editSubtabBtn.click();
+            }
+        };
+
+        window.cancelSectorEdit = function() {
+            const form = document.getElementById('sectorEditForm');
+            if (form) form.reset();
+            document.getElementById('editSectorSlug').value = '';
+
+            const editSubtabBtn = document.getElementById('sectorEditSubtabBtn');
+            if (editSubtabBtn) editSubtabBtn.style.display = 'none';
+
+            const tabsContainer = document.querySelector('#sectorsManageTab .tabs');
+            if (tabsContainer) {
+                tabsContainer.querySelectorAll('.tab-btn').forEach(btn => {
+                    if (btn.getAttribute('data-subtab') === 'sectors-registry-subtab') {
+                        btn.click();
+                    }
+                });
+            }
+        };
+
+        window.clearLeaderPosition = function(position) {
+            if (!confirm(`Mark the ${position} position vacant?`)) return;
+            if (position === 'amir') {
+                document.getElementById('amirName').value = '';
+                document.getElementById('amirPhotoUrl').value = '';
+                document.getElementById('amirPhotoPreview').src = './IMAGE/OBUMSJ Logo.jpg';
+            } else if (position === 'viceAmir') {
+                document.getElementById('viceAmirName').value = '';
+                document.getElementById('viceAmirPhotoUrl').value = '';
+                document.getElementById('viceAmirPhotoPreview').src = './IMAGE/OBUMSJ Logo.jpg';
+            } else if (position === 'writer') {
+                document.getElementById('writerName').value = '';
+                document.getElementById('writerPhotoUrl').value = '';
+                document.getElementById('writerPhotoPreview').src = './IMAGE/OBUMSJ Logo.jpg';
+            }
+        };
+
+        window.handleLeaderPhotoUpload = async function(event, position) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            if (!file.type.startsWith('image/')) {
+                alert("Please select a valid image file (JPEG, PNG, WEBP).");
+                event.target.value = '';
+                return;
+            }
+
+            if (file.size > 5 * 1024 * 1024) {
+                alert("Photograph exceeds the 5MB size limit. Please choose a smaller photo.");
+                event.target.value = '';
+                return;
+            }
+
+            const slug = document.getElementById('editSectorSlug').value || 'general';
+            const statusEl = document.getElementById(position + 'UploadStatus');
+            const previewEl = document.getElementById(position + 'PhotoPreview');
+            const urlInput = document.getElementById(position + 'PhotoUrl');
+
+            if (statusEl) {
+                statusEl.style.display = 'block';
+                statusEl.style.color = '#1976d2';
+                statusEl.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading to Firebase Storage...';
+            }
+
+            try {
+                const cleanName = file.name.replace(/[^a-zA-Z0-9._-]/g, '_');
+                const storagePath = `sectors/${slug}/${position}_${Date.now()}_${cleanName}`;
+                const storageReference = ref(storage, storagePath);
+                await uploadBytes(storageReference, file);
+                const downloadUrl = await getDownloadURL(storageReference);
+
+                if (urlInput) urlInput.value = downloadUrl;
+                if (previewEl) previewEl.src = downloadUrl;
+
+                if (statusEl) {
+                    statusEl.style.color = '#15803d';
+                    statusEl.innerHTML = '<i class="fas fa-check-circle"></i> Uploaded successfully!';
+                }
+            } catch (err) {
+                console.error("Storage upload error:", err);
+                if (statusEl) {
+                    statusEl.style.color = '#b91c1c';
+                    statusEl.innerHTML = `<i class="fas fa-exclamation-circle"></i> Upload failed: ${err.message}`;
+                }
+            }
+        };
+
+        window.handleSectorSubmit = async function(e) {
+            e.preventDefault();
+            const slug = document.getElementById('editSectorSlug').value;
+            if (!slug) return;
+
+            const submitBtn = document.getElementById('saveSectorBtn');
+            const origHtml = submitBtn ? submitBtn.innerHTML : '';
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving Changes...';
+            }
+
+            const name = document.getElementById('sectorDisplayName').value.trim();
+            const pageFile = document.getElementById('sectorPageFile').value.trim();
+            const description = document.getElementById('sectorHeroDesc').value.trim();
+            const aboutTitle = document.getElementById('sectorAboutTitle').value.trim();
+            const aboutText = document.getElementById('sectorAboutText').value.trim();
+            const isActive = document.getElementById('sectorIsActive').value === 'true';
+
+            const amir = {
+                name: document.getElementById('amirName').value.trim(),
+                title: document.getElementById('amirTitle').value.trim(),
+                photoUrl: document.getElementById('amirPhotoUrl').value.trim() || './IMAGE/We are visted.jpg',
+                order: 1
+            };
+
+            const viceAmir = {
+                name: document.getElementById('viceAmirName').value.trim(),
+                title: document.getElementById('viceAmirTitle').value.trim(),
+                photoUrl: document.getElementById('viceAmirPhotoUrl').value.trim() || './IMAGE/Best 4.jpg',
+                order: 2
+            };
+
+            const writer = {
+                name: document.getElementById('writerName').value.trim(),
+                title: document.getElementById('writerTitle').value.trim(),
+                photoUrl: document.getElementById('writerPhotoUrl').value.trim() || './IMAGE/Best 7.jpg',
+                order: 3
+            };
+
+            try {
+                const sectorData = {
+                    id: slug,
+                    name,
+                    pageFile,
+                    description,
+                    aboutTitle,
+                    aboutText,
+                    leadership: { amir, viceAmir, writer },
+                    isActive,
+                    updatedAt: serverTimestamp(),
+                    updatedBy: currentUser?.fullName || currentUser?.username || "Admin"
+                };
+
+                await setDoc(doc(db, "sectors", slug), sectorData, { merge: true });
+
+                await logAdminAction("SECTORS", "SECTOR_UPDATED", slug, {
+                    summary: `Updated sector content & leadership for "${name}" (${pageFile})`
+                });
+
+                alert(`Sector "${name}" and leadership updated successfully and synchronized to public website!`);
+                window.cancelSectorEdit();
+            } catch (err) {
+                console.error("Sector update error:", err);
+                alert("Error saving sector: " + err.message);
+            } finally {
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = origHtml;
+                }
+            }
+        };
+
+        window.toggleSectorArchive = async function() {
+            const slug = document.getElementById('editSectorSlug').value;
+            if (!slug) return;
+            const currentIsActive = document.getElementById('sectorIsActive').value === 'true';
+            const actionVerb = currentIsActive ? "archive/deactivate" : "reactivate";
+
+            if (!confirm(`Are you sure you want to ${actionVerb} this official sector? (The sector record and pages will remain intact)`)) return;
+
+            try {
+                await updateDoc(doc(db, "sectors", slug), {
+                    isActive: !currentIsActive,
+                    updatedAt: serverTimestamp(),
+                    updatedBy: currentUser?.fullName || "Admin"
+                });
+
+                await logAdminAction("SECTORS", "SECTOR_VISIBILITY_TOGGLED", slug, {
+                    summary: `Toggled sector ${slug} active status to ${!currentIsActive}`
+                });
+
+                alert(`Sector successfully ${!currentIsActive ? 'activated' : 'archived'}!`);
+                window.cancelSectorEdit();
+            } catch (err) {
+                alert("Error toggling status: " + err.message);
+            }
+        };
+
+
         // ================= INITIALIZATION & AUTH STATE =================
         document.addEventListener('DOMContentLoaded', function() {
             // Optimistic pre-render from local storage
@@ -3322,7 +4044,7 @@ body.dark-mode .quick-actions .action-btn.gold {
 
             const roleEl = document.getElementById('sidebarUserRole');
             if (roleEl) roleEl.textContent = formatRole(user.role);
-            
+
             const titleEl = document.getElementById('dashboardTitle');
             if (titleEl) titleEl.textContent = "Assalamualeykum, " + (user.fullName || user.username);
 
@@ -3331,7 +4053,7 @@ body.dark-mode .quick-actions .action-btn.gold {
 
             const badgeEl = document.getElementById('roleBadge');
             if (badgeEl) badgeEl.textContent = formatRole(user.role);
-            
+
             const fUser = document.getElementById('footerUser');
             if (fUser) fUser.textContent = user.fullName || user.username;
 
@@ -3647,8 +4369,8 @@ body.dark-mode .quick-actions .action-btn.gold {
 
             const recent = allFirestoreAuditLogs.slice(0, 7);
             container.innerHTML = recent.map(log => {
-                const time = log.timestamp?.seconds 
-                    ? new Date(log.timestamp.seconds * 1000).toLocaleString() 
+                const time = log.timestamp?.seconds
+                    ? new Date(log.timestamp.seconds * 1000).toLocaleString()
                     : 'Just now';
                 const actionDesc = log.details?.summary || `${log.actionType} on ${log.category}`;
                 return `
@@ -3684,8 +4406,8 @@ body.dark-mode .quick-actions .action-btn.gold {
                     `;
                 } else {
                     pendingListEl.innerHTML = pendingUsers.map(user => {
-                        const regDate = user.createdAt?.seconds 
-                            ? new Date(user.createdAt.seconds * 1000).toLocaleDateString() 
+                        const regDate = user.createdAt?.seconds
+                            ? new Date(user.createdAt.seconds * 1000).toLocaleDateString()
                             : 'Recent';
                         const requestedRole = user.requestedRole || 'sector_member';
 
@@ -3796,8 +4518,8 @@ body.dark-mode .quick-actions .action-btn.gold {
             }
 
             tableBody.innerHTML = pageData.map(user => {
-                const regDate = user.createdAt?.seconds 
-                    ? new Date(user.createdAt.seconds * 1000).toLocaleDateString() 
+                const regDate = user.createdAt?.seconds
+                    ? new Date(user.createdAt.seconds * 1000).toLocaleDateString()
                     : 'Recent';
                 const status = user.status || 'active';
                 const statusClass = `badge-status-${status}`;
@@ -3861,7 +4583,7 @@ body.dark-mode .quick-actions .action-btn.gold {
             const permContainer = document.getElementById('modalUserCustomPermsContainer');
             if (permContainer) {
                 const userCustom = user.customPermissions || [];
-                permContainer.innerHTML = PERMISSION_DOMAINS.map(dom => 
+                permContainer.innerHTML = PERMISSION_DOMAINS.map(dom =>
                     dom.permissions.map(p => `
                         <label style="display:flex; align-items:center; gap:6px; font-size:0.8rem; cursor:pointer;">
                             <input type="checkbox" name="userCustomPerm" value="${p.key}" ${userCustom.includes(p.key) ? 'checked' : ''}>
@@ -4061,7 +4783,7 @@ body.dark-mode .quick-actions .action-btn.gold {
             const query = searchInput ? searchInput.value.toLowerCase().trim() : '';
 
             const pendingUsers = allFirestoreUsers.filter(u => u.role === 'pending' || u.status === 'pending');
-            
+
             const badgeEl = document.getElementById('dedicatedPendingCountBadge');
             if (badgeEl) badgeEl.textContent = `${pendingUsers.length} Total`;
 
@@ -4090,8 +4812,8 @@ body.dark-mode .quick-actions .action-btn.gold {
             }
 
             tableBody.innerHTML = filtered.map(user => {
-                const regDate = user.createdAt?.seconds 
-                    ? new Date(user.createdAt.seconds * 1000).toLocaleString() 
+                const regDate = user.createdAt?.seconds
+                    ? new Date(user.createdAt.seconds * 1000).toLocaleString()
                     : 'Recent';
                 const requestedRole = user.requestedRole || 'sector_member';
 
@@ -4160,8 +4882,8 @@ body.dark-mode .quick-actions .action-btn.gold {
             document.getElementById('inspectModalGender').textContent = user.gender || 'Not specified';
             document.getElementById('inspectModalSector').textContent = user.sector || 'General';
 
-            const regDate = user.createdAt?.seconds 
-                ? new Date(user.createdAt.seconds * 1000).toLocaleString() 
+            const regDate = user.createdAt?.seconds
+                ? new Date(user.createdAt.seconds * 1000).toLocaleString()
                 : 'Recent';
             document.getElementById('inspectModalDate').textContent = regDate;
 
@@ -4294,8 +5016,8 @@ body.dark-mode .quick-actions .action-btn.gold {
             }
 
             container.innerHTML = allFirestoreBlogs.map(blog => {
-                const date = blog.createdAt?.seconds 
-                    ? new Date(blog.createdAt.seconds * 1000).toLocaleDateString() 
+                const date = blog.createdAt?.seconds
+                    ? new Date(blog.createdAt.seconds * 1000).toLocaleDateString()
                     : 'Recent';
                 const img = blog.imageUrl || './IMAGE/Best 7.jpg';
 
@@ -4377,8 +5099,8 @@ body.dark-mode .quick-actions .action-btn.gold {
             }
 
             container.innerHTML = allFirestoreAnnouncements.map(ann => {
-                const date = ann.createdAt?.seconds 
-                    ? new Date(ann.createdAt.seconds * 1000).toLocaleDateString() 
+                const date = ann.createdAt?.seconds
+                    ? new Date(ann.createdAt.seconds * 1000).toLocaleDateString()
                     : 'Recent';
                 const priorityClass = `badge-priority-${ann.priority || 'normal'}`;
 
@@ -4442,7 +5164,10 @@ body.dark-mode .quick-actions .action-btn.gold {
                         <td><span class="badge-status badge-status-active">${escapeHtml(p.target || 'All')}</span></td>
                         <td><span class="badge-status ${p.status === 'upcoming' ? 'badge-status-pending' : 'badge-status-active'}">${(p.status || 'UPCOMING').toUpperCase()}</span></td>
                         <td>
-                            <button class="btn-sm btn-delete" onclick="window.deleteQiratProgram('${p.id}')"><i class="fas fa-trash"></i></button>
+                            <div style="display:flex; gap:6px;">
+                                <button class="btn-sm btn-edit" title="Edit Program" onclick="window.editQiratProgram('${p.id}')"><i class="fas fa-edit"></i></button>
+                                <button class="btn-sm btn-delete" title="Delete Program" onclick="window.deleteQiratProgram('${p.id}')"><i class="fas fa-trash"></i></button>
+                            </div>
                         </td>
                     </tr>
                 `;
@@ -4577,8 +5302,8 @@ body.dark-mode .quick-actions .action-btn.gold {
             }
 
             tableBody.innerHTML = filtered.map(log => {
-                const dt = log.timestamp?.seconds 
-                    ? new Date(log.timestamp.seconds * 1000).toLocaleString() 
+                const dt = log.timestamp?.seconds
+                    ? new Date(log.timestamp.seconds * 1000).toLocaleString()
                     : 'Recent';
                 const summary = log.details?.summary || log.actionType;
 
@@ -4727,7 +5452,7 @@ body.dark-mode .quick-actions .action-btn.gold {
 
             // Handle ID variations (e.g. pending-applications -> pendingApplicationsTab)
             const camelTab = tabName.replace(/-([a-z])/g, (g) => g[1].toUpperCase());
-            const targetContent = document.getElementById(tabName + 'Tab') || 
+            const targetContent = document.getElementById(tabName + 'Tab') ||
                                   document.getElementById(camelTab + 'Tab') ||
                                   document.getElementById(tabName) ||
                                   document.getElementById(tabName.replace('-tab', 'Tab'));
@@ -5273,32 +5998,50 @@ body.dark-mode .quick-actions .action-btn.gold {
             const regUrl = document.getElementById('qiratRegUrl').value.trim();
             const status = document.getElementById('qiratStatus').value;
 
+            const editId = document.getElementById('qiratEditDocId')?.value;
+
             try {
-                const docRef = await addDoc(collection(db, "qirat_programs"), {
-                    title, dateTime, location, instructor, target, description,
-                    registrationUrl: regUrl, status,
-                    createdAt: serverTimestamp(),
-                    createdBy: currentUser?.fullName || "Admin"
-                });
+                if (editId) {
+                    await updateDoc(doc(db, "qirat_programs", editId), {
+                        title, dateTime, location, instructor, target, description,
+                        registrationUrl: regUrl, status,
+                        updatedAt: serverTimestamp(),
+                        updatedBy: currentUser?.fullName || "Admin"
+                    });
 
-                await logAdminAction("QIRAT", "QIRAT_PROGRAM_CREATED", docRef.id, {
-                    summary: `Scheduled Qirat Program: "${title}" on ${new Date(dateTime).toLocaleDateString()}`
-                });
+                    await logAdminAction("QIRAT", "QIRAT_PROGRAM_UPDATED", editId, {
+                        summary: `Updated Qirat Program: "${title}"`
+                    });
 
-                // Auto notification
-                await addDoc(collection(db, "notifications"), {
-                    targetUid: 'all',
-                    title: `New Qirat Program: ${title}`,
-                    message: `Scheduled for ${new Date(dateTime).toLocaleString()} at ${location}. Open Qirat page to view details.`,
-                    link: "./Qirat.html",
-                    type: "qirat",
-                    isRead: false,
-                    createdAt: serverTimestamp()
-                });
+                    alert("Qirat program updated successfully!");
+                    window.cancelQiratEdit();
+                } else {
+                    const docRef = await addDoc(collection(db, "qirat_programs"), {
+                        title, dateTime, location, instructor, target, description,
+                        registrationUrl: regUrl, status,
+                        createdAt: serverTimestamp(),
+                        createdBy: currentUser?.fullName || "Admin"
+                    });
 
-                alert("Qirat program scheduled successfully and published to public page!");
-                document.getElementById('qiratProgramForm').reset();
-                window.switchTabDirectly('qirat-manage');
+                    await logAdminAction("QIRAT", "QIRAT_PROGRAM_CREATED", docRef.id, {
+                        summary: `Scheduled Qirat Program: "${title}" on ${new Date(dateTime).toLocaleDateString()}`
+                    });
+
+                    // Auto notification
+                    await addDoc(collection(db, "notifications"), {
+                        targetUid: 'all',
+                        title: `New Qirat Program: ${title}`,
+                        message: `Scheduled for ${new Date(dateTime).toLocaleString()} at ${location}. Open Qirat page to view details.`,
+                        link: "./Qirat.html",
+                        type: "qirat",
+                        isRead: false,
+                        createdAt: serverTimestamp()
+                    });
+
+                    alert("Qirat program scheduled successfully and published to public page!");
+                    document.getElementById('qiratProgramForm').reset();
+                    window.switchTabDirectly('qirat-manage');
+                }
             } catch (err) {
                 const isNetErr = (typeof window.isFirebaseNetworkError === 'function' && window.isFirebaseNetworkError(err)) || !navigator.onLine;
                 if (isNetErr) {
@@ -5417,7 +6160,7 @@ body.dark-mode .quick-actions .action-btn.gold {
         function updateNavigation(user) {
             const userNavItem = document.getElementById('userNavItem');
             if (!userNavItem) return;
-            
+
             userNavItem.innerHTML = `
                 <li class="dropdown">
                     <a href="#" class="user-nav-link" style="color:var(--gold); font-weight:600;"><i class="fas fa-user-circle"></i> ${escapeHtml(user.fullName || user.username)} <i class="fas fa-chevron-down"></i></a>
@@ -5427,7 +6170,7 @@ body.dark-mode .quick-actions .action-btn.gold {
                     </div>
                 </li>
             `;
-            
+
             const navLogout = document.getElementById('navLogout');
             if (navLogout) navLogout.addEventListener('click', (e) => {
                 e.preventDefault();
