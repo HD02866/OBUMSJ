@@ -1,13 +1,13 @@
 // OBUMSJ Service Worker - Offline-First App Shell & Safe Updates
 // Compliant with Multi-Tier Caching, Clean URLs, and Privacy Preservation
 
-const CACHE_VERSION = 'v1.2.1';
+const CACHE_VERSION = 'v1.3.0';
 const PRECACHE_NAME = `obumsj-shell-${CACHE_VERSION}`;
 const RUNTIME_CACHE_NAME = `obumsj-runtime-${CACHE_VERSION}`;
 const CACHE_PREFIX = 'obumsj-';
 
-// Complete static application shell to precache for offline availability across all 20 public pages
-const PRECACHE_ASSETS = [
+// Essential static application shell to precache for offline availability across all 20 public pages
+const ESSENTIAL_PRECACHE_ASSETS = [
   // Root & Homepage
   './',
   './index.html',
@@ -41,6 +41,8 @@ const PRECACHE_ASSETS = [
   './js/theme-engine.js',
   './js/language-system.js',
   './js/firebase.js',
+  './js/islamic-effects.js',
+  './js/motion-system.js',
   // 4-Language Translation Dictionaries
   './js/en.json',
   './js/am.json',
@@ -59,8 +61,13 @@ const PRECACHE_ASSETS = [
   './IMAGE/Commercial Bank of Ethiopia.png',
   './IMAGE/Cooperative Bank of Oromia.png',
   './IMAGE/E-birr.png',
-  // Photography & Gallery Assets
-  './IMAGE/Best 1.jpg',
+  './IMAGE/Hakim Hasen.jpg',
+  // Primary Above-the-Fold Hero Image
+  './IMAGE/Best 1.jpg'
+];
+
+// Secondary gallery photographs warmed asynchronously in background runtime cache
+const SECONDARY_MEDIA_ASSETS = [
   './IMAGE/Best 2.jpg',
   './IMAGE/Best 3.jpg',
   './IMAGE/Best 4.jpg',
@@ -241,25 +248,31 @@ async function getOfflineFallback() {
   return fallback;
 }
 
-// Install Event - Pre-cache complete static app shell
+// Install Event - Pre-cache essential static app shell and warm secondary assets
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(PRECACHE_NAME).then(async cache => {
-      console.log(`[OBUMSJ ServiceWorker] Pre-caching static app shell (${PRECACHE_NAME})`);
-      // Add assets safely; log any specific asset error without aborting others
+      console.log(`[OBUMSJ ServiceWorker] Pre-caching essential static app shell (${PRECACHE_NAME})`);
+      // 1. Cache essential app shell required for 100% offline coverage
       await Promise.all(
-        PRECACHE_ASSETS.map(asset => {
+        ESSENTIAL_PRECACHE_ASSETS.map(asset => {
           return cache.add(asset).catch(err => {
-            console.warn(`[OBUMSJ ServiceWorker] Partial precache warning for ${asset}:`, err);
+            console.warn(`[OBUMSJ ServiceWorker] Essential precache warning for ${asset}:`, err);
           });
         })
       );
+    }).then(() => {
+      // Activate new/updated worker automatically once essential app shell is secured
+      return self.skipWaiting();
+    }).then(() => {
+      // 2. Background non-blocking warm of secondary gallery photographs
+      caches.open(RUNTIME_CACHE_NAME).then(runtimeCache => {
+        SECONDARY_MEDIA_ASSETS.forEach(asset => {
+          runtimeCache.add(asset).catch(() => {});
+        });
+      }).catch(() => {});
     })
   );
-  // Auto-activate on initial installation if no active controller exists yet
-  if (!self.registration || !self.registration.active) {
-    self.skipWaiting();
-  }
 });
 
 // Message Event - Safe user-triggered update activation
@@ -370,7 +383,7 @@ self.addEventListener('fetch', event => {
           if (cachedResponse) {
             return cachedResponse;
           }
-          if (req.destination === 'image') {
+          if (req.destination === 'image' || /\.(jpe?g|png|gif|svg|webp|ico)(\?.*)?$/i.test(url.pathname)) {
             return new Response('<svg xmlns="http://www.w3.org/2000/svg" width="1" height="1"/>', {
               headers: { 'Content-Type': 'image/svg+xml' }
             });

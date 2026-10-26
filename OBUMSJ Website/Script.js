@@ -611,10 +611,22 @@ document.addEventListener('DOMContentLoaded', function() {
         let swRegistration = null;
         let isRefreshing = false;
 
-        // Controllerchange listener: safe single reload upon activation
+        // Controllerchange listener: safe single reload upon activation without interrupting first install or user typing
+        let hadController = ('serviceWorker' in navigator) && !!navigator.serviceWorker.controller;
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.addEventListener('controllerchange', () => {
+                if (!hadController) {
+                    hadController = true;
+                    console.log('[OBUMSJ PWA] Initial service worker activation completed.');
+                    return;
+                }
                 if (isRefreshing) return;
+                const activeEl = document.activeElement;
+                const isInteracting = activeEl && (activeEl.tagName === 'INPUT' || activeEl.tagName === 'TEXTAREA' || activeEl.tagName === 'SELECT' || activeEl.isContentEditable);
+                if (isInteracting) {
+                    console.log('[OBUMSJ PWA] Worker updated; deferring page reload to preserve user input.');
+                    return;
+                }
                 isRefreshing = true;
                 console.log('[OBUMSJ PWA] Controller changed; safely reloading into updated version...');
                 window.location.reload();
@@ -627,9 +639,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 swRegistration = reg;
                 console.log('[OBUMSJ PWA] Service Worker registered successfully with scope:', reg.scope);
 
-                // If a new worker is already waiting, present update toast
-                if (reg.waiting && navigator.serviceWorker.controller) {
-                    showUpdateToast(reg.waiting);
+                // If a new worker is already waiting, safely activate it immediately
+                if (reg.waiting) {
+                    console.log('[OBUMSJ PWA] Waiting worker detected; activating...');
+                    reg.waiting.postMessage({ action: 'skipWaiting' });
                 }
 
                 // Listen for new worker updates
@@ -638,14 +651,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (newWorker) {
                         newWorker.addEventListener('statechange', () => {
                             if (newWorker.state === 'installed') {
-                                if (navigator.serviceWorker.controller) {
-                                    console.log('[OBUMSJ PWA] New update installed and ready for safe activation.');
-                                    showUpdateToast(newWorker);
-                                } else {
-                                    // First install: activate immediately for offline protection
-                                    console.log('[OBUMSJ PWA] Initial service worker installed. Activating...');
-                                    newWorker.postMessage({ action: 'skipWaiting' });
-                                }
+                                console.log('[OBUMSJ PWA] New update installed; activating...');
+                                newWorker.postMessage({ action: 'skipWaiting' });
                             }
                         });
                     }
