@@ -311,18 +311,19 @@ p, span, li, a, td, th, label {
               background-image var(--transition-speed) var(--transition-ease);
 }
 
-.islamic-lighting-vignette {
+.islamic-lighting-vignette,
+[data-theme="dark"] .islamic-lighting-vignette,
+[data-theme="night"] .islamic-lighting-vignette,
+body.dark-mode .islamic-lighting-vignette {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  /* Night Mode default radial lighting diffusion (warm amber from upper corners + ambient ceiling) */
+  /* Night Mode restrained upper corner illumination (concentrated strictly near lantern anchors) */
   background:
-    radial-gradient(circle 340px at 45px 120px, rgba(255, 183, 3, 0.14) 0%, transparent 70%),
-    radial-gradient(circle 340px at calc(100% - 45px) 120px, rgba(255, 183, 3, 0.14) 0%, transparent 70%),
-    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(212, 175, 55, 0.08) 0%, transparent 60%),
-    radial-gradient(circle at 50% 50%, transparent 40%, rgba(15, 8, 4, 0.55) 100%);
+    radial-gradient(circle 180px at 24px 72px, rgba(255, 183, 3, 0.16) 0%, rgba(255, 183, 3, 0.05) 45%, transparent 75%),
+    radial-gradient(circle 180px at calc(100% - 24px) 72px, rgba(255, 183, 3, 0.16) 0%, rgba(255, 183, 3, 0.05) 45%, transparent 75%);
   pointer-events: none;
   z-index: var(--z-decor);
   transition: opacity var(--transition-speed) var(--transition-ease);
@@ -331,12 +332,10 @@ p, span, li, a, td, th, label {
 [data-theme="light"] .islamic-lighting-vignette,
 [data-theme="day"] .islamic-lighting-vignette,
 :root:not([data-theme="dark"]):not([data-theme="night"]) .islamic-lighting-vignette {
-  /* Day Mode soft champagne and cream-white warmth */
+  /* Day Mode restrained soft champagne upper corner illumination (clean, free from center wash) */
   background:
-    radial-gradient(circle 360px at 45px 120px, rgba(230, 200, 145, 0.20) 0%, transparent 70%),
-    radial-gradient(circle 360px at calc(100% - 45px) 120px, rgba(230, 200, 145, 0.20) 0%, transparent 70%),
-    radial-gradient(ellipse 85% 55% at 50% 0%, rgba(255, 255, 255, 0.6) 0%, transparent 70%),
-    radial-gradient(circle at 50% 50%, transparent 50%, rgba(225, 215, 195, 0.3) 100%);
+    radial-gradient(circle 160px at 24px 72px, rgba(230, 200, 145, 0.14) 0%, rgba(230, 200, 145, 0.04) 40%, transparent 70%),
+    radial-gradient(circle 160px at calc(100% - 24px) 72px, rgba(230, 200, 145, 0.14) 0%, rgba(230, 200, 145, 0.04) 40%, transparent 70%);
 }
 
 /* ============================================================
