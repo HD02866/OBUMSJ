@@ -7,10 +7,10 @@ const socialToggle = document.getElementById('socialToggle');
 if (socialToggle && socialSidebar) {
     const isMobile = window.innerWidth <= 768;
     const savedState = localStorage.getItem('obumsj_social_collapsed');
-    
+
     // Default to collapsed on mobile or if user explicitly chose collapsed
     let isSocialCollapsed = savedState !== null ? (savedState === 'true') : isMobile;
-    
+
     function updateSocialUI() {
         if (isSocialCollapsed) {
             socialSidebar.classList.add('collapsed');
@@ -24,7 +24,7 @@ if (socialToggle && socialSidebar) {
             socialToggle.title = 'Hide social channels';
         }
     }
-    
+
     updateSocialUI();
 
     socialToggle.addEventListener('click', function(e) {
@@ -47,20 +47,20 @@ function checkLoginStatus() {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     const loginBtn = document.getElementById('loginBtn');
     const userMenu = document.getElementById('userMenu');
-    
+
     if (currentUser && loginBtn && userMenu) {
         loginBtn.style.display = 'none';
         userMenu.style.display = 'flex';
         userMenu.style.gap = '10px';
         userMenu.style.alignItems = 'center';
-        
+
         // Update dashboard link
         const dashboardLink = document.getElementById('dashboardLink');
         if (dashboardLink) {
             dashboardLink.href = 'Dashboard.html';
             dashboardLink.innerHTML = `<i class="fas fa-tachometer-alt"></i> ${formatRole(currentUser.role)} Dashboard`;
         }
-        
+
         // Add logout functionality
         const logoutBtn = userMenu.querySelector('.logout-btn');
         if (logoutBtn) {
@@ -98,14 +98,14 @@ function setupCounterObserver() {
 // ================= FALLBACK COUNTER FOR MOBILE TOUCH/SCROLL =================
 function setupMobileCounterFallback() {
     let hasScrolledToCounters = false;
-    
+
     function checkCounterPosition() {
         const aboutSection = document.getElementById('about');
         if (!aboutSection) return;
-        
+
         const rect = aboutSection.getElementsByClassName('stats')[0]?.getBoundingClientRect();
         if (!rect) return;
-        
+
         // Check if counters section is in viewport
         const isInViewport = (
             rect.top >= 0 &&
@@ -113,13 +113,13 @@ function setupMobileCounterFallback() {
             rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
             rect.right <= (window.innerWidth || document.documentElement.clientWidth)
         );
-        
+
         // Check if at least part of the counters are visible (for mobile)
         const isPartiallyVisible = (
-            rect.top < window.innerHeight && 
+            rect.top < window.innerHeight &&
             rect.bottom > 0
         );
-        
+
         if ((isInViewport || isPartiallyVisible) && !hasScrolledToCounters && !isCounterRunning) {
             // Trigger counter animation
             setTimeout(() => {
@@ -129,10 +129,10 @@ function setupMobileCounterFallback() {
             }, 500);
         }
     }
-    
+
     // Check on scroll
     window.addEventListener('scroll', checkCounterPosition);
-    
+
     // Initial check on page load
     setTimeout(checkCounterPosition, 1000);
 }
@@ -221,7 +221,7 @@ if (langBtn && langDropdown) {
         var isActive = langDropdown.classList.toggle('active');
         langBtn.setAttribute('aria-expanded', isActive ? 'true' : 'false');
     });
-    
+
     // Close when clicking outside
     document.addEventListener('click', function(e) {
         if (!langDropdown.contains(e.target)) {
@@ -241,6 +241,14 @@ document.addEventListener('keydown', function(e) {
                 langBtn.focus();
             }
         }
+        if (dropdown && dropdown.classList.contains('active')) {
+            dropdown.classList.remove('active');
+            const dropdownToggle = dropdown.querySelector('a');
+            if (dropdownToggle) {
+                dropdownToggle.setAttribute('aria-expanded', 'false');
+                dropdownToggle.focus();
+            }
+        }
         if (navLinks && navLinks.classList.contains('active')) {
             closeMobileNav();
             if (mobileMenu) mobileMenu.focus();
@@ -256,10 +264,13 @@ if (dropdown && dropdownContent) {
     // Desktop hover handled via CSS; touch/click toggle for mobile
     const dropdownToggle = dropdown.querySelector('a');
     if (dropdownToggle) {
+        dropdownToggle.setAttribute('aria-haspopup', 'true');
+        dropdownToggle.setAttribute('aria-expanded', 'false');
         dropdownToggle.addEventListener('click', function(e) {
             if (window.innerWidth <= 992) {
                 e.preventDefault();
-                dropdown.classList.toggle('active');
+                const isNowActive = dropdown.classList.toggle('active');
+                dropdownToggle.setAttribute('aria-expanded', isNowActive ? 'true' : 'false');
             }
         });
     }
@@ -281,16 +292,16 @@ const slides = document.getElementsByClassName("slide");
 
 function showSlides() {
     if (slides.length === 0) return;
-    
+
     for (let i = 0; i < slides.length; i++) {
         slides[i].classList.remove("fade");
     }
-    
+
     slideIndex++;
     if (slideIndex > slides.length) {
         slideIndex = 1;
     }
-    
+
     slides[slideIndex - 1].classList.add("fade");
     setTimeout(showSlides, 5000);
 }
@@ -328,19 +339,19 @@ function initScrollReveal() {
 // ================= INITIALIZATION =================
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Document loaded, initializing...');
-    
+
     // Check login status
     checkLoginStatus();
     initScrollReveal();
-    
+
     // Start slideshow
     if (slides.length > 0) {
         showSlides();
     }
-    
+
     // Setup counter observers
     setupCounterObserver();
-    
+
     // Setup mobile fallback (for devices with IntersectionObserver issues)
     if ('IntersectionObserver' in window) {
         console.log('IntersectionObserver is supported');
@@ -348,31 +359,31 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('IntersectionObserver not supported, using fallback');
         setupMobileCounterFallback();
     }
-    
+
     // Also setup fallback for mobile regardless (double insurance)
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
         console.log('Mobile device detected, enabling additional counter triggers');
         setupMobileCounterFallback();
     }
-    
+
     // Smooth scroll for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             const targetId = this.getAttribute('href');
             if (targetId === '#' || targetId === '#home') return;
-            
+
             e.preventDefault();
             const targetElement = document.querySelector(targetId);
             if (targetElement) {
                 const navbar = document.querySelector('.navbar');
                 const navbarHeight = navbar ? navbar.offsetHeight : 80;
                 const targetPosition = targetElement.offsetTop - navbarHeight;
-                
+
                 window.scrollTo({
                     top: targetPosition,
                     behavior: 'smooth'
                 });
-                
+
                 // Close mobile menu
                 if (window.innerWidth <= 768) {
                     if (navLinks) navLinks.classList.remove('active');
@@ -381,7 +392,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
-    
+
     // Form submissions
     const donationForm = document.getElementById('donationForm');
     if (donationForm) {
@@ -391,7 +402,7 @@ document.addEventListener('DOMContentLoaded', function() {
             donationForm.reset();
         });
     }
-    
+
     // ================= TESTIMONIALS CAROUSEL (Requirement 4) =================
     function initTestimonialCarousel() {
         const carousel = document.getElementById('testimonialsCarousel');
@@ -857,7 +868,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // ================= ENHANCED SCROLL-TRIGGERED ANIMATIONS (Requirement 8) =================
     function initScrollRevealObserver() {
         const isReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        
+
         // Mark DOM as JS reveal-ready for progressive enhancement
         document.documentElement.classList.add('js-reveal-ready');
 
@@ -894,11 +905,11 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
-    
+
     document.querySelectorAll('.animate-on-scroll').forEach(el => {
         scrollObserver.observe(el);
     });
-    
+
     // Navbar scroll effect
     window.addEventListener('scroll', function() {
         const navbar = document.querySelector('.navbar');
@@ -909,7 +920,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 navbar.classList.remove('scrolled');
             }
         }
-        
+
         // Check counters on scroll (extra mobile fallback)
         if (!isCounterRunning) {
             const aboutSection = document.getElementById('about');
@@ -927,17 +938,18 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
-    
+
     // Window resize handler
     window.addEventListener('resize', function() {
-        if (window.innerWidth > 768) {
+        if (window.innerWidth > 992) {
             // Reset mobile menu on desktop
             if (navLinks) navLinks.classList.remove('active');
             if (mobileMenu) mobileMenu.classList.remove('active');
-            if (dropdownContent) dropdownContent.style.display = 'none';
+            if (dropdown) dropdown.classList.remove('active');
+            if (dropdownContent) dropdownContent.style.display = '';
         }
     });
-    
+
     // Force counter animation after 3 seconds if still not triggered (safety net)
     setTimeout(() => {
         if (!isCounterRunning) {
@@ -946,6 +958,6 @@ document.addEventListener('DOMContentLoaded', function() {
             isCounterRunning = true;
         }
     }, 3000);
-    
+
     console.log('Initialization complete');
 });

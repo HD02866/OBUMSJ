@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,367 +6,1082 @@
     <title data-i18n="about_page.page_title">About Us | OBUMSJ - Oda Bultum University Muslim Students' JAMA'A</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-<script src="js/theme-engine.js"></script>
+    <script src="js/theme-engine.js"></script>
     <style>
-        /* Add your existing About page styles here */
-        :root{
-          --primary:#2f8f3d;
-          --secondary:#0f3d2e;
-          --gold:#d4af37;
-          --bg:#f4f9f5;
-          --text:#1f2937;
-        }
-        
-        *{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,Arial,sans-serif;}
-        body{background:var(--bg);color:var(--text);line-height:1.6;}
-        
-        .pattern{
-          background-color:var(--bg);
-          background-image:
-            radial-gradient(circle at 20% 20%, rgba(47,143,61,0.07) 1px, transparent 1px),
-            radial-gradient(circle at 80% 80%, rgba(47,143,61,0.07) 1px, transparent 1px);
-          background-size:40px 40px;
-        }
-        
-        header{
-          background:linear-gradient(135deg,var(--secondary),var(--primary));
-          color:#fff;
-          padding:90px 20px;
-          text-align:center;
-          margin-top: 80px;
-        }
-        header h1{font-size:44px;font-weight:700;}
-        header p{max-width:900px;margin:15px auto;font-size:18px;}
-        
-        .container{width:90%;max-width:1100px;margin:50px auto;}
-        
-        .section-card{
-          background:rgba(255,255,255,0.65);
-          backdrop-filter:blur(12px);
-          -webkit-backdrop-filter:blur(12px);
-          border-radius:18px;
-          padding:35px;
-          margin-bottom:40px;
-          border-left:6px solid var(--primary);
-          box-shadow:0 10px 30px rgba(0,0,0,0.08);
-        }
-        
-        .section-title{
-          font-size:28px;
-          margin-bottom:15px;
-          color:var(--secondary);
-        }
-        
-        .vm-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:30px;}
-        .vm-box{
-          background:#fff;
-          padding:25px;
-          border-radius:16px;
-          box-shadow:0 8px 20px rgba(0,0,0,0.08);
-          transition:0.3s;
-        }
-        .vm-box:hover{transform:translateY(-8px);box-shadow:0 15px 40px rgba(0,0,0,0.15);}
-        .vm-box h3{color:var(--primary);margin-bottom:10px;}
-        
-        .leaders{display:grid;grid-template-columns:repeat(3,1fr);gap:25px;}
-        .leader-card{
-          background:#fff;
-          padding:20px;
-          border-radius:16px;
-          text-align:center;
-          box-shadow:0 8px 20px rgba(0,0,0,0.08);
-          transition:0.3s;
-        }
-        .leader-card:hover{transform:translateY(-8px);box-shadow:0 18px 40px rgba(0,0,0,0.15);}
-        .leader-card img{
-          width:130px;height:130px;border-radius:50%;object-fit:cover;
-          border:4px solid var(--primary);margin-bottom:10px;
-        }
-        .leader-card h4{font-size:20px;color:var(--secondary);}
-        .leader-card p{color:var(--primary);font-weight:600;}
-        
-        .dept-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
-        .dept-item{
-          background:#fff;
-          padding:18px;
-          border-radius:14px;
-          border-left:5px solid var(--primary);
-          box-shadow:0 6px 18px rgba(0,0,0,0.07);
-          transition:0.3s;
-        }
-        .dept-item:hover{transform:translateY(-6px);}
-        
-        .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;text-align:center;}
-        .stat-box{
-          background:#fff;
-          padding:25px;
-          border-radius:16px;
-          box-shadow:0 8px 20px rgba(0,0,0,0.08);
-        }
-        .stat-box h2{font-size:32px;color:var(--primary);}
-        .stat-box p{font-weight:600;}
-        
-        footer{
-          background:var(--secondary);
-          color:#fff;
-          padding:40px 20px;
-          text-align:center;
-          margin-top:60px;
-        }
-        
-        .animate-on-scroll{opacity:0;transform:translateY(60px);transition:0.8s;}
-        .animate-on-scroll.show{opacity:1;transform:translateY(0);}
-        
-        @media(max-width:900px){
-          .vm-grid,.leaders,.dept-grid,.stats{grid-template-columns:1fr;}
-        }
-        .download-btn{display:inline-block;background:var(--primary);color:#fff;padding:12px 20px;border-radius:8px;text-decoration:none;font-weight:bold;margin-top:10px;}
-        .download-btn:hover{background:var(--secondary);}
-        
-        .timeline{border-left:4px solid var(--primary);padding-left:25px;}
-        .timeline-item{margin-bottom:25px;position:relative;}
-        .timeline-item::before{content:"";width:14px;height:14px;background:var(--primary);border-radius:50%;position:absolute;left:-9px;top:5px;}
-        .timeline-item span{font-weight:bold;color:var(--secondary);}
-        
-        .org-chart{text-align:center;}
-        .org-row{display:flex;justify-content:center;gap:20px;margin-top:20px;flex-wrap:wrap;}
-        .org-box{background:#fff;padding:15px 25px;border-radius:12px;border-left:5px solid var(--primary);box-shadow:0 6px 18px rgba(0,0,0,.08);}
-        
-        .gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;}
-        .gallery-grid img{width:100%;border-radius:12px;transition:.3s;box-shadow:0 6px 18px rgba(0,0,0,.08);}
-        .gallery-grid img:hover{transform:scale(1.05);}
-        @media(max-width:900px){.gallery-grid{grid-template-columns:repeat(2,1fr);} }
-        
-        /* Counting animation styles */
-        .counter {
-            font-size: 32px;
-            color: var(--primary);
-            font-weight: bold;
-        }
-        .counter::after {
-            content: '+';
-        }
-        .no-plus::after {
-            content: '';
-        }
+/* ============================================================
+   OBUMSJ ABOUT US PAGE — ADVANCED TRANSLUCENT DESIGN SYSTEM
+   ============================================================ */
+
+/* 1. Page Header / Hero Styling */
+header.about-hero {
+  background: linear-gradient(135deg, rgba(15, 61, 46, 0.88), rgba(47, 143, 61, 0.82));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: #ffffff;
+  padding: 85px 24px 60px;
+  text-align: center;
+  margin-top: 80px;
+  border-bottom: 1px solid var(--border-color, rgba(160, 113, 45, 0.25));
+  position: relative;
+  overflow: hidden;
+}
+
+[data-theme="dark"] header.about-hero,
+[data-theme="night"] header.about-hero,
+body.dark-mode header.about-hero {
+  background: linear-gradient(135deg, rgba(20, 12, 7, 0.92), rgba(45, 30, 16, 0.88));
+  border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+header.about-hero h1 {
+  font-family: var(--font-heading, 'Cinzel', serif);
+  font-size: clamp(2rem, 5vw, 2.8rem);
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #ffffff;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] header.about-hero h1,
+[data-theme="night"] header.about-hero h1,
+body.dark-mode header.about-hero h1 {
+  color: var(--gold-light, #fae084);
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.8), 0 0 16px rgba(212, 175, 55, 0.35);
+}
+
+header.about-hero p {
+  max-width: 850px;
+  margin: 0 auto;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+[data-theme="dark"] header.about-hero p,
+[data-theme="night"] header.about-hero p,
+body.dark-mode header.about-hero p {
+  color: #ebd9c5;
+}
+
+/* 2. Container Layout */
+.container {
+  width: 90%;
+  max-width: 1140px;
+  margin: 50px auto;
+  position: relative;
+  z-index: 2;
+}
+
+/* 3. Translucent Section Cards (Fixes White/Pale Overlay - Requirement 1) */
+.section-card {
+  background: rgba(255, 255, 255, 0.72) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  border-radius: var(--radius-lg, 18px) !important;
+  padding: 38px 32px !important;
+  margin-bottom: 45px !important;
+  border: 1px solid var(--border-color, rgba(160, 113, 45, 0.22)) !important;
+  border-left: 6px solid var(--gold-primary, #d4af37) !important;
+  box-shadow: var(--shadow-md, 0 6px 18px rgba(18, 38, 63, 0.08)) !important;
+  position: relative !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease !important;
+}
+
+[data-theme="dark"] .section-card,
+[data-theme="night"] .section-card,
+body.dark-mode .section-card {
+  background: rgba(28, 18, 10, 0.76) !important;
+  border: 1px solid rgba(212, 175, 55, 0.28) !important;
+  border-left: 6px solid var(--gold-primary, #d4af37) !important;
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.65), 0 0 16px rgba(212, 175, 55, 0.12) !important;
+  color: #ebd9c5 !important;
+}
+
+.section-title {
+  font-family: var(--font-heading, 'Cinzel', serif);
+  font-size: 1.85rem;
+  margin-bottom: 20px;
+  color: var(--secondary, #0f3d2e);
+  position: relative;
+  display: inline-block;
+}
+
+[data-theme="dark"] .section-title,
+[data-theme="night"] .section-title,
+body.dark-mode .section-title {
+  color: var(--gold-primary, #d4af37);
+}
+
+.section-card > p {
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: var(--text-primary, #1e1610);
+}
+
+[data-theme="dark"] .section-card > p,
+[data-theme="night"] .section-card > p,
+body.dark-mode .section-card > p {
+  color: #ebd9c5;
+}
+
+/* 4. Vision & Mission Grid */
+.vm-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+  margin-top: 20px;
+}
+
+.vm-box {
+  background: rgba(255, 255, 255, 0.82) !important;
+  backdrop-filter: blur(6px) !important;
+  -webkit-backdrop-filter: blur(6px) !important;
+  padding: 30px 26px !important;
+  border-radius: var(--radius-md, 16px) !important;
+  border: 1px solid var(--border-subtle, rgba(160, 113, 45, 0.18)) !important;
+  box-shadow: var(--shadow-sm, 0 2px 8px rgba(18, 38, 63, 0.06)) !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease !important;
+  position: relative;
+}
+
+.vm-box:hover {
+  transform: translateY(-6px) !important;
+  box-shadow: var(--shadow-hover, 0 14px 36px rgba(18, 38, 63, 0.16)) !important;
+  border-color: var(--gold-primary, #d4af37) !important;
+}
+
+[data-theme="dark"] .vm-box,
+[data-theme="night"] .vm-box,
+body.dark-mode .vm-box {
+  background: rgba(36, 22, 13, 0.82) !important;
+  border: 1px solid rgba(212, 175, 55, 0.22) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5) !important;
+  color: #ebd9c5 !important;
+}
+
+[data-theme="dark"] .vm-box:hover,
+[data-theme="night"] .vm-box:hover,
+body.dark-mode .vm-box:hover {
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.75), 0 0 18px rgba(212, 175, 55, 0.2) !important;
+  border-color: var(--gold-light, #fae084) !important;
+}
+
+.vm-box h3 {
+  color: var(--primary, #1b5e20);
+  margin-bottom: 12px;
+  font-size: 1.35rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+[data-theme="dark"] .vm-box h3,
+[data-theme="night"] .vm-box h3,
+body.dark-mode .vm-box h3 {
+  color: var(--gold-primary, #d4af37);
+}
+
+.vm-box p {
+  color: var(--text-primary, #1e1610);
+  line-height: 1.65;
+}
+
+[data-theme="dark"] .vm-box p,
+[data-theme="night"] .vm-box p,
+body.dark-mode .vm-box p {
+  color: #ebd9c5;
+}
+
+/* 5. Executive Leadership Grid */
+.leaders {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+  margin-top: 20px;
+}
+
+.leader-card {
+  background: rgba(255, 255, 255, 0.82) !important;
+  backdrop-filter: blur(6px) !important;
+  -webkit-backdrop-filter: blur(6px) !important;
+  padding: 26px 20px !important;
+  border-radius: var(--radius-md, 16px) !important;
+  border: 1px solid var(--border-subtle, rgba(160, 113, 45, 0.18)) !important;
+  text-align: center !important;
+  box-shadow: var(--shadow-sm, 0 2px 8px rgba(18, 38, 63, 0.06)) !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease !important;
+}
+
+.leader-card:hover {
+  transform: translateY(-6px) !important;
+  box-shadow: var(--shadow-hover) !important;
+  border-color: var(--gold-primary, #d4af37) !important;
+}
+
+[data-theme="dark"] .leader-card,
+[data-theme="night"] .leader-card,
+body.dark-mode .leader-card {
+  background: rgba(36, 22, 13, 0.82) !important;
+  border: 1px solid rgba(212, 175, 55, 0.22) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5) !important;
+  color: #ebd9c5 !important;
+}
+
+.leader-card img {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--gold-primary, #d4af37);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+  margin-bottom: 14px;
+  transition: transform 0.3s ease;
+}
+
+.leader-card:hover img {
+  transform: scale(1.05);
+}
+
+.leader-card h4 {
+  font-size: 1.25rem;
+  color: var(--secondary, #0f3d2e);
+  margin-bottom: 4px;
+}
+
+[data-theme="dark"] .leader-card h4,
+[data-theme="night"] .leader-card h4,
+body.dark-mode .leader-card h4 {
+  color: var(--gold-primary, #d4af37);
+}
+
+.leader-card p {
+  color: var(--primary, #1b5e20);
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+
+[data-theme="dark"] .leader-card p,
+[data-theme="night"] .leader-card p,
+body.dark-mode .leader-card p {
+  color: var(--gold-light, #fae084);
+}
+
+/* 6. Our Departments — Interactive Button-Style Links (Requirement 2.B) */
+.dept-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 18px;
+  margin-top: 22px;
+}
+
+.dept-item.dept-btn {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  padding: 16px 20px;
+  border-radius: var(--radius-md, 14px);
+  border: 1px solid var(--border-color, rgba(160, 113, 45, 0.22));
+  border-left: 5px solid var(--primary, #1b5e20);
+  box-shadow: var(--shadow-sm);
+  color: var(--text-primary, #1e1610);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+  cursor: pointer;
+  outline: none;
+}
+
+.dept-item.dept-btn i {
+  font-size: 1.25rem;
+  color: var(--gold-primary, #d4af37);
+  width: 24px;
+  text-align: center;
+  transition: transform 0.25s ease, color 0.25s ease;
+  flex-shrink: 0;
+}
+
+.dept-item.dept-btn:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--gold-primary, #d4af37);
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--primary, #1b5e20);
+}
+
+.dept-item.dept-btn:hover i {
+  transform: scale(1.15);
+  color: var(--primary, #1b5e20);
+}
+
+.dept-item.dept-btn:focus-visible {
+  outline: 3px solid var(--gold-primary, #d4af37);
+  outline-offset: 2px;
+}
+
+[data-theme="dark"] .dept-item.dept-btn,
+[data-theme="night"] .dept-item.dept-btn,
+body.dark-mode .dept-item.dept-btn {
+  background: rgba(35, 22, 13, 0.85);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  border-left: 5px solid var(--gold-primary, #d4af37);
+  color: #ebd9c5;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="dark"] .dept-item.dept-btn:hover,
+[data-theme="night"] .dept-item.dept-btn:hover,
+body.dark-mode .dept-item.dept-btn:hover {
+  background: rgba(45, 28, 16, 0.95);
+  border-color: var(--gold-light, #fae084);
+  color: var(--gold-light, #fae084);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7), 0 0 14px rgba(212, 175, 55, 0.2);
+}
+
+[data-theme="dark"] .dept-item.dept-btn:hover i,
+[data-theme="night"] .dept-item.dept-btn:hover i,
+body.dark-mode .dept-item.dept-btn:hover i {
+  color: var(--gold-light, #fae084);
+}
+
+/* 7. Community Stats */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.stat-box {
+  background: rgba(255, 255, 255, 0.82) !important;
+  backdrop-filter: blur(6px) !important;
+  -webkit-backdrop-filter: blur(6px) !important;
+  padding: 26px 18px !important;
+  border-radius: var(--radius-md, 16px) !important;
+  border: 1px solid var(--border-subtle, rgba(160, 113, 45, 0.18)) !important;
+  box-shadow: var(--shadow-sm) !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+.stat-box:hover {
+  transform: translateY(-5px) !important;
+  box-shadow: var(--shadow-hover) !important;
+  border-color: var(--gold-primary, #d4af37) !important;
+}
+
+[data-theme="dark"] .stat-box,
+[data-theme="night"] .stat-box,
+body.dark-mode .stat-box {
+  background: rgba(36, 22, 13, 0.82) !important;
+  border: 1px solid rgba(212, 175, 55, 0.22) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5) !important;
+  color: #ebd9c5 !important;
+}
+
+.stat-box h2 {
+  font-size: 2.4rem;
+  color: var(--primary, #1b5e20);
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+[data-theme="dark"] .stat-box h2,
+[data-theme="night"] .stat-box h2,
+body.dark-mode .stat-box h2 {
+  color: var(--gold-primary, #d4af37);
+}
+
+.stat-box p {
+  font-weight: 600;
+  color: var(--text-primary, #1e1610);
+  font-size: 0.95rem;
+}
+
+[data-theme="dark"] .stat-box p,
+[data-theme="night"] .stat-box p,
+body.dark-mode .stat-box p {
+  color: #ebd9c5;
+}
+
+.counter::after {
+  content: '+';
+}
+
+.no-plus::after {
+  content: '';
+}
+
+/* 8. Continuous Vertical History Timeline (Requirement 3) */
+.timeline-container {
+  position: relative;
+  width: 100%;
+  max-width: 960px;
+  margin: 40px auto 20px;
+  padding: 20px 0;
+}
+
+/* Single continuous vertical line down the center */
+.timeline-container::before {
+  content: "";
+  position: absolute;
+  top: 10px;
+  bottom: 10px;
+  left: 50%;
+  width: 4px;
+  transform: translateX(-50%);
+  background: linear-gradient(180deg, var(--gold-primary, #d4af37) 0%, rgba(212, 175, 55, 0.6) 50%, var(--gold-primary, #d4af37) 100%);
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+  z-index: 1;
+}
+
+.timeline-entry {
+  position: relative;
+  width: 50%;
+  padding: 16px 36px;
+  box-sizing: border-box;
+  z-index: 2;
+  margin-bottom: 24px;
+}
+
+/* 1st, 3rd entries: ON THE RIGHT */
+.timeline-entry.timeline-right {
+  left: 50%;
+  text-align: left;
+}
+
+.timeline-entry.timeline-right .timeline-node {
+  left: -12px;
+}
+
+/* 2nd, 4th entries: ON THE LEFT */
+.timeline-entry.timeline-left {
+  left: 0;
+  text-align: right;
+}
+
+.timeline-entry.timeline-left .timeline-node {
+  right: -12px;
+}
+
+/* Node marker anchored directly to the central continuous line */
+.timeline-node {
+  position: absolute;
+  top: 30px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--bg-surface, #ffffff);
+  border: 4px solid var(--gold-primary, #d4af37);
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  color: var(--primary, #1b5e20);
+  font-size: 0.65rem;
+}
+
+[data-theme="dark"] .timeline-node,
+[data-theme="night"] .timeline-node,
+body.dark-mode .timeline-node {
+  background: #140c07;
+  border-color: var(--gold-light, #fae084);
+  box-shadow: 0 0 16px rgba(250, 224, 132, 0.8);
+  color: var(--gold-light, #fae084);
+}
+
+/* Timeline card */
+.timeline-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid var(--border-color, rgba(160, 113, 45, 0.22));
+  border-radius: var(--radius-md, 14px);
+  padding: 22px 24px;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  display: inline-block;
+  width: 100%;
+}
+
+.timeline-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--gold-primary, #d4af37);
+}
+
+[data-theme="dark"] .timeline-card,
+[data-theme="night"] .timeline-card,
+body.dark-mode .timeline-card {
+  background: rgba(36, 22, 13, 0.85);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+  color: #ebd9c5;
+}
+
+.timeline-year {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--secondary, #0f3d2e), var(--primary, #1b5e20));
+  color: #ffffff;
+  padding: 4px 14px;
+  border-radius: var(--radius-full, 9999px);
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+[data-theme="dark"] .timeline-year,
+[data-theme="night"] .timeline-year,
+body.dark-mode .timeline-year {
+  background: linear-gradient(135deg, #a0712d, #d4af37);
+  color: #140c07;
+}
+
+.timeline-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--secondary, #0f3d2e);
+}
+
+[data-theme="dark"] .timeline-title,
+[data-theme="night"] .timeline-title,
+body.dark-mode .timeline-title {
+  color: var(--gold-primary, #d4af37);
+}
+
+.timeline-card p {
+  color: var(--text-primary, #1e1610);
+  line-height: 1.6;
+  font-size: 0.96rem;
+  margin: 0;
+}
+
+[data-theme="dark"] .timeline-card p,
+[data-theme="night"] .timeline-card p,
+body.dark-mode .timeline-card p {
+  color: #ebd9c5;
+}
+
+/* 9. Continuously Flowing Gallery Marquee (Requirement 4) */
+.gallery-marquee-wrapper {
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+  padding: 16px 0;
+  border-radius: var(--radius-md, 14px);
+  mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+}
+
+.gallery-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: flowGalleryMarquee 42s linear infinite;
+  will-change: transform;
+}
+
+.gallery-marquee-wrapper:hover .gallery-marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes flowGalleryMarquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.gallery-marquee-group {
+  display: flex;
+  gap: 20px;
+  padding-right: 20px;
+  flex-shrink: 0;
+}
+
+.gallery-item {
+  flex: 0 0 280px;
+  width: 280px;
+  height: 200px;
+  border-radius: var(--radius-md, 14px);
+  overflow: hidden;
+  position: relative;
+  border: 1px solid var(--border-color, rgba(160, 113, 45, 0.22));
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  background: var(--bg-card-subtle);
+}
+
+.gallery-item:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--gold-primary, #d4af37);
+}
+
+[data-theme="dark"] .gallery-item,
+[data-theme="night"] .gallery-item,
+body.dark-mode .gallery-item {
+  border-color: rgba(212, 175, 55, 0.25);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.gallery-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 8px 12px;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.78));
+  color: #ffffff;
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-align: center;
+  letter-spacing: 0.02em;
+}
+
+/* 10. Constitution Download Button */
+.download-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--primary, #1b5e20);
+  color: #ffffff !important;
+  padding: 14px 26px;
+  border-radius: var(--radius-full, 9999px);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1rem;
+  margin-top: 16px;
+  box-shadow: 0 4px 14px rgba(27, 94, 32, 0.3);
+  transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+}
+
+.download-btn:hover {
+  background: var(--secondary, #0f3d2e);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  color: var(--gold-light, #fae084) !important;
+}
+
+[data-theme="dark"] .download-btn,
+[data-theme="night"] .download-btn,
+body.dark-mode .download-btn {
+  background: var(--gold-primary, #d4af37);
+  color: #140c07 !important;
+  box-shadow: 0 4px 16px rgba(212, 175, 55, 0.35);
+}
+
+[data-theme="dark"] .download-btn:hover,
+[data-theme="night"] .download-btn:hover,
+body.dark-mode .download-btn:hover {
+  background: var(--gold-light, #fae084);
+  color: #140c07 !important;
+}
+
+/* 11. Responsive Layout */
+@media (max-width: 900px) {
+  .vm-grid,
+  .leaders,
+  .stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .vm-grid,
+  .leaders,
+  .stats,
+  .dept-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .container {
+    width: 95%;
+    padding: 0 10px;
+  }
+
+  .section-card {
+    padding: 26px 20px !important;
+  }
+
+  /* Mobile Timeline: continuous line shifts to left, all entries stack to right */
+  .timeline-container::before {
+    left: 20px;
+    transform: none;
+  }
+
+  .timeline-entry.timeline-left,
+  .timeline-entry.timeline-right {
+    width: 100%;
+    left: 0;
+    padding-left: 54px;
+    padding-right: 12px;
+    text-align: left;
+  }
+
+  .timeline-entry.timeline-left .timeline-node,
+  .timeline-entry.timeline-right .timeline-node {
+    left: 8px;
+    right: auto;
+  }
+
+  .gallery-item {
+    flex: 0 0 240px;
+    width: 240px;
+    height: 175px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gallery-marquee-track {
+    animation: none !important;
+    overflow-x: auto;
+  }
+}
     </style>
 </head>
-<body class="pattern">
-    <!-- =========================================
-        FLOATING SOCIAL MEDIA SIDEBAR (NEW FEATURE)
-    ========================================= -->
-    <div class="social-sidebar" id="socialSidebar">
-        <div class="social-toggle" id="socialToggle">
-            <i class="fas fa-share-alt"></i>
-        </div>
-        <div class="social-icons">
-            <a href="https://t.me/obumsj" target="_blank" title="Telegram" class="social-icon">
-                <i class="fab fa-telegram"></i>
-                <span class="social-tooltip">Telegram</span>
-            </a>
-            <a href="https://facebook.com/obumsj" target="_blank" title="Facebook" class="social-icon">
-                <i class="fab fa-facebook"></i>
-                <span class="social-tooltip">Facebook</span>
-            </a>
-            <a href="https://wa.me/251912345678" target="_blank" title="WhatsApp" class="social-icon">
-                <i class="fab fa-whatsapp"></i>
-                <span class="social-tooltip">WhatsApp</span>
-            </a>
-            <a href="https://youtube.com/obumsj" target="_blank" title="YouTube" class="social-icon">
-                <i class="fab fa-youtube"></i>
-                <span class="social-tooltip">YouTube</span>
-            </a>
-            <a href="https://tiktok.com/@obumsj" target="_blank" title="TikTok" class="social-icon">
-                <i class="fab fa-tiktok"></i>
-                <span class="social-tooltip">TikTok</span>
-            </a>
-        </div>
-    </div>
-
-    <!-- Navigation -->
-    <nav class="navbar">
+<body>
+<nav class="navbar">
         <div class="logo-container">
             <img src="./IMAGE/OBUMSJ Logo.jpg" alt="OBUMSJ Logo" class="logo">
             <span class="logo-text" data-i18n="logo">OBUMSJ</span>
-             <button id="darkModeToggle" class="dark-btn" aria-label="Toggle theme"><i class="fas fa-moon theme-icon" aria-hidden="true"></i></button>
+            <button id="darkModeToggle" class="dark-btn" aria-label="Toggle theme"><i class="fas fa-moon theme-icon" aria-hidden="true"></i></button>
         </div>
 
        <div class="lang-dropdown">
-  <button class="lang-btn" aria-label="Select Language"><i class="fas fa-globe" aria-hidden="true"></i> <span class="lang-code">EN</span> <i class="fas fa-chevron-down lang-chevron" aria-hidden="true"></i></button>
-  <div class="lang-menu">
-    <a href="#" onclick="setLang('en'); return false;" data-i18n="lang.english">English</a>
-    <a href="#" onclick="setLang('am'); return false;" data-i18n="lang.amharic">Amharic</a>
-    <a href="#" onclick="setLang('om'); return false;" data-i18n="lang.oromo">Oromo</a>
-    <a href="#" onclick="setLang('ar'); return false;" data-i18n="lang.arabic">Arabic</a>
+  <button class="lang-btn" aria-label="Select Language"><span class="selected-flag-icon"><svg class="flag-icon" viewBox="0 0 60 30" width="20" height="14" aria-hidden="true"><clipPath id="uk-c-btn"><path d="M0 0v30h60V0z"/></clipPath><clipPath id="uk-d-btn"><path d="M30 15h30v15zv15H30zh-30v-15zv-15h30z"/></clipPath><g clip-path="url(#uk-c-btn)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" clip-path="url(#uk-d-btn)" stroke="#C8102E" stroke-width="4"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#C8102E" stroke-width="6"/></g></svg></span> <span class="lang-code">EN</span> <i class="fas fa-chevron-down lang-chevron" aria-hidden="true"></i></button>
+  <div class="lang-menu" role="listbox" aria-label="Select Language">
+    <a href="#" onclick="setLang('en'); return false;" class="lang-option active" data-lang="en" role="option" aria-selected="true">
+      <span class="flag-icon-wrap"><svg class="flag-icon" viewBox="0 0 60 30" width="20" height="14" aria-hidden="true"><clipPath id="uk-c-opt"><path d="M0 0v30h60V0z"/></clipPath><clipPath id="uk-d-opt"><path d="M30 15h30v15zv15H30zh-30v-15zv-15h30z"/></clipPath><g clip-path="url(#uk-c-opt)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" clip-path="url(#uk-d-opt)" stroke="#C8102E" stroke-width="4"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#C8102E" stroke-width="6"/></g></svg></span>
+      <span data-i18n="lang.english">English</span>
+    </a>
+    <a href="#" onclick="setLang('am'); return false;" class="lang-option" data-lang="am" role="option" aria-selected="false">
+      <span class="flag-icon-wrap"><svg class="flag-icon" viewBox="0 0 60 30" width="20" height="14" aria-hidden="true"><rect width="60" height="10" fill="#078930"/><rect y="10" width="60" height="10" fill="#FCDD09"/><rect y="20" width="60" height="10" fill="#DA121A"/><circle cx="30" cy="15" r="7" fill="#0F47AF"/><polygon points="30,9.5 31.6,13.8 36,13.8 32.4,16.4 33.8,20.5 30,17.8 26.2,20.5 27.6,16.4 24,13.8 28.4,13.8" fill="#FCDD09"/></svg></span>
+      <span data-i18n="lang.amharic">Amharic</span>
+    </a>
+    <a href="#" onclick="setLang('om'); return false;" class="lang-option" data-lang="om" role="option" aria-selected="false">
+      <span class="flag-icon-wrap"><svg class="flag-icon" viewBox="0 0 60 30" width="20" height="14" aria-hidden="true"><rect width="60" height="10" fill="#DA121A"/><rect y="10" width="60" height="10" fill="#FFFFFF"/><rect y="20" width="60" height="10" fill="#000000"/><path d="M29 19.5h2v-2.5h-2z" fill="#078930"/><path d="M30 11.5c-3.2 0-5.5 1.8-5.5 3.8c0 1 0.8 1.8 1.8 2.3c-0.8 0.5-0.8 1.4 0.2 1.8c1.2 0.1 2.2-0.5 3.5-1c1.3 0.5 2.3 1.1 3.5 1c1-0.4 1-1.3 0.2-1.8c1-0.5 1.8-1.3 1.8-2.3c0-2-2.3-3.8-5.5-3.8z" fill="#078930"/></svg></span>
+      <span data-i18n="lang.oromo">Oromo</span>
+    </a>
+    <a href="#" onclick="setLang('ar'); return false;" class="lang-option" data-lang="ar" role="option" aria-selected="false">
+      <span class="flag-icon-wrap"><svg class="flag-icon" viewBox="0 0 60 30" width="20" height="14" aria-hidden="true"><rect width="60" height="30" fill="#006C35"/><path d="M14 11h32M16 8h8M28 8h10M40 8h4M18 13.5h24" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round"/><path d="M16 17.5h26M16 16v3M14 17.5h2M38 17.5l4-1.5l-2 1.5l2 1.5z" stroke="#FFFFFF" stroke-width="1.4" fill="#FFFFFF"/></svg></span>
+      <span data-i18n="lang.arabic">Arabic</span>
+    </a>
   </div>
 </div>
 
-
-        
         <ul class="nav-links">
             <li><a href="./index.html" data-i18n="nav.home">HOME</a></li>
             <li><a href="./About-Us.html" data-i18n="nav.about">ABOUT US</a></li>
             <li class="dropdown">
-                <a href="./sector.html" data-i18n="nav.sectors">SECTORS <i class="fas fa-chevron-down"></i></a>
+                <a href="./sector.html" data-i18n="nav.sectors" aria-haspopup="true" aria-expanded="false">SECTORS <i class="fas fa-chevron-down" aria-hidden="true"></i></a>
                 <div class="dropdown-content">
-                    <a href="./Qirat.html" data-i18n="sector.qirat"><i class="fas fa-quran"></i> Qirat</a>
-                    <a href="./Dawah.html" data-i18n="sector.dawah"><i class="fas fa-megaphone"></i> Dawah</a>
-                    <a href="./Social Affairs.html" data-i18n="sector.social"><i class="fas fa-hands-helping"></i> Social Affairs</a>
-                   
-                    <a href="./Academy.html" data-i18n="sector.academy"><i class="fas fa-graduation-cap"></i> Academy</a>
-                    <a href="./Finance.html" data-i18n="sector.finance"><i class="fas fa-coins"></i> Finance</a>
-                    <a href="./Ziyara.html" data-i18n="sector.ziyara"><i class="fas fa-kaaba"></i> Ziyara</a>
-                    <a href="./Ruqiya.html" data-i18n="sector.ruqiya"><i class="fas fa-hand-holding-heart"></i> Rukiya</a>
-                    <a href="./Charity.html" data-i18n="sector.charity"><i class="fas fa-donate"></i> Charity</a>
-                    <a href="./Dawrul-hasen.html" data-i18n="sector.dawrul"><i class="fas fa-book"></i> Dawrul Hasen</a>
-                    <a href="./Information.html" data-i18n="sector.information"><i class="fas fa-info-circle"></i> Information</a>
+                    <a href="./Qirat.html" data-i18n="sector.qirat"><i class="fas fa-quran" aria-hidden="true"></i> Qirat Sector</a>
+                    <a href="./Dawah.html" data-i18n="sector.dawah"><i class="fas fa-megaphone" aria-hidden="true"></i> Dawah Sector</a>
+                    <a href="./Social Affairs.html" data-i18n="sector.social"><i class="fas fa-hands-helping" aria-hidden="true"></i> Social Affairs Sector</a>
+                    <a href="./Academy.html" data-i18n="sector.academy"><i class="fas fa-graduation-cap" aria-hidden="true"></i> Academy & Education Sector</a>
+                    <a href="./Finance.html" data-i18n="sector.finance"><i class="fas fa-coins" aria-hidden="true"></i> Finance Sector</a>
+                    <a href="./Ziyara.html" data-i18n="sector.ziyara"><i class="fas fa-kaaba" aria-hidden="true"></i> Ziyara & Outreach Sector</a>
+                    <a href="./Ruqiya.html" data-i18n="sector.ruqiya"><i class="fas fa-hand-holding-heart" aria-hidden="true"></i> Ruqiyah Sector</a>
+                    <a href="./Charity.html" data-i18n="sector.charity"><i class="fas fa-donate" aria-hidden="true"></i> Charity Sector</a>
+                    <a href="./Dawrul-hasen.html" data-i18n="sector.dawrul"><i class="fas fa-book" aria-hidden="true"></i> Dawr Al-Hasan Sector</a>
+                    <a href="./Information.html" data-i18n="sector.information"><i class="fas fa-info-circle" aria-hidden="true"></i> Information & Media Sector</a>
                 </div>
             </li>
             <li><a href="Blog.html" data-i18n="nav.blog">BLOG</a></li>
             <li><a href="contact.html" data-i18n="nav.contact">CONTACT US</a></li>
-            <li><a href="./member.html" data-i18n="nav.membership">MEMBERSHIP</a></li>
+            <li id="loginNavItem"><a href="./member.html" id="loginBtn" data-i18n="nav.membership">MEMBERSHIP</a></li>
+            <li id="userMenuNavItem" style="display:none;">
+                <div id="userMenu" style="display:none; gap:8px; align-items:center;">
+                    <a href="Dashboard.html" id="dashboardLink" class="btn" style="padding:6px 12px; font-size:0.85rem;"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                    <a href="#" class="btn logout-btn" style="padding:6px 10px; font-size:0.85rem; background:#fee2e2; color:#b91c1c;"><i class="fas fa-sign-out-alt"></i></a>
+                </div>
+            </li>
             <li><a href="donate.html" class="btn nav-donate" data-i18n="nav.donate">DONATE HERE</a></li>
         </ul>
-        
-        <div class="menu-toggle" id="mobile-menu">
+
+        <!-- Mobile Navbar PWA Installation Control (Requirement 3) -->
+        <button id="mobileNavInstallBtn" class="nav-install-btn" aria-label="Install App" title="Install App">
+            <i class="fas fa-download" aria-hidden="true"></i> <span class="install-btn-text">App</span>
+        </button>
+
+        <div class="menu-toggle" id="mobile-menu" aria-label="Toggle navigation menu" role="button" tabindex="0">
             <span></span>
             <span></span>
             <span></span>
         </div>
     </nav>
 
-    <header>
+    <!-- Hero Section -->
+    <header class="about-hero">
         <h1 class="typewriter-title" data-i18n="about_page.hero_title" data-typewriter-phrases='["About Our Community", "Faith, Unity & Knowledge", "Serving Muslim Students"]'>About Our Community</h1>
         <p data-i18n="about_page.hero_subtitle">We are a Muslim student community dedicated to spiritual growth, academic excellence, and social responsibility. Our mission is to build ethical leaders who serve society with knowledge, faith, and integrity.</p>
     </header>
 
     <div class="container">
-        <!-- About Section -->
-        <div class="section-card animate-on-scroll">
+        <!-- 1. Who We Are Section -->
+        <div class="section-card card-animated-border reveal-horizontal">
             <h2 class="section-title" data-i18n="about_page.who_title">Who We Are</h2>
             <p data-i18n="about_page.who_text">Our community is a student-based Islamic union that provides religious guidance, academic support, and social activities for Muslim students. We aim to create a strong brotherhood and sisterhood environment where members grow spiritually, intellectually, and socially.</p>
         </div>
 
-        <!-- Vision & Mission -->
-        <div class="section-card animate-on-scroll">
+        <!-- 2. Vision & Mission Section -->
+        <div class="section-card card-animated-border reveal-horizontal">
             <h2 class="section-title" data-i18n="sectors.title">Vision & Mission</h2>
             <div class="vm-grid">
-                <div class="vm-box">
-                    <h3 data-i18n="about_page.vision_title">Our Vision</h3>
+                <div class="vm-box card-animated-border reveal-horizontal stagger-1">
+                    <h3 data-i18n="about_page.vision_title"><i class="fas fa-eye" aria-hidden="true"></i> Our Vision</h3>
                     <p data-i18n="about_page.vision_text">To be a leading Muslim student community that nurtures faith, knowledge, and leadership, producing responsible individuals who positively impact society.</p>
                 </div>
-                <div class="vm-box">
-                    <h3 data-i18n="about_page.mission_title">Our Mission</h3>
+                <div class="vm-box card-animated-border reveal-horizontal stagger-2">
+                    <h3 data-i18n="about_page.mission_title"><i class="fas fa-bullseye" aria-hidden="true"></i> Our Mission</h3>
                     <p data-i18n="about_page.mission_text">To provide Islamic education, academic support, social services, and leadership training through organized programs and departments.</p>
                 </div>
             </div>
         </div>
 
-        <!-- Leadership Section -->
-        <div class="section-card animate-on-scroll">
+        <!-- 3. Leadership Section -->
+        <div class="section-card card-animated-border reveal-horizontal">
             <h2 class="section-title" data-i18n="about_page.leadership_title">Executive Leadership</h2>
             <div class="leaders">
-                <div class="leader-card">
-                    <img src="./IMAGE/We are visted.jpg" alt="President">
+                <div class="leader-card card-animated-border reveal-horizontal stagger-1">
+                    <img src="./IMAGE/We are visted.jpg" alt="President" loading="lazy" decoding="async">
                     <h4>Abdellah Ahmed</h4>
                     <p data-i18n="about_page.leadership_president">Community Amir (President)</p>
                 </div>
-                <div class="leader-card">
-                    <img src="./IMAGE/Best 4.jpg" alt="Vice President">
+                <div class="leader-card card-animated-border reveal-horizontal stagger-2">
+                    <img src="./IMAGE/Best 4.jpg" alt="Vice President" loading="lazy" decoding="async">
                     <h4>Mohammed Yusuf</h4>
                     <p data-i18n="about_page.leadership_vice">Vice Amir</p>
                 </div>
-                <div class="leader-card">
-                    <img src="./IMAGE/Best 7.jpg" alt="Secretary">
+                <div class="leader-card card-animated-border reveal-horizontal stagger-3">
+                    <img src="./IMAGE/Best 7.jpg" alt="Secretary" loading="lazy" decoding="async">
                     <h4>Hassan Ali</h4>
                     <p data-i18n="about_page.leadership_secretary">General Secretary</p>
                 </div>
             </div>
         </div>
 
-        <!-- Departments -->
-        <div class="section-card animate-on-scroll">
+        <!-- 4. Our Departments (Interactive Button-Style Links to 10 Sectors - Requirement 2.B) -->
+        <div class="section-card card-animated-border reveal-horizontal">
             <h2 class="section-title" data-i18n="about_page.departments_title">Our Departments</h2>
             <div class="dept-grid">
-                <div class="dept-item" data-i18n="about_page.department_qirat">Qirat Sector</div>
-                <div class="dept-item" data-i18n="about_page.department_ruqiyah">Ruqiyah Sector</div>
-                <div class="dept-item" data-i18n="about_page.department_charity">Charity Sector</div>
-                <div class="dept-item" data-i18n="about_page.department_finance">Finance Sector</div>
-                <div class="dept-item" data-i18n="about_page.department_dawr">Dawr Al-Hasan Sector</div>
-                <div class="dept-item" data-i18n="about_page.department_information">Information & Media Sector</div>
-                <div class="dept-item" data-i18n="about_page.department_ziyara">Ziyara & Outreach Sector</div>
-                <div class="dept-item" data-i18n="about_page.department_academy">Academy & Education Sector</div>
-                <div class="dept-item" data-i18n="about_page.department_social">Social Affairs Sector</div>
+                <a href="./Qirat.html" class="dept-item dept-btn reveal-horizontal stagger-1" data-i18n="about_page.department_qirat">
+                    <i class="fas fa-quran" aria-hidden="true"></i> <span>Qirat Sector</span>
+                </a>
+                <a href="./Dawah.html" class="dept-item dept-btn reveal-horizontal stagger-2" data-i18n="about_page.department_dawah">
+                    <i class="fas fa-megaphone" aria-hidden="true"></i> <span>Dawah Sector</span>
+                </a>
+                <a href="./Social Affairs.html" class="dept-item dept-btn reveal-horizontal stagger-3" data-i18n="about_page.department_social">
+                    <i class="fas fa-hands-helping" aria-hidden="true"></i> <span>Social Affairs Sector</span>
+                </a>
+                <a href="./Academy.html" class="dept-item dept-btn reveal-horizontal stagger-1" data-i18n="about_page.department_academy">
+                    <i class="fas fa-graduation-cap" aria-hidden="true"></i> <span>Academy & Education Sector</span>
+                </a>
+                <a href="./Finance.html" class="dept-item dept-btn reveal-horizontal stagger-2" data-i18n="about_page.department_finance">
+                    <i class="fas fa-coins" aria-hidden="true"></i> <span>Finance Sector</span>
+                </a>
+                <a href="./Ziyara.html" class="dept-item dept-btn reveal-horizontal stagger-3" data-i18n="about_page.department_ziyara">
+                    <i class="fas fa-kaaba" aria-hidden="true"></i> <span>Ziyara & Outreach Sector</span>
+                </a>
+                <a href="./Ruqiya.html" class="dept-item dept-btn reveal-horizontal stagger-1" data-i18n="about_page.department_ruqiyah">
+                    <i class="fas fa-hand-holding-heart" aria-hidden="true"></i> <span>Ruqiyah Sector</span>
+                </a>
+                <a href="./Charity.html" class="dept-item dept-btn reveal-horizontal stagger-2" data-i18n="about_page.department_charity">
+                    <i class="fas fa-donate" aria-hidden="true"></i> <span>Charity Sector</span>
+                </a>
+                <a href="./Dawrul-hasen.html" class="dept-item dept-btn reveal-horizontal stagger-3" data-i18n="about_page.department_dawr">
+                    <i class="fas fa-book" aria-hidden="true"></i> <span>Dawr Al-Hasan Sector</span>
+                </a>
+                <a href="./Information.html" class="dept-item dept-btn reveal-horizontal stagger-1" data-i18n="about_page.department_information">
+                    <i class="fas fa-info-circle" aria-hidden="true"></i> <span>Information & Media Sector</span>
+                </a>
             </div>
         </div>
 
-        <!-- Community Stats - UPDATED WITH COUNTING ANIMATION -->
-        <div class="section-card animate-on-scroll" id="community-stats">
+        <!-- 5. Community Stats (Counting Animation Preserved) -->
+        <div class="section-card card-animated-border reveal-horizontal" id="community-stats">
             <h2 class="section-title" data-i18n="about_page.stats_title">Community Impact</h2>
             <div class="stats">
-                <div class="stat-box">
+                <div class="stat-box card-animated-border reveal-horizontal stagger-1">
                     <h2 class="counter" data-target="300" data-speed="50">0</h2>
                     <p data-i18n="about_page.stats_members">Active Members</p>
                 </div>
-                <div class="stat-box">
+                <div class="stat-box card-animated-border reveal-horizontal stagger-2">
                     <h2 class="counter no-plus" data-target="9" data-speed="100">0</h2>
                     <p data-i18n="about_page.stats_departments">Departments</p>
                 </div>
-                <div class="stat-box">
+                <div class="stat-box card-animated-border reveal-horizontal stagger-3">
                     <h2 class="counter" data-target="120" data-speed="50">0</h2>
                     <p data-i18n="about_page.stats_events">Events Organized</p>
                 </div>
-                <div class="stat-box">
+                <div class="stat-box card-animated-border reveal-horizontal stagger-1">
                     <h2 class="counter" data-target="10" data-speed="100">0</h2>
                     <p data-i18n="about_page.stats_years">Years of Service</p>
                 </div>
             </div>
         </div>
 
-        <!-- History Timeline -->
-        <div class="section-card animate-on-scroll">
+        <!-- 6. History Timeline (Continuous Vertical Alternating Timeline - Requirement 3) -->
+        <div class="section-card card-animated-border reveal-horizontal" id="history-section">
             <h2 class="section-title" data-i18n="about_page.history_title">Our History</h2>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <span>2015</span>
-                    <p data-i18n="about_page.history_2015">Community founded by Muslim students to strengthen faith and unity.</p>
+            <div class="timeline-container">
+                <!-- Entry 1: RIGHT -->
+                <div class="timeline-entry timeline-right reveal-horizontal stagger-1">
+                    <div class="timeline-node" aria-hidden="true"><i class="fas fa-flag"></i></div>
+                    <div class="timeline-card">
+                        <div class="timeline-year"><span>2015</span></div>
+                        <h3 class="timeline-title">Foundation & Early Unity</h3>
+                        <p data-i18n="about_page.history_2015">Community founded by Muslim students to strengthen faith and unity.</p>
+                    </div>
                 </div>
-                <div class="timeline-item">
-                    <span>2018</span>
-                    <p data-i18n="about_page.history_2018">Established 5 official departments and launched weekly programs.</p>
+
+                <!-- Entry 2: LEFT -->
+                <div class="timeline-entry timeline-left reveal-horizontal stagger-2">
+                    <div class="timeline-node" aria-hidden="true"><i class="fas fa-sitemap"></i></div>
+                    <div class="timeline-card">
+                        <div class="timeline-year"><span>2018</span></div>
+                        <h3 class="timeline-title">Institutional Growth</h3>
+                        <p data-i18n="about_page.history_2018">Established 5 official departments and launched weekly programs.</p>
+                    </div>
                 </div>
-                <div class="timeline-item">
-                    <span>2022</span>
-                    <p data-i18n="about_page.history_2022">Expanded to 9 sectors and started charity and outreach projects.</p>
+
+                <!-- Entry 3: RIGHT -->
+                <div class="timeline-entry timeline-right reveal-horizontal stagger-3">
+                    <div class="timeline-node" aria-hidden="true"><i class="fas fa-hands-helping"></i></div>
+                    <div class="timeline-card">
+                        <div class="timeline-year"><span>2022</span></div>
+                        <h3 class="timeline-title">Expansion & Community Outreach</h3>
+                        <p data-i18n="about_page.history_2022">Expanded to 9 sectors and started charity and outreach projects.</p>
+                    </div>
                 </div>
-                <div class="timeline-item">
-                    <span>2026</span>
-                    <p data-i18n="about_page.history_2026">Launched official website and digital management system.</p>
+
+                <!-- Entry 4: LEFT -->
+                <div class="timeline-entry timeline-left reveal-horizontal stagger-1">
+                    <div class="timeline-node" aria-hidden="true"><i class="fas fa-globe"></i></div>
+                    <div class="timeline-card">
+                        <div class="timeline-year"><span>2026</span></div>
+                        <h3 class="timeline-title">Digital Transformation & Web Platform</h3>
+                        <p data-i18n="about_page.history_2026">Launched official website and digital management system.</p>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Gallery -->
-        <div class="section-card animate-on-scroll">
+        <!-- 7. Gallery of Activities (Continuously Flowing Horizontal Marquee - Requirement 4) -->
+        <div class="section-card card-animated-border reveal-horizontal" id="gallery-section">
             <h2 class="section-title" data-i18n="about_page.gallery_title">Gallery of Activities</h2>
-            <div class="gallery-grid">
-                <img src="./IMAGE/Best 2.jpg" alt="Activity 1">
-                <img src="./IMAGE/Best 6.jpg" alt="Activity 2">
-                <img src="./IMAGE/Best 10.jpg" alt="Activity 3">
-                <img src="./IMAGE/Best 9.jpg" alt="Activity 4">
+            <div class="gallery-marquee-wrapper" aria-label="Gallery of OBUMSJ activities flowing continuously">
+                <div class="gallery-marquee-track">
+                    <!-- Track Group 1 -->
+                    <div class="gallery-marquee-group">
+                        <div class="gallery-item">
+                            <img src="./IMAGE/Best 2.jpg" alt="OBUMSJ Student Gathering and Spiritual Session" loading="lazy" decoding="async">
+                            <div class="gallery-caption">Spiritual Gathering</div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="./IMAGE/Best 6.jpg" alt="OBUMSJ Campus Activity and Brotherhood" loading="lazy" decoding="async">
+                            <div class="gallery-caption">Campus Brotherhood</div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="./IMAGE/Best 10.jpg" alt="OBUMSJ Educational Seminar and Lecture" loading="lazy" decoding="async">
+                            <div class="gallery-caption">Educational Seminar</div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="./IMAGE/Best 9.jpg" alt="OBUMSJ Community Service and Group Photo" loading="lazy" decoding="async">
+                            <div class="gallery-caption">Community Service</div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="./IMAGE/Best 1.jpg" alt="OBUMSJ General Assembly and Member Meetup" loading="lazy" decoding="async">
+                            <div class="gallery-caption">General Assembly</div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="./IMAGE/Best 3.jpg" alt="OBUMSJ Academic Excellence Workshop" loading="lazy" decoding="async">
+                            <div class="gallery-caption">Academic Workshop</div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="./IMAGE/Best 5.jpg" alt="OBUMSJ Islamic Knowledge Forum" loading="lazy" decoding="async">
+                            <div class="gallery-caption">Knowledge Forum</div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="./IMAGE/Best 8.jpg" alt="OBUMSJ Outreach and Social Program" loading="lazy" decoding="async">
+                            <div class="gallery-caption">Social Outreach</div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="./IMAGE/We are visted.jpg" alt="OBUMSJ Special Guest and Scholars Visit" loading="lazy" decoding="async">
+                            <div class="gallery-caption">Distinguished Visit</div>
+                        </div>
+                    </div>
+
+                    <!-- Track Group 2 (Exact Duplicate for Mathematically Seamless Infinite Loop) -->
+                    <div class="gallery-marquee-group" aria-hidden="true">
+                        <div class="gallery-item">
+                            <img src="./IMAGE/Best 2.jpg" alt="" loading="lazy" decoding="async">
+                            <div class="gallery-caption">Spiritual Gathering</div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="./IMAGE/Best 6.jpg" alt="" loading="lazy" decoding="async">
+                            <div class="gallery-caption">Campus Brotherhood</div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="./IMAGE/Best 10.jpg" alt="" loading="lazy" decoding="async">
+                            <div class="gallery-caption">Educational Seminar</div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="./IMAGE/Best 9.jpg" alt="" loading="lazy" decoding="async">
+                            <div class="gallery-caption">Community Service</div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="./IMAGE/Best 1.jpg" alt="" loading="lazy" decoding="async">
+                            <div class="gallery-caption">General Assembly</div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="./IMAGE/Best 3.jpg" alt="" loading="lazy" decoding="async">
+                            <div class="gallery-caption">Academic Workshop</div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="./IMAGE/Best 5.jpg" alt="" loading="lazy" decoding="async">
+                            <div class="gallery-caption">Knowledge Forum</div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="./IMAGE/Best 8.jpg" alt="" loading="lazy" decoding="async">
+                            <div class="gallery-caption">Social Outreach</div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="./IMAGE/We are visted.jpg" alt="" loading="lazy" decoding="async">
+                            <div class="gallery-caption">Distinguished Visit</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- Constitution -->
-        <div class="section-card animate-on-scroll">
+        <!-- 8. Community Constitution Section -->
+        <div class="section-card card-animated-border reveal-horizontal">
             <h2 class="section-title" data-i18n="about_page.constitution_title">Community Constitution</h2>
             <p data-i18n="about_page.constitution_text">You can download our official constitution and bylaws document.</p>
-            <a href="docs/constitution.pdf" download class="download-btn" data-i18n="about_page.constitution_download">Download Constitution PDF</a>
+            <a href="docs/constitution.pdf" download class="download-btn" data-i18n="about_page.constitution_download">
+                <i class="fas fa-file-pdf" aria-hidden="true"></i> <span>Download Constitution PDF</span>
+            </a>
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="footer">
+<footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-column">
@@ -415,7 +1130,6 @@
         </div>
     </footer>
 
-    <!-- Include the universal language system -->
     <script src="./js/language-system.js"></script>
     <script src="./Script.js"></script>
 </body>

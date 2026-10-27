@@ -17,23 +17,23 @@
             margin-bottom: 50px;
             margin-top: 80px;
         }
-        
+
         .donate-page-header h1 {
             font-size: 2.8rem;
             margin-bottom: 15px;
         }
-        
+
         .donate-page-header p {
             font-size: 1.2rem;
             opacity: 0.9;
             max-width: 700px;
             margin: 0 auto;
         }
-        
+
         .donate-page-content {
             padding: 50px 20px;
         }
-        
+
         /* Hadith Section */
         .hadith-section {
             background: linear-gradient(135deg, #f0f9f0, #e6f3e6);
@@ -43,7 +43,7 @@
             text-align: center;
             border-left: 5px solid #2f8f3d;
         }
-        
+
         .hadith-arabic {
             font-size: 1.8rem;
             color: #0f3d2e;
@@ -52,7 +52,7 @@
             line-height: 1.8;
             direction: rtl;
         }
-        
+
         .hadith-english {
             font-size: 1.2rem;
             color: #2f8f3d;
@@ -61,7 +61,7 @@
             margin: 0 auto;
             line-height: 1.6;
         }
-        
+
         /* Donation Methods Grid */
         .donation-methods {
             display: grid;
@@ -69,7 +69,7 @@
             gap: 30px;
             margin-top: 40px;
         }
-        
+
         /* Bank Card Template */
         .bank-card {
             background: white;
@@ -79,62 +79,62 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             height: 100%;
         }
-        
+
         .bank-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
         }
-        
+
         .bank-card-header {
             padding: 25px;
             color: white;
             text-align: center;
         }
-        
+
         .cbe-header {
             background: linear-gradient(135deg, #1a5d1a, #2e7d32);
         }
-        
+
         .cbo-header {
             background: linear-gradient(135deg, #d32f2f, #f44336);
         }
-        
+
         .ebirr-header {
             background: linear-gradient(135deg, #ff9800, #ffb74d);
         }
-        
+
         .bank-icon {
             font-size: 2.5rem;
             margin-bottom: 15px;
         }
-        
+
         .bank-card-body {
             padding: 25px;
         }
-        
+
         .bank-detail {
             margin-bottom: 15px;
             padding-bottom: 15px;
             border-bottom: 1px solid #eee;
         }
-        
+
         .bank-detail:last-child {
             border-bottom: none;
         }
-        
+
         .detail-label {
             font-weight: 600;
             color: #555;
             margin-bottom: 5px;
             font-size: 0.9rem;
         }
-        
+
         .detail-value {
             color: #333;
             font-size: 1.1rem;
             word-break: break-all;
         }
-        
+
         .copy-btn {
             background: var(--primary);
             color: white;
@@ -145,11 +145,11 @@
             margin-top: 5px;
             transition: background 0.3s ease;
         }
-        
+
         .copy-btn:hover {
             background: var(--secondary);
         }
-        
+
         /* Amount Options */
         .amount-options {
             display: flex;
@@ -158,7 +158,7 @@
             flex-wrap: wrap;
             margin: 20px 0;
         }
-        
+
         .amount-option {
             padding: 10px 20px;
             background: var(--light);
@@ -168,24 +168,24 @@
             border: 2px solid transparent;
             font-weight: 500;
         }
-        
+
         .amount-option:hover {
             border-color: var(--accent);
             transform: translateY(-2px);
         }
-        
+
         .amount-option.active {
             background: var(--accent);
             color: white;
             border-color: var(--accent);
         }
-        
+
         .custom-amount {
             display: flex;
             gap: 10px;
             margin-top: 20px;
         }
-        
+
         .custom-amount input {
             flex: 1;
             padding: 12px;
@@ -193,7 +193,7 @@
             border: 1px solid #ddd;
             font-size: 1rem;
         }
-        
+
         .donate-btn {
             background: var(--accent);
             color: white;
@@ -207,12 +207,12 @@
             margin-top: 20px;
             font-size: 1rem;
         }
-        
+
         .donate-btn:hover {
             background: var(--secondary);
             transform: translateY(-2px);
         }
-        
+
         /* QR Code Section */
         .qr-section {
             text-align: center;
@@ -221,7 +221,7 @@
             background: #f9f9f9;
             border-radius: 10px;
         }
-        
+
         .qr-code {
             width: 150px;
             height: 150px;
@@ -231,7 +231,7 @@
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
-        
+
         /* Success Message */
         .success-message {
             background: #d4edda;
@@ -243,46 +243,46 @@
             display: none;
             border-left: 5px solid #28a745;
         }
-        
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .donation-methods {
                 grid-template-columns: 1fr;
             }
-            
+
             .amount-options {
                 flex-direction: column;
                 align-items: center;
             }
-            
+
             .amount-option {
                 width: 100%;
                 max-width: 200px;
                 text-align: center;
             }
-            
+
             .custom-amount {
                 flex-direction: column;
             }
-            
+
             .hadith-arabic {
                 font-size: 1.5rem;
             }
-            
+
             .hadith-english {
                 font-size: 1rem;
             }
         }
-        
+
         /* Bank Specific Colors */
         .cbe-color {
             color: #1a5d1a;
         }
-        
+
         .cbo-color {
             color: #d32f2f;
         }
-        
+
         .ebirr-color {
             color: #ff9800;
         }
@@ -445,47 +445,67 @@
         <div class="logo-container">
             <img src="./IMAGE/OBUMSJ Logo.jpg" alt="OBUMSJ Logo" class="logo">
             <span class="logo-text" data-i18n="logo">OBUMSJ</span>
-             <button id="darkModeToggle" class="dark-btn" aria-label="Toggle theme"><i class="fas fa-moon theme-icon" aria-hidden="true"></i></button>
+            <button id="darkModeToggle" class="dark-btn" aria-label="Toggle theme"><i class="fas fa-moon theme-icon" aria-hidden="true"></i></button>
         </div>
 
        <div class="lang-dropdown">
-  <button class="lang-btn" aria-label="Select Language"><i class="fas fa-globe" aria-hidden="true"></i> <span class="lang-code">EN</span> <i class="fas fa-chevron-down lang-chevron" aria-hidden="true"></i></button>
-  <div class="lang-menu">
-    <a href="#" onclick="setLang('en'); return false;" data-i18n="lang.english">English</a>
-    <a href="#" onclick="setLang('am'); return false;" data-i18n="lang.amharic">Amharic</a>
-    <a href="#" onclick="setLang('om'); return false;" data-i18n="lang.oromo">Oromo</a>
-    <a href="#" onclick="setLang('ar'); return false;" data-i18n="lang.arabic">Arabic</a>
+  <button class="lang-btn" aria-label="Select Language"><span class="selected-flag-icon"><svg class="flag-icon" viewBox="0 0 60 30" width="20" height="14" aria-hidden="true"><clipPath id="uk-c-btn"><path d="M0 0v30h60V0z"/></clipPath><clipPath id="uk-d-btn"><path d="M30 15h30v15zv15H30zh-30v-15zv-15h30z"/></clipPath><g clip-path="url(#uk-c-btn)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" clip-path="url(#uk-d-btn)" stroke="#C8102E" stroke-width="4"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#C8102E" stroke-width="6"/></g></svg></span> <span class="lang-code">EN</span> <i class="fas fa-chevron-down lang-chevron" aria-hidden="true"></i></button>
+  <div class="lang-menu" role="listbox" aria-label="Select Language">
+    <a href="#" onclick="setLang('en'); return false;" class="lang-option active" data-lang="en" role="option" aria-selected="true">
+      <span class="flag-icon-wrap"><svg class="flag-icon" viewBox="0 0 60 30" width="20" height="14" aria-hidden="true"><clipPath id="uk-c-opt"><path d="M0 0v30h60V0z"/></clipPath><clipPath id="uk-d-opt"><path d="M30 15h30v15zv15H30zh-30v-15zv-15h30z"/></clipPath><g clip-path="url(#uk-c-opt)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" clip-path="url(#uk-d-opt)" stroke="#C8102E" stroke-width="4"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#C8102E" stroke-width="6"/></g></svg></span>
+      <span data-i18n="lang.english">English</span>
+    </a>
+    <a href="#" onclick="setLang('am'); return false;" class="lang-option" data-lang="am" role="option" aria-selected="false">
+      <span class="flag-icon-wrap"><svg class="flag-icon" viewBox="0 0 60 30" width="20" height="14" aria-hidden="true"><rect width="60" height="10" fill="#078930"/><rect y="10" width="60" height="10" fill="#FCDD09"/><rect y="20" width="60" height="10" fill="#DA121A"/><circle cx="30" cy="15" r="7" fill="#0F47AF"/><polygon points="30,9.5 31.6,13.8 36,13.8 32.4,16.4 33.8,20.5 30,17.8 26.2,20.5 27.6,16.4 24,13.8 28.4,13.8" fill="#FCDD09"/></svg></span>
+      <span data-i18n="lang.amharic">Amharic</span>
+    </a>
+    <a href="#" onclick="setLang('om'); return false;" class="lang-option" data-lang="om" role="option" aria-selected="false">
+      <span class="flag-icon-wrap"><svg class="flag-icon" viewBox="0 0 60 30" width="20" height="14" aria-hidden="true"><rect width="60" height="10" fill="#DA121A"/><rect y="10" width="60" height="10" fill="#FFFFFF"/><rect y="20" width="60" height="10" fill="#000000"/><path d="M29 19.5h2v-2.5h-2z" fill="#078930"/><path d="M30 11.5c-3.2 0-5.5 1.8-5.5 3.8c0 1 0.8 1.8 1.8 2.3c-0.8 0.5-0.8 1.4 0.2 1.8c1.2 0.1 2.2-0.5 3.5-1c1.3 0.5 2.3 1.1 3.5 1c1-0.4 1-1.3 0.2-1.8c1-0.5 1.8-1.3 1.8-2.3c0-2-2.3-3.8-5.5-3.8z" fill="#078930"/></svg></span>
+      <span data-i18n="lang.oromo">Oromo</span>
+    </a>
+    <a href="#" onclick="setLang('ar'); return false;" class="lang-option" data-lang="ar" role="option" aria-selected="false">
+      <span class="flag-icon-wrap"><svg class="flag-icon" viewBox="0 0 60 30" width="20" height="14" aria-hidden="true"><rect width="60" height="30" fill="#006C35"/><path d="M14 11h32M16 8h8M28 8h10M40 8h4M18 13.5h24" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round"/><path d="M16 17.5h26M16 16v3M14 17.5h2M38 17.5l4-1.5l-2 1.5l2 1.5z" stroke="#FFFFFF" stroke-width="1.4" fill="#FFFFFF"/></svg></span>
+      <span data-i18n="lang.arabic">Arabic</span>
+    </a>
   </div>
 </div>
 
-
-        
         <ul class="nav-links">
             <li><a href="./index.html" data-i18n="nav.home">HOME</a></li>
             <li><a href="./About-Us.html" data-i18n="nav.about">ABOUT US</a></li>
             <li class="dropdown">
-                <a href="./sector.html" data-i18n="nav.sectors">SECTORS <i class="fas fa-chevron-down"></i></a>
+                <a href="./sector.html" data-i18n="nav.sectors" aria-haspopup="true" aria-expanded="false">SECTORS <i class="fas fa-chevron-down" aria-hidden="true"></i></a>
                 <div class="dropdown-content">
-                    <a href="./Qirat.html" data-i18n="sector.qirat"><i class="fas fa-quran"></i> Qirat</a>
-                    <a href="./Dawah.html" data-i18n="sector.dawah"><i class="fas fa-megaphone"></i> Dawah</a>
-                    <a href="./Social Affairs.html" data-i18n="sector.social"><i class="fas fa-hands-helping"></i> Social Affairs</a>
-                    
-                    <a href="./Academy.html" data-i18n="sector.academy"><i class="fas fa-graduation-cap"></i> Academy</a>
-                    <a href="./Finance.html" data-i18n="sector.finance"><i class="fas fa-coins"></i> Finance</a>
-                    <a href="./Ziyara.html" data-i18n="sector.ziyara"><i class="fas fa-kaaba"></i> Ziyara</a>
-                    <a href="./Ruqiya.html" data-i18n="sector.ruqiya"><i class="fas fa-hand-holding-heart"></i> Rukiya</a>
-                    <a href="./Charity.html" data-i18n="sector.charity"><i class="fas fa-donate"></i> Charity</a>
-                    <a href="./Dawrul-hasen.html" data-i18n="sector.dawrul"><i class="fas fa-book"></i> Dawrul Hasen</a>
-                    <a href="./Information.html" data-i18n="sector.information"><i class="fas fa-info-circle"></i> Information</a>
+                    <a href="./Qirat.html" data-i18n="sector.qirat"><i class="fas fa-quran" aria-hidden="true"></i> Qirat Sector</a>
+                    <a href="./Dawah.html" data-i18n="sector.dawah"><i class="fas fa-megaphone" aria-hidden="true"></i> Dawah Sector</a>
+                    <a href="./Social Affairs.html" data-i18n="sector.social"><i class="fas fa-hands-helping" aria-hidden="true"></i> Social Affairs Sector</a>
+                    <a href="./Academy.html" data-i18n="sector.academy"><i class="fas fa-graduation-cap" aria-hidden="true"></i> Academy & Education Sector</a>
+                    <a href="./Finance.html" data-i18n="sector.finance"><i class="fas fa-coins" aria-hidden="true"></i> Finance Sector</a>
+                    <a href="./Ziyara.html" data-i18n="sector.ziyara"><i class="fas fa-kaaba" aria-hidden="true"></i> Ziyara & Outreach Sector</a>
+                    <a href="./Ruqiya.html" data-i18n="sector.ruqiya"><i class="fas fa-hand-holding-heart" aria-hidden="true"></i> Ruqiyah Sector</a>
+                    <a href="./Charity.html" data-i18n="sector.charity"><i class="fas fa-donate" aria-hidden="true"></i> Charity Sector</a>
+                    <a href="./Dawrul-hasen.html" data-i18n="sector.dawrul"><i class="fas fa-book" aria-hidden="true"></i> Dawr Al-Hasan Sector</a>
+                    <a href="./Information.html" data-i18n="sector.information"><i class="fas fa-info-circle" aria-hidden="true"></i> Information & Media Sector</a>
                 </div>
             </li>
             <li><a href="Blog.html" data-i18n="nav.blog">BLOG</a></li>
             <li><a href="contact.html" data-i18n="nav.contact">CONTACT US</a></li>
-            <li><a href="./member.html" data-i18n="nav.membership">LOGIN</a></li>
+            <li id="loginNavItem"><a href="./member.html" id="loginBtn" data-i18n="nav.membership">MEMBERSHIP</a></li>
+            <li id="userMenuNavItem" style="display:none;">
+                <div id="userMenu" style="display:none; gap:8px; align-items:center;">
+                    <a href="Dashboard.html" id="dashboardLink" class="btn" style="padding:6px 12px; font-size:0.85rem;"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                    <a href="#" class="btn logout-btn" style="padding:6px 10px; font-size:0.85rem; background:#fee2e2; color:#b91c1c;"><i class="fas fa-sign-out-alt"></i></a>
+                </div>
+            </li>
             <li><a href="donate.html" class="btn nav-donate" data-i18n="nav.donate">DONATE HERE</a></li>
         </ul>
-        
-        <div class="menu-toggle" id="mobile-menu">
+
+        <!-- Mobile Navbar PWA Installation Control (Requirement 3) -->
+        <button id="mobileNavInstallBtn" class="nav-install-btn" aria-label="Install App" title="Install App">
+            <i class="fas fa-download" aria-hidden="true"></i> <span class="install-btn-text">App</span>
+        </button>
+
+        <div class="menu-toggle" id="mobile-menu" aria-label="Toggle navigation menu" role="button" tabindex="0">
             <span></span>
             <span></span>
             <span></span>
@@ -525,7 +545,7 @@
                     <h2 class="plan-selector-title">Selected Donation Option</h2>
                     <p class="plan-selector-subtitle">Review or customize your contribution schedule below:</p>
                 </div>
-                
+
                 <div class="plan-cards-grid" role="tablist" aria-label="Donation Schedules">
                     <button type="button" class="plan-card active" data-plan="once" role="tab" aria-selected="true" id="tab-once">
                         <div class="plan-card-icon" aria-hidden="true"><i class="fas fa-gift"></i></div>
@@ -575,7 +595,7 @@
             </div>
 
             <h2 style="text-align: center; margin-bottom: 30px; color: var(--secondary);">Choose Your Donation Method</h2>
-            
+
             <div class="donation-methods">
                 <!-- CBE Bank Card -->
                 <div class="bank-card">
@@ -591,12 +611,12 @@
                             <div class="detail-label">Bank Name</div>
                             <div class="detail-value cbe-color">Commercial Bank of Ethiopia (CBE)</div>
                         </div>
-                        
+
                         <div class="bank-detail">
                             <div class="detail-label">Account Name</div>
                             <div class="detail-value">OBUMSJ Organization</div>
                         </div>
-                        
+
                         <div class="bank-detail">
                             <div class="detail-label">Account Number</div>
                             <div class="detail-value" id="cbeAccount">1000442820604</div>
@@ -604,12 +624,12 @@
                                 <i class="fas fa-copy"></i> Copy Account Number
                             </button>
                         </div>
-                        
+
                         <div class="bank-detail">
                             <div class="detail-label">Branch</div>
                             <div class="detail-value">Chiro Main Branch</div>
                         </div>
-                        
+
                         <div class="bank-detail">
                             <div class="detail-label">Swift Code</div>
                             <div class="detail-value">CBETETAA</div>
@@ -631,12 +651,12 @@
                             <div class="detail-label">Bank Name</div>
                             <div class="detail-value cbo-color">Cooperative Bank of Oromia (CBO)</div>
                         </div>
-                        
+
                         <div class="bank-detail">
                             <div class="detail-label">Account Name</div>
                             <div class="detail-value">OBUMSJ Organization</div>
                         </div>
-                        
+
                         <div class="bank-detail">
                             <div class="detail-label">Account Number</div>
                             <div class="detail-value" id="cboAccount">1000096071338</div>
@@ -644,12 +664,12 @@
                                 <i class="fas fa-copy"></i> Copy Account Number
                             </button>
                         </div>
-                        
+
                         <div class="bank-detail">
                             <div class="detail-label">Branch</div>
                             <div class="detail-value">Chiro Branch</div>
                         </div>
-                        
+
                         <div class="bank-detail">
                             <div class="detail-label">Swift Code</div>
                             <div class="detail-value">OROMETAA</div>
@@ -671,12 +691,12 @@
                             <div class="detail-label">Service Provider</div>
                             <div class="detail-value ebirr-color">E-birr Ethiopia</div>
                         </div>
-                        
+
                         <div class="bank-detail">
                             <div class="detail-label">Account Name</div>
                             <div class="detail-value">OBUMSJ Organization</div>
                         </div>
-                        
+
                         <div class="bank-detail">
                             <div class="detail-label">Mobile Number</div>
                             <div class="detail-value" id="ebirrNumber">0915404018</div>
@@ -684,7 +704,7 @@
                                 <i class="fas fa-copy"></i> Copy Phone Number
                             </button>
                         </div>
-                        
+
                         <div class="bank-detail">
                             <div class="detail-label">Payment Method</div>
                             <div class="detail-value">Direct Transfer via E-birr App</div>
@@ -699,7 +719,7 @@
                                 <div class="amount-option" data-amount="500">500 Birr</div>
                                 <div class="amount-option" data-amount="1000">1000 Birr</div>
                             </div>
-                            
+
                             <div class="custom-amount">
                                 <input type="number" placeholder="Enter custom amount" id="mobile-amount" min="1">
                                 <button class="donate-btn" onclick="processEBirrDonation()">
@@ -739,7 +759,7 @@
                         <h4 style="color: var(--dark); margin-bottom: 10px;">Quran & Islamic Studies</h4>
                         <p style="color: var(--text-light);">Support Quran memorization programs, Islamic classes, and religious education for students.</p>
                     </div>
-                    
+
                     <div style="text-align: center; padding: 20px;">
                         <div style="width: 60px; height: 60px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; color: white;">
                             <i class="fas fa-user-graduate"></i>
@@ -747,7 +767,7 @@
                         <h4 style="color: var(--dark); margin-bottom: 10px;">Student Support</h4>
                         <p style="color: var(--text-light);">Help needy students with academic materials, accommodation, and living expenses.</p>
                     </div>
-                    
+
                     <div style="text-align: center; padding: 20px;">
                         <div style="width: 60px; height: 60px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; color: white;">
                             <i class="fas fa-hands-helping"></i>
@@ -755,7 +775,7 @@
                         <h4 style="color: var(--dark); margin-bottom: 10px;">Community Services</h4>
                         <p style="color: var(--text-light);">Fund Dawah activities, charity programs, and community outreach initiatives.</p>
                     </div>
-                    
+
                     <div style="text-align: center; padding: 20px;">
                         <div style="width: 60px; height: 60px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; color: white;">
                             <i class="fas fa-mosque"></i>
@@ -764,7 +784,7 @@
                         <p style="color: var(--text-light);">Maintain our prayer rooms, libraries, and activity centers for optimal use.</p>
                     </div>
                 </div>
-                
+
                 <div style="text-align: center; margin-top: 30px;">
                     <p style="color: var(--text-light); max-width: 800px; margin: 0 auto; font-size: 1.1rem;">
                         <i class="fas fa-quote-left" style="color: var(--accent); margin-right: 5px;"></i>
@@ -843,7 +863,7 @@
                     document.getElementById('mobile-amount').value = amount;
                 });
             });
-            
+
             // Set default amount
             document.querySelector('.amount-option[data-amount="100"]').classList.add('active');
             document.getElementById('mobile-amount').value = '100';
@@ -853,13 +873,13 @@
         function copyToClipboard(elementId, accountType) {
             const element = document.getElementById(elementId);
             const text = element.textContent;
-            
+
             navigator.clipboard.writeText(text).then(() => {
                 const message = document.getElementById('successMessage');
                 const messageText = document.getElementById('messageText');
                 messageText.textContent = `${accountType} copied to clipboard!`;
                 message.style.display = 'block';
-                
+
                 // Hide message after 3 seconds
                 setTimeout(() => {
                     message.style.display = 'none';
@@ -873,15 +893,15 @@
         // Process E-birr donation
         function processEBirrDonation() {
             const amount = document.getElementById('mobile-amount').value;
-            
+
             if (!amount || amount <= 0) {
                 alert('Please enter a valid amount');
                 return;
             }
-            
+
             // Show confirmation
             const confirmation = confirm(`You are about to donate ${amount} Birr via E-birr to number 0915404018.\n\nPlease confirm to proceed.`);
-            
+
             if (confirmation) {
                 // In a real implementation, this would redirect to payment gateway
                 // For now, we'll show a success message
@@ -892,17 +912,17 @@
                 message.style.background = '#d4edda';
                 message.style.color = '#155724';
                 message.style.borderLeftColor = '#28a745';
-                
+
                 // Reset form
                 document.getElementById('mobile-amount').value = '100';
                 document.querySelectorAll('.amount-option').forEach(opt => opt.classList.remove('active'));
                 document.querySelector('.amount-option[data-amount="100"]').classList.add('active');
-                
+
                 // Hide message after 5 seconds
                 setTimeout(() => {
                     message.style.display = 'none';
                 }, 5000);
-                
+
                 // Log donation (in real app, this would be sent to server)
                 console.log(`Donation processed: ${amount} Birr via E-birr`);
             }
@@ -923,7 +943,7 @@ Bank Transfer Instructions for ${bankName}:
 5. Email us at donations@obumsj.org with your receipt
 
 JazakAllah Khair for your support!`;
-            
+
             alert(instructions);
         }
 
@@ -931,7 +951,7 @@ JazakAllah Khair for your support!`;
         document.querySelector('.cbe-header').addEventListener('click', () => {
             showBankInstructions('Commercial Bank of Ethiopia', '1000442820604');
         });
-        
+
         document.querySelector('.cbo-header').addEventListener('click', () => {
             showBankInstructions('Cooperative Bank of Oromia', '1000096071338');
         });

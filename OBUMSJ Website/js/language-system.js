@@ -9,18 +9,18 @@ const LanguageSystem = {
         om: '<svg class="flag-icon" viewBox="0 0 60 30" width="20" height="14" aria-hidden="true"><rect width="60" height="10" fill="#DA121A"/><rect y="10" width="60" height="10" fill="#FFFFFF"/><rect y="20" width="60" height="10" fill="#000000"/><path d="M29 19.5h2v-2.5h-2z" fill="#078930"/><path d="M30 11.5c-3.2 0-5.5 1.8-5.5 3.8c0 1 0.8 1.8 1.8 2.3c-0.8 0.5-0.8 1.4 0.2 1.8c1.2 0.1 2.2-0.5 3.5-1c1.3 0.5 2.3 1.1 3.5 1c1-0.4 1-1.3 0.2-1.8c1-0.5 1.8-1.3 1.8-2.3c0-2-2.3-3.8-5.5-3.8z" fill="#078930"/></svg>',
         ar: '<svg class="flag-icon" viewBox="0 0 60 30" width="20" height="14" aria-hidden="true"><rect width="60" height="30" fill="#006C35"/><path d="M14 11h32M16 8h8M28 8h10M40 8h4M18 13.5h24" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round"/><path d="M16 17.5h26M16 16v3M14 17.5h2M38 17.5l4-1.5l-2 1.5l2 1.5z" stroke="#FFFFFF" stroke-width="1.4" fill="#FFFFFF"/></svg>'
     },
-    
+
     init: function() {
         // Load saved language
         const savedLang = localStorage.getItem('siteLang') || 'en';
         this.loadLanguage(savedLang);
-        
+
         // Make setLang available globally
         window.setLang = (lang) => this.loadLanguage(lang);
-        
+
         console.log('Language system initialized');
     },
-    
+
     loadLanguage: function(lang) {
         fetch(`./js/${lang}.json`)
             .then(response => {
@@ -35,7 +35,7 @@ const LanguageSystem = {
                 this.applyTranslations();
                 this.updateLanguageUI(lang);
                 localStorage.setItem('siteLang', lang);
-                
+
                 // Handle RTL for Arabic
                 if (lang === 'ar') {
                     document.documentElement.setAttribute('dir', 'rtl');
@@ -44,7 +44,7 @@ const LanguageSystem = {
                     document.documentElement.setAttribute('dir', 'ltr');
                     document.body.classList.remove('rtl');
                 }
-                
+
                 // Dispatch event so other components (e.g. scroll reveal, typewriter) know
                 window.dispatchEvent(new CustomEvent('obumsj:languageChanged', { detail: { lang: lang } }));
                 console.log(`Language changed to: ${lang}`);
@@ -58,11 +58,11 @@ const LanguageSystem = {
                 }
             });
     },
-    
+
     applyTranslations: function() {
         const translations = this.translations[this.currentLang];
         if (!translations) return;
-        
+
         document.querySelectorAll('[data-i18n]').forEach(element => {
             const key = element.getAttribute('data-i18n');
             if (translations[key]) {
@@ -73,17 +73,28 @@ const LanguageSystem = {
                 } else if (element.tagName === 'OPTION') {
                     element.textContent = translations[key];
                 } else {
-                    element.textContent = translations[key];
+                    const icon = element.querySelector('i');
+                    if (icon) {
+                        const iconHtml = icon.outerHTML;
+                        const iconIsFirst = element.firstElementChild === icon;
+                        if (iconIsFirst) {
+                            element.innerHTML = iconHtml + ' ' + translations[key];
+                        } else {
+                            element.innerHTML = translations[key] + ' ' + iconHtml;
+                        }
+                    } else {
+                        element.textContent = translations[key];
+                    }
                 }
             }
         });
-        
+
         // Update page title
         if (translations['page_title']) {
             document.title = translations['page_title'];
         }
     },
-    
+
     updateLanguageUI: function(lang) {
         // Update language code elements
         const langCodeElements = document.querySelectorAll('.lang-code');
@@ -110,7 +121,7 @@ const LanguageSystem = {
                 option.setAttribute('aria-selected', 'false');
             }
         });
-        
+
         // Close language dropdown
         const langDropdown = document.querySelector('.lang-dropdown');
         if (langDropdown) {

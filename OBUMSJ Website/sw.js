@@ -1,7 +1,7 @@
 // OBUMSJ Service Worker - Offline-First App Shell & Safe Updates
 // Compliant with Multi-Tier Caching, Clean URLs, and Privacy Preservation
 
-const CACHE_VERSION = 'v1.3.0';
+const CACHE_VERSION = 'v1.4.0';
 const PRECACHE_NAME = `obumsj-shell-${CACHE_VERSION}`;
 const RUNTIME_CACHE_NAME = `obumsj-runtime-${CACHE_VERSION}`;
 const CACHE_PREFIX = 'obumsj-';

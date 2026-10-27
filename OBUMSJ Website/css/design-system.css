@@ -318,7 +318,7 @@ p, span, li, a, td, th, label {
   width: 100%;
   height: 100%;
   /* Night Mode default radial lighting diffusion (warm amber from upper corners + ambient ceiling) */
-  background: 
+  background:
     radial-gradient(circle 340px at 45px 120px, rgba(255, 183, 3, 0.14) 0%, transparent 70%),
     radial-gradient(circle 340px at calc(100% - 45px) 120px, rgba(255, 183, 3, 0.14) 0%, transparent 70%),
     radial-gradient(ellipse 80% 50% at 50% 0%, rgba(212, 175, 55, 0.08) 0%, transparent 60%),
@@ -332,7 +332,7 @@ p, span, li, a, td, th, label {
 [data-theme="day"] .islamic-lighting-vignette,
 :root:not([data-theme="dark"]):not([data-theme="night"]) .islamic-lighting-vignette {
   /* Day Mode soft champagne and cream-white warmth */
-  background: 
+  background:
     radial-gradient(circle 360px at 45px 120px, rgba(230, 200, 145, 0.20) 0%, transparent 70%),
     radial-gradient(circle 360px at calc(100% - 45px) 120px, rgba(230, 200, 145, 0.20) 0%, transparent 70%),
     radial-gradient(ellipse 85% 55% at 50% 0%, rgba(255, 255, 255, 0.6) 0%, transparent 70%),
@@ -762,11 +762,19 @@ button:disabled,
   content: "" !important;
   position: absolute !important;
   inset: 1.5px !important;
-  background: var(--bg-card) !important;
+  background: rgba(255, 255, 255, 0.76) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
   border-radius: calc(var(--radius-lg, 16px) - 1.5px) !important;
   z-index: 1 !important;
   pointer-events: none !important;
   transition: background var(--duration-fast, 150ms) var(--ease-out-smooth) !important;
+}
+
+[data-theme="dark"] .card-animated-border::after,
+[data-theme="night"] .card-animated-border::after,
+body.dark-mode .card-animated-border::after {
+  background: rgba(28, 18, 10, 0.80) !important;
 }
 
 .card-animated-border > * {
@@ -1020,6 +1028,26 @@ body.dark-mode .form-label {
 
 .dropdown-content {
   left: 0;
+  min-width: 290px;
+  max-height: calc(100vh - 85px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+/* Hover bridge: ensures pointer never loses hover crossing the 6px gap */
+.dropdown-content::before {
+  content: "";
+  position: absolute;
+  top: -12px;
+  left: 0;
+  right: 0;
+  height: 12px;
+  background: transparent;
+}
+
+/* Keep sector labels on a single horizontal line on desktop */
+.dropdown-content a {
+  white-space: nowrap;
 }
 
 .lang-menu {
@@ -1038,6 +1066,7 @@ body.dark-mode .form-label {
 }
 
 .dropdown:hover .dropdown-content,
+.dropdown:focus-within .dropdown-content,
 .dropdown.active .dropdown-content,
 .lang-dropdown.active .lang-menu {
   display: block !important;
@@ -1795,7 +1824,23 @@ body.dark-mode .lang-btn {
   padding: 8px 12px;
   border-radius: var(--radius-sm);
   text-decoration: none;
+  white-space: nowrap !important;
   transition: color 0.2s ease, background 0.2s ease;
+}
+
+/* Straight horizontal text enforcement across all navigation elements */
+.navbar,
+.navbar * {
+  writing-mode: horizontal-tb;
+}
+
+.navbar .logo-text,
+.navbar .nav-links a,
+.navbar .dropdown-content a,
+.navbar .lang-btn,
+.navbar .lang-option {
+  white-space: nowrap;
+  font-style: normal;
 }
 
 .navbar .nav-links a:hover {
@@ -2100,13 +2145,20 @@ body.dark-mode .lang-btn {
   .navbar .nav-links .dropdown-content {
     position: static !important;
     display: none;
-    width: 100%;
+    width: 100% !important;
+    min-width: 100% !important;
+    max-height: none !important;
+    overflow-y: visible !important;
     box-shadow: none !important;
     background: var(--bg-card-subtle) !important;
     border: 1px solid var(--border-subtle) !important;
     border-radius: var(--radius-sm);
     margin: 6px 0 10px 0;
     padding: 6px 0;
+  }
+
+  .navbar .nav-links .dropdown-content a {
+    white-space: normal;
   }
 
   .navbar .nav-links .dropdown.active .dropdown-content {
@@ -3160,4 +3212,420 @@ html[dir="rtl"] .obumsj-update-toast {
   font-size: 1.25rem;
   color: #fbbf24;
   flex-shrink: 0;
+}
+
+/* ============================================================
+   18. ADVANCED SECTOR PAGES TRANSLUCENT DESIGN SYSTEM (Phase 2)
+   Consistent Glass Cards, Corner Accents & Motion Styling
+   ============================================================ */
+
+/* 1. Translucent Section Cards / Large Containers */
+.frame-card,
+.schedule-container,
+.cta-section {
+  background: rgba(255, 255, 255, 0.74) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  border: 1px solid rgba(160, 113, 45, 0.22) !important;
+  border-left: 6px solid var(--gold-primary, #d4af37) !important;
+  border-radius: var(--radius-lg, 18px) !important;
+  box-shadow: 0 6px 20px rgba(18, 38, 63, 0.08) !important;
+  color: var(--text-primary, #1e1610) !important;
+  position: relative !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease !important;
+}
+
+[data-theme="dark"] .frame-card,
+[data-theme="night"] .frame-card,
+body.dark-mode .frame-card,
+[data-theme="dark"] .schedule-container,
+[data-theme="night"] .schedule-container,
+body.dark-mode .schedule-container,
+[data-theme="dark"] .cta-section,
+[data-theme="night"] .cta-section,
+body.dark-mode .cta-section {
+  background: rgba(28, 18, 10, 0.78) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  border: 1px solid rgba(212, 175, 55, 0.28) !important;
+  border-left: 6px solid var(--gold-primary, #d4af37) !important;
+  border-radius: var(--radius-lg, 18px) !important;
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.65), 0 0 16px rgba(212, 175, 55, 0.12) !important;
+  color: #ebd9c5 !important;
+}
+
+/* 2. Translucent Inner Cards & Grids */
+.member-card,
+.book-card,
+.dawah-card,
+.message-card,
+.service-box,
+.stat-card,
+.stat-item,
+.audio-player-card,
+.verse-card,
+.feature-box,
+.program-card,
+.method-card,
+.need-item {
+  background: rgba(255, 255, 255, 0.82) !important;
+  backdrop-filter: blur(6px) !important;
+  -webkit-backdrop-filter: blur(6px) !important;
+  border: 1px solid rgba(160, 113, 45, 0.18) !important;
+  border-radius: var(--radius-md, 14px) !important;
+  box-shadow: 0 2px 10px rgba(18, 38, 63, 0.06) !important;
+  color: var(--text-primary, #1e1610) !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease !important;
+}
+
+.member-card:hover,
+.book-card:hover,
+.dawah-card:hover,
+.message-card:hover,
+.service-box:hover,
+.stat-card:hover,
+.stat-item:hover,
+.audio-player-card:hover,
+.verse-card:hover,
+.feature-box:hover,
+.program-card:hover,
+.method-card:hover,
+.need-item:hover {
+  transform: translateY(-5px) !important;
+  box-shadow: 0 12px 28px rgba(18, 38, 63, 0.12) !important;
+  border-color: var(--gold-primary, #d4af37) !important;
+}
+
+[data-theme="dark"] .member-card,
+[data-theme="night"] .member-card,
+body.dark-mode .member-card,
+[data-theme="dark"] .book-card,
+[data-theme="night"] .book-card,
+body.dark-mode .book-card,
+[data-theme="dark"] .dawah-card,
+[data-theme="night"] .dawah-card,
+body.dark-mode .dawah-card,
+[data-theme="dark"] .message-card,
+[data-theme="night"] .message-card,
+body.dark-mode .message-card,
+[data-theme="dark"] .service-box,
+[data-theme="night"] .service-box,
+body.dark-mode .service-box,
+[data-theme="dark"] .stat-card,
+[data-theme="night"] .stat-card,
+body.dark-mode .stat-card,
+[data-theme="dark"] .stat-item,
+[data-theme="night"] .stat-item,
+body.dark-mode .stat-item,
+[data-theme="dark"] .audio-player-card,
+[data-theme="night"] .audio-player-card,
+body.dark-mode .audio-player-card,
+[data-theme="dark"] .verse-card,
+[data-theme="night"] .verse-card,
+body.dark-mode .verse-card,
+[data-theme="dark"] .feature-box,
+[data-theme="night"] .feature-box,
+body.dark-mode .feature-box,
+[data-theme="dark"] .program-card,
+[data-theme="night"] .program-card,
+body.dark-mode .program-card,
+[data-theme="dark"] .method-card,
+[data-theme="night"] .method-card,
+body.dark-mode .method-card,
+[data-theme="dark"] .need-item,
+[data-theme="night"] .need-item,
+body.dark-mode .need-item {
+  background: rgba(36, 22, 13, 0.82) !important;
+  backdrop-filter: blur(6px) !important;
+  -webkit-backdrop-filter: blur(6px) !important;
+  border: 1px solid rgba(212, 175, 55, 0.22) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5) !important;
+  color: #ebd9c5 !important;
+}
+
+[data-theme="dark"] .member-card:hover,
+[data-theme="night"] .member-card:hover,
+body.dark-mode .member-card:hover,
+[data-theme="dark"] .book-card:hover,
+[data-theme="night"] .book-card:hover,
+body.dark-mode .book-card:hover,
+[data-theme="dark"] .dawah-card:hover,
+[data-theme="night"] .dawah-card:hover,
+body.dark-mode .dawah-card:hover,
+[data-theme="dark"] .message-card:hover,
+[data-theme="night"] .message-card:hover,
+body.dark-mode .message-card:hover,
+[data-theme="dark"] .service-box:hover,
+[data-theme="night"] .service-box:hover,
+body.dark-mode .service-box:hover,
+[data-theme="dark"] .stat-card:hover,
+[data-theme="night"] .stat-card:hover,
+body.dark-mode .stat-card:hover,
+[data-theme="dark"] .stat-item:hover,
+[data-theme="night"] .stat-item:hover,
+body.dark-mode .stat-item:hover,
+[data-theme="dark"] .audio-player-card:hover,
+[data-theme="night"] .audio-player-card:hover,
+body.dark-mode .audio-player-card:hover,
+[data-theme="dark"] .verse-card:hover,
+[data-theme="night"] .verse-card:hover,
+body.dark-mode .verse-card:hover,
+[data-theme="dark"] .feature-box:hover,
+[data-theme="night"] .feature-box:hover,
+body.dark-mode .feature-box:hover,
+[data-theme="dark"] .program-card:hover,
+[data-theme="night"] .program-card:hover,
+body.dark-mode .program-card:hover,
+[data-theme="dark"] .method-card:hover,
+[data-theme="night"] .method-card:hover,
+body.dark-mode .method-card:hover,
+[data-theme="dark"] .need-item:hover,
+[data-theme="night"] .need-item:hover,
+body.dark-mode .need-item:hover {
+  transform: translateY(-5px) !important;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.75), 0 0 18px rgba(212, 175, 55, 0.2) !important;
+  border-color: var(--gold-light, #fae084) !important;
+}
+
+/* 3. Leadership Member Cards Polish */
+.member-card {
+  display: flex !important;
+  align-items: center !important;
+  gap: 24px !important;
+  padding: 22px 24px !important;
+  margin-bottom: 24px !important;
+}
+
+.member-card img {
+  width: 120px !important;
+  height: 120px !important;
+  border-radius: 50% !important;
+  object-fit: cover !important;
+  border: 3px solid var(--gold-primary, #d4af37) !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15) !important;
+  flex-shrink: 0 !important;
+  transition: transform 0.3s ease !important;
+}
+
+.member-card:hover img {
+  transform: scale(1.05) !important;
+}
+
+.member-info h3 {
+  font-family: var(--font-heading, 'Cinzel', serif) !important;
+  font-size: 1.35rem !important;
+  color: var(--secondary, #0f3d2e) !important;
+  margin-bottom: 6px !important;
+  font-weight: 700 !important;
+}
+
+[data-theme="dark"] .member-info h3,
+[data-theme="night"] .member-info h3,
+body.dark-mode .member-info h3 {
+  color: var(--gold-primary, #d4af37) !important;
+}
+
+.member-info p {
+  font-size: 1rem !important;
+  color: var(--primary, #1b5e20) !important;
+  font-weight: 600 !important;
+}
+
+[data-theme="dark"] .member-info p,
+[data-theme="night"] .member-info p,
+body.dark-mode .member-info p {
+  color: var(--gold-light, #fae084) !important;
+}
+
+/* 4. Section Titles & Typography */
+.frame-card h2,
+.frame-card h3 {
+  font-family: var(--font-heading, 'Cinzel', serif) !important;
+  font-size: 1.6rem !important;
+  color: var(--secondary, #0f3d2e) !important;
+  margin-bottom: 14px !important;
+}
+
+[data-theme="dark"] .frame-card h2,
+[data-theme="night"] .frame-card h2,
+body.dark-mode .frame-card h2,
+[data-theme="dark"] .frame-card h3,
+[data-theme="night"] .frame-card h3,
+body.dark-mode .frame-card h3 {
+  color: var(--gold-primary, #d4af37) !important;
+}
+
+.frame-card p {
+  font-size: 1.05rem !important;
+  line-height: 1.75 !important;
+  color: var(--text-primary, #1e1610) !important;
+}
+
+[data-theme="dark"] .frame-card p,
+[data-theme="night"] .frame-card p,
+body.dark-mode .frame-card p {
+  color: #ebd9c5 !important;
+}
+
+[data-theme="dark"] .section-title,
+[data-theme="night"] .section-title,
+body.dark-mode .section-title {
+  color: var(--gold-primary, #d4af37) !important;
+}
+
+/* 5. Department Hero Headers */
+.dept-header {
+  background: linear-gradient(135deg, rgba(15, 61, 46, 0.9), rgba(47, 143, 61, 0.85)) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  padding: 85px 20px 65px !important;
+  text-align: center !important;
+  color: #ffffff !important;
+  margin-top: 80px !important;
+  border-bottom: 2px solid var(--gold-primary, #d4af37) !important;
+  box-shadow: 0 4px 20px rgba(15, 61, 46, 0.25) !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+[data-theme="dark"] .dept-header,
+[data-theme="night"] .dept-header,
+body.dark-mode .dept-header {
+  background: linear-gradient(135deg, rgba(20, 12, 7, 0.94), rgba(45, 30, 16, 0.9)) !important;
+  border-bottom: 2px solid var(--gold-primary, #d4af37) !important;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.6) !important;
+}
+
+[data-theme="dark"] .dept-header h1,
+[data-theme="night"] .dept-header h1,
+body.dark-mode .dept-header h1 {
+  color: var(--gold-light, #fae084) !important;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.8), 0 0 16px rgba(212, 175, 55, 0.35) !important;
+}
+
+[data-theme="dark"] .dept-header p,
+[data-theme="night"] .dept-header p,
+body.dark-mode .dept-header p {
+  color: #ebd9c5 !important;
+}
+
+/* 6. Sector-Specific Component Refinements (Dark Mode & Contrast) */
+/* Qirat Schedule & Audio */
+[data-theme="dark"] .schedule-slot,
+[data-theme="night"] .schedule-slot,
+body.dark-mode .schedule-slot {
+  border-right-color: rgba(212, 175, 55, 0.15) !important;
+  border-bottom-color: rgba(212, 175, 55, 0.15) !important;
+}
+
+[data-theme="dark"] .schedule-slot:hover,
+[data-theme="night"] .schedule-slot:hover,
+body.dark-mode .schedule-slot:hover {
+  background: rgba(212, 175, 55, 0.08) !important;
+}
+
+[data-theme="dark"] .schedule-time,
+[data-theme="night"] .schedule-time,
+body.dark-mode .schedule-time {
+  color: var(--gold-primary, #d4af37) !important;
+  border-bottom-color: rgba(212, 175, 55, 0.2) !important;
+}
+
+[data-theme="dark"] .program-title,
+[data-theme="night"] .program-title,
+body.dark-mode .program-title {
+  color: #fae084 !important;
+}
+
+[data-theme="dark"] .program-desc,
+[data-theme="night"] .program-desc,
+body.dark-mode .program-desc {
+  color: #ebd9c5 !important;
+}
+
+[data-theme="dark"] .audio-item,
+[data-theme="night"] .audio-item,
+body.dark-mode .audio-item {
+  background: rgba(36, 22, 13, 0.7) !important;
+  border: 1px solid rgba(212, 175, 55, 0.15) !important;
+  color: #ebd9c5 !important;
+}
+
+[data-theme="dark"] .audio-item:hover,
+[data-theme="night"] .audio-item:hover,
+body.dark-mode .audio-item:hover {
+  background: rgba(212, 175, 55, 0.15) !important;
+}
+
+[data-theme="dark"] .detail-label,
+[data-theme="night"] .detail-label,
+body.dark-mode .detail-label {
+  color: #cfbda8 !important;
+}
+
+/* Dawah Messages */
+[data-theme="dark"] .message-card h3,
+[data-theme="night"] .message-card h3,
+body.dark-mode .message-card h3 {
+  color: var(--gold-primary, #d4af37) !important;
+}
+
+/* Ruqiya Verses & Players */
+[data-theme="dark"] .verse-card h3,
+[data-theme="night"] .verse-card h3,
+body.dark-mode .verse-card h3 {
+  color: var(--gold-primary, #d4af37) !important;
+}
+
+[data-theme="dark"] .arabic-text,
+[data-theme="night"] .arabic-text,
+body.dark-mode .arabic-text {
+  color: var(--gold-light, #fae084) !important;
+}
+
+[data-theme="dark"] .translation-text,
+[data-theme="night"] .translation-text,
+body.dark-mode .translation-text {
+  color: #ebd9c5 !important;
+}
+
+[data-theme="dark"] .feature-box h4,
+[data-theme="night"] .feature-box h4,
+body.dark-mode .feature-box h4 {
+  color: var(--gold-primary, #d4af37) !important;
+}
+
+/* Charity Programs & Needs */
+[data-theme="dark"] .program-card h3,
+[data-theme="night"] .program-card h3,
+body.dark-mode .program-card h3 {
+  color: var(--gold-primary, #d4af37) !important;
+}
+
+[data-theme="dark"] .method-card h3,
+[data-theme="night"] .method-card h3,
+body.dark-mode .method-card h3 {
+  color: var(--gold-primary, #d4af37) !important;
+}
+
+[data-theme="dark"] .need-item h4,
+[data-theme="night"] .need-item h4,
+body.dark-mode .need-item h4 {
+  color: var(--gold-primary, #d4af37) !important;
+}
+
+/* Responsive Stacking & Mobile Consistency */
+@media (max-width: 768px) {
+  .member-card {
+    flex-direction: column !important;
+    text-align: center !important;
+  }
+
+  .member-card img {
+    margin: 0 auto 12px !important;
+  }
+
+  .frame-card {
+    padding: 24px 20px !important;
+  }
 }
