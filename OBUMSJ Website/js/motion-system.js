@@ -17,7 +17,7 @@
   function initScrollReveal() {
     if (isReducedMotion()) {
       // For reduced motion, ensure all elements are immediately visible
-      document.querySelectorAll('.reveal-on-scroll, .reveal-up, .reveal-description').forEach(function (el) {
+      document.querySelectorAll('.reveal-on-scroll, .reveal-up, .reveal-description, .reveal-horizontal, .reveal-image-up').forEach(function (el) {
         el.classList.add('is-revealed');
       });
       return;
@@ -27,13 +27,14 @@
     document.documentElement.classList.add('js-reveal-ready');
 
     if (!('IntersectionObserver' in window)) {
-      document.querySelectorAll('.reveal-on-scroll, .reveal-up, .reveal-description').forEach(function (el) {
+      document.querySelectorAll('.reveal-on-scroll, .reveal-up, .reveal-description, .reveal-horizontal, .reveal-image-up').forEach(function (el) {
         el.classList.add('is-revealed');
       });
       return;
     }
 
     var revealSelectors = [
+      '.reveal-horizontal',
       '.reveal-on-scroll',
       '.reveal-up',
       '.reveal-description',
@@ -64,12 +65,17 @@
         }
       });
     }, {
-      threshold: 0.12,
-      rootMargin: '0px 0px -30px 0px'
+      threshold: 0.08,
+      rootMargin: '0px 0px -20px 0px'
     });
 
     elements.forEach(function (el) {
-      if (!el.classList.contains('reveal-on-scroll') && !el.classList.contains('reveal-up') && !el.classList.contains('reveal-description')) {
+      // Do not add reveal-on-scroll if element is already configured for reveal-horizontal or other specific animation
+      if (!el.classList.contains('reveal-on-scroll') &&
+          !el.classList.contains('reveal-up') &&
+          !el.classList.contains('reveal-description') &&
+          !el.classList.contains('reveal-horizontal') &&
+          !el.classList.contains('reveal-image-up')) {
         el.classList.add('reveal-on-scroll');
       }
       observer.observe(el);

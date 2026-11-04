@@ -165,6 +165,24 @@ service cloud.firestore {
       allow write: if isAdmin();
     }
 
+    // ============================================
+    // CONTACT MESSAGES (Public Inquiries)
+    // ============================================
+    match /contact_messages/{messageId} {
+      // Anyone (including public visitors) can submit an inquiry with strict field validation
+      allow create: if request.resource.data.keys().hasAll(['name', 'email', 'subject', 'message']) &&
+                       request.resource.data.keys().hasOnly(['name', 'email', 'subject', 'message', 'status', 'read', 'createdAt']) &&
+                       request.resource.data.name is string && request.resource.data.name.size() >= 2 && request.resource.data.name.size() <= 200 &&
+                       request.resource.data.email is string && request.resource.data.email.size() >= 5 && request.resource.data.email.size() <= 150 &&
+                       request.resource.data.subject is string && request.resource.data.subject.size() >= 3 && request.resource.data.subject.size() <= 300 &&
+                       request.resource.data.message is string && request.resource.data.message.size() >= 10 && request.resource.data.message.size() <= 5000 &&
+                       request.resource.data.status == 'unread' &&
+                       request.resource.data.read == false;
+
+      // Strictly restrict viewing, updating, and deleting to verified Administrators
+      allow read, update, delete: if isAdmin();
+    }
+
     // Default catch-all denies anything unlisted
     match /{document=**} {
       allow read, write: if false;

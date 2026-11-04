@@ -733,7 +733,7 @@ button:disabled,
   background: var(--bg-card) !important;
   border: 1px solid var(--border-color) !important;
   box-shadow: var(--shadow-md) !important;
-  transition: transform 0.3s var(--ease-out-smooth), box-shadow 0.3s var(--ease-out-smooth), border-color 0.3s ease !important;
+  transition: transform 0.3s var(--ease-out-smooth), box-shadow 0.3s var(--ease-out-smooth), border-color 0.3s ease;
 }
 
 .card-animated-border::before {
@@ -761,9 +761,7 @@ button:disabled,
   content: "" !important;
   position: absolute !important;
   inset: 1.5px !important;
-  background: rgba(255, 255, 255, 0.76) !important;
-  backdrop-filter: blur(8px) !important;
-  -webkit-backdrop-filter: blur(8px) !important;
+  background: var(--bg-card, #ffffff) !important;
   border-radius: calc(var(--radius-lg, 16px) - 1.5px) !important;
   z-index: 1 !important;
   pointer-events: none !important;
@@ -773,7 +771,7 @@ button:disabled,
 [data-theme="dark"] .card-animated-border::after,
 [data-theme="night"] .card-animated-border::after,
 body.dark-mode .card-animated-border::after {
-  background: rgba(28, 18, 10, 0.80) !important;
+  background: #1c120a !important;
 }
 
 .card-animated-border > * {
@@ -1147,6 +1145,7 @@ body.dark-mode .lang-menu {
 .timeline-item,
 .contact-form,
 .hadith-card,
+.hadith-section,
 .bank-card,
 .exam-card,
 .library-card,
@@ -1199,6 +1198,7 @@ body.dark-mode .lang-menu {
 [data-theme="dark"] .timeline-item,
 [data-theme="dark"] .contact-form,
 [data-theme="dark"] .hadith-card,
+[data-theme="dark"] .hadith-section,
 [data-theme="dark"] .bank-card,
 [data-theme="dark"] .exam-card,
 [data-theme="dark"] .library-card,
@@ -1222,6 +1222,7 @@ body.dark-mode .stat-box,
 body.dark-mode .timeline-item,
 body.dark-mode .contact-form,
 body.dark-mode .hadith-card,
+body.dark-mode .hadith-section,
 body.dark-mode .bank-card,
 body.dark-mode .exam-card,
 body.dark-mode .library-card,
@@ -1239,17 +1240,36 @@ body.dark-mode .resource-card {
   border-left: 6px solid var(--gold-primary) !important;
 }
 
-.hadith-card {
+.hadith-card,
+.hadith-section {
   border-left: 5px solid var(--primary) !important;
 }
 
+[data-theme="dark"] .hadith-card,
+[data-theme="night"] .hadith-card,
+body.dark-mode .hadith-card,
+[data-theme="dark"] .hadith-section,
+[data-theme="night"] .hadith-section,
+body.dark-mode .hadith-section {
+  background: #1c120a !important;
+  border-left: 5px solid var(--gold-primary, #d4af37) !important;
+}
+
 [data-theme="dark"] .hadith-arabic,
-body.dark-mode .hadith-arabic {
+[data-theme="night"] .hadith-arabic,
+body.dark-mode .hadith-arabic,
+[data-theme="dark"] .hadith-section .hadith-arabic,
+[data-theme="night"] .hadith-section .hadith-arabic,
+body.dark-mode .hadith-section .hadith-arabic {
   color: var(--gold-light) !important;
 }
 
 [data-theme="dark"] .hadith-english,
-body.dark-mode .hadith-english {
+[data-theme="night"] .hadith-english,
+body.dark-mode .hadith-english,
+[data-theme="dark"] .hadith-section .hadith-english,
+[data-theme="night"] .hadith-section .hadith-english,
+body.dark-mode .hadith-section .hadith-english {
   color: #ebd9c5 !important;
 }
 
@@ -2169,7 +2189,6 @@ body.dark-mode .lang-btn {
     margin-top: 12px;
     text-align: center;
   }
-}
 
 /* Floating Social Media Sidebar */
 .social-sidebar {
@@ -2449,40 +2468,82 @@ html.js-reveal-ready .reveal-description:not(.is-revealed) {
   transition-delay: 120ms; /* Subtle staggered follow-through */
 }
 
-/* Right-to-Left Text Entrance Animation (~5s Duration, Requirement 5) */
+/* Right-to-Left Entrance Animation (~5s Duration, Smooth Transition) */
 .reveal-horizontal {
   opacity: 1;
   transform: none;
+  pointer-events: auto;
 }
 
 html.js-reveal-ready .reveal-horizontal:not(.is-revealed) {
-  opacity: 0;
-  /* Begins subtly to the right (+32px), moves right-to-left into position */
-  transform: translateX(32px);
-  transition: opacity 4.8s cubic-bezier(0.16, 1, 0.3, 1), transform 4.8s cubic-bezier(0.16, 1, 0.3, 1);
+  /* Immediately visible & readable at 0.5 opacity, smoothly glides into place */
+  opacity: 0.5;
+  transform: translateX(28px);
+  transition: opacity 4.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 4.8s cubic-bezier(0.16, 1, 0.3, 1) !important;
   will-change: opacity, transform;
+  pointer-events: auto;
+}
+
+html.js-reveal-ready .reveal-horizontal.is-revealed {
+  opacity: 1 !important;
+  transform: translate(0, 0) !important;
+  transition: opacity 4.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 4.8s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  pointer-events: auto;
+}
+
+html.js-reveal-ready .reveal-horizontal.is-revealed:hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+/* Mobile Viewport Adaptation: Gentler offset prevents any horizontal edge clipping */
+@media (max-width: 768px) {
+  html.js-reveal-ready .reveal-horizontal:not(.is-revealed) {
+    transform: translateX(16px);
+  }
 }
 
 /* RTL Writing Direction Adaptation for Arabic */
-[dir="rtl"] html.js-reveal-ready .reveal-horizontal:not(.is-revealed),
-html.js-reveal-ready [dir="rtl"] .reveal-horizontal:not(.is-revealed),
-body.rtl html.js-reveal-ready .reveal-horizontal:not(.is-revealed) {
-  /* In RTL, starts slightly to the left (-32px), moving into place naturally */
-  transform: translateX(-32px);
+html[dir="rtl"].js-reveal-ready .reveal-horizontal:not(.is-revealed),
+html.js-reveal-ready[dir="rtl"] .reveal-horizontal:not(.is-revealed),
+html.js-reveal-ready body.rtl .reveal-horizontal:not(.is-revealed),
+html.js-reveal-ready [dir="rtl"] .reveal-horizontal:not(.is-revealed) {
+  /* In RTL, starts smoothly from the leading left side, gliding toward the right */
+  transform: translateX(-28px) !important;
 }
 
-/* Restrained Stagger Delays for Multiple Text Cards / Groups */
+@media (max-width: 768px) {
+  html[dir="rtl"].js-reveal-ready .reveal-horizontal:not(.is-revealed),
+  html.js-reveal-ready[dir="rtl"] .reveal-horizontal:not(.is-revealed),
+  html.js-reveal-ready body.rtl .reveal-horizontal:not(.is-revealed),
+  html.js-reveal-ready [dir="rtl"] .reveal-horizontal:not(.is-revealed) {
+    transform: translateX(-16px) !important;
+  }
+}
+
+/* Stagger Delays for Multiple Text Cards / Leadership Groups */
 html.js-reveal-ready .reveal-horizontal:nth-child(2).is-revealed,
 html.js-reveal-ready .reveal-horizontal.stagger-1.is-revealed {
-  transition-delay: 140ms;
+  transition-delay: 120ms;
 }
 html.js-reveal-ready .reveal-horizontal:nth-child(3).is-revealed,
 html.js-reveal-ready .reveal-horizontal.stagger-2.is-revealed {
-  transition-delay: 280ms;
+  transition-delay: 240ms;
 }
 html.js-reveal-ready .reveal-horizontal:nth-child(4).is-revealed,
 html.js-reveal-ready .reveal-horizontal.stagger-3.is-revealed {
-  transition-delay: 420ms;
+  transition-delay: 360ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-horizontal,
+  html.js-reveal-ready .reveal-horizontal:not(.is-revealed),
+  html.js-reveal-ready .reveal-horizontal.is-revealed {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
 }
 
 /* Image Upward Fade Entrance (Requirement 8) */
@@ -3218,20 +3279,18 @@ html[dir="rtl"] .obumsj-update-toast {
    Consistent Glass Cards, Corner Accents & Motion Styling
    ============================================================ */
 
-/* 1. Translucent Section Cards / Large Containers */
+/* 1. Refined Section Cards / Large Containers */
 .frame-card,
 .schedule-container,
 .cta-section {
-  background: rgba(255, 255, 255, 0.74) !important;
-  backdrop-filter: blur(10px) !important;
-  -webkit-backdrop-filter: blur(10px) !important;
+  background: var(--bg-card, #ffffff) !important;
   border: 1px solid rgba(160, 113, 45, 0.22) !important;
   border-left: 6px solid var(--gold-primary, #d4af37) !important;
   border-radius: var(--radius-lg, 18px) !important;
   box-shadow: 0 6px 20px rgba(18, 38, 63, 0.08) !important;
   color: var(--text-primary, #1e1610) !important;
   position: relative !important;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease !important;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
 }
 
 [data-theme="dark"] .frame-card,
@@ -3243,9 +3302,7 @@ body.dark-mode .schedule-container,
 [data-theme="dark"] .cta-section,
 [data-theme="night"] .cta-section,
 body.dark-mode .cta-section {
-  background: rgba(28, 18, 10, 0.78) !important;
-  backdrop-filter: blur(10px) !important;
-  -webkit-backdrop-filter: blur(10px) !important;
+  background: #1c120a !important;
   border: 1px solid rgba(212, 175, 55, 0.28) !important;
   border-left: 6px solid var(--gold-primary, #d4af37) !important;
   border-radius: var(--radius-lg, 18px) !important;
@@ -3253,7 +3310,7 @@ body.dark-mode .cta-section {
   color: #ebd9c5 !important;
 }
 
-/* 2. Translucent Inner Cards & Grids */
+/* 2. Refined Inner Cards & Grids */
 .member-card,
 .book-card,
 .dawah-card,
@@ -3267,14 +3324,33 @@ body.dark-mode .cta-section {
 .program-card,
 .method-card,
 .need-item {
-  background: rgba(255, 255, 255, 0.82) !important;
-  backdrop-filter: blur(6px) !important;
-  -webkit-backdrop-filter: blur(6px) !important;
+  background: var(--bg-card, #ffffff) !important;
   border: 1px solid rgba(160, 113, 45, 0.18) !important;
   border-radius: var(--radius-md, 14px) !important;
   box-shadow: 0 2px 10px rgba(18, 38, 63, 0.06) !important;
   color: var(--text-primary, #1e1610) !important;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease !important;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Nested Inner Cards within Frame Containers: Clean subtle contrast without stacked blur */
+.frame-card .member-card,
+.frame-card .feature-box,
+.frame-card .program-card,
+.frame-card .method-card,
+.frame-card .need-item,
+.frame-card .stat-card,
+.frame-card .stat-item,
+.frame-card .service-box,
+.frame-card .book-card,
+.frame-card .dawah-card,
+.frame-card .message-card {
+  background: var(--bg-card-subtle, #fcfaf6) !important;
+  border: 1px solid rgba(160, 113, 45, 0.16) !important;
+  box-shadow: 0 2px 8px rgba(18, 38, 63, 0.04) !important;
+}
+
+.frame-card .card-animated-border::after {
+  background: var(--bg-card-subtle, #fcfaf6) !important;
 }
 
 .member-card:hover,
@@ -3334,12 +3410,55 @@ body.dark-mode .method-card,
 [data-theme="dark"] .need-item,
 [data-theme="night"] .need-item,
 body.dark-mode .need-item {
-  background: rgba(36, 22, 13, 0.82) !important;
-  backdrop-filter: blur(6px) !important;
-  -webkit-backdrop-filter: blur(6px) !important;
+  background: #1c120a !important;
   border: 1px solid rgba(212, 175, 55, 0.22) !important;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5) !important;
   color: #ebd9c5 !important;
+}
+
+[data-theme="dark"] .frame-card .member-card,
+[data-theme="night"] .frame-card .member-card,
+body.dark-mode .frame-card .member-card,
+[data-theme="dark"] .frame-card .feature-box,
+[data-theme="night"] .frame-card .feature-box,
+body.dark-mode .frame-card .feature-box,
+[data-theme="dark"] .frame-card .program-card,
+[data-theme="night"] .frame-card .program-card,
+body.dark-mode .frame-card .program-card,
+[data-theme="dark"] .frame-card .method-card,
+[data-theme="night"] .frame-card .method-card,
+body.dark-mode .frame-card .method-card,
+[data-theme="dark"] .frame-card .need-item,
+[data-theme="night"] .frame-card .need-item,
+body.dark-mode .frame-card .need-item,
+[data-theme="dark"] .frame-card .stat-card,
+[data-theme="night"] .frame-card .stat-card,
+body.dark-mode .frame-card .stat-card,
+[data-theme="dark"] .frame-card .stat-item,
+[data-theme="night"] .frame-card .stat-item,
+body.dark-mode .frame-card .stat-item,
+[data-theme="dark"] .frame-card .service-box,
+[data-theme="night"] .frame-card .service-box,
+body.dark-mode .frame-card .service-box,
+[data-theme="dark"] .frame-card .book-card,
+[data-theme="night"] .frame-card .book-card,
+body.dark-mode .frame-card .book-card,
+[data-theme="dark"] .frame-card .dawah-card,
+[data-theme="night"] .frame-card .dawah-card,
+body.dark-mode .frame-card .dawah-card,
+[data-theme="dark"] .frame-card .message-card,
+[data-theme="night"] .frame-card .message-card,
+body.dark-mode .frame-card .message-card {
+  background: #24160d !important;
+  border: 1px solid rgba(212, 175, 55, 0.2) !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4) !important;
+  color: #ebd9c5 !important;
+}
+
+[data-theme="dark"] .frame-card .card-animated-border::after,
+[data-theme="night"] .frame-card .card-animated-border::after,
+body.dark-mode .frame-card .card-animated-border::after {
+  background: #24160d !important;
 }
 
 [data-theme="dark"] .member-card:hover,

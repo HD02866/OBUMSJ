@@ -1715,6 +1715,12 @@ body.dark-mode .quick-actions .action-btn.gold {
                     <i class="fas fa-history"></i> Audit Logs
                 </a>
 
+                <!-- Contact Inquiries (Admin Only) -->
+                <a href="#inquiries" class="menu-item admin-only" data-tab="inquiries">
+                    <i class="fas fa-envelope-open-text"></i> Contact Inquiries
+                    <span id="sidebarInquiriesBadge" class="menu-badge" style="background:#e11d48; color:#fff; display:none;">0</span>
+                </a>
+
                 <!-- Reports & Analytics (Admin & Leadership) -->
                 <a href="#analytics" class="menu-item admin-only main-amir-only" data-tab="analytics" data-perm="analytics.view">
                     <i class="fas fa-chart-pie"></i> Reports & Analytics
@@ -2770,6 +2776,70 @@ body.dark-mode .quick-actions .action-btn.gold {
                 </div>
             </div>
 
+
+            <!-- TAB: CONTACT INQUIRIES (Admin Only) -->
+            <div class="tab-content admin-only" id="inquiriesTab">
+                <div class="dashboard-section">
+                    <h2 class="section-title"><i class="fas fa-envelope-open-text"></i> Contact Messages & Inquiries</h2>
+
+                    <!-- Inquiries Quick Stats Cards -->
+                    <div class="stats-grid" style="margin-bottom:24px;">
+                        <div class="stat-card gold">
+                            <div class="stat-icon" style="background:rgba(212,175,55,0.12); color:var(--gold);"><i class="fas fa-inbox"></i></div>
+                            <div class="stat-value" id="inquiriesTotalCount">0</div>
+                            <div class="stat-label">Total Messages</div>
+                        </div>
+                        <div class="stat-card" style="border-left-color:#e11d48;">
+                            <div class="stat-icon" style="background:rgba(225,29,72,0.12); color:#e11d48;"><i class="fas fa-envelope"></i></div>
+                            <div class="stat-value" id="inquiriesUnreadCount" style="color:#e11d48;">0</div>
+                            <div class="stat-label">Unread Inquiries</div>
+                        </div>
+                        <div class="stat-card secondary">
+                            <div class="stat-icon" style="background:rgba(46,125,50,0.12); color:var(--secondary);"><i class="fas fa-envelope-open"></i></div>
+                            <div class="stat-value" id="inquiriesReadCount" style="color:var(--secondary);">0</div>
+                            <div class="stat-label">Handled / Read</div>
+                        </div>
+                    </div>
+
+                    <!-- Filter & Action Bar -->
+                    <div style="display:flex; flex-wrap:wrap; gap:12px; justify-content:space-between; align-items:center; margin-bottom:20px;">
+                        <div style="display:flex; flex-wrap:wrap; gap:10px; flex:1; min-width:280px;">
+                            <div class="search-box" style="flex:1; min-width:200px; max-width:360px;">
+                                <i class="fas fa-search"></i>
+                                <input type="text" id="inquirySearchInput" placeholder="Search by name, email, or subject..." style="width:100%; padding:10px 14px 10px 36px; border:1px solid #cbd5e1; border-radius:8px; font-size:0.9rem;">
+                            </div>
+                            <select id="inquiryStatusFilter" style="padding:10px 14px; border:1px solid #cbd5e1; border-radius:8px; font-size:0.9rem; background:#fff;">
+                                <option value="all">All Inquiries</option>
+                                <option value="unread">Unread Only</option>
+                                <option value="read">Read Only</option>
+                            </select>
+                        </div>
+                        <div style="display:flex; gap:10px;">
+                            <button type="button" class="btn" id="exportInquiriesBtn" style="padding:10px 16px; font-size:0.88rem; background:var(--primary); color:#fff; border-radius:8px; display:flex; align-items:center; gap:8px;">
+                                <i class="fas fa-file-csv"></i> Export CSV
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Inquiries Data Table -->
+                    <div class="dashboard-card-panel" style="overflow-x:auto;">
+                        <table class="user-table">
+                            <thead>
+                                <tr>
+                                    <th style="width:110px;">Status</th>
+                                    <th style="width:170px;">Received At</th>
+                                    <th>Sender Details</th>
+                                    <th>Subject & Message</th>
+                                    <th style="min-width:220px; text-align:right;">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="inquiriesTableBody">
+                                <tr><td colspan="5" class="table-state-cell"><div class="table-loading-state"><i class="fas fa-spinner fa-spin"></i><span>Loading inquiries from Firestore...</span></div></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
             <!-- TAB 10: WEBSITE SETTINGS -->
             <div class="tab-content admin-only" id="settingsTab" data-perm="settings.manage">
                 <div class="dashboard-section">
@@ -3208,6 +3278,50 @@ body.dark-mode .quick-actions .action-btn.gold {
         </div>
     </div>
 
+    <!-- Modal: Contact Inquiry Detail Modal -->
+    <div class="dashboard-modal" id="inquiryDetailModal" role="dialog" aria-modal="true" aria-labelledby="inquiryModalSubject">
+        <div class="modal-dialog" style="max-width:680px;">
+            <div class="modal-header">
+                <h3 id="inquiryModalSubject"><i class="fas fa-envelope-open-text" style="color:var(--gold);"></i> Message Inquiry</h3>
+                <button type="button" class="modal-close-btn" id="inquiryModalCloseBtn" aria-label="Close message dialog">&times;</button>
+            </div>
+            <div class="modal-body" style="padding:24px;">
+                <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:18px; padding-bottom:14px; border-bottom:1px solid #e2e8f0; flex-wrap:wrap; gap:10px;">
+                    <div>
+                        <div style="font-size:1.15rem; font-weight:700; color:var(--secondary); margin-bottom:4px;" id="inquiryModalSender">Sender Name</div>
+                        <div style="font-size:0.9rem; color:#64748b;">
+                            <a id="inquiryModalEmail" href="#" style="color:var(--primary); text-decoration:none; font-weight:500;">
+                                <i class="fas fa-envelope" style="margin-right:6px;"></i><span id="inquiryModalEmailText">email@example.com</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div style="text-align:right;">
+                        <span id="inquiryModalStatusBadge" class="badge-status">Unread</span>
+                        <div style="font-size:0.8rem; color:#94a3b8; margin-top:4px;" id="inquiryModalDate">Date</div>
+                    </div>
+                </div>
+
+                <div style="margin-bottom:16px;">
+                    <label style="font-size:0.82rem; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#64748b; display:block; margin-bottom:4px;">Subject</label>
+                    <div id="inquiryModalSubjectText" style="font-size:1.05rem; font-weight:600; color:var(--text-color, #1e293b);">Inquiry Subject</div>
+                </div>
+
+                <div>
+                    <label style="font-size:0.82rem; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#64748b; display:block; margin-bottom:8px;">Message Content</label>
+                    <div id="inquiryModalBody" style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:18px; font-size:0.95rem; line-height:1.65; white-space:pre-wrap; word-break:break-word; max-height:360px; overflow-y:auto; color:var(--text-color, #1e293b);"></div>
+                </div>
+            </div>
+            <div class="modal-footer" style="padding:16px 24px; border-top:1px solid #e2e8f0; display:flex; justify-content:space-between; align-items:center;">
+                <button type="button" class="btn" id="inquiryModalToggleStatusBtn" style="padding:9px 18px; font-size:0.88rem; border-radius:8px; font-weight:600;">
+                    Mark as Handled
+                </button>
+                <button type="button" class="btn" id="inquiryModalDismissBtn" style="padding:9px 20px; font-size:0.88rem; background:#64748b; color:#fff; border-radius:8px;">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
@@ -3269,6 +3383,7 @@ body.dark-mode .quick-actions .action-btn.gold {
         let allFirestoreQirat = [];
         let allFirestoreNotifs = [];
         let allFirestoreAuditLogs = [];
+        let allFirestoreInquiries = [];
         let systemRolePermissions = {};
 
         // User Directory Pagination & Filters
@@ -4022,6 +4137,9 @@ body.dark-mode .quick-actions .action-btn.gold {
                     setupQiratListener();
                     setupNotificationsListener();
                     setupAuditLogsListener();
+                    if (currentUser.role === 'admin') {
+                        setupInquiriesListener();
+                    }
 
                 } catch (err) {
                     console.error("Auth state synchronization error:", err);
@@ -5439,6 +5557,289 @@ body.dark-mode .quick-actions .action-btn.gold {
             URL.revokeObjectURL(url);
         }
 
+        // ================= PHASE 4: CONTACT INQUIRIES MANAGEMENT =================
+        let inquiriesUnsubscribe = null;
+        let inquiryFilterStatus = "all";
+        let inquirySearchQuery = "";
+        let activeModalInquiryId = null;
+
+        function setupInquiriesListener() {
+            if (!currentUser || currentUser.role !== "admin") return;
+
+            try {
+                if (inquiriesUnsubscribe) {
+                    inquiriesUnsubscribe();
+                    inquiriesUnsubscribe = null;
+                }
+
+                const q = query(collection(db, "contact_messages"), orderBy("createdAt", "desc"));
+                inquiriesUnsubscribe = onSnapshot(q, (snapshot) => {
+                    allFirestoreInquiries = [];
+                    snapshot.forEach((docSnap) => {
+                        allFirestoreInquiries.push({
+                            id: docSnap.id,
+                            ...docSnap.data()
+                        });
+                    });
+
+                    updateInquiriesCounters();
+                    renderInquiriesList();
+
+                    // If modal is open for an inquiry that updated, re-sync modal
+                    if (activeModalInquiryId) {
+                        const updated = allFirestoreInquiries.find(i => i.id === activeModalInquiryId);
+                        if (updated) syncInquiryModalData(updated);
+                    }
+                }, (error) => {
+                    console.warn("Inquiries snapshot error:", error);
+                    const tableBody = document.getElementById("inquiriesTableBody");
+                    if (tableBody) {
+                        tableBody.innerHTML = `<tr><td colspan="5" class="table-state-cell"><div class="table-empty-state"><i class="fas fa-exclamation-triangle" style="color:#ef4444;"></i><span>Unable to load inquiries: ${escapeHtml(error.message)}</span></div></td></tr>`;
+                    }
+                });
+            } catch (err) {
+                console.error("Error setting up inquiries listener:", err);
+            }
+        }
+
+        function updateInquiriesCounters() {
+            const total = allFirestoreInquiries.length;
+            const unread = allFirestoreInquiries.filter(i => !i.read && i.status !== "read").length;
+            const read = total - unread;
+
+            const totalEl = document.getElementById("inquiriesTotalCount");
+            if (totalEl) totalEl.textContent = total;
+
+            const unreadEl = document.getElementById("inquiriesUnreadCount");
+            if (unreadEl) unreadEl.textContent = unread;
+
+            const readEl = document.getElementById("inquiriesReadCount");
+            if (readEl) readEl.textContent = read;
+
+            const badge = document.getElementById("sidebarInquiriesBadge");
+            if (badge) {
+                if (unread > 0) {
+                    badge.textContent = unread;
+                    badge.style.display = "inline-block";
+                } else {
+                    badge.style.display = "none";
+                }
+            }
+        }
+
+        function renderInquiriesList() {
+            const tableBody = document.getElementById("inquiriesTableBody");
+            if (!tableBody) return;
+
+            const searchInput = document.getElementById("inquirySearchInput");
+            const queryText = (searchInput ? searchInput.value : inquirySearchQuery).toLowerCase().trim();
+
+            const statusSelect = document.getElementById("inquiryStatusFilter");
+            const filterVal = statusSelect ? statusSelect.value : inquiryFilterStatus;
+
+            let filtered = allFirestoreInquiries.filter(item => {
+                const isUnread = !item.read && item.status !== "read";
+                if (filterVal === "unread" && !isUnread) return false;
+                if (filterVal === "read" && isUnread) return false;
+
+                if (queryText) {
+                    const haystack = `${item.name || ""} ${item.email || ""} ${item.subject || ""} ${item.message || ""}`.toLowerCase();
+                    return haystack.includes(queryText);
+                }
+                return true;
+            });
+
+            if (filtered.length === 0) {
+                tableBody.innerHTML = `<tr><td colspan="5" class="table-state-cell"><div class="table-empty-state"><i class="fas fa-inbox"></i><span>No contact inquiries found matching your criteria.</span></div></td></tr>`;
+                return;
+            }
+
+            tableBody.innerHTML = filtered.map(item => {
+                const isUnread = !item.read && item.status !== "read";
+                const statusBadge = isUnread
+                    ? `<span class="badge-status" style="background:#ffe4e6; color:#e11d48; border:1px solid #fecdd3; font-weight:600;"><i class="fas fa-envelope"></i> Unread</span>`
+                    : `<span class="badge-status badge-status-active" style="background:#f1f5f9; color:#475569; border:1px solid #e2e8f0;"><i class="fas fa-check-circle"></i> Handled</span>`;
+
+                const dateStr = item.createdAt?.seconds
+                    ? new Date(item.createdAt.seconds * 1000).toLocaleString()
+                    : (item.createdAt?.toDate ? item.createdAt.toDate().toLocaleString() : "Recent");
+
+                const safeName = escapeHtml(item.name || "Anonymous");
+                const safeEmail = escapeHtml(item.email || "");
+                const safeSubject = escapeHtml(item.subject || "No Subject");
+
+                return `
+                    <tr style="${isUnread ? "background:rgba(225,29,72,0.03);" : ""}">
+                        <td>${statusBadge}</td>
+                        <td style="font-size:0.8rem; color:#64748b; white-space:nowrap;">${dateStr}</td>
+                        <td>
+                            <strong style="color:var(--text-primary, #1e293b); display:block;">${safeName}</strong>
+                            <a href="mailto:${safeEmail}" style="font-size:0.82rem; color:var(--primary); text-decoration:none;"><i class="fas fa-envelope" style="font-size:0.75rem;"></i> ${safeEmail}</a>
+                        </td>
+                        <td>
+                            <span style="font-weight:600; color:var(--secondary);">${safeSubject}</span>
+                            <div style="font-size:0.8rem; color:#64748b; max-width:280px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${escapeHtml(item.message || "")}</div>
+                        </td>
+                        <td style="text-align:right; white-space:nowrap;">
+                            <div style="display:inline-flex; gap:6px;">
+                                <button type="button" class="action-btn outline btn-sm" onclick="window.openInquiryModal('${item.id}')" title="Read message" style="padding:5px 10px; font-size:0.8rem;">
+                                    <i class="fas fa-eye"></i> View
+                                </button>
+                                <button type="button" class="action-btn secondary btn-sm" onclick="window.toggleInquiryStatus('${item.id}', '${item.status || (item.read ? "read" : "unread")}')" title="${isUnread ? "Mark as Handled" : "Mark as Unread"}" style="padding:5px 10px; font-size:0.8rem;">
+                                    ${isUnread ? '<i class="fas fa-check"></i> Mark Read' : '<i class="fas fa-undo"></i> Mark Unread'}
+                                </button>
+                                <button type="button" class="action-btn btn-sm" style="background:#fee2e2; color:#b91c1c; border-color:#fca5a5; padding:5px 10px; font-size:0.8rem;" onclick="window.deleteInquiry('${item.id}')" title="Delete inquiry">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            }).join("");
+        }
+
+        function syncInquiryModalData(item) {
+            const isUnread = !item.read && item.status !== "read";
+            const modalSender = document.getElementById("inquiryModalSender");
+            if (modalSender) modalSender.textContent = item.name || "Anonymous";
+
+            const modalEmail = document.getElementById("inquiryModalEmail");
+            const modalEmailText = document.getElementById("inquiryModalEmailText");
+            if (modalEmail && modalEmailText) {
+                modalEmail.href = `mailto:${item.email || ""}`;
+                modalEmailText.textContent = item.email || "";
+            }
+
+            const modalDate = document.getElementById("inquiryModalDate");
+            if (modalDate) {
+                modalDate.textContent = item.createdAt?.seconds
+                    ? new Date(item.createdAt.seconds * 1000).toLocaleString()
+                    : "Recent";
+            }
+
+            const modalStatus = document.getElementById("inquiryModalStatusBadge");
+            if (modalStatus) {
+                modalStatus.className = isUnread ? "badge-status" : "badge-status badge-status-active";
+                modalStatus.style.background = isUnread ? "#ffe4e6" : "#f1f5f9";
+                modalStatus.style.color = isUnread ? "#e11d48" : "#475569";
+                modalStatus.style.border = isUnread ? "1px solid #fecdd3" : "1px solid #e2e8f0";
+                modalStatus.innerHTML = isUnread ? '<i class="fas fa-envelope"></i> Unread' : '<i class="fas fa-check-circle"></i> Handled';
+            }
+
+            const modalSubject = document.getElementById("inquiryModalSubjectText");
+            if (modalSubject) modalSubject.textContent = item.subject || "No Subject";
+
+            const modalBody = document.getElementById("inquiryModalBody");
+            if (modalBody) modalBody.textContent = item.message || "";
+
+            const toggleBtn = document.getElementById("inquiryModalToggleStatusBtn");
+            if (toggleBtn) {
+                toggleBtn.className = isUnread ? "btn action-btn secondary" : "btn action-btn outline";
+                toggleBtn.innerHTML = isUnread ? '<i class="fas fa-check"></i> Mark as Handled' : '<i class="fas fa-undo"></i> Mark as Unread';
+                toggleBtn.onclick = () => window.toggleInquiryStatus(item.id, item.status || (item.read ? "read" : "unread"));
+            }
+        }
+
+        window.openInquiryModal = function(id) {
+            const item = allFirestoreInquiries.find(i => i.id === id);
+            if (!item) return;
+
+            activeModalInquiryId = id;
+            syncInquiryModalData(item);
+
+            const modal = document.getElementById("inquiryDetailModal");
+            if (modal) modal.style.display = "flex";
+        };
+
+        window.closeInquiryModal = function() {
+            activeModalInquiryId = null;
+            const modal = document.getElementById("inquiryDetailModal");
+            if (modal) modal.style.display = "none";
+        };
+
+        window.toggleInquiryStatus = async function(id, currentStatus) {
+            if (!currentUser || currentUser.role !== "admin") {
+                alert("Unauthorized: Only administrators can update inquiry statuses.");
+                return;
+            }
+
+            const isCurrentlyUnread = currentStatus === "unread" || !currentStatus;
+            const newStatus = isCurrentlyUnread ? "read" : "unread";
+            const newRead = isCurrentlyUnread;
+
+            try {
+                await updateDoc(doc(db, "contact_messages", id), {
+                    status: newStatus,
+                    read: newRead,
+                    updatedAt: serverTimestamp(),
+                    updatedBy: currentUser?.fullName || "Admin"
+                });
+
+                await logAdminAction("CONTACT", "INQUIRY_STATUS_UPDATED", id, {
+                    newStatus: newStatus,
+                    previousStatus: currentStatus || "unread"
+                });
+            } catch (err) {
+                console.error("Error updating inquiry status:", err);
+                alert("Failed to update inquiry status: " + err.message);
+            }
+        };
+
+        window.deleteInquiry = async function(id) {
+            if (!currentUser || currentUser.role !== "admin") {
+                alert("Unauthorized: Only administrators can delete inquiries.");
+                return;
+            }
+
+            const item = allFirestoreInquiries.find(i => i.id === id);
+            const sender = item ? item.name : "this sender";
+            if (!confirm(`Are you sure you want to permanently delete the inquiry from "${sender}"? This action cannot be undone.`)) {
+                return;
+            }
+
+            try {
+                await deleteDoc(doc(db, "contact_messages", id));
+
+                if (activeModalInquiryId === id) {
+                    window.closeInquiryModal();
+                }
+
+                await logAdminAction("CONTACT", "INQUIRY_DELETED", id, {
+                    senderName: item?.name || "",
+                    subject: item?.subject || ""
+                });
+            } catch (err) {
+                console.error("Error deleting inquiry:", err);
+                alert("Failed to delete inquiry: " + err.message);
+            }
+        };
+
+        window.exportInquiriesCSV = function() {
+            if (allFirestoreInquiries.length === 0) {
+                alert("No inquiries data available to export.");
+                return;
+            }
+
+            const headers = ["Received At", "Status", "Sender Name", "Email", "Subject", "Message Content"];
+            const rows = allFirestoreInquiries.map(item => {
+                const dt = item.createdAt?.seconds
+                    ? new Date(item.createdAt.seconds * 1000).toISOString()
+                    : "";
+                const st = (item.status === "read" || item.read) ? "Read" : "Unread";
+                return [
+                    `"${dt}"`,
+                    `"${st}"`,
+                    `"${(item.name || "").replace(/"/g, '""')}"`,
+                    `"${(item.email || "").replace(/"/g, '""')}"`,
+                    `"${(item.subject || "").replace(/"/g, '""')}"`,
+                    `"${(item.message || "").replace(/"/g, '""')}"`
+                ];
+            });
+
+            const csvContent = [headers.join(","), ...rows.map(r => r.join(","))].join("\n");
+            downloadBlob(csvContent, "OBUMSJ_Contact_Inquiries.csv", "text/csv");
+        };
+
         // ================= TAB SWITCHING HELPER =================
         window.switchTabDirectly = function(tabName) {
             document.querySelectorAll('.menu-item').forEach(i => i.classList.remove('active'));
@@ -5526,6 +5927,38 @@ body.dark-mode .quick-actions .action-btn.gold {
                     if (notifTray) notifTray.style.display = 'none';
                     window.switchTabDirectly('notifications-center');
                 });
+            }
+
+            // Contact Inquiries Event Listeners
+            const inqSearch = document.getElementById("inquirySearchInput");
+            if (inqSearch) {
+                inqSearch.addEventListener("input", function() {
+                    inquirySearchQuery = this.value;
+                    renderInquiriesList();
+                });
+            }
+
+            const inqFilter = document.getElementById("inquiryStatusFilter");
+            if (inqFilter) {
+                inqFilter.addEventListener("change", function() {
+                    inquiryFilterStatus = this.value;
+                    renderInquiriesList();
+                });
+            }
+
+            const inqExportBtn = document.getElementById("exportInquiriesBtn");
+            if (inqExportBtn) {
+                inqExportBtn.addEventListener("click", window.exportInquiriesCSV);
+            }
+
+            const inqCloseBtn = document.getElementById("inquiryModalCloseBtn");
+            if (inqCloseBtn) {
+                inqCloseBtn.addEventListener("click", window.closeInquiryModal);
+            }
+
+            const inqDismissBtn = document.getElementById("inquiryModalDismissBtn");
+            if (inqDismissBtn) {
+                inqDismissBtn.addEventListener("click", window.closeInquiryModal);
             }
 
             // User Search & Filters

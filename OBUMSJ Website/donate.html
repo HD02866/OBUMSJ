@@ -42,6 +42,8 @@
             margin-bottom: 50px;
             text-align: center;
             border-left: 5px solid #2f8f3d;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+            transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
         }
 
         .hadith-arabic {
@@ -55,11 +57,34 @@
 
         .hadith-english {
             font-size: 1.2rem;
-            color: #2f8f3d;
+            color: #1b5e20;
             font-style: italic;
             max-width: 800px;
             margin: 0 auto;
             line-height: 1.6;
+        }
+
+        /* Night Mode Hadith Section Override */
+        [data-theme="dark"] .hadith-section,
+        [data-theme="night"] .hadith-section,
+        body.dark-mode .hadith-section {
+            background: #1c120a !important;
+            border: 1px solid rgba(212, 175, 55, 0.28) !important;
+            border-left: 5px solid var(--gold-primary, #d4af37) !important;
+            box-shadow: 0 10px 32px rgba(0, 0, 0, 0.6) !important;
+        }
+
+        [data-theme="dark"] .hadith-arabic,
+        [data-theme="night"] .hadith-arabic,
+        body.dark-mode .hadith-arabic {
+            color: var(--gold-light, #fae084) !important;
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+        }
+
+        [data-theme="dark"] .hadith-english,
+        [data-theme="night"] .hadith-english,
+        body.dark-mode .hadith-english {
+            color: #ebd9c5 !important;
         }
 
         /* Donation Methods Grid */
@@ -524,7 +549,7 @@
     <section class="donate-page-content">
         <div class="container">
             <!-- Hadith Section -->
-            <div class="hadith-section">
+            <div class="hadith-section hadith-card">
                 <div class="hadith-arabic">
                     ﴿مَّثَلُ الَّذِينَ يُنفِقُونَ أَمْوَالَهُمْ فِي سَبِيلِ اللَّهِ كَمَثَلِ حَبَّةٍ أَنبَتَتْ سَبْعَ سَنَابِلَ فِي كُلِّ سُنبُلَةٍ مِّائَةُ حَبَّةٍ ۗ وَاللَّهُ يُضَاعِفُ لِمَن يَشَاءُ ۗ وَاللَّهُ وَاسِعٌ عَلِيمٌ﴾
                 </div>
