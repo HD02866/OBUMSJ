@@ -853,6 +853,17 @@ body.dark-mode .download-btn:hover {
                     <p data-i18n="about_page.mission_text">To provide Islamic education, academic support, social services, and leadership training through organized programs and departments.</p>
                 </div>
             </div>
+            <!-- Objectives & Values (Dynamic CMS Target) -->
+            <div id="cmsObjectivesValuesGrid" class="vm-grid" style="margin-top: 24px; display: none;">
+                <div class="vm-box card-animated-border reveal-horizontal stagger-1" id="cmsObjectivesBox" style="display: none;">
+                    <h3><i class="fas fa-compass" aria-hidden="true"></i> <span id="cmsObjectivesTitle">Strategic Objectives</span></h3>
+                    <p id="cmsObjectivesText"></p>
+                </div>
+                <div class="vm-box card-animated-border reveal-horizontal stagger-2" id="cmsValuesBox" style="display: none;">
+                    <h3><i class="fas fa-heart" aria-hidden="true"></i> <span id="cmsValuesTitle">Core Values</span></h3>
+                    <p id="cmsValuesText"></p>
+                </div>
+            </div>
         </div>
 
         <!-- 3. Leadership Section -->
@@ -1132,5 +1143,6 @@ body.dark-mode .download-btn:hover {
 
     <script src="./js/language-system.js"></script>
     <script src="./Script.js"></script>
+    <script type="module" src="./js/about-content.js"></script>
 </body>
 </html>

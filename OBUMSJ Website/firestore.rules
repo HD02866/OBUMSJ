@@ -161,8 +161,52 @@ service cloud.firestore {
     // SETTINGS COLLECTION
     // ============================================
     match /settings/{settingId} {
-      allow read: if isAuthenticated();
+      // Public visitors can read intended public website content & general contact settings
+      // Authenticated members can only read role permission templates required for client UI operation
+      // Private administrative settings and configuration remain strictly restricted to Administrators
+      allow read: if settingId in ['general', 'homepage', 'about'] ||
+                     (settingId == 'permissions' && isAuthenticated()) ||
+                     isAdmin();
+      // Only verified administrators can create, update, or delete settings
       allow write: if isAdmin();
+    }
+
+    // ============================================
+    // LEADERS COLLECTION (Executive Leadership CMS)
+    // ============================================
+    match /leaders/{leaderId} {
+      // Public visitors and members can view only published leadership profiles
+      // Administrators can view all profiles including drafts
+      allow read: if (resource.data.published == true) || isAdmin();
+      // Only authorized administrators can create, update, or delete profiles
+      allow write: if isAdmin();
+    }
+
+    // ============================================
+    // SECTOR RESOURCES COLLECTION (Educational Resources CMS)
+    // ============================================
+    match /sector_resources/{resourceId} {
+      // Public visitors and members can view only explicitly published educational resources
+      // Administrators can view all resources including drafts
+      allow read: if (resource.data.published == true) || isAdmin();
+
+      // Only authorized administrators can create, update, or delete resource records
+      allow create, update: if isAdmin() &&
+        request.resource.data.sector in ['qirat', 'ruqiya', 'academy'] &&
+        request.resource.data.type in ['audio', 'document', 'book', 'video', 'other'] &&
+        request.resource.data.title is map &&
+        request.resource.data.description is map &&
+        request.resource.data.fileId is string && request.resource.data.fileId.size() > 0 &&
+        request.resource.data.fileName is string && request.resource.data.fileName.size() > 0 &&
+        (request.resource.data.fileSize is int || request.resource.data.fileSize is float) && request.resource.data.fileSize >= 0 &&
+        request.resource.data.order is int &&
+        request.resource.data.published is bool &&
+        (
+          (request.resource.data.published == true && request.resource.data.status == 'published') ||
+          (request.resource.data.published == false && request.resource.data.status == 'draft')
+        );
+
+      allow delete: if isAdmin();
     }
 
     // ============================================
