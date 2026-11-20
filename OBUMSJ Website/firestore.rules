@@ -41,6 +41,19 @@ service cloud.firestore {
       return hasRole(['admin', 'main_amir', 'blog_manager']);
     }
 
+    // Helper: Check if user has explicit granular permission for a sector
+    function hasSectorPermission(sectorSlug, requiredPerm) {
+      return isAuthenticated() && (
+        isLeadership() ||
+        (
+          userDocExists() &&
+          getUserData().get('role', '') in ['amir', 'vice_amir', 'writer', 'sector_member'] &&
+          sectorSlug in getUserData().get('sectorAccess', {}) &&
+          requiredPerm in getUserData().get('sectorAccess', {}).get(sectorSlug, {}).get('permissions', [])
+        )
+      );
+    }
+
     // ============================================
     // USERNAMES INDEX (for secure 1-to-1 username lookup)
     // ============================================
@@ -81,7 +94,7 @@ service cloud.firestore {
 
       // 4. Profile Update:
       // Users can update their own personal info (cannot change role, status, approval metadata, or permission overrides).
-      // Leadership can update all fields (including role promotion & approval).
+      // Leadership can update all fields (including role promotion & approval), but cannot modify their own permissions unless admin.
       allow update: if isAuthenticated() && (
         (
           request.auth.uid == userId &&
@@ -91,9 +104,12 @@ service cloud.firestore {
             'approvedAt',
             'approvedBy',
             'customPermissions',
-            'deniedPermissions'
+            'deniedPermissions',
+            'sectorAccess'
           ])
-        ) || isLeadership()
+        ) || (
+          isLeadership() && (request.auth.uid != userId || isAdmin())
+        )
       );
 
       // 5. Permanent Profile Deletion:
@@ -129,8 +145,32 @@ service cloud.firestore {
     // SECTORS COLLECTION (Content & Leadership)
     // ============================================
     match /sectors/{sectorId} {
-      allow read: if true;
-      allow create, update, delete: if isStaff();
+      // Public visitors and members can view active/published sectors; staff & leadership can view all
+      allow read: if resource.data.get('isActive', true) == true || isStaff();
+
+      // Sector document creation & deletion strictly restricted to Admin & Main Amir
+      allow create, delete: if isLeadership();
+
+      // Sector updates:
+      // - Admin and Main Amir have full mutation rights across all 10 sectors
+      // - Sector Amir, Vice Amir, and Writer must be explicitly granted permissions for this sector
+      // - Leadership appointments & replacements (leadership field) are STRICTLY restricted to Admin & Main Amir
+      // - Active/archive status (isActive field) requires 'sectors.content.publish'
+      // - Content and translation edits require 'sectors.content.edit' or 'sectors.translations.edit'
+      allow update: if isAuthenticated() && (
+        isLeadership() ||
+        (
+          (
+            hasSectorPermission(sectorId, 'sectors.content.edit') ||
+            hasSectorPermission(sectorId, 'sectors.translations.edit')
+          ) &&
+          !request.resource.data.diff(resource.data).affectedKeys().hasAny(['leadership']) &&
+          (
+            !request.resource.data.diff(resource.data).affectedKeys().hasAny(['isActive']) ||
+            hasSectorPermission(sectorId, 'sectors.content.publish')
+          )
+        )
+      );
     }
 
     // ============================================
@@ -190,23 +230,69 @@ service cloud.firestore {
       // Administrators can view all resources including drafts
       allow read: if (resource.data.published == true) || isAdmin();
 
-      // Only authorized administrators can create, update, or delete resource records
-      allow create, update: if isAdmin() &&
-        request.resource.data.sector in ['qirat', 'ruqiya', 'academy'] &&
-        request.resource.data.type in ['audio', 'document', 'book', 'video', 'other'] &&
-        request.resource.data.title is map &&
-        request.resource.data.description is map &&
-        request.resource.data.fileId is string && request.resource.data.fileId.size() > 0 &&
-        request.resource.data.fileName is string && request.resource.data.fileName.size() > 0 &&
-        (request.resource.data.fileSize is int || request.resource.data.fileSize is float) && request.resource.data.fileSize >= 0 &&
-        request.resource.data.order is int &&
-        request.resource.data.published is bool &&
-        (
-          (request.resource.data.published == true && request.resource.data.status == 'published') ||
-          (request.resource.data.published == false && request.resource.data.status == 'draft')
-        );
+      // Common schema validation for sector educational resource documents
+      function isValidSectorResource(data) {
+        return data.keys().hasAll([
+            'sector', 'type', 'title', 'description', 'fileId', 'fileName',
+            'mimeType', 'fileSize', 'order', 'status', 'published',
+            'createdAt', 'createdBy', 'updatedAt', 'updatedBy'
+          ]) &&
+          data.keys().hasOnly([
+            'sector', 'type', 'title', 'description', 'fileId', 'fileName',
+            'mimeType', 'fileSize', 'folderId', 'order', 'status', 'published',
+            'createdAt', 'createdBy', 'updatedAt', 'updatedBy'
+          ]) &&
+          data.sector in ['qirat', 'ruqiya', 'academy'] &&
+          data.type in ['audio', 'document', 'book', 'video', 'other'] &&
+          data.title is map &&
+          data.title.keys().hasOnly(['en', 'am', 'om', 'ar']) &&
+          (!('en' in data.title) || (data.title.en is string && data.title.en.size() <= 300)) &&
+          (!('am' in data.title) || (data.title.am is string && data.title.am.size() <= 300)) &&
+          (!('om' in data.title) || (data.title.om is string && data.title.om.size() <= 300)) &&
+          (!('ar' in data.title) || (data.title.ar is string && data.title.ar.size() <= 300)) &&
+          data.description is map &&
+          data.description.keys().hasOnly(['en', 'am', 'om', 'ar']) &&
+          (!('en' in data.description) || (data.description.en is string && data.description.en.size() <= 3000)) &&
+          (!('am' in data.description) || (data.description.am is string && data.description.am.size() <= 3000)) &&
+          (!('om' in data.description) || (data.description.om is string && data.description.om.size() <= 3000)) &&
+          (!('ar' in data.description) || (data.description.ar is string && data.description.ar.size() <= 3000)) &&
+          data.fileId is string && data.fileId.size() > 0 && data.fileId.size() <= 200 &&
+          data.fileName is string && data.fileName.size() > 0 && data.fileName.size() <= 300 &&
+          data.mimeType is string && data.mimeType.size() > 0 && data.mimeType.size() <= 150 &&
+          (data.fileSize is int || data.fileSize is float) && data.fileSize >= 0 &&
+          (!('folderId' in data) || (data.folderId is string && data.folderId.size() <= 200)) &&
+          data.order is int &&
+          data.published is bool &&
+          (
+            (data.published == true && data.status == 'published') ||
+            (data.published == false && data.status == 'draft')
+          ) &&
+          data.createdAt is timestamp &&
+          data.createdBy is string && data.createdBy.size() > 0 && data.createdBy.size() <= 100 &&
+          data.updatedAt is timestamp &&
+          data.updatedBy is string && data.updatedBy.size() > 0 && data.updatedBy.size() <= 100;
+      }
 
+      // Only authorized administrators can create new resources with valid schema
+      allow create: if isAdmin() &&
+        isValidSectorResource(request.resource.data);
+
+      // Only authorized administrators can update resources; createdAt and createdBy cannot be altered
+      allow update: if isAdmin() &&
+        isValidSectorResource(request.resource.data) &&
+        request.resource.data.createdAt == resource.data.createdAt &&
+        request.resource.data.createdBy == resource.data.createdBy;
+
+      // Only authorized administrators can delete resources
       allow delete: if isAdmin();
+    }
+
+    // ============================================
+    // SECTOR RESOURCE PERMISSIONS (Admin-Only Drive Permission Tracking)
+    // ============================================
+    match /sector_resource_permissions/{resourceId} {
+      // Only authorized administrators can read, create, update, or delete permission tracking metadata
+      allow read, write: if isAdmin();
     }
 
     // ============================================

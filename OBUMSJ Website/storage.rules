@@ -6,15 +6,37 @@ service firebase.storage {
       return request.auth != null;
     }
 
-    function isAdmin() {
-      return isAuthenticated()
-        && firestore.exists(/databases/(default)/documents/users/$(request.auth.uid))
-        && firestore.get(/databases/(default)/documents/users/$(request.auth.uid)).data.role == 'admin';
-    }
-
     function isImageFile() {
       return request.resource.contentType.matches('image/.*')
         && request.resource.size < 5 * 1024 * 1024; // 5MB limit
+    }
+
+    function userDocExists() {
+      return isAuthenticated()
+        && firestore.exists(/databases/(default)/documents/users/$(request.auth.uid));
+    }
+
+    function getUserData() {
+      return firestore.get(/databases/(default)/documents/users/$(request.auth.uid)).data;
+    }
+
+    function isAdmin() {
+      return userDocExists() && getUserData().role == 'admin';
+    }
+
+    function isLeadership() {
+      return userDocExists() && (getUserData().role in ['admin', 'main_amir']);
+    }
+
+    function isStorageSectorAuthorized(sectorSlug, requiredPerm) {
+      return userDocExists() && (
+        (getUserData().role in ['admin', 'main_amir']) ||
+        (
+          getUserData().role in ['amir', 'vice_amir', 'writer', 'sector_member'] &&
+          sectorSlug in getUserData().get('sectorAccess', {}) &&
+          requiredPerm in getUserData().get('sectorAccess', {}).get(sectorSlug, {}).get('permissions', [])
+        )
+      );
     }
 
     // Blog images - public read, authenticated upload for admins & editors
@@ -23,17 +45,18 @@ service firebase.storage {
       allow write: if isAuthenticated() && isImageFile();
     }
 
-    // Sector leadership photos - public read, authenticated upload for staff
-    match /sectors/{allPaths=**} {
+    // Sector media uploads (leadership portraits and banners) - public read; scoped upload/delete for authorized leaders
+    match /sectors/{sectorSlug}/{allPaths=**} {
       allow read: if true;
-      allow write: if isAuthenticated() && isImageFile();
+      allow create, update: if isAuthenticated() && isImageFile() && isStorageSectorAuthorized(sectorSlug, 'sectors.media.upload');
+      allow delete: if isAuthenticated() && isStorageSectorAuthorized(sectorSlug, 'sectors.media.upload');
     }
 
-    // Executive leadership photos - public read, admin-only write & delete
+    // Executive leadership photos - public read, leadership write & delete
     match /leaders/{allPaths=**} {
       allow read: if true;
-      allow create, update: if isAdmin() && isImageFile();
-      allow delete: if isAdmin();
+      allow create, update: if isLeadership() && isImageFile();
+      allow delete: if isLeadership();
     }
 
     // User profile images - public read, owner write
@@ -42,7 +65,7 @@ service firebase.storage {
       allow write: if isAuthenticated() && request.auth.uid == userId && isImageFile();
     }
 
-    // Default deny
+    // Default catch-all denies anything unlisted
     match /{allPaths=**} {
       allow read, write: if false;
     }

@@ -770,6 +770,13 @@ body {
     </div>
 </section>
 
+    <!-- ================= DYNAMIC SECTOR EDUCATIONAL RESOURCES (CMS) ================= -->
+    <section class="sector-resources-section" id="dynamicSectorResourcesSection" style="padding: 70px 0; background: var(--bg-secondary, #fafafa); border-bottom: 1px solid rgba(160, 113, 45, 0.15);">
+        <div class="container" id="dynamicSectorResourcesContainer">
+            <!-- Dynamically populated by js/sector-resources.js -->
+        </div>
+    </section>
+
 <!-- ================= AUDIO DOWNLOAD SECTION ================= -->
 <section class="audio-section">
     <div class="audio-container">
@@ -883,71 +890,137 @@ body {
     import { db, doc, onSnapshot } from "./js/firebase.js";
 
     const SECTOR_SLUG = "ruqiya";
+    let cachedSectorData = null;
+
+    function getLocalizedSectorText(field, lang) {
+        if (!field) return '';
+        if (typeof field === 'string') return field;
+        if (typeof field === 'object') {
+            return field[lang] || field.en || field['am'] || field['om'] || field['ar'] || Object.values(field)[0] || '';
+        }
+        return '';
+    }
+
+    function applySectorContent(data, lang) {
+        if (!data) return;
+
+        // 1. Update Sector Hero Title & Description
+        const headerTitle = document.querySelector('.dept-header h1');
+        if (headerTitle) {
+            const title = getLocalizedSectorText(data.name, lang);
+            if (title) headerTitle.textContent = title;
+        }
+
+        const headerDesc = document.querySelector('.dept-header p');
+        if (headerDesc) {
+            const desc = getLocalizedSectorText(data.description, lang);
+            if (desc) headerDesc.textContent = desc;
+        }
+
+        // 2. Update Sector Hero Banner / Cover Image
+        if (data.bannerUrl) {
+            const heroEl = document.querySelector('.dept-hero') || document.querySelector('.hero-section') || document.querySelector('.dept-header');
+            if (heroEl) {
+                heroEl.style.backgroundImage = `linear-gradient(rgba(15, 61, 46, 0.85), rgba(15, 61, 46, 0.85)), url("${data.bannerUrl}")`;
+                heroEl.style.backgroundSize = 'cover';
+                heroEl.style.backgroundPosition = 'center';
+            }
+        }
+
+        // 3. Update About Frame Section
+        const aboutH2 = document.querySelector('.frame-card h2');
+        if (aboutH2) {
+            const aboutTitle = getLocalizedSectorText(data.aboutTitle, lang);
+            if (aboutTitle) aboutH2.textContent = aboutTitle;
+        }
+
+        const aboutP = document.querySelector('.frame-card p');
+        if (aboutP) {
+            const aboutText = getLocalizedSectorText(data.aboutText, lang);
+            if (aboutText) aboutP.textContent = aboutText;
+        }
+
+        // 4. Inactive Sector Status Banner
+        let inactiveBanner = document.getElementById('sectorInactiveBanner');
+        if (data.isActive === false) {
+            if (!inactiveBanner) {
+                inactiveBanner = document.createElement('div');
+                inactiveBanner.id = 'sectorInactiveBanner';
+                inactiveBanner.style.cssText = 'background:#fef3c7; color:#92400e; padding:12px 20px; text-align:center; font-weight:600; border-bottom:2px solid #f59e0b; font-size:0.95rem; z-index:9999;';
+                document.body.prepend(inactiveBanner);
+            }
+            const notices = {
+                en: 'Notice: This sector is currently in transition or archived for this academic term.',
+                am: 'ማሳሰቢያ፡ ይህ ዘርፍ በአሁኑ ወቅት በሽግግር ላይ ወይም ለዚህ የትምህርት ዘመን በማህደር የተቀመጠ ነው።',
+                om: 'Hubachiisa: Dameen kun yeroo ammaa cehumsa irra jira yookiin semisteera kanaaf hin hojjetu.',
+                ar: 'تنبيه: هذا القسم في مرحلة انتقالية حالياً أو غير نشط لهذا الفصل الدراسي.'
+            };
+            inactiveBanner.textContent = notices[lang] || notices.en;
+            inactiveBanner.style.display = 'block';
+        } else if (inactiveBanner) {
+            inactiveBanner.style.display = 'none';
+        }
+
+        // 5. Update Executive Leadership Cards (Amir, Vice Amir, Writer)
+        if (data.leadership) {
+            const memberCards = document.querySelectorAll('.member-card');
+            const positions = ['amir', 'viceAmir', 'writer'];
+
+            positions.forEach((posKey, idx) => {
+                const card = memberCards[idx];
+                if (!card) return;
+                const leader = data.leadership[posKey];
+
+                if (leader && leader.name && leader.name.trim() !== '') {
+                    card.style.display = 'flex';
+                    const img = card.querySelector('img');
+                    const h3 = card.querySelector('.member-info h3');
+                    const p = card.querySelector('.member-info p');
+
+                    if (img && leader.photoUrl) {
+                        img.src = leader.photoUrl;
+                    }
+                    if (h3) {
+                        h3.textContent = leader.name;
+                    }
+                    if (p && leader.title) {
+                        p.textContent = leader.title;
+                    }
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    }
 
     try {
         onSnapshot(doc(db, "sectors", SECTOR_SLUG), (docSnap) => {
             if (!docSnap.exists()) return;
-            const data = docSnap.data();
-
-            // 1. Update Sector Hero Title & Description
-            const headerTitle = document.querySelector('.dept-header h1');
-            if (headerTitle && data.name) {
-                headerTitle.textContent = data.name;
-            }
-
-            const headerDesc = document.querySelector('.dept-header p');
-            if (headerDesc && data.description) {
-                headerDesc.textContent = data.description;
-            }
-
-            // 2. Update About Frame Section
-            const aboutH2 = document.querySelector('.frame-card h2');
-            if (aboutH2 && data.aboutTitle) {
-                aboutH2.textContent = data.aboutTitle;
-            }
-
-            const aboutP = document.querySelector('.frame-card p');
-            if (aboutP && data.aboutText) {
-                aboutP.textContent = data.aboutText;
-            }
-
-            // 3. Update Executive Leadership Cards (Amir, Vice Amir, Writer)
-            if (data.leadership) {
-                const memberCards = document.querySelectorAll('.member-card');
-                const positions = ['amir', 'viceAmir', 'writer'];
-
-                positions.forEach((posKey, idx) => {
-                    const card = memberCards[idx];
-                    if (!card) return;
-                    const leader = data.leadership[posKey];
-
-                    if (leader && leader.name && leader.name.trim() !== '') {
-                        card.style.display = 'flex';
-                        const img = card.querySelector('img');
-                        const h3 = card.querySelector('.member-info h3');
-                        const p = card.querySelector('.member-info p');
-
-                        if (img && leader.photoUrl) {
-                            img.src = leader.photoUrl;
-                        }
-                        if (h3) {
-                            h3.textContent = leader.name;
-                        }
-                        if (p && leader.title) {
-                            p.textContent = leader.title;
-                        }
-                    } else {
-                        // Vacant position: gracefully hide card
-                        card.style.display = 'none';
-                    }
-                });
-            }
+            cachedSectorData = docSnap.data();
+            const currentLang = localStorage.getItem('siteLang') || 'en';
+            applySectorContent(cachedSectorData, currentLang);
         }, (err) => {
             console.warn("[OBUMSJ Sectors] Real-time sync for " + SECTOR_SLUG + ":", err);
+        });
+
+        // Reactive language change listener
+        window.addEventListener('obumsj:languageChanged', (e) => {
+            const lang = e.detail?.lang || localStorage.getItem('siteLang') || 'en';
+            if (cachedSectorData) {
+                applySectorContent(cachedSectorData, lang);
+            }
         });
     } catch (e) {
         console.error("[OBUMSJ Sectors] Connection error for " + SECTOR_SLUG + ":", e);
     }
 </script>
+    <!-- Task 6: Sector Educational Resources Delivery Module -->
+    <script type="module">
+        import { initSectorResources } from "./js/sector-resources.js";
+        initSectorResources({
+            sectorSlug: "ruqiya",
+            containerId: "dynamicSectorResourcesContainer"
+        });
+    </script>
 </body>
 </html>

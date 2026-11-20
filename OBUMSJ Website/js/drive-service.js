@@ -651,3 +651,132 @@ export async function uploadFileToDriveFolder(file, folderId, onProgress = null,
         xhr.send(file);
     });
 }
+
+// ============================================================================
+// TASK 6: GOOGLE DRIVE PUBLIC PERMISSION MANAGEMENT (ADMINISTRATIVE)
+// ============================================================================
+
+/**
+ * Retrieve permissions list for a specific Google Drive file
+ * @param {string} fileId - The Google Drive file ID
+ * @returns {Promise<Array>} List of permission objects
+ */
+export async function getFilePermissions(fileId) {
+    if (!fileId || typeof fileId !== 'string') {
+        throw new Error('Valid Google Drive file ID is required.');
+    }
+    if (!isTokenValid()) {
+        updateStatus(DRIVE_STATUS.EXPIRED);
+        throw new Error('Google Drive access token is expired or disconnected.');
+    }
+
+    const url = `https://www.googleapis.com/drive/v3/files/${encodeURIComponent(fileId)}/permissions?fields=permissions(id,type,role)`;
+    const res = await fetch(url, {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${driveAccessToken}`,
+            'Accept': 'application/json'
+        }
+    });
+
+    if (!res.ok) {
+        if (res.status === 401) updateStatus(DRIVE_STATUS.EXPIRED);
+        const errJson = await res.json().catch(() => ({}));
+        throw new Error(errJson.error?.message || `Failed to inspect Drive permissions (HTTP ${res.status}).`);
+    }
+
+    const data = await res.json();
+    return data.permissions || [];
+}
+
+/**
+ * Create a public read permission ("anyone with the link can view") on a specific Google Drive file
+ * @param {string} fileId - The Google Drive file ID
+ * @returns {Promise<Object>} { id, role, type }
+ */
+export async function createPublicFilePermission(fileId) {
+    if (!fileId || typeof fileId !== 'string') {
+        throw new Error('Valid Google Drive file ID is required.');
+    }
+    if (!isTokenValid()) {
+        updateStatus(DRIVE_STATUS.EXPIRED);
+        throw new Error('Google Drive access token is expired or disconnected.');
+    }
+
+    const url = `https://www.googleapis.com/drive/v3/files/${encodeURIComponent(fileId)}/permissions?fields=id,type,role`;
+    const res = await fetch(url, {
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${driveAccessToken}`,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            role: 'reader',
+            type: 'anyone'
+        })
+    });
+
+    if (!res.ok) {
+        if (res.status === 401) updateStatus(DRIVE_STATUS.EXPIRED);
+        const errJson = await res.json().catch(() => ({}));
+        throw new Error(errJson.error?.message || `Failed to create public Drive file permission (HTTP ${res.status}).`);
+    }
+
+    return await res.json();
+}
+
+/**
+ * Delete a specific permission from a Google Drive file
+ * @param {string} fileId - The Google Drive file ID
+ * @param {string} permissionId - The specific permission ID to remove
+ * @returns {Promise<boolean>}
+ */
+export async function deleteFilePermission(fileId, permissionId) {
+    if (!fileId || !permissionId) {
+        throw new Error('Both fileId and permissionId are required to delete a Drive permission.');
+    }
+    if (!isTokenValid()) {
+        updateStatus(DRIVE_STATUS.EXPIRED);
+        throw new Error('Google Drive access token is expired or disconnected.');
+    }
+
+    const url = `https://www.googleapis.com/drive/v3/files/${encodeURIComponent(fileId)}/permissions/${encodeURIComponent(permissionId)}`;
+    const res = await fetch(url, {
+        method: 'DELETE',
+        headers: {
+            'Authorization': `Bearer ${driveAccessToken}`
+        }
+    });
+
+    if (!res.ok && res.status !== 404) {
+        if (res.status === 401) updateStatus(DRIVE_STATUS.EXPIRED);
+        const errJson = await res.json().catch(() => ({}));
+        throw new Error(errJson.error?.message || `Failed to delete Drive permission (HTTP ${res.status}).`);
+    }
+
+    return true;
+}
+
+/**
+ * Idempotently ensure a file has public read permission
+ * If a permission with type 'anyone' and role 'reader' already exists, reuses it.
+ * Otherwise, creates a new one.
+ * @param {string} fileId - The Google Drive file ID
+ * @returns {Promise<{ permissionId: string, isExisting: boolean }>}
+ */
+export async function ensurePublicFilePermission(fileId) {
+    const permissions = await getFilePermissions(fileId);
+    const existing = permissions.find(p => p.type === 'anyone' && p.role === 'reader');
+    if (existing) {
+        return {
+            permissionId: existing.id,
+            isExisting: true
+        };
+    }
+
+    const created = await createPublicFilePermission(fileId);
+    return {
+        permissionId: created.id,
+        isExisting: false
+    };
+}
