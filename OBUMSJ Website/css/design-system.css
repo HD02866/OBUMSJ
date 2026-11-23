@@ -149,7 +149,9 @@
   /* Legacy Compatibility Aliases */
   --white: #ffffff;
   --dark: #1b5e20;
-  --sidebar-bg: #ffffff;
+  --sidebar-bg: #0f3d2e;
+  --sidebar-text: #ffffff;
+  --sidebar-border: rgba(197, 154, 63, 0.25);
   --lantern-glow: rgba(255, 183, 3, 0.35);
   --bg-pattern: url("../IMAGE/decorative/islamic-day-texture-seamless.jpg");
   --bg-pattern-opacity: 0.055;
@@ -249,6 +251,8 @@ body.dark-mode {
   --white: #ffffff;
   --dark: #140c07;
   --sidebar-bg: #1b1009;
+  --sidebar-text: #ebd9c5;
+  --sidebar-border: rgba(212, 175, 55, 0.25);
   --lantern-glow: rgba(255, 183, 3, 0.75);
   --bg-pattern: url("../IMAGE/decorative/islamic-night-texture-seamless.jpg");
   --bg-pattern-opacity: 0.12;
@@ -2313,8 +2317,9 @@ body.dark-mode .social-tooltip {
 
 .dashboard-sidebar {
   width: 280px;
-  background: var(--bg-surface) !important;
-  border-right: 1px solid var(--border-color);
+  background: var(--sidebar-bg, #0f3d2e) !important;
+  color: var(--sidebar-text, #ffffff);
+  border-right: 1px solid var(--sidebar-border, rgba(197, 154, 63, 0.25));
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), margin-left 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   z-index: var(--z-sidebar);
 }
@@ -2322,6 +2327,7 @@ body.dark-mode .social-tooltip {
 [data-theme="dark"] .dashboard-sidebar,
 body.dark-mode .dashboard-sidebar {
   background: #1b1009 !important;
+  color: #ebd9c5 !important;
   border-right: 1px solid rgba(212, 175, 55, 0.25) !important;
 }
 
